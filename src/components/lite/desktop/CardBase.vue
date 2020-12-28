@@ -1,7 +1,7 @@
 <template>
   <div class="mycard">
     <div class="position-relative">
-      <router-link :to="{ name: 'ProductPage' }" target="_blank">
+      <router-link :to="{ name: 'ProductPage' }">
         <div class="mycard_img mybg_center position-relative d-block">
           <div class="mycard_img_list">
 
