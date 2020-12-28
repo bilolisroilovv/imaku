@@ -180,7 +180,7 @@
 
 <div class="container">
   <swiper class="swiper qwer" :options="swiperOption">
-    <swiper-slide class="slide-1">123asd12</swiper-slide>
+    <swiper-slide class="slide-1">sdsdfsdfsdfsdf</swiper-slide>
     <swiper-slide class="slide-2">12312</swiper-slide>
     <swiper-slide class="slide-3">12asd312</swiper-slide>
     <swiper-slide class="slide-4">12as312</swiper-slide>
