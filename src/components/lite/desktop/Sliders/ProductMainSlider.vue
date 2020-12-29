@@ -43,33 +43,33 @@
       </swiper>
       <swiper class="swiper gallery-thumbs" :options="swiperOptionThumbs" ref="swiperThumbs">
         <swiper-slide
-        class="gallery-thumb slide mybg_center"
+        class="gallery-thumb slide1 mybg_center"
         id="swiper-slide1"
         :style="{'background-image': 'url(' + require('@/assets/lite/mercedes.jpg') + ')'}"
         ></swiper-slide>
         <swiper-slide
-        class="gallery-thumb slide mybg_center"
-        id="swiper-slide1"
+        class="gallery-thumb slide2 mybg_center"
+        id="swiper-slide2"
         :style="{'background-image': 'url(' + require('@/assets/lite/mercedes2.jpg') + ')'}"
         ></swiper-slide>
         <swiper-slide
-        class="gallery-thumb slide mybg_center"
-        id="swiper-slide1"
+        class="gallery-thumb slide3 mybg_center"
+        id="swiper-slide3"
         :style="{'background-image': 'url(' + require('@/assets/lite/mercedes3.jpg') + ')'}"
         ></swiper-slide>
         <swiper-slide
-        class="gallery-thumb swiper-slide mybg_center"
-        id="swiper-slide1"
+        class="gallery-thumb slide4 mybg_center"
+        id="swiper-slide4"
         :style="{'background-image': 'url(' + require('@/assets/lite/mercedes4.jpg') + ')'}"
         ></swiper-slide>
         <swiper-slide
-        class="gallery-thumb slide mybg_center"
-        id="swiper-slide1"
+        class="gallery-thumb slide5 mybg_center"
+        id="swiper-slide5"
         :style="{'background-image': 'url(' + require('@/assets/lite/mercedes5.jpg') + ')'}"
         ></swiper-slide>
         <swiper-slide
-        class="gallery-thumb slide mybg_center"
-        id="swiper-slide1"
+        class="gallery-thumb slide6 mybg_center"
+        id="swiper-slide6"
         :style="{'background-image': 'url(' + require('@/assets/lite/mercedes6.jpg') + ')'}"
         ></swiper-slide>
       </swiper> <!-- gallery-thumbs -->
@@ -90,6 +90,8 @@ export default {
     return {
       swiperOptionTop: {
         effect: 'fade',
+        loop: true,
+        loopedSlides: 5,
         navigation: {
           nextEl: '.product_slider_next',
           prevEl: '.product_slider_prev'
@@ -97,10 +99,11 @@ export default {
       },
       swiperOptionThumbs: {
         spaceBetween: 10,
+        loop: true,
+        loopedSlides: 5,
         slidesPerView: 5,
-        freeMode: true,
-        watchSlidesVisibility: true,
-        watchSlidesProgress: true
+        centeredSlides: true,
+        slideToClickedSlide: true
       }
     }
   },

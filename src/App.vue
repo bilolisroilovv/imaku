@@ -686,15 +686,34 @@ body.modal-open {
 .filter_collapse .vs-collapse-item--header {
   padding: 15px 10px!important;
 }
+
+.vs-dropdown--menu {
+  box-shadow: 0 5px 20px 0 rgba(0,0,0,.05)!important;
+  border-radius: 5px!important;
+  border: none!important;
+}
 .vs-dropdown--item {
-  color: #333!important;
+  transition: all 0.2s!important;
+  width: 100%!important;
+  margin: 0!important;
+  padding: 0px 5px!important;
 }
 .vs-dropdown--item .vs-dropdown--item-link {
   transition: all 0.2s!important;
+  color: #313131!important;
+  font-size: 14px;
+  padding: 5px 20px 5px 10px!important;
+}
+.vs-dropdown--item:hover .vs-dropdown--item-link {
+  color: #000!important;
+  background: #f5f5f5!important;
 }
 .vs-dropdown--item .vs-dropdown--item-link:hover {
-  color: var(--main-color)!important;
-  background: rgba(255, 201, 150, 0.377)!important;
+  color: #000!important;
+  background: #f5f5f5!important;
+}
+.vs-dropdown--menu--after, .vs-dropdown-right--menu--after {
+  display: none!important;
 }
 </style>
 

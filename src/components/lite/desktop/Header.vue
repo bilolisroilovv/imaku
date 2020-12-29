@@ -74,7 +74,6 @@
               </vs-dropdown-item>
             </vs-dropdown-menu>
           </vs-dropdown>
-
         </div> <!-- d-flex -->
       </div> <!-- navbar_links -->
       <div class="d-flex myalign-items-center justify-content-between">
