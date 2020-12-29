@@ -238,7 +238,7 @@
       <swiper-slide class="slide-1">
         <router-link to="/category"
         class="mybg_center categorie_block d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/categorie7.png') + ')'}">
+        :style="{'background-image': 'url(' + require('@/assets/lite/categorie3.png') + ')'}">
 
         </router-link>
         <router-link to="/category" class="categorie_text">
@@ -277,7 +277,7 @@
       <swiper-slide class="slide-1">
         <router-link to="/category"
         class="mybg_center categorie_block d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/categorie3.png') + ')'}">
+        :style="{'background-image': 'url(' + require('@/assets/lite/categorie7.png') + ')'}">
 
         </router-link>
         <router-link to="/category" class="categorie_text">
@@ -287,7 +287,7 @@
       <swiper-slide class="swiper-slide">
         <router-link to="/category"
         class="mybg_center categorie_block d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/categorie1.png') + ')'}">
+        :style="{'background-image': 'url(' + require('@/assets/lite/categorie2.png') + ')'}">
 
         </router-link>
         <router-link to="/category" class="categorie_text">
@@ -297,7 +297,7 @@
       <swiper-slide class="swiper-slide">
         <router-link to="/category"
         class="mybg_center categorie_block d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/categorie3.png') + ')'}">
+        :style="{'background-image': 'url(' + require('@/assets/lite/categorie5.png') + ')'}">
 
         </router-link>
         <router-link to="/category" class="categorie_text">
