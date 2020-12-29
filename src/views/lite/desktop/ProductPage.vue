@@ -33,13 +33,13 @@
 
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
-                  <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                  <li class="breadcrumb-item"><router-link to="/">Главная</router-link></li>
                   <span class="mx-2 px-1">/</span>
-                  <li class="breadcrumb-item"><a href="#">Автомобили</a></li>
+                  <li class="breadcrumb-item"><router-link to="/category">Автомобили</router-link></li>
                   <span class="mx-2 px-1">/</span>
-                  <li class="breadcrumb-item"><a href="#">Легковые автомобили</a></li>
+                  <li class="breadcrumb-item"><router-link to="/category">Легковые автомобили</router-link></li>
                   <span class="mx-2 px-1">/</span>
-                  <li class="breadcrumb-item"><a href="#">Mercedes</a></li>
+                  <li class="breadcrumb-item"><router-link to="/category">Mercedes</router-link></li>
                   <span class="mx-2 px-1">/</span>
                   <li class="breadcrumb-item active" aria-current="page">Mercedes Benz E-53</li>
                 </ol>
@@ -55,7 +55,8 @@
 
         <div class="row mt-4">
           <div class="col-md-8">
-          </div>
+            <ProductMainSlider />
+          </div> <!-- col-md-8 -->
 
           <div class="col-md-4">
             <div class="bg-white product_sidebar">
@@ -856,12 +857,14 @@
 <script>
 import Header2 from '@/components/lite/desktop/Header2'
 import ToggleFavorite from '@/components/lite/desktop/ToggleFavorite'
+import ProductMainSlider from '@/components/lite/desktop/Sliders/ProductMainSlider'
 
 export default {
   name: 'ProductPage',
   components: {
     Header2,
-    ToggleFavorite
+    ToggleFavorite,
+    ProductMainSlider
   },
   data () {
     return {

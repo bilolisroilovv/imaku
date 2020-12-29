@@ -1,6 +1,6 @@
 <template>
   <div>
-    <swiper class="swiper main_slider mt-5" :options="mainSliderOption">
+    <swiper class="swiper main_slider" :options="mainSliderOption">
       <swiper-slide class="slide-1 myhover_bg">
         <router-link to="/category" class="mybg_center d-block h-100 w-100"
           :style="{'background-image': 'url(' + require('@/assets/lite/mainslider1.jpg') + ')'}"></router-link>

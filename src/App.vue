@@ -686,6 +686,16 @@ body.modal-open {
 .filter_collapse .vs-collapse-item--header {
   padding: 15px 10px!important;
 }
+.vs-dropdown--item {
+  color: #333!important;
+}
+.vs-dropdown--item .vs-dropdown--item-link {
+  transition: all 0.2s!important;
+}
+.vs-dropdown--item .vs-dropdown--item-link:hover {
+  color: var(--main-color)!important;
+  background: rgba(255, 201, 150, 0.377)!important;
+}
 </style>
 
 <script>

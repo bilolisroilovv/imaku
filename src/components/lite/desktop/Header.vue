@@ -60,9 +60,21 @@
           <a href="#" class="navbar_top_link">
             Частые вопросы
           </a> <!-- navbar_top_link -->
-          <a href="#" class="navbar_top_link">
-            Русский
-          </a> <!-- navbar_top_link -->
+          <vs-dropdown class="header_lang_link">
+            <a class="navbar_top_link" href="#">
+              Русский
+              <vs-icon class="" icon="expand_more"></vs-icon>
+            </a>
+            <vs-dropdown-menu>
+              <vs-dropdown-item class="navbar_top_link">
+                O'zbekcha
+              </vs-dropdown-item>
+              <vs-dropdown-item class="navbar_top_link">
+                Endglish
+              </vs-dropdown-item>
+            </vs-dropdown-menu>
+          </vs-dropdown>
+
         </div> <!-- d-flex -->
       </div> <!-- navbar_links -->
       <div class="d-flex myalign-items-center justify-content-between">
@@ -178,7 +190,7 @@
 
 <!-------------------------------- START HeaderSlider -------------------------------->
 
-<div class="container">
+<div class="container pt-3">
   <HeaderMainSlider />
 </div><!-- container -->
 
@@ -601,5 +613,19 @@ export default {
   100% {
     stop-color: #6d5bf5;
   }
+}
+.header_lang_link {
+  display: flex!important;
+  align-items: center!important;
+}
+.header_lang_link .navbar_top_link {
+  display: flex!important;
+  align-items: center!important;
+}
+.header_lang_link .navbar_top_link:hover {
+  color: #000!important;
+}
+.header_lang_link .navbar_top_link i {
+  font-size: 18px;
 }
 </style>
