@@ -212,108 +212,99 @@
   <div class="swiper-pagination main_slider_pagination mt-3"></div>
 </div><!-- container -->
 
-<div class="container position-relative">
-  <!-- Swiper -->
-  <swiper class="swiper categories_slider mt-5" :options="categoriesSliderOption">
-    <swiper-slide class="slide-1">
-      <router-link to="/category"
-      class="mybg_center categorie_block d-block h-100 w-100"
-      :style="{'background-image': 'url(' + require('@/assets/lite/categorie1.png') + ')'}">
+<div class="container">
+  <div class="position-relative myswiper_hover mt-4">
+    <swiper class="swiper categories_slider" :options="categoriesSliderOption">
+      <swiper-slide class="slide-1">
+        <router-link to="/category"
+        class="mybg_center categorie_block d-block h-100 w-100"
+        :style="{'background-image': 'url(' + require('@/assets/lite/categorie1.png') + ')'}">
 
-      </router-link>
-      <router-link to="/category" class="categorie_text">
-        Автотовары
-      </router-link>
-    </swiper-slide>
-    <!-- swiper-slide -->
-    <swiper-slide class="slide-1">
-      <router-link to="/category"
-      class="mybg_center categorie_block d-block h-100 w-100"
-      :style="{'background-image': 'url(' + require('@/assets/lite/categorie2.png') + ')'}">
+        </router-link>
+        <router-link to="/category" class="categorie_text">
+          Автотовары
+        </router-link>
+      </swiper-slide><!-- swiper-slide -->
+      <swiper-slide class="slide-1">
+        <router-link to="/category"
+        class="mybg_center categorie_block d-block h-100 w-100"
+        :style="{'background-image': 'url(' + require('@/assets/lite/categorie2.png') + ')'}">
 
-      </router-link>
-      <router-link to="/category" class="categorie_text">
-        Спорт и развлечение
-      </router-link>
-    </swiper-slide>
-    <!-- swiper-slide -->
-    <swiper-slide class="slide-1">
-      <router-link to="/category"
-      class="mybg_center categorie_block d-block h-100 w-100"
-      :style="{'background-image': 'url(' + require('@/assets/lite/categorie7.png') + ')'}">
+        </router-link>
+        <router-link to="/category" class="categorie_text">
+          Спорт и развлечение
+        </router-link>
+      </swiper-slide><!-- swiper-slide -->
+      <swiper-slide class="slide-1">
+        <router-link to="/category"
+        class="mybg_center categorie_block d-block h-100 w-100"
+        :style="{'background-image': 'url(' + require('@/assets/lite/categorie7.png') + ')'}">
 
-      </router-link>
-      <router-link to="/category" class="categorie_text">
-        Недвижимость
-      </router-link>
-    </swiper-slide>
-    <!-- swiper-slide -->
-    <swiper-slide class="slide-1">
-      <router-link to="/category"
-      class="mybg_center categorie_block d-block h-100 w-100"
-      :style="{'background-image': 'url(' + require('@/assets/lite/categorie4.png') + ')'}">
+        </router-link>
+        <router-link to="/category" class="categorie_text">
+          Недвижимость
+        </router-link>
+      </swiper-slide><!-- swiper-slide -->
+      <swiper-slide class="slide-1">
+        <router-link to="/category"
+        class="mybg_center categorie_block d-block h-100 w-100"
+        :style="{'background-image': 'url(' + require('@/assets/lite/categorie4.png') + ')'}">
 
-      </router-link>
-      <router-link to="/category" class="categorie_text">
-        Товары для детей
-      </router-link>
-    </swiper-slide>
-    <!-- swiper-slide -->
-    <swiper-slide class="slide-1">
-      <router-link to="/category"
-      class="mybg_center categorie_block d-block h-100 w-100"
-      :style="{'background-image': 'url(' + require('@/assets/lite/categorie5.png') + ')'}">
-      </router-link>
-      <router-link to="/category" class="categorie_text">
-        Электроника
-      </router-link>
-    </swiper-slide>
-    <!-- swiper-slide -->
-    <swiper-slide class="slide-1">
-      <router-link to="/category"
-      class="mybg_center categorie_block d-block h-100 w-100"
-      :style="{'background-image': 'url(' + require('@/assets/lite/categorie6.png') + ')'}">
+        </router-link>
+        <router-link to="/category" class="categorie_text">
+          Товары для детей
+        </router-link>
+      </swiper-slide><!-- swiper-slide -->
+      <swiper-slide class="slide-1">
+        <router-link to="/category"
+        class="mybg_center categorie_block d-block h-100 w-100"
+        :style="{'background-image': 'url(' + require('@/assets/lite/categorie5.png') + ')'}">
+        </router-link>
+        <router-link to="/category" class="categorie_text">
+          Электроника
+        </router-link>
+      </swiper-slide><!-- swiper-slide -->
+      <swiper-slide class="slide-1">
+        <router-link to="/category"
+        class="mybg_center categorie_block d-block h-100 w-100"
+        :style="{'background-image': 'url(' + require('@/assets/lite/categorie6.png') + ')'}">
 
-      </router-link>
-      <router-link to="/category" class="categorie_text">
-        Одежда для мужчин
-      </router-link>
-    </swiper-slide>
-    <!-- swiper-slide -->
-    <swiper-slide class="slide-1">
-      <router-link to="/category"
-      class="mybg_center categorie_block d-block h-100 w-100"
-      :style="{'background-image': 'url(' + require('@/assets/lite/categorie3.png') + ')'}">
+        </router-link>
+        <router-link to="/category" class="categorie_text">
+          Одежда для мужчин
+        </router-link>
+      </swiper-slide><!-- swiper-slide -->
+      <swiper-slide class="slide-1">
+        <router-link to="/category"
+        class="mybg_center categorie_block d-block h-100 w-100"
+        :style="{'background-image': 'url(' + require('@/assets/lite/categorie3.png') + ')'}">
 
-      </router-link>
-      <router-link to="/category" class="categorie_text">
-        Одежда для женщин
-      </router-link>
-    </swiper-slide>
-    <!-- swiper-slide -->
-    <swiper-slide class="swiper-slide">
-      <router-link to="/category"
-      class="mybg_center categorie_block d-block h-100 w-100"
-      :style="{'background-image': 'url(' + require('@/assets/lite/categorie1.png') + ')'}">
+        </router-link>
+        <router-link to="/category" class="categorie_text">
+          Одежда для женщин
+        </router-link>
+      </swiper-slide><!-- swiper-slide -->
+      <swiper-slide class="swiper-slide">
+        <router-link to="/category"
+        class="mybg_center categorie_block d-block h-100 w-100"
+        :style="{'background-image': 'url(' + require('@/assets/lite/categorie1.png') + ')'}">
 
-      </router-link>
-      <router-link to="/category" class="categorie_text">
-        Спорт и развлечение
-      </router-link>
-    </swiper-slide>
-    <!-- swiper-slide -->
-    <swiper-slide class="swiper-slide">
-      <router-link to="/category"
-      class="mybg_center categorie_block d-block h-100 w-100"
-      :style="{'background-image': 'url(' + require('@/assets/lite/categorie3.png') + ')'}">
+        </router-link>
+        <router-link to="/category" class="categorie_text">
+          Спорт и развлечение
+        </router-link>
+      </swiper-slide><!-- swiper-slide -->
+      <swiper-slide class="swiper-slide">
+        <router-link to="/category"
+        class="mybg_center categorie_block d-block h-100 w-100"
+        :style="{'background-image': 'url(' + require('@/assets/lite/categorie3.png') + ')'}">
 
-      </router-link>
-      <router-link to="/category" class="categorie_text">
-        Спорт и развлечение
-      </router-link>
-    </swiper-slide>
-    <!-- swiper-slide -->
-
+        </router-link>
+        <router-link to="/category" class="categorie_text">
+          Спорт и развлечение
+        </router-link>
+      </swiper-slide><!-- swiper-slide -->
+    </swiper><!-- swiper-container -->
     <!-- Add Arrows -->
     <div class="categories_slider_next main_slider_btns flex-center d-flex">
       <i class="fas fa-chevron-right"></i>
@@ -321,7 +312,7 @@
     <div class="categories_slider_prev main_slider_btns flex-center d-flex">
       <i class="fas fa-chevron-left"></i>
     </div><!-- main_slider_prev -->
-  </swiper><!-- swiper-container -->
+  </div> <!-- position-relative -->
 </div><!-- container -->
 
 <!-------------------------------- END HeaderSlider -------------------------------->
@@ -857,10 +848,13 @@ export default {
   width: 40px;
   height: 40px;
 }
-.categories_slider:hover .categories_slider_prev {
+.myswiper_hover {
+  overflow-x: hidden;
+}
+.myswiper_hover:hover .categories_slider_prev {
   left: 20px;
 }
-.categories_slider:hover .categories_slider_next {
+.myswiper_hover:hover .categories_slider_next {
   right: 20px;
 }
 .categories_slider .swiper-slide {
