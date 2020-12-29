@@ -179,140 +179,11 @@
 <!-------------------------------- START HeaderSlider -------------------------------->
 
 <div class="container">
-  <swiper class="swiper main_slider mt-5" :options="mainSliderOption">
-    <swiper-slide class="slide-1 myhover_bg">
-      <router-link to="/category" class="mybg_center d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mainslider1.jpg') + ')'}"></router-link>
-    </swiper-slide>
-    <swiper-slide class="slide-2 myhover_bg">
-      <router-link to="/category" class="mybg_center d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mainslider2.jpg') + ')'}"></router-link>
-    </swiper-slide>
-    <swiper-slide class="slide-3 myhover_bg">
-      <router-link to="/category" class="mybg_center d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mainslider3.jpg') + ')'}"></router-link>
-    </swiper-slide>
-    <swiper-slide class="slide-4 myhover_bg">
-      <router-link to="/category" class="mybg_center d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mainslider4.jpg') + ')'}"></router-link>
-    </swiper-slide>
-    <swiper-slide class="slide-5 myhover_bg">
-      <router-link to="/category" class="mybg_center d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mainslider5.jpg') + ')'}"></router-link>
-    </swiper-slide>
-    <!-- Add Arrows -->
-    <div class="main_slider_next main_slider_btns flex-center d-flex">
-      <i class="fas fa-chevron-right"></i>
-    </div><!-- main_slider_next -->
-    <div class="main_slider_prev main_slider_btns flex-center d-flex">
-      <i class="fas fa-chevron-left"></i>
-    </div><!-- main_slider_prev -->
-  </swiper>
-  <!-- Add Pagination -->
-  <div class="swiper-pagination main_slider_pagination mt-3"></div>
+  <HeaderMainSlider />
 </div><!-- container -->
 
 <div class="container">
-  <div class="position-relative myswiper_hover mt-4">
-    <swiper class="swiper categories_slider" :options="categoriesSliderOption">
-      <swiper-slide class="slide-1">
-        <router-link to="/category"
-        class="mybg_center categorie_block d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/categorie1.png') + ')'}">
-
-        </router-link>
-        <router-link to="/category" class="categorie_text">
-          Автотовары
-        </router-link>
-      </swiper-slide><!-- swiper-slide -->
-      <swiper-slide class="slide-1">
-        <router-link to="/category"
-        class="mybg_center categorie_block d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/categorie2.png') + ')'}">
-
-        </router-link>
-        <router-link to="/category" class="categorie_text">
-          Спорт и развлечение
-        </router-link>
-      </swiper-slide><!-- swiper-slide -->
-      <swiper-slide class="slide-1">
-        <router-link to="/category"
-        class="mybg_center categorie_block d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/categorie3.png') + ')'}">
-
-        </router-link>
-        <router-link to="/category" class="categorie_text">
-          Недвижимость
-        </router-link>
-      </swiper-slide><!-- swiper-slide -->
-      <swiper-slide class="slide-1">
-        <router-link to="/category"
-        class="mybg_center categorie_block d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/categorie4.png') + ')'}">
-
-        </router-link>
-        <router-link to="/category" class="categorie_text">
-          Товары для детей
-        </router-link>
-      </swiper-slide><!-- swiper-slide -->
-      <swiper-slide class="slide-1">
-        <router-link to="/category"
-        class="mybg_center categorie_block d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/categorie5.png') + ')'}">
-        </router-link>
-        <router-link to="/category" class="categorie_text">
-          Электроника
-        </router-link>
-      </swiper-slide><!-- swiper-slide -->
-      <swiper-slide class="slide-1">
-        <router-link to="/category"
-        class="mybg_center categorie_block d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/categorie6.png') + ')'}">
-
-        </router-link>
-        <router-link to="/category" class="categorie_text">
-          Одежда для мужчин
-        </router-link>
-      </swiper-slide><!-- swiper-slide -->
-      <swiper-slide class="slide-1">
-        <router-link to="/category"
-        class="mybg_center categorie_block d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/categorie7.png') + ')'}">
-
-        </router-link>
-        <router-link to="/category" class="categorie_text">
-          Одежда для женщин
-        </router-link>
-      </swiper-slide><!-- swiper-slide -->
-      <swiper-slide class="swiper-slide">
-        <router-link to="/category"
-        class="mybg_center categorie_block d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/categorie2.png') + ')'}">
-
-        </router-link>
-        <router-link to="/category" class="categorie_text">
-          Спорт и развлечение
-        </router-link>
-      </swiper-slide><!-- swiper-slide -->
-      <swiper-slide class="swiper-slide">
-        <router-link to="/category"
-        class="mybg_center categorie_block d-block h-100 w-100"
-        :style="{'background-image': 'url(' + require('@/assets/lite/categorie5.png') + ')'}">
-
-        </router-link>
-        <router-link to="/category" class="categorie_text">
-          Спорт и развлечение
-        </router-link>
-      </swiper-slide><!-- swiper-slide -->
-    </swiper><!-- swiper-container -->
-    <!-- Add Arrows -->
-    <div class="categories_slider_next main_slider_btns flex-center d-flex">
-      <i class="fas fa-chevron-right"></i>
-    </div><!-- main_slider_next -->
-    <div class="categories_slider_prev main_slider_btns flex-center d-flex">
-      <i class="fas fa-chevron-left"></i>
-    </div><!-- main_slider_prev -->
-  </div> <!-- position-relative -->
+  <HeaderCategoriesSlider />
 </div><!-- container -->
 
 <!-------------------------------- END HeaderSlider -------------------------------->
@@ -372,51 +243,24 @@
 
 <script>
 import SearchGroup from '@/components/lite/desktop/SearchGroup'
+import HeaderMainSlider from '@/components/lite/desktop/Sliders/HeaderMainSlider'
+import HeaderCategoriesSlider from '@/components/lite/desktop/Sliders/HeaderCategoriesSlider'
 import HeaderCategoriesDropdown from '@/components/lite/desktop/headerCategories/HeaderCategoriesDropdown'
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-import 'swiper/css/swiper.css'
+
 export default {
   name: 'Header',
   components: {
     SearchGroup,
     HeaderCategoriesDropdown,
-    Swiper,
-    SwiperSlide
+    HeaderMainSlider,
+    HeaderCategoriesSlider
   },
   data () {
     return {
       limitPosition: 950,
       scrolled: false,
       scrollPosition: null,
-      headerCategoriesDropdownVisible: false,
-      mainSliderOption: {
-        effect: 'fade',
-        loop: true,
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: false
-        },
-        navigation: {
-          nextEl: '.main_slider_next',
-          prevEl: '.main_slider_prev'
-        },
-        pagination: {
-          el: '.main_slider_pagination',
-          clickable: true
-        }
-      },
-      categoriesSliderOption: {
-        slidesPerView: 7,
-        spaceBetween: 15,
-        autoplay: {
-          delay: 15000,
-          disableOnInteraction: false
-        },
-        navigation: {
-          nextEl: '.categories_slider_next',
-          prevEl: '.categories_slider_prev'
-        }
-      }
+      headerCategoriesDropdownVisible: false
     } /* return */
   },
   methods: {
@@ -757,128 +601,5 @@ export default {
   100% {
     stop-color: #6d5bf5;
   }
-}
-.swiper-container {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
-}
-
-.main_slider {
-  width: 100%;
-  height: 370px;
-  overflow: hidden;
-  border-radius: 10px;
-}
-.main_slider_btns {
-  border-radius: 50%;
-  opacity: 0.5;
-  width: 48px;
-  height: 48px;
-  position: absolute;
-  transition: all 0.25s;
-  transform: translate(0, -50%);
-  z-index: 2;
-  font-size: 18px;
-  color: #000;
-  background: #fff;
-}
-.main_slider_btns:hover {
-  opacity: 1;
-  color: var(--main-color);
-}
-
-.main_slider_next {
-  top: 50%;
-  right: -50px;
-}
-.main_slider_prev {
-  top: 50%;
-  left: -50px;
-}
-.main_slider:hover .main_slider_prev {
-  left: 35px;
-}
-.main_slider:hover .main_slider_next {
-  right: 35px;
-}
-
-.main_slider_pagination {
-  position: relative;
-  z-index: 2;
-}
-.main_slider_pagination .swiper-pagination-bullet {
-  width: 12px;
-  height: 12px;
-  margin: 0 3px;
-  outline: none !important;
-  background: var(--main-color);
-}
-.categories_slider {
-  width: 100%;
-  height: 135px;
-  overflow: hidden;
-}
-
-.categories_slider_next {
-  top: 50%;
-  right: -50px;
-  font-size: 15px;
-  width: 40px;
-  height: 40px;
-}
-.categories_slider_prev {
-  top: 50%;
-  left: -50px;
-  font-size: 15px;
-  width: 40px;
-  height: 40px;
-}
-.myswiper_hover {
-  overflow-x: hidden;
-}
-.myswiper_hover:hover .categories_slider_prev {
-  left: 20px;
-}
-.myswiper_hover:hover .categories_slider_next {
-  right: 20px;
-}
-.categories_slider .swiper-slide {
-  border-radius: 12px;
-  overflow: hidden;
-}
-.categories_slider .categorie_block {
-  position: relative;
-  border-radius: 12px;
-  background-size: 100%;
-  transition: all 0.3s;
-}
-.categories_slider .categorie_text {
-  font-weight: 500;
-  font-size: 16px;
-  font-family: 'Inter', sans-serif;
-  color: #FFFFFF;
-  position: absolute;
-  line-height: 1.1;
-  left: 7%;
-  padding-right: 7%;
-  bottom: 15%;
-}
-.categories_slider .swiper-slide:hover .categorie_block {
-  background-size: 105%;
 }
 </style>

@@ -109,7 +109,7 @@
           </div> <!-- post_add_block -->
         </div> <!-- col-md-8 -->
         <div class="col-md-4">
-          <a href="#" class="right_block mt-4" :style="{ 'background-image': 'url(' + this.adImage + ')' }">
+          <a href="#" class="right_block mt-4" :style="{'background-image': 'url(' + require('@/assets/lite/post-add-banner.jpg') + ')'}">
           </a> <!-- ad_block -->
         </div> <!-- col-md-4 -->
       </div> <!-- row -->
@@ -272,7 +272,7 @@ export default {
 .right_block {
   border-radius: 8px;
   width: 100%;
-  height: 700px;
+  height: 500px;
   display: block;
   background-repeat: no-repeat;
   background-size: cover;
