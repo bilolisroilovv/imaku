@@ -114,9 +114,9 @@
           <a href="#" class="create_store_btn d-flex align-items-center mr-2">
             Создать магазин
           </a> <!-- mainbtn -->
-          <a href="#" class="mainbtn create_ad_btn d-flex align-items-center mr-2">
+          <router-link to="/post-add" class="mainbtn create_ad_btn d-flex align-items-center mr-2">
             Подать объявление
-          </a> <!-- mainbtn -->
+          </router-link> <!-- mainbtn -->
           <a href="#" class="header_icon" data-toggle="modal" @click.prevent v-b-modal.signModal >
             <svg version="1.1" width="55" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
