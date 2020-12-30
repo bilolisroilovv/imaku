@@ -43,11 +43,6 @@
                   <a href="#">Стекла и пленки</a>
                   <a href="#">Чехлы</a>
                   <a href="#">Чехлы-аккумуляторы</a>
-                  <a href="#">Flash-накопители</a>
-                  <a href="#">SIM-карты</a>
-                  <a href="#">Запчасти для устройств</a>
-                  <a href="#">Аксессуары для съемки</a>
-
                 </div>
               </div> <!-- category_sidebar_categories -->
             </div> <!-- category_sidebar -->
@@ -58,14 +53,14 @@
                     <h5>Цена</h5>
                   </div>
                   <div class="price_filter">
-                    <vs-slider max=5000000 v-model="value1"/>
-                    <div class="d-flex">
+                    <vs-slider class="w-100" max=10000000 :color="colorx" v-model="value1"/>
+                    <div class="d-flex justify-content-between">
                       <div class="position-relative">
-                        <input type="text" v-model="value1[0]" v-mask="['#', '##', '###', '####', '# ###', '## ###', '### ###', '#### ###', '# ### ###', '## ### ###', '### ### ###', '#### ### ###', '# ### ### ###', '## ### ### ###', '### ### ### ###', '#### ### ### ###', '# ### ### ### ###', '## ### ### ### ###', '### ### ### ### ###']">
+                        <input type="text" max="10000000" v-model="value1[0]">
                         <span>От</span>
                       </div>
-                      <div class="position-relative">
-                        <input type="text" v-model="value1[1]" v-mask="['#', '##', '###', '####', '# ###', '## ###', '### ###', '#### ###', '# ### ###', '## ### ###', '### ### ###', '#### ### ###', '# ### ### ###', '## ### ### ###', '### ### ### ###', '#### ### ### ###', '# ### ### ### ###', '## ### ### ### ###', '### ### ### ### ###']">
+                      <div class="position-relative ml-3">
+                        <input type="text" max="10000000" v-model="value1[1]">
                         <span>До</span>
                       </div>
                     </div> <!-- d-flex -->
@@ -239,12 +234,16 @@ import Card4 from '@/components/lite/desktop/Cards/Card4'
 
 export default {
   name: 'CategoryPage',
+  components: {
+    Header2,
+    Card4
+  },
   data () {
     return {
       select1Normal: '',
       select1: 1,
-      value1: [0, 1000000],
-      value2: 25,
+      value1: [500000, 2000000],
+      colorx: 'var(--main-color)',
       options1: [
         { text: 'Популярные', value: 1 },
         { text: 'Новинки', value: 2 },
@@ -253,10 +252,6 @@ export default {
         { text: 'Высокий рейтинг', value: 5 }
       ]
     }
-  },
-  components: {
-    Header2,
-    Card4
   }
 }
 </script>
@@ -276,7 +271,7 @@ export default {
   border-radius: 3px;
   color: #444;
   transition: all 0.2s;
-  width: 95%;
+  width: 100%;
   padding: 6px 10px 6px 35px;
   font-family: "Inter", sans-serif;
   font-weight: 500;

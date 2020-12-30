@@ -715,6 +715,12 @@ body.modal-open {
 .vs-dropdown--menu--after, .vs-dropdown-right--menu--after {
   display: none!important;
 }
+.con-vs-slider {
+  min-width: 200px!important;
+}
+.price_filter .vs-slider--circle-text {
+  opacity: 0!important;
+}
 </style>
 
 <script>

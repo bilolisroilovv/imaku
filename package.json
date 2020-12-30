@@ -17,6 +17,7 @@
     "v-photoswipe": "^1.0.3-1",
     "vue": "^2.6.12",
     "vue-awesome-swiper": "^4.1.1",
+    "vue-input-mask": "0.0.11",
     "vue-pswipe": "^0.15.1",
     "vue-rellax": "^0.2.0",
     "vue-router": "^3.2.0",

@@ -16,7 +16,9 @@ import 'vue-select/dist/vue-select.css'
 import Vuesax from 'vuesax'
 import 'vuesax/dist/vuesax.css'
 import 'material-icons/iconfont/material-icons.css'
+import InputMask from 'vue-input-mask'
 
+Vue.component('input-mask', InputMask)
 Vue.use(Vuesax)
 Vue.component('v-select', vSelect)
 Vue.use(VueRellax)
