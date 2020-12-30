@@ -57,15 +57,18 @@
                   <div slot="header">
                     <h5>Цена</h5>
                   </div>
-                  <div class="price_filter d-flex">
+                  <div class="price_filter">
+                    <vs-slider max=5000000 v-model="value1"/>
+                    <div class="d-flex">
                       <div class="position-relative">
-                        <input type="text" v-mask="['#', '##', '###', '####', '# ###', '## ###', '### ###', '#### ###', '# ### ###', '## ### ###', '### ### ###', '#### ### ###', '# ### ### ###', '## ### ### ###', '### ### ### ###', '#### ### ### ###', '# ### ### ### ###', '## ### ### ### ###', '### ### ### ### ###']">
+                        <input type="text" v-model="value1[0]" v-mask="['#', '##', '###', '####', '# ###', '## ###', '### ###', '#### ###', '# ### ###', '## ### ###', '### ### ###', '#### ### ###', '# ### ### ###', '## ### ### ###', '### ### ### ###', '#### ### ### ###', '# ### ### ### ###', '## ### ### ### ###', '### ### ### ### ###']">
                         <span>От</span>
                       </div>
                       <div class="position-relative">
-                        <input type="text" v-mask="['#', '##', '###', '####', '# ###', '## ###', '### ###', '#### ###', '# ### ###', '## ### ###', '### ### ###', '#### ### ###', '# ### ### ###', '## ### ### ###', '### ### ### ###', '#### ### ### ###', '# ### ### ### ###', '## ### ### ### ###', '### ### ### ### ###']">
+                        <input type="text" v-model="value1[1]" v-mask="['#', '##', '###', '####', '# ###', '## ###', '### ###', '#### ###', '# ### ###', '## ### ###', '### ### ###', '#### ### ###', '# ### ### ###', '## ### ### ###', '### ### ### ###', '#### ### ### ###', '# ### ### ### ###', '## ### ### ### ###', '### ### ### ### ###']">
                         <span>До</span>
                       </div>
+                    </div> <!-- d-flex -->
                   </div> <!-- price_filter -->
                   </vs-collapse-item>
                   <vs-collapse-item>
@@ -232,7 +235,7 @@
 
 <script>
 import Header2 from '@/components/lite/desktop/Header2'
-import Card4 from '@/components/lite/desktop/Card4'
+import Card4 from '@/components/lite/desktop/Cards/Card4'
 
 export default {
   name: 'CategoryPage',
@@ -240,6 +243,8 @@ export default {
     return {
       select1Normal: '',
       select1: 1,
+      value1: [0, 1000000],
+      value2: 25,
       options1: [
         { text: 'Популярные', value: 1 },
         { text: 'Новинки', value: 2 },

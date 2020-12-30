@@ -322,7 +322,7 @@
                   </div> <!-- product_hashtags -->
 
                   <h4 class="pb-4">Другие товары продавца</h4>
-
+                  <OtherSellerGoodsSlider/>
                 </div> <!-- col-md-6 -->
               </div> <!-- row -->
 
@@ -858,13 +858,15 @@
 import Header2 from '@/components/lite/desktop/Header2'
 import ToggleFavorite from '@/components/lite/desktop/ToggleFavorite'
 import ProductMainSlider from '@/components/lite/desktop/Sliders/ProductMainSlider'
+import OtherSellerGoodsSlider from '@/components/lite/desktop/Sliders/OtherSellerGoodsSlider'
 
 export default {
   name: 'ProductPage',
   components: {
     Header2,
     ToggleFavorite,
-    ProductMainSlider
+    ProductMainSlider,
+    OtherSellerGoodsSlider
   },
   data () {
     return {
@@ -993,52 +995,6 @@ export default {
 .back_btn:hover {
   background: #343538!important;
 }
-.gallery-top {
-  height: 600px;
-  width: 100%;
-  border-radius: 5px;
-}
-
-.gallery-thumbs {
-  height: 150px;
-  box-sizing: border-box;
-  padding: 10px 0;
-}
-
-.gallery-thumbs .swiper-slide {
-  width: 25%;
-  height: 100%;
-  cursor: pointer;
-  opacity: 1;
-  border-radius: 3px!important;
-  overflow: hidden;
-}
-
-.gallery-thumbs .swiper-slide-thumb-active {
-  -webkit-box-shadow: inset 0px 0px 0px 3px var(--main-color);
-  -moz-box-shadow: inset 0px 0px 0px 3px var(--main-color);
-  box-shadow: inset 0px 0px 0px 3px var(--main-color);
-  opacity: 1;
-}
-
-.product_slider_next {
-  top: 50%;
-  right: -50px;
-}
-.product_slider_prev {
-  top: 50%;
-  left: -50px;
-}
-.gallery-top:hover .product_slider_prev {
-  left: 25px;
-}
-.gallery-top:hover .product_slider_next {
-  right: 25px;
-}
-.zoom-imgs {
-  cursor: pointer;
-}
-
 .product_sidebar {
   border-radius: 6px;
   padding: 30px 30px 20px 30px;

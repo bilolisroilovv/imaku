@@ -217,7 +217,7 @@
 
 <script>
 import Header2 from '@/components/lite/desktop/Header2'
-import Card5 from '@/components/lite/desktop/Card5'
+import Card5 from '@/components/lite/desktop/Cards/Card5'
 
 export default {
   name: 'ProfilePosts',

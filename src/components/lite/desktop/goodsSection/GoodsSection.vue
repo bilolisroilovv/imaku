@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import CardBase from '@/components/lite/desktop/CardBase'
+import CardBase from '@/components/lite/desktop/Cards/CardBase'
 
 export default {
   name: 'GoodsSection',

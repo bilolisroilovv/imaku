@@ -224,7 +224,7 @@
 
 <script>
 import Header2 from '@/components/lite/desktop/Header2'
-import Card4 from '@/components/lite/desktop/Card4'
+import Card4 from '@/components/lite/desktop/Cards/Card4'
 
 export default {
   name: 'ProductPage',
