@@ -15,7 +15,6 @@ html,
 body {
   font-family: "Roboto", sans-serif !important;
   background: #f8f8fc !important;
-  min-height: 6550px;
 }
 /*
   font-family: 'Inter', sans-serif;

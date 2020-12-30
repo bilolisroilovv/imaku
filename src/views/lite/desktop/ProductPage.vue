@@ -847,6 +847,24 @@
 
   </section> <!-- product_review_section -->
 
+  <section class="section pt-0">
+    <div class="container">
+      <h2 class="section_title pb-4">
+        Похожие объявления
+      </h2> <!-- section_title -->
+      <SimilarGoodsSlider />
+    </div> <!-- container -->
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section_title pb-4">
+        Новые объявления
+      </h2> <!-- section_title -->
+      <GoodsSection />
+    </div> <!-- container -->
+  </section>
+
   <!-- The modal -->
   <b-modal id="my-modal" centered>
 
@@ -859,6 +877,8 @@ import Header2 from '@/components/lite/desktop/Header2'
 import ToggleFavorite from '@/components/lite/desktop/ToggleFavorite'
 import ProductMainSlider from '@/components/lite/desktop/Sliders/ProductMainSlider'
 import OtherSellerGoodsSlider from '@/components/lite/desktop/Sliders/OtherSellerGoodsSlider'
+import SimilarGoodsSlider from '@/components/lite/desktop/Sliders/SimilarGoodsSlider'
+import GoodsSection from '@/components/lite/desktop/goodsSection/GoodsSection'
 
 export default {
   name: 'ProductPage',
@@ -866,7 +886,9 @@ export default {
     Header2,
     ToggleFavorite,
     ProductMainSlider,
-    OtherSellerGoodsSlider
+    OtherSellerGoodsSlider,
+    SimilarGoodsSlider,
+    GoodsSection
   },
   data () {
     return {

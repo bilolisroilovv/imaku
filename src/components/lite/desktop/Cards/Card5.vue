@@ -1,7 +1,7 @@
 <template>
   <div class="mycard">
     <div class="position-relative">
-      <router-link :to="{ name: 'ProductPage' }" target="_blank">
+      <router-link :to="{ name: 'ProductPage' }">
         <div class="mycard_img mybg_center position-relative d-block">
           <div class="mycard_img_list">
 
@@ -25,7 +25,7 @@
     <div class="w-100">
       <div class="d-flex justify-content-between">
         <div>
-          <router-link :to="{ name: 'ProductPage' }" target="_blank" title="Диван две кресла PANDA механизмом дельфин ткань туркия"
+          <router-link :to="{ name: 'ProductPage' }" title="Диван две кресла PANDA механизмом дельфин ткань туркия"
             class="mycard_title text_ellipsis1 pt-1 myhover_text">
             Диван две кресла PANDA механизмом дельфин ткань туркия
           </router-link>
@@ -77,16 +77,32 @@
           <div class="dislike_btn_count">-55</div>
           <!-- dislike_btn_count -->
         </button>
-        <!-- dislike_btn -->
-        <div class="d-flex align-items-center mycard_views" title="Просмотры">
-          <svg width="18" height="10" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M11.0441 3.71484C9.99799 1.64824 7.927 0.25 5.55567 0.25C3.18433 0.25 1.11277 1.64922 0.0672412 3.71504C0.0231134 3.80342 0.00012207 3.90107 0.00012207 4.0001C0.00012207 4.09913 0.0231134 4.19678 0.0672412 4.28516C1.11334 6.35176 3.18433 7.75 5.55567 7.75C7.927 7.75 9.99857 6.35078 11.0441 4.28496C11.0882 4.19658 11.1112 4.09893 11.1112 3.9999C11.1112 3.90087 11.0882 3.80322 11.0441 3.71484ZM5.55567 6.8125C5.00627 6.8125 4.46922 6.64755 4.01242 6.33851C3.55561 6.02947 3.19958 5.59021 2.98934 5.0763C2.77909 4.56238 2.72408 3.99688 2.83126 3.45131C2.93844 2.90574 3.203 2.4046 3.59148 2.01126C3.97996 1.61793 4.47491 1.35006 5.01375 1.24154C5.55259 1.13302 6.1111 1.18872 6.61868 1.40159C7.12625 1.61446 7.56008 1.97495 7.86531 2.43746C8.17053 2.89997 8.33345 3.44374 8.33345 4C8.33362 4.36939 8.2619 4.7352 8.12236 5.07651C7.98283 5.41782 7.77822 5.72794 7.52025 5.98914C7.26227 6.25034 6.95598 6.4575 6.61889 6.59878C6.28179 6.74006 5.9205 6.81268 5.55567 6.8125ZM5.55567 2.125C5.39038 2.12734 5.22615 2.15224 5.06743 2.19902C5.19826 2.37904 5.26105 2.60056 5.24439 2.82343C5.22774 3.04629 5.13276 3.25573 4.97667 3.41377C4.82059 3.57181 4.61373 3.66798 4.39362 3.68484C4.17351 3.7017 3.95472 3.63813 3.77692 3.50566C3.67568 3.88332 3.69396 4.28361 3.82918 4.6502C3.9644 5.01678 4.20975 5.33121 4.53071 5.54921C4.85166 5.76722 5.23206 5.87782 5.61835 5.86547C6.00465 5.85311 6.37739 5.71841 6.68412 5.48033C6.99084 5.24225 7.21611 4.91278 7.3282 4.53828C7.4403 4.16378 7.43359 3.76312 7.309 3.39269C7.18442 3.02226 6.94825 2.70071 6.63372 2.4733C6.31919 2.2459 5.94215 2.12408 5.55567 2.125Z"
-              fill="#7D95AE" />
-          </svg>
-          <span>3486</span>
-        </div>
-        <!-- d-flex -->
+          <!-- dislike_btn -->
+          <vs-tooltip text="Просмотры">
+            <div class="d-flex align-items-center mycard_views mr-2" title="Просмотры">
+              <i class="far fa-eye mr-1"></i>
+              <span>3486</span>
+            </div> <!-- d-flex -->
+          </vs-tooltip>
+          <vs-tooltip text="Просмотры номера">
+            <div class="d-flex align-items-center mycard_views mr-2" title="Просмотры номера">
+              <i class="fas fa-phone-alt mr-1"></i>
+              <span>52</span>
+            </div> <!-- d-flex -->
+          </vs-tooltip>
+          <vs-tooltip text="Добавлений в избранное">
+            <div class="d-flex align-items-center mycard_views mr-2" title="Просмотры номера">
+              <i class="far fa-heart mr-1"></i>
+              <span>52</span>
+            </div> <!-- d-flex -->
+          </vs-tooltip>
+          <vs-tooltip text="Сообщений">
+            <div class="d-flex align-items-center mycard_views" title="Сообщений">
+              <i class="far fa-comment-alt mr-1"></i>
+              <span>52</span>
+            </div> <!-- d-flex -->
+          </vs-tooltip>
+
         </div> <!-- d-flex -->
         <div class="mycard_edit_btns">
           <a href="#" class="post_remove_btn mainbtn"><i class="far fa-trash-alt mr-1"></i> Удалить</a>
@@ -321,10 +337,14 @@ export default {
 .dislike_btn.active .dislike_btn_count {
   color: #fc4747;
 }
+.mycard_views {
+  font-size: 12px;
 
+  color: #7d95ae;
+}
 .mycard_views span {
   font-weight: 500;
-  font-size: 11px;
+  font-size: 12px;
 
   color: #7d95ae;
 }

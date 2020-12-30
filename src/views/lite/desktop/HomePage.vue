@@ -22,10 +22,25 @@
 
     <Header />
 
+    <section class="section pt-5 pb-0">
+      <div class="container">
+        <h2 class="section_title pb-4">
+          Отдам даром
+        </h2> <!-- section_title -->
+        <SimilarGoodsSlider />
+      </div> <!-- container -->
+    </section>
+
     <SelectionSection />
 
-    <GoodsSection />
-
+    <section class="section pt-0">
+      <div class="container">
+        <h2 class="section_title pb-4">
+          Новые объявления
+        </h2> <!-- section_title -->
+        <GoodsSection />
+      </div> <!-- container -->
+    </section>
   </div>
 </template>
 
@@ -33,13 +48,15 @@
 import Header from '@/components/lite/desktop/Header'
 import SelectionSection from '@/components/lite/desktop/SelectionSection/SelectionSection'
 import GoodsSection from '@/components/lite/desktop/goodsSection/GoodsSection'
+import SimilarGoodsSlider from '@/components/lite/desktop/Sliders/SimilarGoodsSlider'
 
 export default {
   name: 'HomePage',
   components: {
     Header,
     SelectionSection,
-    GoodsSection
+    GoodsSection,
+    SimilarGoodsSlider
   }
 }
 </script>
