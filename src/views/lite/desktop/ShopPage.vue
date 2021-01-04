@@ -42,8 +42,9 @@
     </section> <!-- product_section -->
 
     <ShopInfo/>
-
-    <GoodsSection/>
+    <div class="container">
+      <GoodsSection class="pt-0" />
+    </div> <!-- container -->
 
   </div>
 </template>
