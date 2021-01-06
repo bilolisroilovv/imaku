@@ -38,7 +38,7 @@
         <h2 class="section_title pb-4">
           Новые объявления
         </h2> <!-- section_title -->
-        <GoodsSection />
+        <GoodsSection/>
       </div> <!-- container -->
     </section>
   </div>

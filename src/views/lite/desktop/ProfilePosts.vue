@@ -87,40 +87,40 @@
               <div class="pt-2 pb-2 profile_links">
                 <ul class="product_adress_ul">
                   <li class="active">
-                    <a href="#">
+                    <router-link to="/profile-posts">
                       <i class="far fa-file"></i>
                       Мои объявления
-                    </a>
+                    </router-link>
                   </li>
                   <li>
-                    <a href="#">
+                    <router-link href="#">
                       <i class="far fa-heart"></i>
                       Избранные
-                    </a>
+                    </router-link>
                   </li>
                   <li>
-                    <a href="#">
+                    <router-link href="#">
                       <i class="far fa-comment-dots"></i>
                       Сообщения
-                    </a>
+                    </router-link>
                   </li>
                   <li>
-                    <a href="#">
+                    <router-link href="#">
                       <i class="far fa-edit"></i>
                       Настройки
-                    </a>
+                    </router-link>
                   </li>
                   <li>
-                    <a href="#">
+                    <router-link href="#">
                       <i class="far fa-question-circle"></i>
                       Обратиться в поддержку
-                    </a>
+                    </router-link>
                   </li>
                   <li>
-                    <a href="#">
+                    <router-link href="#">
                       <i class="fas fa-sign-out-alt"></i>
                       Выход
-                    </a>
+                    </router-link>
                   </li>
                 </ul> <!-- product_adress_ul -->
               </div> <!-- profile_links -->

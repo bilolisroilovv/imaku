@@ -101,8 +101,7 @@ export default {
         spaceBetween: 10,
         loop: true,
         loopedSlides: 5,
-        slidesPerView: 5,
-        centeredSlides: true,
+        slidesPerView: 'auto',
         slideToClickedSlide: true
       }
     }
