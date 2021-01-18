@@ -44,7 +44,9 @@ const routes = [
     path: '/profile-posts',
     name: 'ProfilePosts',
     component: () => import('../views/lite/desktop/ProfilePosts.vue')
-  }
+  },
+
+  { path: '*', redirect: '/' }
 ]
 
 const router = new VueRouter({
