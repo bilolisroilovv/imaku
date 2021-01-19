@@ -139,9 +139,10 @@ export default {
       formData.append('phone', this.phone)
       formData.append('code', this.code)
       await axios.post('verify', formData).then(res => {
-        console.log(res.data.token)
-        alert('Success')
+        console.log('Success')
         localStorage.setItem('token', res.data.token)
+
+        this.$store.dispath('user', res.data.token)
       }).catch(function (err) {
         console.log(err)
       })
