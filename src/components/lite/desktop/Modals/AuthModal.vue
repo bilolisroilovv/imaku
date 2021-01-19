@@ -109,14 +109,12 @@ export default {
       code: ''
     }
   },
+  computed: {
+    loggedIn () {
+      return this.$store.state.auth.status.loggedIn
+    }
+  },
   methods: {
-    makeToast (variant = null) {
-      this.$bvToast.toast('Toast body content', {
-        title: `Variant ${variant || 'default'}`,
-        variant: variant,
-        solid: true
-      })
-    },
     async nextStep () {
       var formData = new FormData()
 
@@ -141,8 +139,6 @@ export default {
       await axios.post('verify', formData).then(res => {
         console.log('Success')
         localStorage.setItem('token', res.data.token)
-
-        this.$store.dispath('user', res.data.token)
       }).catch(function (err) {
         console.log(err)
       })

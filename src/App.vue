@@ -15,7 +15,6 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      user: ''
     }
   },
   computed: {
@@ -29,12 +28,12 @@ export default {
     EmptyLayout
   },
   async created () {
-    var formData = new FormData()
-
-    formData.append('user', this.user)
-    await axios.post('me', formData).then(res => {
-      res.data.token = localStorage.getItem('token')
-      console.log('Auth')
+    await axios.get('me', {}, {
+      headers: {
+        Authorization: localStorage.token
+      }
+    }).then(res => {
+      console.log('Auth success')
     }).catch(function (err) {
       console.log(err)
     })
