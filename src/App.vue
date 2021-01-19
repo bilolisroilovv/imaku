@@ -1,8 +1,45 @@
 <template>
   <div id="app">
-    <router-view />
+    <component :is="layout">
+      <router-view  />
+    </component>
   </div>
 </template>
+
+<script>
+import MainLayout from '@/layouts/MainLayout'
+import SecondLayout from '@/layouts/SecondLayout'
+import EmptyLayout from '@/layouts/EmptyLayout'
+import axios from 'axios'
+
+export default {
+  data () {
+    return {
+    }
+  },
+  computed: {
+    layout () {
+      return (this.$route.meta.layout || 'second') + '-layout'
+    }
+  },
+  components: {
+    MainLayout,
+    SecondLayout,
+    EmptyLayout
+  },
+  async created () {
+    await axios.post('me').then(res => {
+      console.log(res)
+    }).catch(function (err) {
+      console.log(err)
+    })
+    // console.log(response)
+
+    /* localStorage.setItem('token', response.data.token) */
+    /* this.codeInputShow = true */
+  }
+}
+</script>
 
 <style>
 * {
@@ -189,6 +226,7 @@ body.modal-open {
 .sign_modal_form span {
   font-size: 12px;
   color: #ADADAD;
+  display: inherit;
 }
 
 .sign_modal_form label {
@@ -721,7 +759,3 @@ body.modal-open {
   opacity: 0!important;
 }
 </style>
-
-<script>
-export default {}
-</script>

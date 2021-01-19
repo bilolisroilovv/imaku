@@ -256,7 +256,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
 .create_store_btn {
   background: rgba(255, 201, 150, 0.377);
   color: var(--main-color);
@@ -269,6 +268,7 @@ export default {
 }
 .create_store_btn:hover {
   background: rgba(255, 201, 150, 0.527);
+  color: var(--main-color);
 }
 .create_ad_btn {
   font-size: 15px;

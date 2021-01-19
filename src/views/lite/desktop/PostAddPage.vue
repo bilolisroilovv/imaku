@@ -1,7 +1,5 @@
 <template>
   <div>
-    <Header2/>
-
     <div class="container">
       <div class="row">
         <div class="col-md-8">
@@ -118,7 +116,6 @@
 </template>
 
 <script>
-import Header2 from '@/components/lite/desktop/Header2'
 export default {
   name: 'PostAddPage',
   data () {
@@ -182,7 +179,6 @@ export default {
     }
   },
   components: {
-    Header2
   }
 }
 </script>

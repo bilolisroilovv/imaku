@@ -183,30 +183,14 @@
       </div>
     </div> <!-- d-flex -->
   </div> <!-- container -->
-</div> <!-- mynavbar -->
-
+  </div> <!-- mynavbar -->
 <!-------------------------------- END HeaderNavbar -------------------------------->
-
-<!-------------------------------- START HeaderSlider -------------------------------->
-
-<div class="container pt-3">
-  <HeaderMainSlider />
-</div><!-- container -->
-
-<div class="container">
-  <HeaderCategoriesSlider />
-</div><!-- container -->
-
-<!-------------------------------- END HeaderSlider -------------------------------->
-
-<AuthModal />
+  <AuthModal />
 </header>
 </template>
 
 <script>
 import SearchGroup from '@/components/lite/desktop/SearchGroup'
-import HeaderMainSlider from '@/components/lite/desktop/Sliders/HeaderMainSlider'
-import HeaderCategoriesSlider from '@/components/lite/desktop/Sliders/HeaderCategoriesSlider'
 import HeaderCategoriesDropdown from '@/components/lite/desktop/headerCategories/HeaderCategoriesDropdown'
 import AuthModal from '@/components/lite/desktop/Modals/AuthModal'
 
@@ -215,8 +199,6 @@ export default {
   components: {
     SearchGroup,
     HeaderCategoriesDropdown,
-    HeaderMainSlider,
-    HeaderCategoriesSlider,
     AuthModal
   },
   data () {
@@ -278,7 +260,7 @@ export default {
 .create_ad_btn {
   font-size: 15px;
   font-family: 'Inter', sans-serif;
-  padding: 10px 14px;
+  padding: 10px 14px!important;
 }
 .navbar_top_link {
   font-size: 13px;

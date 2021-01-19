@@ -8,41 +8,49 @@ const routes = [
   {
     path: '/',
     name: 'HomePage',
+    meta: { layout: 'main' },
     component: HomePage
   },
   {
     path: '/product',
     name: 'ProductPage',
+    meta: { layout: 'second' },
     component: () => import('../views/lite/desktop/ProductPage.vue')
   },
   {
     path: '/seller',
     name: 'SellerPage',
+    meta: { layout: 'second' },
     component: () => import('../views/lite/desktop/SellerPage.vue')
   },
   {
     path: '/profile',
     name: 'ProfilePage',
+    meta: { layout: 'second' },
     component: () => import('../views/lite/desktop/ProfilePage.vue')
   },
   {
     path: '/shop',
     name: 'ShopPage',
+    meta: { layout: 'second' },
     component: () => import('../views/lite/desktop/ShopPage.vue')
   },
   {
     path: '/post-add',
     name: 'PostAddPage',
+    meta: { layout: 'second' },
     component: () => import('../views/lite/desktop/PostAddPage.vue')
   },
   {
     path: '/category',
     name: 'CategoryPage',
+    meta: { layout: 'second' },
     component: () => import('../views/lite/desktop/CategoryPage.vue')
   },
   {
     path: '/profile-posts',
     name: 'ProfilePosts',
+    meta: { layout: 'second' },
     component: () => import('../views/lite/desktop/ProfilePosts.vue')
   },
 

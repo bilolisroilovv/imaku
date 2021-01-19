@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header2/>
     <section class="product_section">
       <div class="container">
         <div class="row">
@@ -229,13 +228,11 @@
 </template>
 
 <script>
-import Header2 from '@/components/lite/desktop/Header2'
 import Card4 from '@/components/lite/desktop/Cards/Card4'
 
 export default {
   name: 'CategoryPage',
   components: {
-    Header2,
     Card4
   },
   data () {

@@ -10,24 +10,42 @@
       </h5>
     </div>
     <!-- mymodal-header -->
-    <div  v-show="step == false" class="step1">
-      <form @submit.prevent="" action="" class="sign_modal_form">
-        <input
-          id="modal_phone"
-          v-model="userPhone"
-          type="text"
-          v-mask="'+998 (##) ###-##-##'"
-          placeholder="Ваш номер..."
-          required
-        />
-        <span class="mt-1">
-          На этот номер будет высланно смс с кодом подтверждения
-        </span>
-        <div>
-          <button class="mt-3 mainbtn w-100" @click="nextStep">Продолжить</button>
-        </div>
+      <form @submit.prevent="handleSubmit" action="" class="sign_modal_form">
+        <div v-show="step === 1" class="step1">
+          <input
+            id="modal_phone"
+            v-model="phone"
+            type="text"
+            v-mask="'+998 (##) ###-##-##'"
+            placeholder="Ваш номер..."
+            required
+          />
+          <span class="mt-1">
+            На этот номер будет высланно смс с кодом подтверждения
+          </span>
+          <div>
+            <button class="mt-3 mainbtn w-100" @click.prevent="nextStep">Продолжить</button>
+          </div>
+        </div> <!-- step1 -->
 
-        <div class="mt-3 sign_modal_terms_link">
+        <div v-show="step === 2" class="step2">
+          <input
+            id="code_phone"
+            type="text"
+            v-mask="'######'"
+            placeholder="Код пароль"
+            required
+            v-model="code"
+          />
+          <span class="mt-1"
+            >На ваш номер был отправлен пароль для входа</span
+          >
+          <div>
+            <button class="mt-3 mainbtn w-100" type="submit">Продолжить</button>
+          </div>
+        </div> <!-- step2 -->
+
+        <!-- <div class="mt-3 sign_modal_terms_link">
           <label class="control control--checkbox">
             <input type="checkbox" checked="checked" required />
             <div class="control__indicator"></div>
@@ -39,27 +57,10 @@
             <div class="control__indicator"></div>
             Я хочу получать новости и акции
           </label>
-        </div>
+        </div> -->
       </form>
-    </div> <!-- step1 -->
-    <div v-show="step" class="step2">
-      <form @submit.prevent="AuthUser" class="sign_modal_form">
-        <input
-          id="code_phone"
-          type="text"
-          v-mask="'###-###'"
-          placeholder="Код пароль"
-          required
-          v-model="verifyCode"
-        />
-        <span class="mt-1"
-          >На ваш номер был отправлен пароль для входа</span
-        >
-        <div>
-          <button class="mt-3 mainbtn w-100" type="submit">Продолжить</button>
-        </div>
 
-        <div class="mt-3 sign_modal_terms_link">
+        <!-- <div class="mt-3 sign_modal_terms_link">
           <label class="control control--checkbox">
             <input type="checkbox" checked="checked" required />
             <div class="control__indicator"></div>
@@ -71,9 +72,7 @@
             <div class="control__indicator"></div>
             Я хочу получать новости и акции
           </label>
-        </div>
-      </form>
-    </div> <!-- step2 -->
+        </div> -->
 
         <!-- <div class="product_sidebar_socials mt-4">
           <span>Войти с помощью :</span>
@@ -99,22 +98,54 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'AuthModal',
   data () {
     return {
-      step: false,
-      userPhone: '',
-      verifyCode: ''
+      step: 1,
+      phone: '',
+      code: ''
     }
   },
   methods: {
-    nextStep () {
-      this.step++
+    makeToast (variant = null) {
+      this.$bvToast.toast('Toast body content', {
+        title: `Variant ${variant || 'default'}`,
+        variant: variant,
+        solid: true
+      })
+    },
+    async nextStep () {
+      var formData = new FormData()
+
+      formData.append('phone', this.phone)
+      await axios.post('authorize', formData).then(res => {
+        console.log(res.data)
+        if (res.status === 200) {
+          this.step++
+        }
+        /* localStorage.setItem('token', res.data.token) */
+      }).catch(function (err) {
+        console.log(err)
+      })
+      // console.log(response)
       /* this.codeInputShow = true */
     },
-    AuthUser () {
-      alert('Auth')
+    async handleSubmit () {
+      var formData = new FormData()
+
+      formData.append('phone', this.phone)
+      formData.append('code', this.code)
+      await axios.post('verify', formData).then(res => {
+        console.log(res.data.token)
+        alert('Success')
+        localStorage.setItem('token', res.data.token)
+      }).catch(function (err) {
+        console.log(err)
+      })
+      /* this.$router.go(this.$router.currentRoute) */
     }
   }
 }

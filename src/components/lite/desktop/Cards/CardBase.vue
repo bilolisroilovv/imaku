@@ -41,7 +41,6 @@
           class="position-bottom-right mycard_favorite2 flex-center d-flex"
         />
       </div><!-- product_favourite -->
-      
       <!-- mycard_favorite -->
     </div>
     <!-- position-relative -->

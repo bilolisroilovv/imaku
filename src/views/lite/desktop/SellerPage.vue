@@ -1,25 +1,5 @@
 <template>
   <div>
-    <div id="top"></div>
-    <a href="#top" class="top_btn flex-center anim d-flex">
-      <svg
-        class="svg-inline--fa fa-chevron-left fa-w-10"
-        aria-hidden="true"
-        focusable="false"
-        data-prefix="fas"
-        data-icon="chevron-left"
-        role="img"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 320 512"
-        data-fa-i2svg=""
-      >
-        <path
-          fill="#fff"
-          d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"
-        ></path>
-      </svg>
-    </a><!-- top_btn -->
-    <Header2 />
     <section class="product_section">
       <div class="container">
         <div class="row">
@@ -223,13 +203,11 @@
 </template>
 
 <script>
-import Header2 from '@/components/lite/desktop/Header2'
 import Card4 from '@/components/lite/desktop/Cards/Card4'
 
 export default {
   name: 'ProductPage',
   components: {
-    Header2,
     Card4
   },
   data () {
