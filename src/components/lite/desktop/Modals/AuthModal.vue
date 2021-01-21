@@ -148,6 +148,7 @@ export default {
       ))
       localStorage.setItem('token', response.data.token)
       this.$router.go(this.$router.currentRoute)
+      this.$router.push('/')
 
       /* if (response.data.token) {
         localStorage.setItem('token', response.data.token)

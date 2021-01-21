@@ -42,6 +42,7 @@
               <path d="M7.42009 19.814C7.58934 19.9349 7.79211 19.9998 8.00009 19.9998C8.20806 19.9998 8.41084 19.9349 8.58009 19.814C8.88409 19.599 16.0291 14.44 16.0001 8C16.0001 3.589 12.4111 0 8.00009 0C3.58909 0 8.80377e-05 3.589 8.80377e-05 7.995C-0.028912 14.44 7.11609 19.599 7.42009 19.814ZM8.00009 2C11.3091 2 14.0001 4.691 14.0001 8.005C14.0211 12.443 9.61209 16.428 8.00009 17.735C6.38909 16.427 1.97909 12.441 2.00009 8C2.00009 4.691 4.69109 2 8.00009 2Z" fill="black"/>
             </svg>
             Ташкент
+            {{ $t("message.city") }}
           </a> <!-- navbar_top_link -->
         </div> <!-- d-flex -->
         <div class="d-flex justify-content-between align-items-center">
@@ -66,12 +67,12 @@
               <vs-icon class="" icon="expand_more"></vs-icon>
             </a>
             <vs-dropdown-menu>
-              <vs-dropdown-item class="navbar_top_link">
+              <vs-dropdown-item class="navbar_top_link" @click.prevent="setLocale('uz')">
                 O'zbekcha
               </vs-dropdown-item>
-              <vs-dropdown-item class="navbar_top_link">
+              <!-- <vs-dropdown-item class="navbar_top_link">
                 Endglish
-              </vs-dropdown-item>
+              </vs-dropdown-item> -->
             </vs-dropdown-menu>
           </vs-dropdown>
         </div> <!-- d-flex -->
@@ -121,14 +122,14 @@
           />
       </div> <!-- d-flex -->
       <div>
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center" v-if="!currentUser">
           <a href="#" class="create_store_btn d-flex align-items-center mr-2">
             Создать магазин
           </a> <!-- mainbtn -->
           <router-link to="/post-add" class="mainbtn create_ad_btn d-flex align-items-center mr-2">
             Подать объявление
           </router-link> <!-- mainbtn -->
-          <a href="#" v-if="!currentUser" class="header_icon" data-toggle="modal" @click.prevent v-b-modal.signModal >
+          <a href="#" class="header_icon" data-toggle="modal" @click.prevent v-b-modal.signModal >
             <svg version="1.1" width="55" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
               style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -179,17 +180,30 @@
             </svg>
             <span>Войти</span>
           </a>
-          <vs-dropdown v-if="currentUser" class="header_profile_link">
+        </div>
+
+        <div class="d-flex align-items-center" v-if="currentUser">
+          <a href="#" class="create_store_btn d-flex align-items-center mr-3">
+            Создать магазин
+          </a> <!-- mainbtn -->
+          <router-link to="/post-add" class="mainbtn create_ad_btn d-flex align-items-center mr-2">
+            Подать объявление
+          </router-link> <!-- mainbtn -->
+          <vs-dropdown class="header_profile_link ml-3">
             <a class="header_profile_img mybg_center" :style="{ 'background-image': 'url(' + this.profileLogo + ')' }" href="#">
             </a>
             <vs-dropdown-menu class="header_profile_links">
-              <vs-dropdown-item class="navbar_top_link">
-                Профиль
-              </vs-dropdown-item>
-              <vs-dropdown-item class="navbar_top_link">
-                Мои объявления
-              </vs-dropdown-item>
-              <vs-dropdown-item class="navbar_top_link">
+              <router-link to="/profile">
+                <vs-dropdown-item class="navbar_top_link">
+                  Профиль
+                </vs-dropdown-item>
+              </router-link>
+              <router-link to="/profile-posts">
+                <vs-dropdown-item class="navbar_top_link">
+                  Мои объявления
+                </vs-dropdown-item>
+              </router-link>
+              <vs-dropdown-item class="navbar_top_link" @click.prevent="handleLogout">
                 Выйти
               </vs-dropdown-item>
             </vs-dropdown-menu>
@@ -223,10 +237,15 @@ export default {
       scrolled: false,
       scrollPosition: null,
       headerCategoriesDropdownVisible: false,
-      profileLogo: "'https://picsum.photos/500?random=2'"
+      profileLogo: "'https://picsum.photos/50?random=2'"
     } /* return */
   },
   methods: {
+    handleLogout () {
+      localStorage.removeItem('token')
+      this.$router.push('/')
+      this.$router.go(this.$router.currentRoute)
+    },
     ///   HeaderNavbar Animation   ///
     handleScroll () {
       if (this.scrollPosition < window.scrollY && this.limitPosition < window.scrollY) {
@@ -244,6 +263,9 @@ export default {
     },
     onClose () {
       this.headerCategoriesDropdownVisible = false
+    },
+    setLocale (locale) {
+      this.$i18n.locale = locale
     }
   },
   computed: {
@@ -262,8 +284,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 .header_profile_img {
-  width: 45px;
-  height: 45px;
+  width: 43px;
+  height: 43px;
   border-radius: 50%;
   display: block;
 }

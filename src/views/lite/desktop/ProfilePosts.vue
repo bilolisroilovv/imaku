@@ -199,6 +199,7 @@
 
 <script>
 import Card5 from '@/components/lite/desktop/Cards/Card5'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'ProfilePosts',
@@ -209,6 +210,24 @@ export default {
     return {
       avatarImage: "'https://picsum.photos/500?random=1'"
     }
+  },
+  methods: {
+    handleLogout () {
+      localStorage.removeItem('token')
+      this.$router.push('/')
+      this.$router.go(this.$router.currentRoute)
+    },
+    checkLogin () {
+      if (!this.currentUser) {
+        this.$router.push('/')
+      }
+    }
+  },
+  computed: {
+    ...mapGetters(['currentUser'])
+  },
+  mounted () {
+    this.checkLogin()
   }
 }
 </script>

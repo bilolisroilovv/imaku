@@ -72,7 +72,7 @@
                       Мои объявления
                     </router-link>
                   </li>
-                  <li class="active">
+                  <li active-class="active">
                     <a href="#">
                       <i class="far fa-heart"></i>
                       Избранные
@@ -97,7 +97,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="" @click.prevent="handleClick">
+                    <a href="" @click.prevent="handleLogout">
                       <i class="fas fa-sign-out-alt"></i>
                       Выход
                     </a>
@@ -204,6 +204,7 @@
 
 <script>
 import Card4 from '@/components/lite/desktop/Cards/Card4'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'ProductPage',
@@ -216,10 +217,22 @@ export default {
     }
   },
   methods: {
-    handleClick () {
+    handleLogout () {
       localStorage.removeItem('token')
       this.$router.push('/')
+      this.$router.go(this.$router.currentRoute)
+    },
+    checkLogin () {
+      if (!this.currentUser) {
+        this.$router.push('/')
+      }
     }
+  },
+  computed: {
+    ...mapGetters(['currentUser'])
+  },
+  mounted () {
+    this.checkLogin()
   }
 }
 </script>

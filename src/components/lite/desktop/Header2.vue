@@ -121,7 +121,7 @@
           />
       </div> <!-- d-flex -->
       <div>
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center" v-if="!currentUser">
           <a href="#" class="create_store_btn d-flex align-items-center mr-2">
             Создать магазин
           </a> <!-- mainbtn -->
@@ -180,6 +180,34 @@
             <span>Войти</span>
           </a>
         </div>
+
+        <div class="d-flex align-items-center" v-if="currentUser">
+          <a href="#" class="create_store_btn d-flex align-items-center mr-3">
+            Создать магазин
+          </a> <!-- mainbtn -->
+          <router-link to="/post-add" class="mainbtn create_ad_btn d-flex align-items-center mr-2">
+            Подать объявление
+          </router-link> <!-- mainbtn -->
+          <vs-dropdown class="header_profile_link ml-3">
+            <a class="header_profile_img mybg_center" :style="{ 'background-image': 'url(' + this.profileLogo + ')' }" href="#">
+            </a>
+            <vs-dropdown-menu class="header_profile_links">
+              <router-link to="/profile">
+                <vs-dropdown-item class="navbar_top_link">
+                  Профиль
+                </vs-dropdown-item>
+              </router-link>
+              <router-link to="/profile-posts">
+                <vs-dropdown-item class="navbar_top_link">
+                  Мои объявления
+                </vs-dropdown-item>
+              </router-link>
+              <vs-dropdown-item class="navbar_top_link" @click.prevent="handleLogout">
+                Выйти
+              </vs-dropdown-item>
+            </vs-dropdown-menu>
+          </vs-dropdown>
+        </div>
       </div>
     </div> <!-- d-flex -->
   </div> <!-- container -->
@@ -194,6 +222,7 @@
 import SearchGroup2 from '@/components/lite/desktop/SearchGroup2'
 import HeaderCategoriesDropdown from '@/components/lite/desktop/headerCategories/HeaderCategoriesDropdown'
 import AuthModal from '@/components/lite/desktop/Modals/AuthModal'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Header',
@@ -208,6 +237,7 @@ export default {
       scrolled: false,
       scrollPosition: null,
       headerCategoriesDropdownVisible: false,
+      profileLogo: "'https://picsum.photos/50?random=2'",
       swiperOption: {
         spaceBetween: 30,
         effect: 'fade',
@@ -223,6 +253,11 @@ export default {
     } /* return */
   },
   methods: {
+    handleLogout () {
+      localStorage.removeItem('token')
+      this.$router.push('/')
+      this.$router.go(this.$router.currentRoute)
+    },
     ///   HeaderNavbar Animation   ///
     handleScroll () {
       if (this.scrollPosition < window.scrollY && this.limitPosition < window.scrollY) {
@@ -243,6 +278,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['currentUser'])
   },
   mounted () {
     window.addEventListener('scroll', this.handleScroll)

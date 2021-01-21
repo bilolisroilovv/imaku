@@ -8,13 +8,13 @@ export default {
     }
   },
   mutations: {
-    updateUser (state, user) {
+    setUser (state, user) {
       state.user = user
     }
   },
   actions: {
     fetchUser (ctx, user) {
-      ctx.commit('updateUser', user)
+      ctx.commit('setUser', user)
     }
   }
 }
