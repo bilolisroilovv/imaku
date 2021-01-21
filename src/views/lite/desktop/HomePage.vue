@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h3>{{content}}</h3>
     <!-------------------------------- START HeaderSlider -------------------------------->
     <div class="container pt-3">
       <HeaderMainSlider />
@@ -10,7 +11,6 @@
     </div><!-- container -->
 
     <!-------------------------------- END HeaderSlider -------------------------------->
-
     <section class="section pt-5 pb-0">
       <div class="container">
         <h2 class="section_title pb-4">
@@ -43,6 +43,11 @@ import SimilarGoodsSlider from '@/components/lite/desktop/Sliders/SimilarGoodsSl
 
 export default {
   name: 'HomePage',
+  data () {
+    return {
+      content: ''
+    }
+  },
   components: {
     SelectionSection,
     GoodsSection,

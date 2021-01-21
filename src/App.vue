@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <component :is="layout">
-      <router-view  />
+      <router-view />
     </component>
   </div>
 </template>
@@ -11,6 +11,7 @@ import MainLayout from '@/layouts/MainLayout'
 import SecondLayout from '@/layouts/SecondLayout'
 import EmptyLayout from '@/layouts/EmptyLayout'
 import axios from 'axios'
+/* import {mapGetters} from 'vuex' */
 
 export default {
   data () {
@@ -21,6 +22,7 @@ export default {
     layout () {
       return (this.$route.meta.layout || 'second') + '-layout'
     }
+    /* ...mapGetters(['currentUser']) */
   },
   components: {
     MainLayout,
@@ -28,24 +30,14 @@ export default {
     EmptyLayout
   },
   async created () {
-    await axios.get('me', {}, {
-      headers: {
-        Authorization: localStorage.token
-      }
-    }).then(res => {
-      console.log('Auth success')
-    }).catch(function (err) {
-      console.log(err)
-    })
-    // console.log(response)
-
-    /* localStorage.setItem('token', response.data.token) */
-    /* this.codeInputShow = true */
+    const response = await axios.get('me')
+    console.log(response)
+    this.$store.dispatch('fetchUser', response.data)
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -202,6 +194,7 @@ body.modal-open {
 .modal .modal-content {
   border: none;
   border-radius: 15px;
+  overflow: hidden;
 }
 .modal .modal-content {
   border-radius: 10px;
@@ -226,13 +219,16 @@ body.modal-open {
 .sign_modal_form {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .sign_modal_form span {
   font-size: 12px;
   color: #ADADAD;
   display: inherit;
 }
-
+.con-vs-loading {
+  position: absolute!important;
+}
 .sign_modal_form label {
   font-weight: normal;
   font-size: 15px;
@@ -761,5 +757,8 @@ body.modal-open {
 }
 .price_filter .vs-slider--circle-text {
   opacity: 0!important;
+}
+.header_profile_links a {
+  font-size: 15px!important;
 }
 </style>

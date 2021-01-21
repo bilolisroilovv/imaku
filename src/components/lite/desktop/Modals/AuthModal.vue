@@ -1,7 +1,8 @@
 <template>
   <!-- The modal -->
   <b-modal id="signModal" centered title="BootstrapVue">
-    <div class="mymodal-header justify-content-center">
+    <div class="loading_div">
+      <div class="mymodal-header justify-content-center">
       <button type="button" @click="$bvModal.hide('signModal')" class="close">
         <img src="@/assets/lite/close.png" class="img-width" alt="" />
       </button>
@@ -94,6 +95,7 @@
             </a>
           </div>
         </div> -->
+    </div> <!-- loading_div -->
   </b-modal>
 </template>
 
@@ -106,47 +108,60 @@ export default {
     return {
       step: 1,
       phone: '',
-      code: ''
-    }
-  },
-  computed: {
-    loggedIn () {
-      return this.$store.state.auth.status.loggedIn
+      code: '',
+      colorLoading: 'var(--main-color)'
     }
   },
   methods: {
     async nextStep () {
-      var formData = new FormData()
-
-      formData.append('phone', this.phone)
-      await axios.post('authorize', formData).then(res => {
-        console.log(res.data)
-        if (res.status === 200) {
-          this.step++
-        }
-        /* localStorage.setItem('token', res.data.token) */
-      }).catch(function (err) {
-        console.log(err)
+      this.$vs.loading({
+        container: '.loading_div',
+        scale: 0.6,
+        color: this.colorLoading
       })
-      // console.log(response)
-      /* this.codeInputShow = true */
+
+      const response = await axios.post('authorize', {
+        phone: this.phone
+      }).finally(() => (
+        this.$vs.loading.close('.loading_div > .con-vs-loading')
+      ))
+
+      if (response.status === 200) {
+        this.step++
+      } else {
+        console.log(response.status)
+      }
     },
-    async handleSubmit () {
-      var formData = new FormData()
 
-      formData.append('phone', this.phone)
-      formData.append('code', this.code)
-      await axios.post('verify', formData).then(res => {
-        console.log('Success')
-        localStorage.setItem('token', res.data.token)
-      }).catch(function (err) {
-        console.log(err)
+    async handleSubmit () {
+      this.$vs.loading({
+        container: '.loading_div',
+        scale: 0.6,
+        color: this.colorLoading
       })
-      /* this.$router.go(this.$router.currentRoute) */
+
+      const response = await axios.post('verify', {
+        phone: this.phone,
+        code: this.code
+      }).finally(() => (
+        this.$vs.loading.close('.loading_div > .con-vs-loading')
+      ))
+      localStorage.setItem('token', response.data.token)
+      this.$router.go(this.$router.currentRoute)
+
+      /* if (response.data.token) {
+        localStorage.setItem('token', response.data.token)
+        console.log(response.data.token)
+      } else {
+        console.log(response.status)
+      } */
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.loading_div {
+  max-height: 100%;
+}
 </style>

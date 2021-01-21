@@ -128,7 +128,7 @@
           <router-link to="/post-add" class="mainbtn create_ad_btn d-flex align-items-center mr-2">
             Подать объявление
           </router-link> <!-- mainbtn -->
-          <a href="#" class="header_icon" data-toggle="modal" @click.prevent v-b-modal.signModal >
+          <a href="#" v-if="!currentUser" class="header_icon" data-toggle="modal" @click.prevent v-b-modal.signModal >
             <svg version="1.1" width="55" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
               style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -179,6 +179,21 @@
             </svg>
             <span>Войти</span>
           </a>
+          <vs-dropdown v-if="currentUser" class="header_profile_link">
+            <a class="header_profile_img mybg_center" :style="{ 'background-image': 'url(' + this.profileLogo + ')' }" href="#">
+            </a>
+            <vs-dropdown-menu class="header_profile_links">
+              <vs-dropdown-item class="navbar_top_link">
+                Профиль
+              </vs-dropdown-item>
+              <vs-dropdown-item class="navbar_top_link">
+                Мои объявления
+              </vs-dropdown-item>
+              <vs-dropdown-item class="navbar_top_link">
+                Выйти
+              </vs-dropdown-item>
+            </vs-dropdown-menu>
+          </vs-dropdown>
         </div>
       </div>
     </div> <!-- d-flex -->
@@ -193,6 +208,7 @@
 import SearchGroup from '@/components/lite/desktop/SearchGroup'
 import HeaderCategoriesDropdown from '@/components/lite/desktop/headerCategories/HeaderCategoriesDropdown'
 import AuthModal from '@/components/lite/desktop/Modals/AuthModal'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Header',
@@ -206,7 +222,8 @@ export default {
       limitPosition: 950,
       scrolled: false,
       scrollPosition: null,
-      headerCategoriesDropdownVisible: false
+      headerCategoriesDropdownVisible: false,
+      profileLogo: "'https://picsum.photos/500?random=2'"
     } /* return */
   },
   methods: {
@@ -230,6 +247,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['currentUser'])
   },
   mounted () {
     window.addEventListener('scroll', this.handleScroll)
@@ -243,6 +261,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
+.header_profile_img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: block;
+}
 .create_store_btn {
   background: rgba(255, 201, 150, 0.377);
   color: var(--main-color);
@@ -562,4 +586,5 @@ export default {
 .header_lang_link .navbar_top_link i {
   font-size: 18px;
 }
+
 </style>
