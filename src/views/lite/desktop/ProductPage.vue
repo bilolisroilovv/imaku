@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="d-flex align-items-center mb-3">
-              <a href="index.html" class="back_btn mainbtn mr-4 dark">
+              <a href="#" @click.prevent="$router.go(-1)" class="back_btn mainbtn mr-4 dark">
                 <img src="@/assets/lite/back_btn.png" class="mr-2" alt="">
                 Назад
               </a> <!-- back_btn -->

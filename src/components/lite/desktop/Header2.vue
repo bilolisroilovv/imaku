@@ -48,6 +48,20 @@
           <a href="#" class="navbar_top_link bg">
             Мобильное приложение
           </a> <!-- navbar_top_link -->
+          <vs-dropdown class="header_lang_link">
+            <a class="navbar_top_link" href="#">
+              Русский
+              <vs-icon class="" icon="expand_more"></vs-icon>
+            </a>
+            <vs-dropdown-menu>
+              <vs-dropdown-item class="navbar_top_link" @click.prevent="setLocale('uz')">
+                O'zbekcha
+              </vs-dropdown-item>
+              <!-- <vs-dropdown-item class="navbar_top_link">
+                Endglish
+              </vs-dropdown-item> -->
+            </vs-dropdown-menu>
+          </vs-dropdown>
           <a href="#" class="navbar_top_link">
             Обратиться в поддержку
           </a> <!-- navbar_top_link -->
@@ -57,23 +71,9 @@
           <a href="#" class="navbar_top_link">
             Избранные
           </a> <!-- navbar_top_link -->
-          <a href="#" class="navbar_top_link">
+          <a href="#" class="navbar_top_link pr-0">
             Частые вопросы
           </a> <!-- navbar_top_link -->
-          <vs-dropdown class="header_lang_link">
-            <a class="navbar_top_link" href="#">
-              Русский
-              <vs-icon class="" icon="expand_more"></vs-icon>
-            </a>
-            <vs-dropdown-menu>
-              <vs-dropdown-item class="navbar_top_link">
-                O'zbekcha
-              </vs-dropdown-item>
-              <vs-dropdown-item class="navbar_top_link">
-                Endglish
-              </vs-dropdown-item>
-            </vs-dropdown-menu>
-          </vs-dropdown>
         </div> <!-- d-flex -->
       </div> <!-- navbar_links -->
       <div class="d-flex myalign-items-center justify-content-between">
