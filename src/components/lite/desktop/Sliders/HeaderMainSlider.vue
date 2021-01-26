@@ -36,6 +36,7 @@
 
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import { mapGetters } from 'vuex'
 import 'swiper/css/swiper.css'
 
 export default {
@@ -63,6 +64,9 @@ export default {
         }
       }
     }
+  },
+  computed: {
+    ...mapGetters(['allHeaderCategories'])
   }
 }
 </script>

@@ -1,15 +1,15 @@
 <template>
   <div>
     <ul class="submenu_list">
-      <li class="submenu_title"><a href="categories.html">Фото и Видео</a></li>
-      <li><a href="categories.html">Пленочные фотоаппараты</a></li>
-      <li><a href="categories.html">Цифровые фотоаппараты</a></li>
-      <li><a href="categories.html">Видеокамеры</a></li>
-      <li><a href="categories.html">Объективы</a></li>
-      <li><a href="categories.html">Штативы и моноподы</a></li>
-      <li><a href="categories.html">Фотовспышки</a></li>
-      <li><a href="categories.html">Аксессуары для фото и видеокамер</a></li>
-      <li><a href="categories.html">Телескопы и бинокли</a></li>
+      <li class="submenu_title">
+        <a href="categories.html">{{category.name}}</a>
+      </li> <!-- submenu_title -->
+      <li
+        v-for="category in category.subCategories"
+        :key="category.id"
+      >
+        <a href="categories.html">{{category.name}}</a>
+      </li>
     </ul>
   </div>
 </template>
@@ -17,8 +17,15 @@
 <script>
 export default {
   name: 'HeaderCategoriesItemTitle',
+  components: {
+  },
   data () {
     return {
+    }
+  },
+  props: {
+    category: {
+      type: Object
     }
   }
 }

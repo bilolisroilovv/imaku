@@ -33,6 +33,7 @@ export default {
     const response = await axios.get('me')
     console.log(response)
     this.$store.dispatch('fetchUser', response.data)
+    this.$store.dispatch('fetchCategories')
   }
 }
 </script>

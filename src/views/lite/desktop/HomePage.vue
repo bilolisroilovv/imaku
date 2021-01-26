@@ -54,6 +54,9 @@ export default {
     SimilarGoodsSlider,
     HeaderMainSlider,
     HeaderCategoriesSlider
+  },
+  created () {
+    this.$store.dispatch('fetchHeaderCategories')
   }
 }
 </script>

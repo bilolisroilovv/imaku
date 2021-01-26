@@ -26,20 +26,18 @@
           </defs>
         </svg>
       </div> <!-- mymenu_li_a_img -->
-      Телефоны и аксессуары
+        {{category.name}}
       </div>
       <i class="fas fa-angle-right"></i>
     </a> <!-- mymenu_li_a -->
 
     <ul class="submenu">
       <div class="submenu_content">
-        <HeaderCategoriesItemPart />
-        <HeaderCategoriesItemPart />
-        <HeaderCategoriesItemPart />
-        <HeaderCategoriesItemPart />
-        <HeaderCategoriesItemPart />
-        <HeaderCategoriesItemPart />
-
+        <HeaderCategoriesItemPart
+        v-for="category in category.subCategories"
+        :key="category.id"
+        :category="category"
+        />
       </div> <!-- submenu_content -->
     </ul> <!-- submenu -->
 
@@ -47,7 +45,7 @@
 </template>
 
 <script>
-import HeaderCategoriesItemPart from '@/components/lite/desktop/headerCategories/HeaderCategoriesItemPart.vue'
+import HeaderCategoriesItemPart from '@/components/lite/desktop/headerCategories/HeaderCategoriesItemPart'
 
 export default {
   name: 'HeaderCategoriesItem',
@@ -57,6 +55,13 @@ export default {
   data () {
     return {
     }
+  },
+  props: {
+    category: {
+      type: Object
+    }
+  },
+  mounted () {
   }
 }
 </script>
@@ -125,7 +130,7 @@ export default {
 }
 .submenu_content {
   display: flex;
-  flex-flow: wrap;
+  flex-flow: column wrap;
   -webkit-box-pack: start;
   place-content: flex-start;
   height: 100%;

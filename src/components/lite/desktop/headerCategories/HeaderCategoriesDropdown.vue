@@ -1,110 +1,10 @@
 <template>
   <div>
-    <ul class="submenu first_submenu">
-      <div class="submenu_content">
-        <div>
-          <ul class="submenu_list">
-            <li class="submenu_title"><a href="categories.html">Телефоны</a></li>
-            <li><a href="categories.html">Аксессуары</a></li>
-            <li><a href="categories.html">Мобильные телефоны</a></li>
-            <li><a href="categories.html">Сим-карты / тарифы / номера</a></li>
-            <li><a href="categories.html">Стационарные телефоны</a></li>
-            <li><a href="categories.html">Прочие телефоны</a></li>
-          </ul>
-        </div>
-        <div>
-          <ul class="submenu_list">
-            <li class="submenu_title"><a href="categories.html">Компьютеры</a></li>
-            <li><a href="categories.html">Настольные</a></li>
-            <li><a href="categories.html">Ноутбуки</a></li>
-            <li><a href="categories.html">Планшетные компьютеры</a></li>
-            <li><a href="categories.html">Аксессуары</a></li>
-            <li><a href="categories.html">Комплектующие</a></li>
-            <li><a href="categories.html">Перифирийные устройства</a></li>
-            <li><a href="categories.html">Мониторы</a></li>
-            <li><a href="categories.html">Внешние накопители</a></li>
-          </ul>
-        </div>
-        <div>
-
-          <ul class="submenu_list">
-            <li class="submenu_title"><a href="categories.html">Фото и Видео</a></li>
-            <li><a href="categories.html">Пленочные фотоаппараты</a></li>
-            <li><a href="categories.html">Цифровые фотоаппараты</a></li>
-            <li><a href="categories.html">Видеокамеры</a></li>
-            <li><a href="categories.html">Объективы</a></li>
-            <li><a href="categories.html">Штативы и моноподы</a></li>
-            <li><a href="categories.html">Фотовспышки</a></li>
-            <li><a href="categories.html">Аксессуары для фото и видеокамер</a></li>
-            <li><a href="categories.html">Телескопы и бинокли</a></li>
-          </ul>
-        </div>
-        <div>
-          <ul class="submenu_list">
-            <li class="submenu_title"><a href="categories.html">Техника для дома</a></li>
-            <li><a href="categories.html">Пылесосы</a></li>
-            <li><a href="categories.html">Утюги</a></li>
-            <li><a href="categories.html">Стиральные машины</a></li>
-            <li><a href="categories.html">Швейные машины</a></li>
-            <li><a href="categories.html">Вязальные машины</a></li>
-            <li><a href="categories.html">Фильтры для воды</a></li>
-            <li><a href="categories.html">Прочая техника для дома</a></li>
-          </ul>
-        </div>
-        <div>
-          <ul class="submenu_list">
-            <li class="submenu_title"><a href="categories.html">Техника для дома</a></li>
-            <li><a href="categories.html">Кондиционеры</a></li>
-            <li><a href="categories.html">Водонагреватели</a></li>
-            <li><a href="categories.html">Увлажнители воздуха</a></li>
-            <li><a href="categories.html">Вентиляторы</a></li>
-            <li><a href="categories.html">Обогреватели и тепловые завесы</a></li>
-          </ul>
-        </div>
-        <div>
-          <ul class="submenu_list">
-            <li class="submenu_title"><a href="categories.html">Техника для дома</a></li>
-            <li><a href="categories.html">Кондиционеры</a></li>
-            <li><a href="categories.html">Водонагреватели</a></li>
-            <li><a href="categories.html">Увлажнители воздуха</a></li>
-            <li><a href="categories.html">Вентиляторы</a></li>
-            <li><a href="categories.html">Обогреватели и тепловые завесы</a></li>
-          </ul>
-        </div>
-
-      </div> <!-- submenu_content -->
-    </ul> <!-- submenu -->
-
     <ul class="mymenu">
       <HeaderCategoriesItem
-      />
-      <HeaderCategoriesItem
-      />
-      <HeaderCategoriesItem
-      />
-      <HeaderCategoriesItem
-      />
-      <HeaderCategoriesItem
-      />
-      <HeaderCategoriesItem
-      />
-      <HeaderCategoriesItem
-      />
-      <HeaderCategoriesItem
-      />
-      <HeaderCategoriesItem
-      />
-      <HeaderCategoriesItem
-      />
-      <HeaderCategoriesItem
-      />
-      <HeaderCategoriesItem
-      />
-      <HeaderCategoriesItem
-      />
-      <HeaderCategoriesItem
-      />
-      <HeaderCategoriesItem
+        v-for="category in allCategories"
+        :key="category.id"
+        :category="category"
       />
     </ul> <!-- mymenu -->
   </div> <!-- header_categories_dropdown -->
@@ -112,20 +12,25 @@
 
 <script>
 import HeaderCategoriesItem from '@/components/lite/desktop/headerCategories/HeaderCategoriesItem.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'HeaderCategoriesDropdown',
   components: {
     HeaderCategoriesItem
   },
-  pros: {
+  props: {
     scrollPosition: Number
   },
   data () {
     return {
+      categories: []
     }
   },
-  methods: {
+  computed: {
+    ...mapGetters(['allCategories'])
+  },
+  async mounted () {
   }
 }
 </script>
@@ -137,8 +42,8 @@ export default {
   border-radius: 8px;
   padding: 20px 13px;
   display: inline-block;
-  min-height: 100%;
-  min-width: 300px;
+  height: 600px;
+  min-width: 250px;
   position: relative;
 }
 .mymenu_li {
