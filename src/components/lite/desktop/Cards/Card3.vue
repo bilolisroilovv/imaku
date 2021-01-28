@@ -1,7 +1,7 @@
 <template>
   <div class="mycard3">
     <div class="position-relative">
-      <router-link to="/product"
+      <router-link :to="{ name: 'ProductPage', params: {id: propducts.id } }"
         class="mycard_img mybg_center position-relative d-block">
         <div class="mycard_img_list">
           <div class="slide_item"></div>
@@ -58,7 +58,8 @@ export default {
       image: "'https://picsum.photos/500?random=1'",
       image2: "'https://picsum.photos/500?random=2'",
       image3: "'https://picsum.photos/500?random=3'",
-      image4: "'https://picsum.photos/500?random=4'"
+      image4: "'https://picsum.photos/500?random=4'",
+      products: []
     }
   }
 }

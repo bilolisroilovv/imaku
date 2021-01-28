@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -18,9 +19,9 @@
     "v-photoswipe": "^1.0.3-1",
     "vue": "^2.6.12",
     "vue-awesome-swiper": "^4.1.1",
+    "vue-i18n": "^8.17.3",
     "vue-input-mask": "0.0.11",
     "vue-pswipe": "^0.15.1",
-    "vue-rellax": "^0.2.0",
     "vue-router": "^3.2.0",
     "vue-select": "^3.11.2",
     "vue-star-rating": "^1.7.0",
@@ -45,6 +46,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.2",
+    "vue-cli-plugin-i18n": "~1.0.1",
     "vue-template-compiler": "^2.6.11"
   }
 }

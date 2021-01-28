@@ -10,7 +10,7 @@
 import MainLayout from '@/layouts/MainLayout'
 import SecondLayout from '@/layouts/SecondLayout'
 import EmptyLayout from '@/layouts/EmptyLayout'
-import axios from 'axios'
+/* import axios from 'axios' */
 /* import {mapGetters} from 'vuex' */
 
 export default {
@@ -30,10 +30,8 @@ export default {
     EmptyLayout
   },
   async created () {
-    const response = await axios.get('me')
-    console.log(response)
-    this.$store.dispatch('fetchUser', response.data)
     this.$store.dispatch('fetchCategories')
+    this.$store.dispatch('fetchUser')
   }
 }
 </script>

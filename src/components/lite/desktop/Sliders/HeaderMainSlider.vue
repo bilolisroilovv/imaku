@@ -1,27 +1,17 @@
 <template>
   <div>
     <swiper class="swiper main_slider" :options="mainSliderOption">
-      <swiper-slide class="slide-1 myhover_bg">
-        <router-link to="/category" class="mybg_center d-block h-100 w-100"
-          :style="{'background-image': 'url(' + require('@/assets/lite/mainslider1.jpg') + ')'}"></router-link>
+      <swiper-slide
+        class="slide-1 myhover_bg"
+        v-for="item in allHeaderMainSlider"
+        :key="item.id"
+      >
+        <router-link
+          :to="item.link"
+          class="mybg_center d-block h-100 w-100"
+          :style="{'background-image': 'url(' + item.image + ')' }">
+        </router-link>
       </swiper-slide>
-      <swiper-slide class="slide-2 myhover_bg">
-        <router-link to="/category" class="mybg_center d-block h-100 w-100"
-          :style="{'background-image': 'url(' + require('@/assets/lite/mainslider2.jpg') + ')'}"></router-link>
-      </swiper-slide>
-      <swiper-slide class="slide-3 myhover_bg">
-        <router-link to="/category" class="mybg_center d-block h-100 w-100"
-          :style="{'background-image': 'url(' + require('@/assets/lite/mainslider3.jpg') + ')'}"></router-link>
-      </swiper-slide>
-      <swiper-slide class="slide-4 myhover_bg">
-        <router-link to="/category" class="mybg_center d-block h-100 w-100"
-          :style="{'background-image': 'url(' + require('@/assets/lite/mainslider4.jpg') + ')'}"></router-link>
-      </swiper-slide>
-      <swiper-slide class="slide-5 myhover_bg">
-        <router-link to="/category" class="mybg_center d-block h-100 w-100"
-          :style="{'background-image': 'url(' + require('@/assets/lite/mainslider5.jpg') + ')'}"></router-link>
-      </swiper-slide>
-      <!-- Add Arrows -->
       <div class="main_slider_next main_slider_btns flex-center d-flex">
         <i class="fas fa-chevron-right"></i>
       </div><!-- main_slider_next -->
@@ -49,7 +39,6 @@ export default {
     return {
       mainSliderOption: {
         effect: 'fade',
-        loop: true,
         autoplay: {
           delay: 5000,
           disableOnInteraction: false
@@ -66,7 +55,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['allHeaderCategories'])
+    ...mapGetters(['allHeaderMainSlider'])
   }
 }
 </script>

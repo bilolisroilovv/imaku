@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default {
   state: {
     user: null
@@ -13,8 +15,9 @@ export default {
     }
   },
   actions: {
-    fetchUser (ctx, user) {
-      ctx.commit('setUser', user)
+    async fetchUser (ctx) {
+      const response = await axios.get('me')
+      ctx.commit('setUser', response.data)
     }
   }
 }

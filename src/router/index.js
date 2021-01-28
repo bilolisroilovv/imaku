@@ -1,64 +1,75 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomePage from '../views/lite/desktop/HomePage.vue'
+import i18n from '@/i18n'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'HomePage',
-    meta: { layout: 'main' },
-    component: HomePage
+    redirect: `/${i18n.locale}`
   },
   {
-    path: '/product',
-    name: 'ProductPage',
-    meta: { layout: 'second' },
-    component: () => import('../views/lite/desktop/ProductPage.vue')
-  },
-  {
-    path: '/seller',
-    name: 'SellerPage',
-    meta: { layout: 'second' },
-    component: () => import('../views/lite/desktop/SellerPage.vue')
-  },
-  {
-    path: '/profile',
-    name: 'ProfilePage',
-    meta: { layout: 'second' },
-    component: () => import('../views/lite/desktop/ProfilePage.vue')
-  },
-  {
-    path: '/shop',
-    name: 'ShopPage',
-    meta: { layout: 'second' },
-    component: () => import('../views/lite/desktop/ShopPage.vue')
-  },
-  {
-    path: '/post-add',
-    name: 'PostAddPage',
-    meta: { layout: 'second' },
-    component: () => import('../views/lite/desktop/PostAddPage.vue')
-  },
-  {
-    path: '/category',
-    name: 'CategoryPage',
-    meta: { layout: 'second' },
-    component: () => import('../views/lite/desktop/CategoryPage.vue')
-  },
-  {
-    path: '/profile-posts',
-    name: 'ProfilePosts',
-    meta: { layout: 'second' },
-    component: () => import('../views/lite/desktop/ProfilePosts.vue')
-  },
-
-  { path: '*', redirect: '/' }
+    path: '/:lang',
+    component: { render (c) { return c('router-view') } },
+    children: [
+      {
+        path: '',
+        name: 'HomePage',
+        meta: { layout: 'main' },
+        component: HomePage
+      },
+      {
+        path: 'product',
+        name: 'ProductPage',
+        meta: { layout: 'second' },
+        component: () => import('../views/lite/desktop/ProductPage.vue'),
+        props: true
+      },
+      {
+        path: 'seller',
+        name: 'SellerPage',
+        meta: { layout: 'second' },
+        component: () => import('../views/lite/desktop/SellerPage.vue')
+      },
+      {
+        path: 'profile',
+        name: 'ProfilePage',
+        meta: { layout: 'second' },
+        component: () => import('../views/lite/desktop/ProfilePage.vue')
+      },
+      {
+        path: 'shop',
+        name: 'ShopPage',
+        meta: { layout: 'second' },
+        component: () => import('../views/lite/desktop/ShopPage.vue')
+      },
+      {
+        path: 'post-add',
+        name: 'PostAddPage',
+        meta: { layout: 'second' },
+        component: () => import('../views/lite/desktop/PostAddPage.vue')
+      },
+      {
+        path: 'category',
+        name: 'CategoryPage',
+        meta: { layout: 'second' },
+        component: () => import('../views/lite/desktop/CategoryPage.vue')
+      },
+      {
+        path: 'profile-posts',
+        name: 'ProfilePosts',
+        meta: { layout: 'second' },
+        component: () => import('../views/lite/desktop/ProfilePosts.vue')
+      },
+      { path: '*', redirect: '/' }
+    ]
+  }
 ]
 
 const router = new VueRouter({
-  /* mode: 'history', */
+  mode: 'history',
   base: process.env.BASE_URL,
   routes,
   scrollBehavior (to, from, savedPosition) {

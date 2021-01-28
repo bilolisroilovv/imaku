@@ -7,10 +7,10 @@ import BootstrapVue from 'bootstrap-vue'
 // import 'swiper/swiper-bundle.css'
 import StarRating from 'vue-star-rating'
 import VueTheMask from 'vue-the-mask'
-import VueRellax from 'vue-rellax'
 import vSelect from 'vue-select'
 import Vuesax from 'vuesax'
 import InputMask from 'vue-input-mask'
+import i18n from './i18n'
 import './axios'
 import 'vuesax/dist/vuesax.css'
 import 'material-icons/iconfont/material-icons.css'
@@ -22,13 +22,22 @@ import './registerServiceWorker'
 Vue.component('input-mask', InputMask)
 Vue.use(Vuesax)
 Vue.component('v-select', vSelect)
-Vue.use(VueRellax)
 Vue.component('star-rating', StarRating)
 Vue.use(VueTheMask)
 // Vue.use(VueAwesomeSwiper)
 Vue.use(BootstrapVue)
 
 Vue.config.productionTip = false
+
+router.beforeEach((to, from, next) => {
+  let language = to.params.lang
+  if (!language) {
+    language = 'en'
+  }
+
+  i18n.locale = language
+  next()
+})
 
 let handleOutsideClick
 Vue.directive('closable', {
@@ -60,5 +69,6 @@ Vue.directive('closable', {
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount('#app')

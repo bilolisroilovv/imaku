@@ -116,6 +116,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'PostAddPage',
   data () {
@@ -176,7 +178,15 @@ export default {
   methods: {
     successUpload () {
       this.$vs.notify({ color: 'success', title: 'Upload Success', text: 'Lorem ipsum dolor sit amet, consectetur' })
+    },
+    checkLogin () {
+      if (!this.currentUser) {
+        this.$router.push('/')
+      }
     }
+  },
+  computed: {
+    ...mapGetters(['currentUser'])
   },
   components: {
   }

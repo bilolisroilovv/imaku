@@ -867,6 +867,7 @@ export default {
     SimilarGoodsSlider,
     GoodsSection
   },
+  props: ['id'],
   data () {
     return {
       avatarImage: "'https://picsum.photos/500?random=1'"
