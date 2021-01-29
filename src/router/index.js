@@ -21,10 +21,10 @@ const routes = [
         component: HomePage
       },
       {
-        path: 'product',
-        name: 'ProductPage',
+        path: 'posts/:id-:slug',
+        name: 'PostPage',
         meta: { layout: 'second' },
-        component: () => import('../views/lite/desktop/ProductPage.vue'),
+        component: () => import('../views/lite/desktop/PostPage.vue'),
         props: true
       },
       {

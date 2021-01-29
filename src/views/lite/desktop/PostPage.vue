@@ -26,7 +26,7 @@
 
             </div> <!-- d-flex -->
             <h2 class="section_title">
-              Mercedes Benz E-5
+              {{ postData.name }}
             </h2> <!-- section_title -->
 
           </div> <!-- col-md-12 -->
@@ -840,7 +840,7 @@
       <h2 class="section_title pb-4">
         Новые объявления
       </h2> <!-- section_title -->
-      <GoodsSection />
+      <PostsSection />
     </div> <!-- container -->
   </section>
 
@@ -856,22 +856,28 @@ import ToggleFavorite from '@/components/lite/desktop/ToggleFavorite'
 import ProductMainSlider from '@/components/lite/desktop/Sliders/ProductMainSlider'
 import OtherSellerGoodsSlider from '@/components/lite/desktop/Sliders/OtherSellerGoodsSlider'
 import SimilarGoodsSlider from '@/components/lite/desktop/Sliders/SimilarGoodsSlider'
-import GoodsSection from '@/components/lite/desktop/goodsSection/GoodsSection'
+import PostsSection from '@/components/lite/desktop/postsSection/PostsSection'
+import axios from 'axios'
 
 export default {
-  name: 'ProductPage',
+  name: 'PostPage',
   components: {
     ToggleFavorite,
     ProductMainSlider,
     OtherSellerGoodsSlider,
     SimilarGoodsSlider,
-    GoodsSection
+    PostsSection
   },
   props: ['id'],
   data () {
     return {
-      avatarImage: "'https://picsum.photos/500?random=1'"
+      avatarImage: "'https://picsum.photos/500?random=1'",
+      postData: {}
     }
+  },
+  async mounted () {
+    const response = await axios.get('/posts/' + this.id)
+    this.postData = response.data
   }
 }
 </script>

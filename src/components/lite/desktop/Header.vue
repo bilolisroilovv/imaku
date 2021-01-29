@@ -82,9 +82,9 @@
       <div class="d-flex myalign-items-center justify-content-between">
 
         <div class="d-flex myalign-items-center">
-          <a href="/" class="logo mr-3">
+          <router-link :to="{ name: 'HomePage' }" class="logo mr-3">
             <img src="@/assets/lite/logo.png" alt="" class="img-width">
-          </a>
+          </router-link>
           <div class="header_categories position-relative mt-1 mr-3">
 
             <button class="categories_hamburger">
@@ -128,7 +128,7 @@
           <a href="#" class="create_store_btn d-flex align-items-center mr-2">
             Создать магазин
           </a> <!-- mainbtn -->
-          <router-link :to="`${$i18n.locale}/post-add`" class="mainbtn create_ad_btn d-flex align-items-center mr-2">
+          <router-link :to="{ name: 'PostAddPage' }" class="mainbtn create_ad_btn d-flex align-items-center mr-2">
             Подать объявление
           </router-link> <!-- mainbtn -->
           <a href="#" class="header_icon" data-toggle="modal" @click.prevent v-b-modal.signModal >
@@ -188,19 +188,19 @@
           <a href="#" class="create_store_btn d-flex align-items-center mr-3">
             Создать магазин
           </a> <!-- mainbtn -->
-          <router-link :to="`${$i18n.locale}/post-add`" class="mainbtn create_ad_btn d-flex align-items-center mr-2">
+          <router-link :to="{ name: 'PostAddPage' }" class="mainbtn create_ad_btn d-flex align-items-center mr-2">
             Подать объявление
           </router-link> <!-- mainbtn -->
           <vs-dropdown class="header_profile_link ml-3">
             <a class="header_profile_img mybg_center" :style="{ 'background-image': 'url(' + this.profileLogo + ')' }" href="#">
             </a>
             <vs-dropdown-menu class="header_profile_links">
-              <router-link :to="`${$i18n.locale}/profile`">
+              <router-link :to="{ name: 'ProfilePage' }">
                 <vs-dropdown-item class="navbar_top_link">
                   Профиль
                 </vs-dropdown-item>
               </router-link>
-              <router-link :to="`${$i18n.locale}/profile-posts`">
+              <router-link :to="{ name: 'ProfilePosts' }">
                 <vs-dropdown-item class="navbar_top_link">
                   Мои объявления
                 </vs-dropdown-item>

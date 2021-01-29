@@ -27,7 +27,7 @@
         <h2 class="section_title pb-4">
           Новые объявления
         </h2> <!-- section_title -->
-        <GoodsSection/>
+        <PostsSection/>
       </div> <!-- container -->
     </section>
   </div>
@@ -38,7 +38,7 @@ import HeaderMainSlider from '@/components/lite/desktop/Sliders/HeaderMainSlider
 import HeaderCategoriesSlider from '@/components/lite/desktop/Sliders/HeaderCategoriesSlider'
 
 import SelectionSection from '@/components/lite/desktop/SelectionSection/SelectionSection'
-import GoodsSection from '@/components/lite/desktop/goodsSection/GoodsSection'
+import PostsSection from '@/components/lite/desktop/postsSection/PostsSection'
 import SimilarGoodsSlider from '@/components/lite/desktop/Sliders/SimilarGoodsSlider'
 
 export default {
@@ -50,7 +50,7 @@ export default {
   },
   components: {
     SelectionSection,
-    GoodsSection,
+    PostsSection,
     SimilarGoodsSlider,
     HeaderMainSlider,
     HeaderCategoriesSlider

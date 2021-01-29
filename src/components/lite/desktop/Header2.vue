@@ -41,7 +41,7 @@
               <path d="M8 12C10.206 12 12 10.206 12 8C12 5.794 10.206 4 8 4C5.794 4 4 5.794 4 8C4 10.206 5.794 12 8 12ZM8 6C9.103 6 10 6.897 10 8C10 9.103 9.103 10 8 10C6.897 10 6 9.103 6 8C6 6.897 6.897 6 8 6Z" fill="black"/>
               <path d="M7.42009 19.814C7.58934 19.9349 7.79211 19.9998 8.00009 19.9998C8.20806 19.9998 8.41084 19.9349 8.58009 19.814C8.88409 19.599 16.0291 14.44 16.0001 8C16.0001 3.589 12.4111 0 8.00009 0C3.58909 0 8.80377e-05 3.589 8.80377e-05 7.995C-0.028912 14.44 7.11609 19.599 7.42009 19.814ZM8.00009 2C11.3091 2 14.0001 4.691 14.0001 8.005C14.0211 12.443 9.61209 16.428 8.00009 17.735C6.38909 16.427 1.97909 12.441 2.00009 8C2.00009 4.691 4.69109 2 8.00009 2Z" fill="black"/>
             </svg>
-            Ташкент
+            {{ $t('message') }}
           </a> <!-- navbar_top_link -->
         </div> <!-- d-flex -->
         <div class="d-flex justify-content-between align-items-center">
@@ -50,12 +50,15 @@
           </a> <!-- navbar_top_link -->
           <vs-dropdown class="header_lang_link">
             <a class="navbar_top_link" href="#">
-              Русский
+              {{$i18n.locale.toUpperCase()}}
               <vs-icon class="" icon="expand_more"></vs-icon>
             </a>
             <vs-dropdown-menu>
+              <vs-dropdown-item class="navbar_top_link" @click.prevent="setLocale('ru')">
+                Ru
+              </vs-dropdown-item>
               <vs-dropdown-item class="navbar_top_link" @click.prevent="setLocale('uz')">
-                O'zbekcha
+                Uz
               </vs-dropdown-item>
               <!-- <vs-dropdown-item class="navbar_top_link">
                 Endglish
@@ -79,7 +82,7 @@
       <div class="d-flex myalign-items-center justify-content-between">
 
         <div class="d-flex myalign-items-center">
-          <router-link to="/" class="logo mr-3">
+          <router-link :to="{ name: 'HomePage' }" class="logo mr-3">
             <img src="@/assets/lite/logo.png" alt="" class="img-width">
           </router-link>
           <div class="header_categories position-relative mt-1 mr-3">
@@ -125,7 +128,7 @@
           <a href="#" class="create_store_btn d-flex align-items-center mr-2">
             Создать магазин
           </a> <!-- mainbtn -->
-          <router-link to="/post-add" class="mainbtn create_ad_btn d-flex align-items-center mr-2">
+          <router-link :to="{ name: 'PostAddPage' }" class="mainbtn create_ad_btn d-flex align-items-center mr-2">
             Подать объявление
           </router-link> <!-- mainbtn -->
           <a href="#" class="header_icon" data-toggle="modal" @click.prevent v-b-modal.signModal >
@@ -185,19 +188,19 @@
           <a href="#" class="create_store_btn d-flex align-items-center mr-3">
             Создать магазин
           </a> <!-- mainbtn -->
-          <router-link to="/post-add" class="mainbtn create_ad_btn d-flex align-items-center mr-2">
+          <router-link :to="{ name: 'PostAddPage' }" class="mainbtn create_ad_btn d-flex align-items-center mr-2">
             Подать объявление
           </router-link> <!-- mainbtn -->
           <vs-dropdown class="header_profile_link ml-3">
             <a class="header_profile_img mybg_center" :style="{ 'background-image': 'url(' + this.profileLogo + ')' }" href="#">
             </a>
             <vs-dropdown-menu class="header_profile_links">
-              <router-link to="/profile">
+              <router-link :to="{ name: 'ProfilePage' }">
                 <vs-dropdown-item class="navbar_top_link">
                   Профиль
                 </vs-dropdown-item>
               </router-link>
-              <router-link to="/profile-posts">
+              <router-link :to="{ name: 'ProfilePosts' }">
                 <vs-dropdown-item class="navbar_top_link">
                   Мои объявления
                 </vs-dropdown-item>
@@ -275,6 +278,12 @@ export default {
     },
     onClose () {
       this.headerCategoriesDropdownVisible = false
+    },
+    setLocale (locale) {
+      this.$i18n.locale = locale
+      this.$router.push({
+        params: { lang: locale }
+      })
     }
   },
   computed: {

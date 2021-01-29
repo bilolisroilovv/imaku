@@ -39,7 +39,6 @@ export default {
     },
     async fetchPosts (ctx) {
       const response = await axios.get('')
-      console.log(response.data.posts)
       ctx.commit('updatePosts', response.data.posts)
     }
   }

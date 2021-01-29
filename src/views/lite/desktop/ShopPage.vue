@@ -22,7 +22,7 @@
     </section> <!-- product_section -->
     <ShopInfo/>
     <div class="container">
-      <GoodsSection class="pt-0" />
+      <PostsSection class="pt-0" />
     </div> <!-- container -->
 
   </div>
@@ -30,14 +30,14 @@
 
 <script>
 import ShopInfo from '@/components/lite/desktop/ShopInfo'
-import GoodsSection from '@/components/lite/desktop/goodsSection/GoodsSection'
+import PostsSection from '@/components/lite/desktop/postsSection/PostsSection'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'ProductPage',
   components: {
     ShopInfo,
-    GoodsSection
+    PostsSection
   },
   computed: {
     ...mapGetters(['currentUser'])

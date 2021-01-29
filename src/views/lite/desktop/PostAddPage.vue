@@ -188,6 +188,9 @@ export default {
   computed: {
     ...mapGetters(['currentUser'])
   },
+  mounted () {
+    this.checkLogin()
+  },
   components: {
   }
 }

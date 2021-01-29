@@ -1,7 +1,7 @@
 <template>
   <div class="mycard3">
     <div class="position-relative">
-      <router-link :to="{ name: 'ProductPage', params: {id: propducts.id } }"
+      <router-link to="/"
         class="mycard_img mybg_center position-relative d-block">
         <div class="mycard_img_list">
           <div class="slide_item"></div>

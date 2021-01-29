@@ -2,43 +2,30 @@
 <div class="position-relative">
   <!-- Swiper -->
   <swiper class="swiper similar_goods_slider" :options="SimilarGoodsSliderOption">
-    <swiper-slide class="swiper-slide">
-      <CardBase />
-    </swiper-slide> <!-- swiper-slide -->
-    <swiper-slide class="swiper-slide">
-      <CardBase />
-    </swiper-slide> <!-- swiper-slide -->
-    <swiper-slide class="swiper-slide">
-      <CardBase />
-    </swiper-slide> <!-- swiper-slide -->
-    <swiper-slide class="swiper-slide">
-      <CardBase />
-    </swiper-slide> <!-- swiper-slide -->
-    <swiper-slide class="swiper-slide">
-      <CardBase />
-    </swiper-slide> <!-- swiper-slide -->
-    <swiper-slide class="swiper-slide">
-      <CardBase />
-    </swiper-slide> <!-- swiper-slide -->
-    <swiper-slide class="swiper-slide">
-      <CardBase />
+    <swiper-slide
+    class="swiper-slide"
+    v-for="post in allPosts"
+    :key="post.id"
+    :post="post">
+      <CardBase/>
     </swiper-slide> <!-- swiper-slide -->
   </swiper> <!-- other_seller_goods_slider -->
 
   <div class="similar_goods_slider_next main_slider_btns flex-center d-flex">
     <i class="fas fa-chevron-right"></i>
   </div> <!-- other_seller_goods_slider_next -->
+
   <div class="similar_goods_slider_prev main_slider_btns flex-center d-flex">
     <i class="fas fa-chevron-left"></i>
   </div> <!-- other_seller_goods_slider_prev -->
-
 </div> <!-- position-relative -->
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-import 'swiper/css/swiper.css'
 import CardBase from '@/components/lite/desktop/Cards/CardBase'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import { mapGetters } from 'vuex'
+import 'swiper/css/swiper.css'
 
 export default {
   name: 'HeaderMainSlider',
@@ -58,6 +45,9 @@ export default {
         }
       }
     }
+  },
+  computed: {
+    ...mapGetters(['allPosts'])
   }
 }
 </script>
