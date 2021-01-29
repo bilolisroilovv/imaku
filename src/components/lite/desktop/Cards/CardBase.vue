@@ -5,36 +5,19 @@
       :to="{ name: 'PostPage', params: {id: this.post.id, slug: this.post.slug } }">
         <div class="mycard_img mybg_center position-relative d-block">
           <div class="mycard_img_list">
-            <div class="slide_item"></div>
-            <div
-              class="mybg_center myimg"
-              :style="{ 'background-image': 'url(' + this.image + ')' }"
-            ></div>
 
-            <div class="slide_item"></div>
-            <!-- slide_item -->
             <div
-              class="mybg_center myimg"
-              :style="{ 'background-image': 'url(' + this.image2 + ')' }"
-            ></div>
+            class="d-block w-100"
+            v-for="(image, index) in this.post.gallery"
+            :key="index">
+              <div class="slide_item">
+              </div>
+              <div class="mybg_center myimg" :style="{ 'background-image': 'url(' + image + ')' }">
+              </div>
+            </div> <!-- d-block -->
 
-            <div class="slide_item"></div>
-            <!-- slide_item -->
-            <div
-              class="mybg_center myimg"
-              :style="{ 'background-image': 'url(' + this.image3 + ')' }"
-            ></div>
-
-            <div class="slide_item"></div>
-            <!-- slide_item -->
-            <div
-              class="mybg_center myimg"
-              :style="{ 'background-image': 'url(' + this.image4 + ')' }"
-            ></div>
-          </div>
-          <!-- mycard_img_list -->
-        </div>
-        <!-- mycard_img -->
+          </div><!-- mycard_img_list -->
+        </div><!-- mycard_img -->
       </router-link>
       <div class="product_favourite flex-center d-flex">
         <ToggleFavorite
@@ -51,9 +34,9 @@
       title="Диван две кресла PANDA механизмом дельфин ткань туркия"
       class="mycard_title text_ellipsis2 mb-2 pt-2 mt-1 myhover_text"
     >
-      Диван две кресла PANDA механизмом дельфин ткань туркия
+      {{ this.post.name }}
     </router-link>
-    <h4 class="mycard_price text_ellipsis1">1 050 у.е.</h4>
+    <h4 class="mycard_price text_ellipsis1">{{ this.post.price }}</h4>
     <!-- mycard_price -->
     <div class="d-flex align-items-center">
       <star-rating
@@ -115,7 +98,7 @@
           </svg>
         </div>
         <!-- like_btn_icon -->
-        <div class="like_btn_count">+900</div>
+        <div class="like_btn_count">+{{ this.post.likes }}</div>
         <!-- like_btn_count -->
       </button>
       <!-- like_btn -->
@@ -142,7 +125,7 @@
           </svg>
         </div>
         <!-- dislike_btn_icon -->
-        <div class="dislike_btn_count">-55</div>
+        <div class="dislike_btn_count">-{{ this.post.dislikes }}</div>
         <!-- dislike_btn_count -->
       </button>
       <!-- dislike_btn -->
@@ -159,7 +142,7 @@
             fill="#7D95AE"
           />
         </svg>
-        <span>3486</span>
+        <span>{{ this.post.views }}</span>
       </div>
       <!-- d-flex -->
     </div>
@@ -169,7 +152,7 @@
       <a
         href="shop.html"
         class="mycard_store_img mybg_center d-block"
-        :style="{ 'background-image': 'url(' + this.image3 + ')' }"
+        :style="{ 'background-image': 'url(' + this.post.author.avatar + ')' }"
       >
       </a>
       <!-- mycard_store_img -->
@@ -178,7 +161,7 @@
         class="mycard_store_name myhover_text text_ellipsis1"
         title="Furniture store"
       >
-        Furniture store
+        {{ this.post.author.name }}
       </a>
       <!-- mycard_store_name -->
     </div>
@@ -218,11 +201,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card_img_div {
+  display: block;
+  width: 100%;
+}
 .mycard {
   background: #ffffff;
   border-radius: 3px;
   padding: 12px;
   transition: all 0.2s;
+  width: 100%;
   /* box-shadow: 2px 5px 20px #0000000f; */
 }
 .mycard .mycard_img {
@@ -276,7 +264,7 @@ export default {
   height: 100%;
   display: flex;
   position: relative;
-  flex-direction: row-reverse;
+  /* flex-direction: row-reverse; */
 }
 .mycard_img_list .slide_item {
   width: 100%;

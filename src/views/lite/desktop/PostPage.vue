@@ -831,7 +831,7 @@
       <h2 class="section_title pb-4">
         Похожие объявления
       </h2> <!-- section_title -->
-      <SimilarGoodsSlider />
+      <PostsSlider />
     </div> <!-- container -->
   </section>
 
@@ -855,7 +855,7 @@
 import ToggleFavorite from '@/components/lite/desktop/ToggleFavorite'
 import ProductMainSlider from '@/components/lite/desktop/Sliders/ProductMainSlider'
 import OtherSellerGoodsSlider from '@/components/lite/desktop/Sliders/OtherSellerGoodsSlider'
-import SimilarGoodsSlider from '@/components/lite/desktop/Sliders/SimilarGoodsSlider'
+import PostsSlider from '@/components/lite/desktop/Sliders/PostsSlider'
 import PostsSection from '@/components/lite/desktop/postsSection/PostsSection'
 import axios from 'axios'
 
@@ -865,7 +865,7 @@ export default {
     ToggleFavorite,
     ProductMainSlider,
     OtherSellerGoodsSlider,
-    SimilarGoodsSlider,
+    PostsSlider,
     PostsSection
   },
   props: ['id'],

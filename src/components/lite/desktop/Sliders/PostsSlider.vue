@@ -4,7 +4,7 @@
   <swiper class="swiper similar_goods_slider" :options="SimilarGoodsSliderOption">
     <swiper-slide
     class="swiper-slide"
-    v-for="post in allPosts"
+    v-for="post in posts"
     :key="post.id">
       <CardBase :post="post"/>
     </swiper-slide> <!-- swiper-slide -->
@@ -23,15 +23,19 @@
 <script>
 import CardBase from '@/components/lite/desktop/Cards/CardBase'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-import { mapGetters } from 'vuex'
 import 'swiper/css/swiper.css'
 
 export default {
-  name: 'HeaderMainSlider',
+  name: 'PostsSlider',
   components: {
     Swiper,
     SwiperSlide,
     CardBase
+  },
+  props: {
+    posts: {
+      type: Array
+    }
   },
   data () {
     return {
@@ -44,9 +48,6 @@ export default {
         }
       }
     }
-  },
-  computed: {
-    ...mapGetters(['allPosts'])
   }
 }
 </script>

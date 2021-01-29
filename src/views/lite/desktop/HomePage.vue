@@ -16,7 +16,9 @@
         <h2 class="section_title pb-4">
           Отдам даром
         </h2> <!-- section_title -->
-        <SimilarGoodsSlider />
+        <PostsSlider
+        :posts="givesSliderData"
+        />
       </div> <!-- container -->
     </section>
 
@@ -27,7 +29,9 @@
         <h2 class="section_title pb-4">
           Для вас
         </h2> <!-- section_title -->
-        <PostsSection/>
+        <PostsSection
+        :posts="allPosts"
+        />
       </div> <!-- container -->
     </section>
   </div>
@@ -36,22 +40,24 @@
 <script>
 import HeaderMainSlider from '@/components/lite/desktop/Sliders/HeaderMainSlider'
 import HeaderCategoriesSlider from '@/components/lite/desktop/Sliders/HeaderCategoriesSlider'
-
 import SelectionSection from '@/components/lite/desktop/SelectionSection/SelectionSection'
 import PostsSection from '@/components/lite/desktop/postsSection/PostsSection'
-import SimilarGoodsSlider from '@/components/lite/desktop/Sliders/SimilarGoodsSlider'
+import PostsSlider from '@/components/lite/desktop/Sliders/PostsSlider'
+import { mapGetters } from 'vuex'
+import axios from 'axios'
 
 export default {
   name: 'HomePage',
   data () {
     return {
-      content: ''
+      content: '',
+      givesSliderData: []
     }
   },
   components: {
     SelectionSection,
     PostsSection,
-    SimilarGoodsSlider,
+    PostsSlider,
     HeaderMainSlider,
     HeaderCategoriesSlider
   },
@@ -59,6 +65,13 @@ export default {
     this.$store.dispatch('fetchHeaderCategories')
     this.$store.dispatch('fetchHeaderMainSlider')
     this.$store.dispatch('fetchPosts')
+  },
+  computed: {
+    ...mapGetters(['allPosts'])
+  },
+  async mounted () {
+    const response = await axios.get('')
+    this.givesSliderData = response.data.gives
   }
 }
 </script>
