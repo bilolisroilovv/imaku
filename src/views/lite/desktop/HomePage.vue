@@ -25,7 +25,7 @@
     <section class="section pt-0">
       <div class="container">
         <h2 class="section_title pb-4">
-          Новые объявления
+          Для вас
         </h2> <!-- section_title -->
         <PostsSection/>
       </div> <!-- container -->

@@ -5,9 +5,8 @@
     <swiper-slide
     class="swiper-slide"
     v-for="post in allPosts"
-    :key="post.id"
-    :post="post">
-      <CardBase/>
+    :key="post.id">
+      <CardBase :post="post"/>
     </swiper-slide> <!-- swiper-slide -->
   </swiper> <!-- other_seller_goods_slider -->
 

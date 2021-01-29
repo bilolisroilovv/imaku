@@ -24,8 +24,8 @@ const routes = [
         path: 'posts/:id-:slug',
         name: 'PostPage',
         meta: { layout: 'second' },
-        component: () => import('../views/lite/desktop/PostPage.vue'),
-        props: true
+        props: true,
+        component: () => import('../views/lite/desktop/PostPage.vue')
       },
       {
         path: 'seller',

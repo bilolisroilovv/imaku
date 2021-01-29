@@ -7,7 +7,7 @@
         :key="item.id"
       >
         <router-link
-          :to="item.link"
+          :to="{ name: 'CategoryPage' }"
           class="mybg_center d-block h-100 w-100"
           :style="{'background-image': 'url(' + item.image + ')' }">
         </router-link>

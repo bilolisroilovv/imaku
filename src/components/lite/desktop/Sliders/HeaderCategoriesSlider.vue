@@ -7,7 +7,8 @@
         v-for="item in allHeaderCategories"
         :key="item.id"
         >
-          <router-link to="/category"
+          <router-link
+          :to="{ name: 'CategoryPage' }"
           class="mybg_center categorie_block d-block h-100 w-100"
           :style="{'background-image': 'url(' + item.image + ')' }">
 

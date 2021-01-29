@@ -872,7 +872,7 @@ export default {
   data () {
     return {
       avatarImage: "'https://picsum.photos/500?random=1'",
-      postData: {}
+      postData: []
     }
   },
   async mounted () {
