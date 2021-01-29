@@ -31,6 +31,7 @@
 <script>
 import ShopInfo from '@/components/lite/desktop/ShopInfo'
 import PostsSection from '@/components/lite/desktop/postsSection/PostsSection'
+import axios from 'axios'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -46,6 +47,10 @@ export default {
     return {
       avatarImage: "'https://picsum.photos/500?random=1'"
     }
+  },
+  async mounted () {
+    const response = await axios.get('/shop/' + this.id)
+    this.postData = response.data
   }
 }
 </script>

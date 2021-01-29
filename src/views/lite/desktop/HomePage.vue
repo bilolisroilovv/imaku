@@ -11,7 +11,7 @@
     </div><!-- container -->
 
     <!-------------------------------- END HeaderSlider -------------------------------->
-    <section class="section pt-5 pb-0">
+    <section class="section pt-5 pb-3">
       <div class="container">
         <h2 class="section_title pb-4">
           Отдам даром
@@ -22,7 +22,16 @@
       </div> <!-- container -->
     </section>
 
-    <SelectionSection />
+    <section class="section section2 pb-5">
+      <div class="container">
+        <h2 class="section_title pb-4">
+          Популярные объявления
+        </h2> <!-- section_title -->
+        <SelectionSection
+        :posts="allPosts"
+        />
+      </div> <!-- container -->
+    </section>
 
     <section class="section pt-0">
       <div class="container">

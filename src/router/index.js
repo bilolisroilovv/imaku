@@ -28,9 +28,10 @@ const routes = [
         component: () => import('../views/lite/desktop/PostPage.vue')
       },
       {
-        path: 'seller',
+        path: 'seller:id',
         name: 'SellerPage',
         meta: { layout: 'second' },
+        props: true,
         component: () => import('../views/lite/desktop/SellerPage.vue')
       },
       {
@@ -40,7 +41,7 @@ const routes = [
         component: () => import('../views/lite/desktop/ProfilePage.vue')
       },
       {
-        path: 'shop',
+        path: 'shop:id',
         name: 'ShopPage',
         meta: { layout: 'second' },
         component: () => import('../views/lite/desktop/ShopPage.vue')

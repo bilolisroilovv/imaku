@@ -149,20 +149,20 @@
     <!-- mycard_btns -->
     <hr class="mt-2 mb-2" />
     <div class="d-flex align-items-center mycard_store">
-      <a
-        href="shop.html"
+      <router-link
+        :to="{ name: this.post.author.type, params: {id: this.post.author.id } }"
         class="mycard_store_img mybg_center d-block"
         :style="{ 'background-image': 'url(' + this.post.author.avatar + ')' }"
       >
-      </a>
+      </router-link>
       <!-- mycard_store_img -->
-      <a
-        href="shop.html"
+      <router-link
+        :to="{ name: this.post.author.type, params: {id: this.post.author.id } }"
         class="mycard_store_name myhover_text text_ellipsis1"
         title="Furniture store"
       >
         {{ this.post.author.name }}
-      </a>
+      </router-link>
       <!-- mycard_store_name -->
     </div>
     <!-- d-flex -->

@@ -204,6 +204,7 @@
 
 <script>
 import Card4 from '@/components/lite/desktop/Cards/Card4'
+import axios from 'axios'
 
 export default {
   name: 'ProductPage',
@@ -214,6 +215,10 @@ export default {
     return {
       avatarImage: "'https://picsum.photos/500?random=1'"
     }
+  },
+  async mounted () {
+    const response = await axios.get('/seller/' + this.id)
+    this.postData = response.data
   }
 }
 </script>
