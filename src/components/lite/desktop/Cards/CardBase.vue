@@ -264,7 +264,7 @@ export default {
   height: 100%;
   display: flex;
   position: relative;
-  /* flex-direction: row-reverse; */
+  flex-direction: row-reverse;
 }
 .mycard_img_list .slide_item {
   width: 100%;

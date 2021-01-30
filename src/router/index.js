@@ -43,6 +43,7 @@ const routes = [
       {
         path: 'shop:id',
         name: 'ShopPage',
+        props: true,
         meta: { layout: 'second' },
         component: () => import('../views/lite/desktop/ShopPage.vue')
       },
