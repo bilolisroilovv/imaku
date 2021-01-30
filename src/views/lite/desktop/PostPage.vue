@@ -67,7 +67,7 @@
                     </svg>
                   </div>
                   <!-- like_btn_icon -->
-                  <div class="like_btn_count">+{{ postData.likes }}</div>
+                  <div class="like_btn_count">+{{ likesCount }}</div>
                   <!-- like_btn_count -->
                 </button>
                 <!-- like_btn -->
@@ -307,6 +307,7 @@ export default {
         }
       },
       avatarImage: "'https://picsum.photos/500?random=1'",
+      likesCount: this.postData.likes,
       postData: []
     }
   },
@@ -318,8 +319,7 @@ export default {
   methods: {
     async handleLike () {
       const response = await axios.get('like/' + this.postData.id)
-      console.log(response)
-      this.postData.likes++
+      this.likesCount = response.data.likes
     },
     async handleDislike () {
       const response = await axios.get('dislike/' + this.postData.id)
