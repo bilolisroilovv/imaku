@@ -83,7 +83,7 @@
                     </svg>
                   </div>
                   <!-- dislike_btn_icon -->
-                  <div class="dislike_btn_count">-{{ postData.dislikes }}</div>
+                  <div class="dislike_btn_count">-{{ dislikesCount }}</div>
                   <!-- dislike_btn_count -->
                 </button>
                 <!-- dislike_btn -->
@@ -306,25 +306,58 @@ export default {
           prevEl: '.other_seller_goods_slider_prev'
         }
       },
-      avatarImage: "'https://picsum.photos/500?random=1'",
-      likesCount: this.postData.likes,
+      likesCount: null,
+      disLikesCount: null,
+      isLiked: false,
+      isDisliked: false,
+      isFavorited: false,
       postData: []
     }
   },
   async mounted () {
     const response = await axios.get('posts/' + this.id)
     this.postData = response.data
-    console.log(this.postData)
+    this.likesCount = response.data.likes
+    this.disLikesCount = response.data.dislikes
+    this.isFavorited = response.data.favorite
   },
   methods: {
     async handleLike () {
       const response = await axios.get('like/' + this.postData.id)
-      this.likesCount = response.data.likes
+      console.log(response)
+      this.isLiked = !this.isLiked
+      if (this.isLiked === true) {
+        this.likesCount++
+      } else {
+        this.likesCount--
+      }
+      if (this.isDisliked === true) {
+        this.isDisliked = false
+        this.disLikesCount--
+      }
+      /* this.likesCount = response.data.likes
+      this.dislikesCount = response.data.dislikes */
     },
     async handleDislike () {
       const response = await axios.get('dislike/' + this.postData.id)
       console.log(response)
-      console.log(this.postData.id)
+      this.isDisliked = !this.isDisliked
+      if (this.isDisliked === true) {
+        this.disLikesCount++
+      } else {
+        this.disLikesCount--
+      }
+      if (this.isLiked === true) {
+        this.isLiked = false
+        this.likesCount--
+      }
+      /* this.likesCount = response.data.likes
+      this.dislikesCount = response.data.dislikes */
+    },
+    async handleFavorite () {
+      const response = await axios.get('favorite/' + this.postData.id)
+      console.log(response)
+      this.isFavorited = !this.isFavorited
     }
   }
 }
