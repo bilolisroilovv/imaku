@@ -55,7 +55,7 @@
               <hr>
 
               <div class="mycard_btns myproduct_btns d-flex align-items-center pb-1 pt-3">
-                <button class="like_btn card_like_btn d-flex align-items-center mr-3" title="Мне нравится">
+                <button class="like_btn card_like_btn d-flex align-items-center mr-3" @click.prevent="handleLike" title="Мне нравится">
                   <div class="like_btn_icon d-flex align-items-center">
                     <svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -71,7 +71,7 @@
                   <!-- like_btn_count -->
                 </button>
                 <!-- like_btn -->
-                <button class="dislike_btn card_like_btn d-flex align-items-center mr-3" title="Мне не нравится">
+                <button class="dislike_btn card_like_btn d-flex align-items-center mr-3" @click.prevent="handleDislike" title="Мне не нравится">
                   <div class="dislike_btn_icon d-flex align-items-center">
                     <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -254,16 +254,16 @@
       <h2 class="section_title pb-4">
         Похожие объявления
       </h2> <!-- section_title -->
-      <PostsSlider />
+      <PostsSlider :posts="postData.similarAds"/>
     </div> <!-- container -->
   </section>
 
   <section class="section">
     <div class="container">
       <h2 class="section_title pb-4">
-        Новые объявления
+        Специально для вас
       </h2> <!-- section_title -->
-      <PostsSection />
+      <PostsSection :posts="postData.posts"/>
     </div> <!-- container -->
   </section>
 
@@ -311,9 +311,21 @@ export default {
     }
   },
   async mounted () {
-    const response = await axios.get('/posts/' + this.id)
+    const response = await axios.get('posts/' + this.id)
     this.postData = response.data
     console.log(this.postData)
+  },
+  methods: {
+    async handleLike () {
+      const response = await axios.get('like/' + this.postData.id)
+      console.log(response)
+      this.postData.likes++
+    },
+    async handleDislike () {
+      const response = await axios.get('dislike/' + this.postData.id)
+      console.log(response)
+      console.log(this.postData.id)
+    }
   }
 }
 </script>
