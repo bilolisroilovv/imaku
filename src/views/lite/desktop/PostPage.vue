@@ -40,7 +40,7 @@
           <div class="col-md-4">
             <div class="bg-white product_sidebar">
               <div class="d-flex justify-content-between align-items-center pb-2 ">
-                <h2 class="product_price">125 000 y.e.</h2>
+                <h2 class="product_price">{{ postData.price }}</h2>
 
                 <div class="product_favourite mycard_favorite_stroke2 flex-center d-flex" v-b-tooltip.hover title="Добавить в избранное">
                   <ToggleFavorite class="d-flex align-items-center"/>
@@ -67,7 +67,7 @@
                     </svg>
                   </div>
                   <!-- like_btn_icon -->
-                  <div class="like_btn_count">+422</div>
+                  <div class="like_btn_count">+{{ postData.likes }}</div>
                   <!-- like_btn_count -->
                 </button>
                 <!-- like_btn -->
@@ -83,7 +83,7 @@
                     </svg>
                   </div>
                   <!-- dislike_btn_icon -->
-                  <div class="dislike_btn_count">-84</div>
+                  <div class="dislike_btn_count">-{{ postData.dislikes }}</div>
                   <!-- dislike_btn_count -->
                 </button>
                 <!-- dislike_btn -->
@@ -93,7 +93,7 @@
                       d="M11.0441 3.71484C9.99799 1.64824 7.927 0.25 5.55567 0.25C3.18433 0.25 1.11277 1.64922 0.0672412 3.71504C0.0231134 3.80342 0.00012207 3.90107 0.00012207 4.0001C0.00012207 4.09913 0.0231134 4.19678 0.0672412 4.28516C1.11334 6.35176 3.18433 7.75 5.55567 7.75C7.927 7.75 9.99857 6.35078 11.0441 4.28496C11.0882 4.19658 11.1112 4.09893 11.1112 3.9999C11.1112 3.90087 11.0882 3.80322 11.0441 3.71484ZM5.55567 6.8125C5.00627 6.8125 4.46922 6.64755 4.01242 6.33851C3.55561 6.02947 3.19958 5.59021 2.98934 5.0763C2.77909 4.56238 2.72408 3.99688 2.83126 3.45131C2.93844 2.90574 3.203 2.4046 3.59148 2.01126C3.97996 1.61793 4.47491 1.35006 5.01375 1.24154C5.55259 1.13302 6.1111 1.18872 6.61868 1.40159C7.12625 1.61446 7.56008 1.97495 7.86531 2.43746C8.17053 2.89997 8.33345 3.44374 8.33345 4C8.33362 4.36939 8.2619 4.7352 8.12236 5.07651C7.98283 5.41782 7.77822 5.72794 7.52025 5.98914C7.26227 6.25034 6.95598 6.4575 6.61889 6.59878C6.28179 6.74006 5.9205 6.81268 5.55567 6.8125ZM5.55567 2.125C5.39038 2.12734 5.22615 2.15224 5.06743 2.19902C5.19826 2.37904 5.26105 2.60056 5.24439 2.82343C5.22774 3.04629 5.13276 3.25573 4.97667 3.41377C4.82059 3.57181 4.61373 3.66798 4.39362 3.68484C4.17351 3.7017 3.95472 3.63813 3.77692 3.50566C3.67568 3.88332 3.69396 4.28361 3.82918 4.6502C3.9644 5.01678 4.20975 5.33121 4.53071 5.54921C4.85166 5.76722 5.23206 5.87782 5.61835 5.86547C6.00465 5.85311 6.37739 5.71841 6.68412 5.48033C6.99084 5.24225 7.21611 4.91278 7.3282 4.53828C7.4403 4.16378 7.43359 3.76312 7.309 3.39269C7.18442 3.02226 6.94825 2.70071 6.63372 2.4733C6.31919 2.2459 5.94215 2.12408 5.55567 2.125Z"
                       fill="#7D95AE" />
                   </svg>
-                  <span>1253</span>
+                  <span>{{ postData.views }}</span>
                 </div>
                 <!-- d-flex -->
               </div> <!-- myproduct_btns -->
@@ -101,12 +101,12 @@
               <!-- mycard_btns -->
               <div class="product_seller d-flex align-items-center mt-4">
                 <a href="seller.html" target="_blank" class="product_seller_img mybg_center mr-3"
-                  :style="{ 'background-image': 'url(' + this.avatarImage + ')' }"></a> <!-- product_cusomer_img -->
+                  :style="{ 'background-image': 'url(' + postData.author.avatar + ')' }"></a> <!-- product_cusomer_img -->
                 <div class="seller_text">
                   <a href="seller.html" title="Алексеев Эдуaрд Львович" target="_blank"
-                    class="product_seller_name d-block text_ellipsis1 myhover_text">Алексеев Эдуaрд Львович</a>
+                    class="product_seller_name d-block text_ellipsis1 myhover_text">{{ postData.author.name }}</a>
                   <!-- product_seller_name -->
-                  <span>(12 объявлений)</span>
+                  <span>({{ postData.author.postsCount }} объявлений)</span>
                   <button class="d-block mt-1 subscribe_btn" data-show="true">Подписаться</button>
                 </div> <!-- seller_text -->
 
@@ -160,7 +160,7 @@
 
                 <div class="product_sidebar_date text-right">
                   <span class="mt-2 d-block">Дата публикации:</span>
-                  <h6 class="mt-1">13.02.2020</h6>
+                  <h6 class="mt-1">{{ postData.createdAt }}</h6>
                 </div> <!-- product_sidebar_date -->
 
               </div> <!-- product_sidebar_bottom -->
@@ -180,28 +180,7 @@
               <h3 class="pb-3">Описание</h3>
               <div class="desc_text">
                 <p>
-                  ЕСТЬ ДОСТАВКА! <br>
-                  <br>
-                  Nike Knitposite JAMES 17 привезли из США размеры от 40 до 46. <br>
-                  <br>
-                  С момента появления первой фирменной обуви Nike KRIP 2003 году многое изменилось. Теперь на его 17-й
-                  модели оснащен верхом Knitposite, который сочетает в себе популярную конструкцию Nike Flyknit с
-                  формованной термостойкой пряжей. Этот новый материал предлагает больше поддержки и увеличивает
-                  долговечность, в то же время устойчивый к растяжению, чтобы помочь держать вашу ногу на месте. С
-                  добавлением каблука Max Air с максимальной громкостью в баскетбольные кроссовки James эта обувь
-                  поможет вам играть как величайший игрок на корте.
-                  <br>• Верх Knitposite для максимальной гибкости и воздухопроницаемости.
-                  <br>• Air Max и Zoom Air для отскока и амортизации.
-                  <br>• Не маркировочная резиновая подошва для тяги и долговечности.
-                  <br>
-                  ФУНКЦИИ <br>
-                  <br>
-                  Поддержка лодыжки <br>
-                  Высокие стопы, которые фиксируют лодыжку в положении для дополнительной поддержки. <br>
-                  <br>
-                  Баскетбол <br>
-                  Помогает поднять вашу игру от тротуара до лиственных пород.
-
+                  {{ postData.description }}
                 </p>
               </div> <!-- desc_text -->
 
@@ -301,7 +280,49 @@
                   </div> <!-- product_hashtags -->
 
                   <h4 class="pb-4">Другие товары продавца</h4>
-                  <OtherSellerGoodsSlider/>
+
+                  <div>
+                    <div class="position-relative">
+                      <!-- Swiper -->
+                      <swiper class="swiper other_seller_goods_slider" :options="otherSellerGoodsOption">
+
+                          <swiper-slide class="swiper-slide">
+                            <Card3 />
+                          </swiper-slide> <!-- swiper-slide -->
+                          <swiper-slide class="swiper-slide">
+                            <Card3 />
+                          </swiper-slide> <!-- swiper-slide -->
+                          <swiper-slide class="swiper-slide">
+                            <Card3 />
+                          </swiper-slide> <!-- swiper-slide -->
+                          <swiper-slide class="swiper-slide">
+                            <Card3 />
+                          </swiper-slide> <!-- swiper-slide -->
+                          <swiper-slide class="swiper-slide">
+                            <Card3 />
+                          </swiper-slide> <!-- swiper-slide -->
+                          <swiper-slide class="swiper-slide">
+                            <Card3 />
+                          </swiper-slide> <!-- swiper-slide -->
+                          <swiper-slide class="swiper-slide">
+                            <Card3 />
+                          </swiper-slide> <!-- swiper-slide -->
+                          <swiper-slide class="swiper-slide">
+                            <Card3 />
+                          </swiper-slide> <!-- swiper-slide -->
+
+                      </swiper> <!-- other_seller_goods_slider -->
+
+                      <div class="other_seller_goods_slider_next main_slider_btns flex-center d-flex">
+                        <i class="fas fa-chevron-right"></i>
+                      </div>
+                      <!-- other_seller_goods_slider_next -->
+                      <div class="other_seller_goods_slider_prev main_slider_btns flex-center d-flex">
+                        <i class="fas fa-chevron-left"></i>
+                      </div>
+                      <!-- other_seller_goods_slider_prev -->
+                    </div> <!-- position-relative -->
+                  </div>
                 </div> <!-- col-md-6 -->
               </div> <!-- row -->
 
@@ -854,9 +875,11 @@
 <script>
 import ToggleFavorite from '@/components/lite/desktop/ToggleFavorite'
 import ProductMainSlider from '@/components/lite/desktop/Sliders/ProductMainSlider'
-import OtherSellerGoodsSlider from '@/components/lite/desktop/Sliders/OtherSellerGoodsSlider'
 import PostsSlider from '@/components/lite/desktop/Sliders/PostsSlider'
 import PostsSection from '@/components/lite/desktop/postsSection/PostsSection'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
+import Card3 from '@/components/lite/desktop/Cards/Card3'
 import axios from 'axios'
 
 export default {
@@ -864,13 +887,23 @@ export default {
   components: {
     ToggleFavorite,
     ProductMainSlider,
-    OtherSellerGoodsSlider,
     PostsSlider,
-    PostsSection
+    PostsSection,
+    Swiper,
+    SwiperSlide,
+    Card3
   },
   props: ['id'],
   data () {
     return {
+      otherSellerGoodsOption: {
+        spaceBetween: 15,
+        slidesPerView: 3,
+        navigation: {
+          nextEl: '.other_seller_goods_slider_next',
+          prevEl: '.other_seller_goods_slider_prev'
+        }
+      },
       avatarImage: "'https://picsum.photos/500?random=1'",
       postData: []
     }
@@ -878,11 +911,50 @@ export default {
   async mounted () {
     const response = await axios.get('/posts/' + this.id)
     this.postData = response.data
+    console.log(this.postData)
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.other_seller_goods_slider {
+  width: 100%;
+  height: 230px;
+}
+.other_seller_goods_slider_prev.swiper-button-disabled {
+  opacity: 0!important;
+  pointer-events: none;
+}
+.other_seller_goods_slider_next.swiper-button-disabled {
+  opacity: 0!important;
+  pointer-events: none;
+}
+.other_seller_goods_slider_next {
+  top: 45%;
+  right: -19px;
+  font-size: 15px;
+  width: 40px;
+  height: 40px;
+  opacity: 1;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.13);
+  outline: none;
+}
+.other_seller_goods_slider_prev {
+  top: 45%;
+  left: -19px;
+  font-size: 15px;
+  width: 40px;
+  height: 40px;
+  opacity: 1;
+  box-shadow: 1px 1px 10px rgba(0,  0, 0, 0.13);
+  outline: none;;
+}
+.other_seller_goods_slider:hover .other_seller_goods_slider_prev {
+  left: 20px;
+}
+.other_seller_goods_slider:hover .other_seller_goods_slider_next {
+  right: 20px;
+}
 .product_btns a {
   background: #343538;
   border-radius: 4px;
