@@ -4,25 +4,16 @@
       <router-link to="/"
         class="mycard_img mybg_center position-relative d-block">
         <div class="mycard_img_list">
-          <div class="slide_item"></div>
-          <!-- slide_item -->
-          <div class="mybg_center myimg"
-               :style="{ 'background-image': 'url(' + this.image + ')' }"
-          >
-          </div>
-          <div class="slide_item"></div>
-          <!-- slide_item -->
-          <div class="mybg_center myimg"
-               :style="{ 'background-image': 'url(' + this.image2 + ')' }"
-          >
-          </div>
-          <div class="slide_item"></div>
-          <!-- slide_item -->
-          <div class="mybg_center myimg"
-               :style="{ 'background-image': 'url(' + this.image3 + ')' }"
-          ></div>
-        </div>
-        <!-- mycard_img_list -->
+          <div
+            class="d-block w-100"
+            v-for="(image, index) in this.post.gallery"
+            :key="index">
+              <div class="slide_item">
+              </div>
+              <div class="mybg_center myimg" :style="{ 'background-image': 'url(' + image + ')' }">
+              </div>
+            </div> <!-- d-block -->
+        </div><!-- mycard_img_list -->
       </router-link>
       <!-- mycard_img -->
       <div class="product_favourite flex-center d-flex">
@@ -60,6 +51,18 @@ export default {
       image3: "'https://picsum.photos/500?random=3'",
       image4: "'https://picsum.photos/500?random=4'",
       products: []
+    }
+  },
+  props: {
+    post: {
+      id: {
+        type: Number,
+        default: null
+      },
+      slug: {
+        type: String,
+        default: ''
+      }
     }
   }
 }

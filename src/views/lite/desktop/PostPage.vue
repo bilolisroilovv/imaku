@@ -83,7 +83,7 @@
                     </svg>
                   </div>
                   <!-- dislike_btn_icon -->
-                  <div class="dislike_btn_count">-{{ dislikesCount }}</div>
+                  <div class="dislike_btn_count">-{{ disLikesCount }}</div>
                   <!-- dislike_btn_count -->
                 </button>
                 <!-- dislike_btn -->
@@ -319,12 +319,12 @@ export default {
     this.postData = response.data
     this.likesCount = response.data.likes
     this.disLikesCount = response.data.dislikes
+    this.isLiked = response.data.isLiked
+    this.isDisliked = response.data.isDisliked
     this.isFavorited = response.data.favorite
   },
   methods: {
     async handleLike () {
-      const response = await axios.get('like/' + this.postData.id)
-      console.log(response)
       this.isLiked = !this.isLiked
       if (this.isLiked === true) {
         this.likesCount++
@@ -335,12 +335,12 @@ export default {
         this.isDisliked = false
         this.disLikesCount--
       }
+      const response = await axios.get('like/' + this.postData.id)
+      console.log(response)
       /* this.likesCount = response.data.likes
       this.dislikesCount = response.data.dislikes */
     },
     async handleDislike () {
-      const response = await axios.get('dislike/' + this.postData.id)
-      console.log(response)
       this.isDisliked = !this.isDisliked
       if (this.isDisliked === true) {
         this.disLikesCount++
@@ -351,6 +351,8 @@ export default {
         this.isLiked = false
         this.likesCount--
       }
+      const response = await axios.get('dislike/' + this.postData.id)
+      console.log(response)
       /* this.likesCount = response.data.likes
       this.dislikesCount = response.data.dislikes */
     },

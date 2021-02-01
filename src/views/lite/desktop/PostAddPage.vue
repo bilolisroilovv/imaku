@@ -8,102 +8,122 @@
             <div class="d-flex align-items-center myinput_group pb-4">
               <label for="">Категория <span>*</span></label>
               <vs-select
-              class="selectExample"
-              v-model="select1"
-              >
-              <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options1" />
-            </vs-select>
+                class="selectExample"
+                v-model="select1"
+                placeholder="Выберите"
+                @change="handleSelectCategory"
+                >
+                <vs-select-item :key="index" :value="item.id" :text="item.title" v-for="(item,index) in this.mainCategories" />
+              </vs-select>
             </div> <!-- d-flex -->
-            <div class="d-flex align-items-center myinput_group pb-4">
-              <label for="">Тип</label>
-              <vs-select
-              class="selectExample"
-              v-model="select2"
-              >
-              <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options2" />
-            </vs-select>
 
-            </div> <!-- d-flex -->
-            <div class="d-flex align-items-center myinput_group pb-4">
-              <label for="">Размер</label>
-              <vs-select
-              class="selectExample"
-              v-model="select3"
-              >
-              <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options3" />
-            </vs-select>
-            </div> <!-- d-flex -->
-            <div class="d-flex align-items-center myinput_group pb-4">
-              <label for="">Состояние товара</label>
+            <div class="d-flex align-items-center myinput_group pb-4" v-if="isSubcategoryShow">
+              <label for="">Подкатегории <span>*</span></label>
               <vs-select
                 class="selectExample"
-                v-model="select4"
+                v-model="select1"
+                placeholder="Выберите"
+                @change="handleSelectSubcategory"
                 >
-                <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options4" />
+                <vs-select-item :key="index" :value="item.id" :text="item.title" v-for="(item,index) in this.mainSubcategories" />
               </vs-select>
             </div> <!-- d-flex -->
-            <div class="d-flex align-items-center myinput_group pb-4">
-              <label for="">Тип объявления <span>*</span></label>
-              <vs-select
-                class="selectExample"
-                v-model="select5"
-                >
-                <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options5" />
-              </vs-select>
-            </div> <!-- d-flex -->
-            <div class="d-flex align-items-center myinput_group pb-4">
-              <label for="">Название товара <span>*</span></label>
-              <input type="text" placeholder="">
-            </div> <!-- d-flex -->
-            <div class="d-flex align-items-center price_input_group myinput_group pb-4">
-              <label for="">Цена <span>*</span></label>
-              <input type="tel" v-mask="['#', '##', '###', '####', '# ###', '## ###', '### ###', '#### ###', '# ### ###', '## ### ###', '### ### ###', '#### ### ###', '# ### ### ###', '## ### ### ###', '### ### ### ###', '#### ### ### ###', '# ### ### ### ###', '## ### ### ### ###', '### ### ### ### ###']" placeholder="" class="price_input mr-2 ">
-              <vs-select
-                class="selectExample"
-                v-model="select6"
-                >
-                <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options6" />
-              </vs-select>
-            </div> <!-- d-flex -->
-            <div class="d-flex myinput_group pb-4">
-              <label for="">Описание <span>*</span></label>
-              <textarea id="" rows="7"></textarea>
-            </div> <!-- d-flex -->
-            <div class="d-flex myinput_group pb-4">
-              <label for="">Фотографии</label>
-              <div class="w-100">
-                <div class="photos_block">
-                  <vs-upload :single-upload="true" :text="'Добавить'" :show-upload-button="false" action="https://jsonplaceholder.typicode.com/posts/" @on-success="successUpload">
-                  </vs-upload>
-                </div> <!-- photos_block -->
-                <p class="photos_p pt-2">
-                  Первое фото будет отображаться в результатах поиска, выберите наиболее удачное. <br>
-                  Вы можете загрузить до 12 фотографий в формате JPG или PNG. <br>
-                  Максимальный размер фото — 25MB.
-                </p>
-              </div>
-            </div> <!-- d-flex -->
-            <div class="d-flex myinput_group pb-4">
-              <label for="">Местоположение <span>*</span></label>
-              <div class="w-100">
-                <div class="map">
-                  <div class="position-relative mb-3">
-                    <input type="text" class="" value="Узбекистан, Ташкент">
-                    <img src="@/assets/lite/search_icon.svg" class="search_icon" alt="">
-                  </div> <!-- position-relative -->
-                  <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Abba8008a5450056cb02076d704d37f7a73e78cb7fb71ec31993b722f7295c93a&amp;source=constructor" width="100%" height="250" frameborder="0"></iframe>
-                </div> <!-- map -->
-              </div>
-            </div> <!-- d-flex -->
-            <div class="d-flex myinput_group pb-4">
-              <label for="">Телефон <span>*</span></label>
-              <div class="w-100">
-                <input type="tel" v-mask="'+998 (##) ###-##-##'" placeholder="Ваш номер..." required value="+998 (90) 478-21-42">
-              </div>
-            </div> <!-- d-flex -->
-            <div class="d-flex justify-content-end myinput_group pt-4">
-              <a href="#" class="mainbtn inter_font text-bold">Опубликовать</a>
-            </div> <!-- d-flex -->
+            <div v-if="isCharactersShow">
+              <div class="d-flex align-items-center myinput_group pb-4">
+                  <label for="">Тип</label>
+                  <vs-select
+                    class="selectExample"
+                    v-model="select2"
+                    placeholder="Выберите"
+                  >
+                  <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options2" />
+                </vs-select>
+
+                </div> <!-- d-flex -->
+                <div class="d-flex align-items-center myinput_group pb-4">
+                  <label for="">Размер</label>
+                  <vs-select
+                    class="selectExample"
+                    v-model="select3"
+                    placeholder="Выберите"
+                  >
+                  <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options3" />
+                </vs-select>
+                </div> <!-- d-flex -->
+                <div class="d-flex align-items-center myinput_group pb-4">
+                  <label for="">Состояние товара</label>
+                  <vs-select
+                    class="selectExample"
+                    v-model="select4"
+                    placeholder="Выберите"
+                    >
+                    <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options4" />
+                  </vs-select>
+                </div> <!-- d-flex -->
+                <div class="d-flex align-items-center myinput_group pb-4">
+                  <label for="">Тип объявления <span>*</span></label>
+                  <vs-select
+                    class="selectExample"
+                    v-model="select5"
+                    placeholder="Выберите"
+                    >
+                    <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options5" />
+                  </vs-select>
+                </div> <!-- d-flex -->
+                <div class="d-flex align-items-center myinput_group pb-4">
+                  <label for="">Название товара <span>*</span></label>
+                  <input type="text" placeholder="">
+                </div> <!-- d-flex -->
+                <div class="d-flex align-items-center price_input_group myinput_group pb-4">
+                  <label for="">Цена <span>*</span></label>
+                  <input type="tel" v-mask="['#', '##', '###', '####', '# ###', '## ###', '### ###', '#### ###', '# ### ###', '## ### ###', '### ### ###', '#### ### ###', '# ### ### ###', '## ### ### ###', '### ### ### ###', '#### ### ### ###', '# ### ### ### ###', '## ### ### ### ###', '### ### ### ### ###']" placeholder="" class="price_input mr-2 ">
+                  <vs-select
+                    class="selectExample"
+                    v-model="select6"
+                    >
+                    <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options6" />
+                  </vs-select>
+                </div> <!-- d-flex -->
+                <div class="d-flex myinput_group pb-4">
+                  <label for="">Описание <span>*</span></label>
+                  <textarea id="" rows="7"></textarea>
+                </div> <!-- d-flex -->
+                <div class="d-flex myinput_group pb-4">
+                  <label for="">Фотографии</label>
+                  <div class="w-100">
+                    <div class="photos_block">
+                      <vs-upload :single-upload="true" automatic :text="'Добавить'" :show-upload-button="false" action="https://jsonplaceholder.typicode.com/posts/" @on-success="successUpload">
+                      </vs-upload>
+                    </div> <!-- photos_block -->
+                    <p class="photos_p pt-2">
+                      Первое фото будет отображаться в результатах поиска, выберите наиболее удачное. <br>
+                      Вы можете загрузить до 12 фотографий в формате JPG или PNG. <br>
+                      Максимальный размер фото — 25MB.
+                    </p>
+                  </div>
+                </div> <!-- d-flex -->
+                <div class="d-flex myinput_group pb-4">
+                  <label for="">Местоположение <span>*</span></label>
+                  <div class="w-100">
+                    <div class="map">
+                      <div class="position-relative mb-3">
+                        <input type="text" class="" value="Узбекистан, Ташкент">
+                        <img src="@/assets/lite/search_icon.svg" class="search_icon" alt="">
+                      </div> <!-- position-relative -->
+                      <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Abba8008a5450056cb02076d704d37f7a73e78cb7fb71ec31993b722f7295c93a&amp;source=constructor" width="100%" height="250" frameborder="0"></iframe>
+                    </div> <!-- map -->
+                  </div>
+                </div> <!-- d-flex -->
+                <div class="d-flex myinput_group pb-4">
+                  <label for="">Телефон <span>*</span></label>
+                  <div class="w-100">
+                    <input type="tel" v-mask="'+998 (##) ###-##-##'" placeholder="Ваш номер..." required value="+998 (90) 478-21-42">
+                  </div>
+                </div> <!-- d-flex -->
+                <div class="d-flex justify-content-end myinput_group pt-4">
+                  <a href="#" class="mainbtn inter_font text-bold">Опубликовать</a>
+                </div> <!-- d-flex -->
+            </div> <!-- v-if="isCharactersShow" -->
           </div> <!-- post_add_block -->
         </div> <!-- col-md-8 -->
         <div class="col-md-4">
@@ -117,32 +137,23 @@
 
 <script>
 import { mapGetters } from 'vuex'
-
+import axios from 'axios'
 export default {
   name: 'PostAddPage',
   data () {
     return {
+      isSubcategoryShow: false,
+      isCharactersShow: false,
       adImage: "'https://picsum.photos/430/700?random=1'",
       select1Normal: '',
-      select1: 1,
-      select2: 1,
-      select3: 1,
-      select4: 1,
-      select5: 1,
+      select1: 'Выберите',
+      select2: 'Выберите',
+      select3: 'Выберите',
+      select4: 'Выберите',
+      select5: 'Выберите',
       select6: 1,
-      options1: [
-        { text: 'Женский гардероб', value: 1 },
-        { text: 'Мужской гардероб', value: 2 },
-        { text: 'Детский гардероб', value: 3 },
-        { text: 'Детские товары', value: 4 },
-        { text: 'Хундмейд', value: 5 },
-        { text: 'Телефон и планшеты', value: 6 },
-        { text: 'Фото и видеокамеры', value: 7 },
-        { text: 'Компьютерная техника', value: 8 },
-        { text: 'Бытовая техника', value: 9 },
-        { text: 'Электроника', value: 10 },
-        { text: 'Красота и здоровье', value: 11 }
-      ],
+      mainCategories: [],
+      mainSubcategories: [],
       options2: [
         { text: 'Продаю свое', value: 1 },
         { text: 'Приобрел на продажу', value: 2 },
@@ -177,19 +188,31 @@ export default {
   },
   methods: {
     successUpload () {
-      this.$vs.notify({ color: 'success', title: 'Upload Success', text: 'Lorem ipsum dolor sit amet, consectetur' })
+      this.$vs.notify({ color: 'success', title: 'Загрузка успешно выполнена', text: 'Загрузка успешно выполнена' })
     },
     checkLogin () {
       if (!this.currentUser) {
         this.$router.push('/')
       }
+    },
+    async handleSelectCategory () {
+      console.log(this.select1)
+      const response = await axios.get('categories/subcategories/' + this.select1)
+      this.mainSubcategories = response.data
+      this.isSubcategoryShow = true
+      console.log(response)
+    },
+    handleSelectSubcategory () {
+      this.isCharactersShow = true
     }
   },
   computed: {
     ...mapGetters(['currentUser'])
   },
-  mounted () {
+  async mounted () {
     this.checkLogin()
+    const response = await axios.get('posts/create')
+    this.mainCategories = response.data
   },
   components: {
   }
