@@ -21,7 +21,7 @@
               <label for="">Подкатегории <span>*</span></label>
               <vs-select
                 class="selectExample"
-                v-model="select1"
+                v-model="select2"
                 placeholder="Выберите"
                 @change="handleSelectSubcategory"
                 >
@@ -29,54 +29,25 @@
               </vs-select>
             </div> <!-- d-flex -->
             <div v-if="isCharactersShow">
-              <div class="d-flex align-items-center myinput_group pb-4">
-                  <label for="">Тип</label>
-                  <vs-select
-                    class="selectExample"
-                    v-model="select2"
-                    placeholder="Выберите"
-                  >
-                  <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options2" />
-                </vs-select>
 
-                </div> <!-- d-flex -->
-                <div class="d-flex align-items-center myinput_group pb-4">
-                  <label for="">Размер</label>
-                  <vs-select
-                    class="selectExample"
-                    v-model="select3"
-                    placeholder="Выберите"
-                  >
-                  <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options3" />
+              <div class="d-flex align-items-center myinput_group pb-4" v-for="character in this.characters" :key="character.id">
+                <label for="">{{ character.title }}</label>
+                <vs-select
+                  class="selectExample"
+                  placeholder="Выберите"
+                  v-model="character.select"
+                >
+                <vs-select-item :key="item.id" :value="item.id" :text="item.value" v-for="item in character.options" />
                 </vs-select>
-                </div> <!-- d-flex -->
-                <div class="d-flex align-items-center myinput_group pb-4">
-                  <label for="">Состояние товара</label>
-                  <vs-select
-                    class="selectExample"
-                    v-model="select4"
-                    placeholder="Выберите"
-                    >
-                    <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options4" />
-                  </vs-select>
-                </div> <!-- d-flex -->
-                <div class="d-flex align-items-center myinput_group pb-4">
-                  <label for="">Тип объявления <span>*</span></label>
-                  <vs-select
-                    class="selectExample"
-                    v-model="select5"
-                    placeholder="Выберите"
-                    >
-                    <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options5" />
-                  </vs-select>
-                </div> <!-- d-flex -->
+              </div> <!-- d-flex -->
+
                 <div class="d-flex align-items-center myinput_group pb-4">
                   <label for="">Название товара <span>*</span></label>
-                  <input type="text" placeholder="">
+                  <input type="text" placeholder="" v-model="name">
                 </div> <!-- d-flex -->
                 <div class="d-flex align-items-center price_input_group myinput_group pb-4">
                   <label for="">Цена <span>*</span></label>
-                  <input type="tel" v-mask="['#', '##', '###', '####', '# ###', '## ###', '### ###', '#### ###', '# ### ###', '## ### ###', '### ### ###', '#### ### ###', '# ### ### ###', '## ### ### ###', '### ### ### ###', '#### ### ### ###', '# ### ### ### ###', '## ### ### ### ###', '### ### ### ### ###']" placeholder="" class="price_input mr-2 ">
+                  <input type="tel" v-model="price" v-mask="['#', '##', '###', '####', '# ###', '## ###', '### ###', '#### ###', '# ### ###', '## ### ###', '### ### ###', '#### ### ###', '# ### ### ###', '## ### ### ###', '### ### ### ###', '#### ### ### ###', '# ### ### ### ###', '## ### ### ### ###', '### ### ### ### ###']" placeholder="" class="price_input mr-2 ">
                   <vs-select
                     class="selectExample"
                     v-model="select6"
@@ -86,7 +57,7 @@
                 </div> <!-- d-flex -->
                 <div class="d-flex myinput_group pb-4">
                   <label for="">Описание <span>*</span></label>
-                  <textarea id="" rows="7"></textarea>
+                  <textarea id="" rows="7" v-model="description"></textarea>
                 </div> <!-- d-flex -->
                 <div class="d-flex myinput_group pb-4">
                   <label for="">Фотографии</label>
@@ -121,7 +92,7 @@
                   </div>
                 </div> <!-- d-flex -->
                 <div class="d-flex justify-content-end myinput_group pt-4">
-                  <a href="#" class="mainbtn inter_font text-bold">Опубликовать</a>
+                  <a href="#"  @click.prevent="handleSubmit" class="mainbtn inter_font text-bold">Опубликовать</a>
                 </div> <!-- d-flex -->
             </div> <!-- v-if="isCharactersShow" -->
           </div> <!-- post_add_block -->
@@ -142,8 +113,13 @@ export default {
   name: 'PostAddPage',
   data () {
     return {
+      name: '',
+      price: Number,
+      description: '',
       isSubcategoryShow: false,
       isCharactersShow: false,
+      characters: [],
+      characteristics: [],
       adImage: "'https://picsum.photos/430/700?random=1'",
       select1Normal: '',
       select1: 'Выберите',
@@ -151,42 +127,23 @@ export default {
       select3: 'Выберите',
       select4: 'Выберите',
       select5: 'Выберите',
+      selectValue: 1,
       select6: 1,
       mainCategories: [],
       mainSubcategories: [],
-      options2: [
-        { text: 'Продаю свое', value: 1 },
-        { text: 'Приобрел на продажу', value: 2 },
-        { text: 'Магазин', value: 3 },
-        { text: 'Договорная цена', value: 4 },
-        { text: 'Продаю чужое', value: 5 }
-      ],
-      options3: [
-        { text: 'Red', value: 1 },
-        { text: 'Green', value: 2 },
-        { text: 'Blue', value: 3 },
-        { text: 'Purple', value: 4 }
-      ],
-      options4: [
-        { text: '2 гб и менее', value: 1 },
-        { text: '4', value: 2 },
-        { text: '8', value: 3 },
-        { text: '16', value: 4 },
-        { text: '32', value: 5 },
-        { text: '64', value: 6 },
-        { text: '128 и более', value: 7 }
-      ],
-      options5: [
-        { text: 'Нет', value: 1 },
-        { text: 'Есть', value: 2 }
-      ],
       options6: [
         { text: 'сум', value: 1 },
         { text: 'y.e.', value: 2 }
-      ]
+      ],
+      selectedItems: []
     }
   },
   methods: {
+    handle (e) {
+      const datas = e.target.value
+      this.selectedItems.push(datas)
+      console.log(this.selectedItems)
+    },
     successUpload () {
       this.$vs.notify({ color: 'success', title: 'Загрузка успешно выполнена', text: 'Загрузка успешно выполнена' })
     },
@@ -196,14 +153,21 @@ export default {
       }
     },
     async handleSelectCategory () {
-      console.log(this.select1)
       const response = await axios.get('categories/subcategories/' + this.select1)
       this.mainSubcategories = response.data
       this.isSubcategoryShow = true
-      console.log(response)
+      this.isCharactersShow = false
     },
-    handleSelectSubcategory () {
+    async handleSelectSubcategory () {
+      const response = await axios.get('characters/' + this.select2)
+      this.characters = response.data
       this.isCharactersShow = true
+    },
+    handleSubmit () {
+      console.log(this.characters[0].id, this.characters[0].select, this.characters[1].id, this.characters[1].select)
+      console.log(this.name)
+      console.log(this.price)
+      console.log(this.description)
     }
   },
   computed: {
