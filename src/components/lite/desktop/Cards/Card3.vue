@@ -1,19 +1,29 @@
 <template>
   <div class="mycard3">
     <div class="position-relative">
-      <router-link to="/"
-        class="mycard_img mybg_center position-relative d-block">
+      <router-link
+        :to="{
+          name: 'PostPage',
+          params: { id: this.post.id, slug: this.post.slug }
+        }"
+        class="mycard_img mybg_center position-relative d-block"
+        @click="updatePage"
+      >
         <div class="mycard_img_list">
           <div
             class="d-block w-100"
             v-for="(image, index) in this.post.gallery"
-            :key="index">
-              <div class="slide_item">
-              </div>
-              <div class="mybg_center myimg" :style="{ 'background-image': 'url(' + image + ')' }">
-              </div>
-            </div> <!-- d-block -->
-        </div><!-- mycard_img_list -->
+            :key="index"
+          >
+            <div class="slide_item"></div>
+            <div
+              class="mybg_center myimg"
+              :style="{ 'background-image': 'url(' + image + ')' }"
+            ></div>
+          </div>
+          <!-- d-block -->
+        </div>
+        <!-- mycard_img_list -->
       </router-link>
       <!-- mycard_img -->
       <div class="product_favourite flex-center d-flex">
@@ -24,16 +34,24 @@
       </div>
 
       <!-- mycard_favorite -->
-    </div> <!-- position-relative -->
+    </div>
+    <!-- position-relative -->
 
-    <router-link to="/product" title="Стиральная машина LG TW-4V7RW9T 10.5 кг"
-      class="mycard_title text_ellipsis2 mb-2 pt-2">
-      Стиральная машина LG TW-4V7RW9T 10.5 кг
+    <router-link
+      :to="{
+        name: 'PostPage',
+        params: { id: this.post.id, slug: this.post.slug }
+      }"
+      :title="post.name"
+      class="mycard_title text_ellipsis2 mb-2 pt-2"
+    >
+      {{ post.name }}
     </router-link>
     <!-- mycard_title -->
-    <h4 class="mycard_price text_ellipsis1">15 000 000 сум</h4>
+    <h4 class="mycard_price text_ellipsis1">{{ post.price }}</h4>
     <!-- mycard_price -->
-  </div> <!-- mycard3 -->
+  </div>
+  <!-- mycard3 -->
 </template>
 
 <script>
@@ -44,7 +62,7 @@ export default {
   components: {
     ToggleFavorite
   },
-  data () {
+  data() {
     return {
       image: "'https://picsum.photos/500?random=1'",
       image2: "'https://picsum.photos/500?random=2'",
@@ -64,6 +82,12 @@ export default {
         default: ''
       }
     }
+  },
+  methods: {
+    updatePage() {
+      event.preventDefault()
+      location.reload()
+    }
   }
 }
 </script>
@@ -72,6 +96,7 @@ export default {
 .mycard3 {
   border-radius: 3px;
   overflow: hidden;
+  width: 100%;
 }
 .mycard3 .mycard_img {
   border-radius: 4px;
@@ -82,7 +107,7 @@ export default {
 .mycard3 .mycard_title {
   font-weight: 400;
   font-size: 14px;
-  color: #19191D;
+  color: #19191d;
   height: 50px;
 }
 .mycard3 .mycard_price {
@@ -90,7 +115,7 @@ export default {
   font-size: 17px;
   color: rgba(0, 0, 0, 0.87);
   letter-spacing: inherit;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 .mycard3 .mycard_favorite {
   position: inherit;

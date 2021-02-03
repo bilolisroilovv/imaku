@@ -1,84 +1,57 @@
 <template>
   <div>
     <!-- Swiper -->
-      <swiper class="swiper gallery-top bg-white" :options="swiperOptionTop" ref="swiperTop">
-        <swiper-slide
-        class="swiper-slide mybg_center zoom-imgs"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mercedes.jpg') + ')'}"
-        >
-        </swiper-slide>
-        <swiper-slide
-        class="swiper-slide mybg_center zoom-imgs"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mercedes2.jpg') + ')'}"
-        >
-        </swiper-slide>
-        <swiper-slide
-        class="swiper-slide mybg_center zoom-imgs"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mercedes3.jpg') + ')'}"
-        >
-        </swiper-slide>
-        <swiper-slide
-        class="swiper-slide mybg_center zoom-imgs"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mercedes4.jpg') + ')'}"
-        >
-        </swiper-slide>
-        <swiper-slide
-        class="swiper-slide mybg_center zoom-imgs"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mercedes5.jpg') + ')'}"
-        >
-        </swiper-slide>
-        <swiper-slide
-        class="swiper-slide mybg_center zoom-imgs"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mercedes6.jpg') + ')'}"
-        >
-        </swiper-slide>
-        <!-- Add Arrows -->
-        <div class="product_slider_next main_slider_btns flex-center d-flex">
-          <i class="fas fa-chevron-right"></i>
+    <swiper
+      class="swiper gallery-top bg-white"
+      :options="swiperOptionTop"
+      ref="swiperTop"
+      id="lightgallery"
+    >
+      <swiper-slide
+        v-for="(image, index) in gallery"
+        class="swiper-slide"
+        :key="index"
+      >
+        <div class="zoom-imgs item" :data-src="image">
+          <img :src="image" />
         </div>
-        <!-- main_slider_next -->
-        <div class="product_slider_prev main_slider_btns flex-center d-flex">
-          <i class="fas fa-chevron-left"></i>
-        </div>
-      </swiper>
-      <swiper class="swiper gallery-thumbs" :options="swiperOptionThumbs" ref="swiperThumbs">
-        <swiper-slide
-        class="gallery-thumb slide1 mybg_center"
-        id="swiper-slide1"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mercedes.jpg') + ')'}"
-        ></swiper-slide>
-        <swiper-slide
-        class="gallery-thumb slide2 mybg_center"
-        id="swiper-slide2"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mercedes2.jpg') + ')'}"
-        ></swiper-slide>
-        <swiper-slide
-        class="gallery-thumb slide3 mybg_center"
-        id="swiper-slide3"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mercedes3.jpg') + ')'}"
-        ></swiper-slide>
-        <swiper-slide
-        class="gallery-thumb slide4 mybg_center"
-        id="swiper-slide4"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mercedes4.jpg') + ')'}"
-        ></swiper-slide>
-        <swiper-slide
-        class="gallery-thumb slide5 mybg_center"
-        id="swiper-slide5"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mercedes5.jpg') + ')'}"
-        ></swiper-slide>
-        <swiper-slide
-        class="gallery-thumb slide6 mybg_center"
+      </swiper-slide>
+      <!-- Add Arrows -->
+      <div
+        class="product_slider_next main_slider_btns flex-center d-flex swiper-button-next"
+        slot="button-next"
+      ></div>
+      <!-- main_slider_next -->
+      <div
+        class="product_slider_prev main_slider_btns flex-center d-flex swiper-button-prev"
+        slot="button-prev"
+      ></div>
+    </swiper>
+    <swiper
+      class="swiper gallery-thumbs"
+      :options="swiperOptionThumbs"
+      ref="swiperThumbs"
+    >
+      <swiper-slide
+        v-for="(image, index) in gallery"
+        :key="index"
+        class="gallery-thumb"
         id="swiper-slide6"
-        :style="{'background-image': 'url(' + require('@/assets/lite/mercedes6.jpg') + ')'}"
-        ></swiper-slide>
-      </swiper> <!-- gallery-thumbs -->
+      >
+        <div class="item" :data-src="image">
+          <img :src="image" />
+        </div>
+      </swiper-slide>
+    </swiper>
+    <!-- gallery-thumbs -->
   </div>
 </template>
 
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
+import 'lightgallery.js'
+import 'lightgallery.js/dist/css/lightgallery.css'
 
 export default {
   name: 'ProductMainSlider',
@@ -86,32 +59,40 @@ export default {
     Swiper,
     SwiperSlide
   },
-  data () {
+  data() {
     return {
       swiperOptionTop: {
-        effect: 'fade',
-        loop: true,
-        loopedSlides: 5,
+        spaceBetween: 10,
         navigation: {
-          nextEl: '.product_slider_next',
-          prevEl: '.product_slider_prev'
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
         }
       },
       swiperOptionThumbs: {
         spaceBetween: 10,
-        loop: true,
-        loopedSlides: 5,
-        slidesPerView: 'auto',
+        centeredSlides: true,
+        slidesPerView: 5,
+        touchRatio: 0.2,
         slideToClickedSlide: true
       }
     }
   },
-  mounted () {
-    this.$nextTick(() => {
-      const swiperTop = this.$refs.swiperTop.$swiper
-      const swiperThumbs = this.$refs.swiperThumbs.$swiper
-      swiperTop.controller.control = swiperThumbs
-      swiperThumbs.controller.control = swiperTop
+  props: ['gallery'],
+  computed: {
+    swiperTop() {
+      return this.$refs.swiperTop.$swiper
+    },
+    swiperThumbs() {
+      return this.$refs.swiperThumbs.$swiper
+    }
+  },
+  mounted() {
+    this.swiperTop.controller.control = this.swiperThumbs
+    this.swiperThumbs.controller.control = this.swiperTop
+    const el = document.getElementById('lightgallery')
+    window.lightGallery(el, {
+      thumbnail: true,
+      selector: '.item'
     })
   }
 }
@@ -122,6 +103,9 @@ export default {
   height: 600px;
   width: 100%;
   border-radius: 5px;
+  img {
+    max-width: 100%;
+  }
 }
 
 .gallery-thumbs {
@@ -135,8 +119,15 @@ export default {
   height: 100%;
   cursor: pointer;
   opacity: 1;
-  border-radius: 3px!important;
+  border-radius: 3px !important;
   overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
 }
 
 .gallery-thumbs .swiper-slide-active {
@@ -144,6 +135,7 @@ export default {
   -moz-box-shadow: inset 0px 0px 0px 3px var(--main-color);
   box-shadow: inset 0px 0px 0px 3px var(--main-color);
   opacity: 1;
+  padding: 5px;
 }
 
 .product_slider_next {
@@ -153,6 +145,12 @@ export default {
 .product_slider_prev {
   top: 50%;
   left: -50px;
+}
+.product_slider_next,
+.product_slider_prev {
+  &::after {
+    font-size: 18px;
+  }
 }
 .gallery-top:hover .product_slider_prev {
   left: 25px;
