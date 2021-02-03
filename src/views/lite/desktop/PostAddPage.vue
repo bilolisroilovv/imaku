@@ -63,11 +63,10 @@
                   <label for="">Фотографии</label>
                   <div class="w-100">
                     <div class="photos_block">
-                      <vs-upload multiple :text="'Добавить'" ref="files" action="https://jsonplaceholder.typicode.com/posts/" :change="handleFilesUpload" :show-upload-button="false" @on-success="successUpload">
-                      </vs-upload>
+                      <!-- <vs-upload multiple single-upload="true" :text="'Добавить'" id="files" ref="files" :change="handleFilesUpload" :show-upload-button="false" @on-success="successUpload">
+                      </vs-upload> -->
+                      <input type="file" id="files" ref="files" multiple @change="handleFilesUpload($event)"/>
                     </div> <!-- photos_block -->
-
-                    <input type="file" multiple>
                     <p class="photos_p pt-2">
                       Первое фото будет отображаться в результатах поиска, выберите наиболее удачное. <br>
                       Вы можете загрузить до 12 фотографий в формате JPG или PNG. <br>
@@ -122,7 +121,7 @@ export default {
       isCharactersShow: false,
       priceTypeSelect: 'сум',
       phone: Number,
-      files: '',
+      files: null,
       characters: [],
       characteristics: [],
       select1Normal: '',
@@ -172,35 +171,36 @@ export default {
       this.characters = response.data
       this.userCharacters = userKharacters
     },
-    handleFilesUpload () {
-      this.file = this.$refs.file.files[0]
+    handleFilesUpload (event) {
+      this.files = event.target.files
     },
-    handleSubmit () {
-      console.log(this.userCharacters)
+    async handleSubmit () {
       const form = new FormData()
       form.append('cat_id', this.select1)
-      form.append('subcategory_id', this.select2)
       form.append('subcategory_id', this.select2)
       form.append('name', this.name)
       form.append('price', this.price)
       form.append('price_type', this.priceTypeSelect)
       form.append('description', this.description)
       form.append('phone', this.phone)
-      form.append('characters', this.userCharacters)
       form.append('description', this.description)
+      /* form.append('gallery', this.files) */
+      for (var i = 0; i < this.userCharacters.length; i++) {
+        form.append('characters[' + i + '][character_id]', this.userCharacters[i].characterId)
+        form.append('characters[' + i + '][option_id]', this.userCharacters[i].option_id)
+      }
       for (let i = 0; i < this.files.length; i++) {
         const file = this.files[i]
-        form.append('files[' + i + ']', file)
+        console.log(file)
+        form.append('gallery[' + i + ']', file)
       }
 
-      axios.post('posts/store',
-        form
-      ).then(function () {
-        alert('SUCCESS!!')
-      }).catch(function (error) {
-        alert('FAILURE!!')
-        console.log(error)
+      const response = await axios.post('posts/store', form, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       })
+      console.log(response)
     }
   },
   computed: {
