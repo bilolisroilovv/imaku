@@ -2,35 +2,46 @@
   <div class="mycard">
     <div class="position-relative">
       <router-link
-      :to="{ name: 'PostPage', params: {id: this.post.id, slug: this.post.slug } }">
+        :to="{
+          name: 'PostPage',
+          params: { id: this.post.id, slug: this.post.slug }
+        }"
+      >
         <div class="mycard_img mybg_center position-relative d-block">
           <div class="mycard_img_list">
-
             <div
-            class="d-block w-100"
-            v-for="(image, index) in this.post.gallery"
-            :key="index">
-              <div class="slide_item">
-              </div>
-              <div class="mybg_center myimg" :style="{ 'background-image': 'url(' + image + ')' }">
-              </div>
-            </div> <!-- d-block -->
-
-          </div><!-- mycard_img_list -->
-        </div><!-- mycard_img -->
+              class="d-block w-100"
+              v-for="(image, index) in this.post.gallery"
+              :key="index"
+            >
+              <div class="slide_item"></div>
+              <div
+                class="mybg_center myimg"
+                :style="{ 'background-image': 'url(' + image + ')' }"
+              ></div>
+            </div>
+            <!-- d-block -->
+          </div>
+          <!-- mycard_img_list -->
+        </div>
+        <!-- mycard_img -->
       </router-link>
       <div class="product_favourite flex-center d-flex">
         <ToggleFavorite
           title="Добавить в избранное"
           class="position-bottom-right mycard_favorite2 flex-center d-flex"
         />
-      </div><!-- product_favourite -->
+      </div>
+      <!-- product_favourite -->
       <!-- mycard_favorite -->
     </div>
     <!-- position-relative -->
 
     <router-link
-      :to="{ name: 'PostPage', params: {id: this.post.id, slug: this.post.slug } }"
+      :to="{
+        name: 'PostPage',
+        params: { id: this.post.id, slug: this.post.slug }
+      }"
       title="Диван две кресла PANDA механизмом дельфин ткань туркия"
       class="mycard_title text_ellipsis2 mb-2 pt-2 mt-1 myhover_text"
     >
@@ -150,14 +161,20 @@
     <hr class="mt-2 mb-2" />
     <div class="d-flex align-items-center mycard_store">
       <router-link
-        :to="{ name: this.post.author.type, params: {id: this.post.author.id } }"
+        :to="{
+          name: this.post.author.type,
+          params: { id: this.post.author.id }
+        }"
         class="mycard_store_img mybg_center d-block"
         :style="{ 'background-image': 'url(' + this.post.author.avatar + ')' }"
       >
       </router-link>
       <!-- mycard_store_img -->
       <router-link
-        :to="{ name: this.post.author.type, params: {id: this.post.author.id } }"
+        :to="{
+          name: this.post.author.type,
+          params: { id: this.post.author.id }
+        }"
         class="mycard_store_name myhover_text text_ellipsis1"
         title="Furniture store"
       >
@@ -171,19 +188,19 @@
 </template>
 
 <script>
-import ToggleFavorite from '@/components/lite/desktop/ToggleFavorite'
+import ToggleFavorite from "@/components/lite/desktop/ToggleFavorite";
 export default {
-  name: 'CardBase',
+  name: "CardBase",
   components: {
     ToggleFavorite
   },
-  data () {
+  data() {
     return {
       image: "'https://picsum.photos/500?random=1'",
       image2: "'https://picsum.photos/500?random=2'",
       image3: "'https://picsum.photos/500?random=3'",
       image4: "'https://picsum.photos/500?random=4'"
-    }
+    };
   },
   props: {
     post: {
@@ -193,11 +210,11 @@ export default {
       },
       slug: {
         type: String,
-        default: ''
+        default: ""
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -277,7 +294,7 @@ export default {
   transition: all 0.15s;
 }
 .mycard_img_list .slide_item:after {
-  content: '';
+  content: "";
   display: block;
   width: 100%;
   height: 2px;
@@ -289,7 +306,7 @@ export default {
   border-bottom: 2px solid #ccc;
 }
 .mycard_img_list .slide_item:before {
-  content: '';
+  content: "";
   display: block;
   width: 100%;
   height: 3px;
@@ -314,14 +331,14 @@ export default {
   z-index: 4;
 }
 .mycard .mycard_title {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 14px;
   line-height: 1.4;
   height: 45px;
   color: #19191d;
 }
 .mycard .mycard_price {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: bold;
   font-size: 18px;
 

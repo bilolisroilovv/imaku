@@ -9,21 +9,27 @@
                 <ol class="breadcrumb mb-0 p-0">
                   <li class="breadcrumb-item"><a href="/">Главная</a></li>
                   <span class="mx-2 px-1">/</span>
-                  <li class="breadcrumb-item active" aria-current="page">Смартфоны и телефоны</li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    Смартфоны и телефоны
+                  </li>
                 </ol>
               </nav>
-
-            </div> <!-- d-flex -->
-
-          </div> <!-- col-md-12 -->
-        </div> <!-- row -->
-
-      </div> <!-- container -->
-    </section> <!-- product_section -->
+            </div>
+            <!-- d-flex -->
+          </div>
+          <!-- col-md-12 -->
+        </div>
+        <!-- row -->
+      </div>
+      <!-- container -->
+    </section>
+    <!-- product_section -->
 
     <section class="category_section">
       <div class="container">
-        <h2 class="section_title pb-4">Смартфоны и телефоны <span>102 200 результатов</span></h2>
+        <h2 class="section_title pb-4">
+          Смартфоны и телефоны <span>102 200 результатов</span>
+        </h2>
         <div class="row">
           <div class="w-26 pr-0">
             <div class="category_sidebar bg-white">
@@ -43,8 +49,10 @@
                   <a href="#">Чехлы</a>
                   <a href="#">Чехлы-аккумуляторы</a>
                 </div>
-              </div> <!-- category_sidebar_categories -->
-            </div> <!-- category_sidebar -->
+              </div>
+              <!-- category_sidebar_categories -->
+            </div>
+            <!-- category_sidebar -->
             <div class="category_sidebar_filter mt-4">
               <vs-collapse class="filter_collapse">
                 <vs-collapse-item open>
@@ -52,20 +60,27 @@
                     <h5>Цена</h5>
                   </div>
                   <div class="price_filter">
-                    <vs-slider class="w-100" max=10000000 :color="colorx" v-model="value1"/>
+                    <vs-slider
+                      class="w-100"
+                      max="10000000"
+                      :color="colorx"
+                      v-model="value1"
+                    />
                     <div class="d-flex justify-content-between">
                       <div class="position-relative">
-                        <input type="text" max="10000000" v-model="value1[0]">
+                        <input type="text" max="10000000" v-model="value1[0]" />
                         <span>От</span>
                       </div>
                       <div class="position-relative ml-3">
-                        <input type="text" max="10000000" v-model="value1[1]">
+                        <input type="text" max="10000000" v-model="value1[1]" />
                         <span>До</span>
                       </div>
-                    </div> <!-- d-flex -->
-                  </div> <!-- price_filter -->
-                  </vs-collapse-item>
-                  <vs-collapse-item>
+                    </div>
+                    <!-- d-flex -->
+                  </div>
+                  <!-- price_filter -->
+                </vs-collapse-item>
+                <vs-collapse-item>
                   <div slot="header">
                     <h5>Бренд</h5>
                   </div>
@@ -115,9 +130,10 @@
                       <div class="control__indicator"></div>
                       Redmi
                     </label>
-                  </div> <!-- price_filter -->
-                  </vs-collapse-item>
-                  <vs-collapse-item>
+                  </div>
+                  <!-- price_filter -->
+                </vs-collapse-item>
+                <vs-collapse-item>
                   <div slot="header">
                     <h5>Состояние</h5>
                   </div>
@@ -132,24 +148,31 @@
                       <div class="control__indicator"></div>
                       Б/У
                     </label>
-                  </div> <!-- price_filter -->
-                  </vs-collapse-item>
-                </vs-collapse>
-            </div> <!-- category_sidebar_filter -->
-          </div> <!-- w-26 -->
+                  </div>
+                  <!-- price_filter -->
+                </vs-collapse-item>
+              </vs-collapse>
+            </div>
+            <!-- category_sidebar_filter -->
+          </div>
+          <!-- w-26 -->
 
           <div class="w-74">
             <div class="mb-3 d-flex">
               <vs-select
                 class="selectExample category_select"
                 v-model="select1"
-                >
-                <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options1" />
+              >
+                <vs-select-item
+                  :key="index"
+                  :value="item.value"
+                  :text="item.text"
+                  v-for="(item, index) in options1"
+                />
               </vs-select>
             </div>
 
             <div class="grid-container grid-template-4 grid-gap-10">
-
               <Card4 />
               <Card4 />
               <Card4 />
@@ -176,81 +199,75 @@
               <Card4 />
               <Card4 />
               <Card4 />
-
-            </div> <!-- grid-container -->
+            </div>
+            <!-- grid-container -->
             <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
-              <svg width="12" height="12" viewBox="0 0 341.333 341.333"
-                style="enable-background:new 0 0 341.333 341.333;" xml:space="preserve">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 341.333 341.333"
+                style="enable-background:new 0 0 341.333 341.333;"
+                xml:space="preserve"
+              >
                 <g>
                   <g>
-                    <polygon points="311.253,140.587 192,259.627 192,0 149.333,0 149.333,259.627 30.293,140.373 0,170.667 170.667,341.333 341.333,170.667" />
+                    <polygon
+                      points="311.253,140.587 192,259.627 192,0 149.333,0 149.333,259.627 30.293,140.373 0,170.667 170.667,341.333 341.333,170.667"
+                    />
                   </g>
                 </g>
-                <g>
-                </g>
-                <g>
-                </g>
-                <g>
-                </g>
-                <g>
-                </g>
-                <g>
-                </g>
-                <g>
-                </g>
-                <g>
-                </g>
-                <g>
-                </g>
-                <g>
-                </g>
-                <g>
-                </g>
-                <g>
-                </g>
-                <g>
-                </g>
-                <g>
-                </g>
-                <g>
-                </g>
-                <g>
-                </g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
               </svg>
               Показать еще
             </button>
-
-          </div> <!-- w-74 -->
-        </div> <!-- row -->
-      </div> <!-- container -->
+          </div>
+          <!-- w-74 -->
+        </div>
+        <!-- row -->
+      </div>
+      <!-- container -->
     </section>
   </div>
 </template>
 
 <script>
-import Card4 from '@/components/lite/desktop/Cards/Card4'
+import Card4 from "@/components/lite/desktop/Cards/Card4";
 
 export default {
-  name: 'CategoryPage',
+  name: "CategoryPage",
   components: {
     Card4
   },
-  data () {
+  data() {
     return {
-      select1Normal: '',
+      select1Normal: "",
       select1: 1,
       value1: [500000, 2000000],
-      colorx: 'var(--main-color)',
+      colorx: "var(--main-color)",
       options1: [
-        { text: 'Популярные', value: 1 },
-        { text: 'Новинки', value: 2 },
-        { text: 'Сначала дешевые', value: 3 },
-        { text: 'Сначала дорогие', value: 4 },
-        { text: 'Высокий рейтинг', value: 5 }
+        { text: "Популярные", value: 1 },
+        { text: "Новинки", value: 2 },
+        { text: "Сначала дешевые", value: 3 },
+        { text: "Сначала дорогие", value: 4 },
+        { text: "Высокий рейтинг", value: 5 }
       ]
-    }
+    };
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -261,7 +278,7 @@ export default {
   margin: 5px 0;
 }
 .control__indicator {
-  top: 3px!important;
+  top: 3px !important;
 }
 .price_filter input {
   border: 2px solid #d6dbe0;
@@ -323,7 +340,7 @@ export default {
   padding: 15px 20px;
 }
 .con-select {
-  width: 220px!important;
+  width: 220px !important;
 }
 .w-26 {
   width: 26%;
@@ -343,22 +360,22 @@ export default {
   color: rgb(107, 107, 107);
 }
 .breadcrumb {
-  background: transparent!important;
+  background: transparent !important;
   display: flex;
   align-items: center;
 }
 .breadcrumb-item a {
-  color: #555!important;
+  color: #555 !important;
   transition: all 0.2s;
   font-size: 15px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .breadcrumb-item a:hover {
-  color: #000!important;
+  color: #000 !important;
 }
 .breadcrumb-item.active {
-  color: #555!important;
-  font-family: 'Inter', sans-serif;
+  color: #555 !important;
+  font-family: "Inter", sans-serif;
   font-size: 15px;
 }
 .breadcrumb span {
@@ -366,8 +383,8 @@ export default {
   color: #777;
 }
 .see_more_btn {
-  background: transparent!important;
-  border: 2px solid var(--main-color)!important;
+  background: transparent !important;
+  border: 2px solid var(--main-color) !important;
   color: var(--main-color);
   font-weight: 500;
   font-size: 14px;
@@ -382,7 +399,7 @@ export default {
 }
 .see_more_btn:hover {
   color: #fff;
-  background: var(--main-color)!important;
+  background: var(--main-color) !important;
 }
 .see_more_btn:hover svg g {
   fill: #fff;

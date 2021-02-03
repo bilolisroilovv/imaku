@@ -6,38 +6,39 @@
         :key="category.id"
         :category="category"
       />
-    </ul> <!-- mymenu -->
-  </div> <!-- header_categories_dropdown -->
+    </ul>
+    <!-- mymenu -->
+  </div>
+  <!-- header_categories_dropdown -->
 </template>
 
 <script>
-import HeaderCategoriesItem from '@/components/lite/desktop/headerCategories/HeaderCategoriesItem.vue'
-import { mapGetters } from 'vuex'
+import HeaderCategoriesItem from "@/components/lite/desktop/headerCategories/HeaderCategoriesItem.vue";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'HeaderCategoriesDropdown',
+  name: "HeaderCategoriesDropdown",
   components: {
     HeaderCategoriesItem
   },
   props: {
     scrollPosition: Number
   },
-  data () {
+  data() {
     return {
       categories: []
-    }
+    };
   },
   computed: {
-    ...mapGetters(['allCategories'])
+    ...mapGetters(["allCategories"])
   },
-  async mounted () {
-  }
-}
+  async mounted() {}
+};
 </script>
 
 <style scoped>
 .mymenu {
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
   padding: 20px 13px;
@@ -62,11 +63,16 @@ export default {
   position: absolute;
   top: 0;
   left: 100%;
-  background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(255,255,255,1) 5%, rgba(255,255,255,1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 0) 0%,
+    rgba(255, 255, 255, 1) 5%,
+    rgba(255, 255, 255, 1) 100%
+  );
   padding: 15px 35px;
 }
 .submenu:before {
-  content: '';
+  content: "";
   display: block;
   background: transparent;
   position: absolute;
@@ -83,7 +89,7 @@ export default {
 }
 .mymenu_li:hover .submenu {
   display: block;
-  z-index: 2!important;
+  z-index: 2 !important;
 }
 .mymenu .submenu_content {
   display: flex;

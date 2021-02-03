@@ -2,13 +2,11 @@
   <div>
     <ul class="submenu_list">
       <li class="submenu_title">
-        <a href="categories.html">{{category.name}}</a>
-      </li> <!-- submenu_title -->
-      <li
-        v-for="category in category.subCategories"
-        :key="category.id"
-      >
-        <a href="categories.html">{{category.name}}</a>
+        <a href="categories.html">{{ category.name }}</a>
+      </li>
+      <!-- submenu_title -->
+      <li v-for="category in category.subCategories" :key="category.id">
+        <a href="categories.html">{{ category.name }}</a>
       </li>
     </ul>
   </div>
@@ -16,19 +14,17 @@
 
 <script>
 export default {
-  name: 'HeaderCategoriesItemTitle',
-  components: {
-  },
-  data () {
-    return {
-    }
+  name: "HeaderCategoriesItemTitle",
+  components: {},
+  data() {
+    return {};
   },
   props: {
     category: {
       type: Object
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

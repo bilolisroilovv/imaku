@@ -1,18 +1,15 @@
 <template>
   <div class="grid-container grid-gap-20 grid-template-5">
-    <CardBase
-    v-for="post in posts"
-    :key="post.id"
-    :post="post"
-    />
-  </div><!-- grid-container -->
+    <CardBase v-for="post in posts" :key="post.id" :post="post" />
+  </div>
+  <!-- grid-container -->
 </template>
 
 <script>
-import CardBase from '@/components/lite/desktop/Cards/CardBase'
+import CardBase from "@/components/lite/desktop/Cards/CardBase";
 
 export default {
-  name: 'PostsSection',
+  name: "PostsSection",
   components: {
     CardBase
   },
@@ -21,13 +18,10 @@ export default {
       type: Array
     }
   },
-  data () {
-    return {
-    }
+  data() {
+    return {};
   }
-}
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

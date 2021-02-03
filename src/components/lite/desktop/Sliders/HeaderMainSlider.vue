@@ -9,15 +9,18 @@
         <router-link
           :to="{ name: 'CategoryPage' }"
           class="mybg_center d-block h-100 w-100"
-          :style="{'background-image': 'url(' + item.image + ')' }">
+          :style="{ 'background-image': 'url(' + item.image + ')' }"
+        >
         </router-link>
       </swiper-slide>
       <div class="main_slider_next main_slider_btns flex-center d-flex">
         <i class="fas fa-chevron-right"></i>
-      </div><!-- main_slider_next -->
+      </div>
+      <!-- main_slider_next -->
       <div class="main_slider_prev main_slider_btns flex-center d-flex">
         <i class="fas fa-chevron-left"></i>
-      </div><!-- main_slider_prev -->
+      </div>
+      <!-- main_slider_prev -->
     </swiper>
     <!-- Add Pagination -->
     <div class="swiper-pagination main_slider_pagination mt-3"></div>
@@ -25,43 +28,42 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-import { mapGetters } from 'vuex'
-import 'swiper/css/swiper.css'
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import { mapGetters } from "vuex";
+import "swiper/css/swiper.css";
 
 export default {
-  name: 'HeaderMainSlider',
+  name: "HeaderMainSlider",
   components: {
     Swiper,
     SwiperSlide
   },
-  data () {
+  data() {
     return {
       mainSliderOption: {
-        effect: 'fade',
+        effect: "fade",
         autoplay: {
           delay: 5000,
           disableOnInteraction: false
         },
         navigation: {
-          nextEl: '.main_slider_next',
-          prevEl: '.main_slider_prev'
+          nextEl: ".main_slider_next",
+          prevEl: ".main_slider_prev"
         },
         pagination: {
-          el: '.main_slider_pagination',
+          el: ".main_slider_pagination",
           clickable: true
         }
       }
-    }
+    };
   },
   computed: {
-    ...mapGetters(['allHeaderMainSlider'])
+    ...mapGetters(["allHeaderMainSlider"])
   }
-}
+};
 </script>
 
 <style lang="scss">
-
 .main_slider {
   width: 100%;
   height: 370px;

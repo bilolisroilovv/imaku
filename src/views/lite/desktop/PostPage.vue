@@ -453,17 +453,17 @@
 </template>
 
 <script>
-import ToggleFavorite from '@/components/lite/desktop/ToggleFavorite'
-import ProductMainSlider from '@/components/lite/desktop/Sliders/ProductMainSlider'
-import PostsSlider from '@/components/lite/desktop/Sliders/PostsSlider'
-import PostsSection from '@/components/lite/desktop/postsSection/PostsSection'
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-import Card3 from '@/components/lite/desktop/Cards/Card3'
-import axios from 'axios'
-import 'swiper/css/swiper.css'
+import ToggleFavorite from "@/components/lite/desktop/ToggleFavorite";
+import ProductMainSlider from "@/components/lite/desktop/Sliders/ProductMainSlider";
+import PostsSlider from "@/components/lite/desktop/Sliders/PostsSlider";
+import PostsSection from "@/components/lite/desktop/postsSection/PostsSection";
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import Card3 from "@/components/lite/desktop/Cards/Card3";
+import axios from "axios";
+import "swiper/css/swiper.css";
 
 export default {
-  name: 'PostPage',
+  name: "PostPage",
   components: {
     ToggleFavorite,
     ProductMainSlider,
@@ -473,15 +473,15 @@ export default {
     SwiperSlide,
     Card3
   },
-  props: ['id'],
+  props: ["id"],
   data() {
     return {
       otherSellerGoodsOption: {
         spaceBetween: 15,
         slidesPerView: 3,
         navigation: {
-          nextEl: '.other_seller_goods_slider_next',
-          prevEl: '.other_seller_goods_slider_prev'
+          nextEl: ".other_seller_goods_slider_next",
+          prevEl: ".other_seller_goods_slider_prev"
         }
       },
       likesCount: null,
@@ -492,59 +492,59 @@ export default {
       postData: [],
       gallery: [],
       authorPosts: []
-    }
+    };
   },
   async mounted() {
-    const response = await axios.get('posts/' + this.id)
-    this.postData = response.data
-    this.likesCount = response.data.likes
-    this.disLikesCount = response.data.dislikes
-    this.isLiked = response.data.isLiked
-    this.isDisliked = response.data.isDisliked
-    this.isFavorited = response.data.favorite
-    this.gallery = response.data.gallery
-    this.authorPosts = response.data.author.posts
+    const response = await axios.get("posts/" + this.id);
+    this.postData = response.data;
+    this.likesCount = response.data.likes;
+    this.disLikesCount = response.data.dislikes;
+    this.isLiked = response.data.isLiked;
+    this.isDisliked = response.data.isDisliked;
+    this.isFavorited = response.data.favorite;
+    this.gallery = response.data.gallery;
+    this.authorPosts = response.data.author.posts;
   },
   methods: {
     async handleLike() {
-      this.isLiked = !this.isLiked
+      this.isLiked = !this.isLiked;
       if (this.isLiked === true) {
-        this.likesCount++
+        this.likesCount++;
       } else {
-        this.likesCount--
+        this.likesCount--;
       }
       if (this.isDisliked === true) {
-        this.isDisliked = false
-        this.disLikesCount--
+        this.isDisliked = false;
+        this.disLikesCount--;
       }
-      const response = await axios.get('like/' + this.postData.id)
-      console.log(response)
+      const response = await axios.get("like/" + this.postData.id);
+      console.log(response);
       /* this.likesCount = response.data.likes
       this.dislikesCount = response.data.dislikes */
     },
     async handleDislike() {
-      this.isDisliked = !this.isDisliked
+      this.isDisliked = !this.isDisliked;
       if (this.isDisliked === true) {
-        this.disLikesCount++
+        this.disLikesCount++;
       } else {
-        this.disLikesCount--
+        this.disLikesCount--;
       }
       if (this.isLiked === true) {
-        this.isLiked = false
-        this.likesCount--
+        this.isLiked = false;
+        this.likesCount--;
       }
-      const response = await axios.get('dislike/' + this.postData.id)
-      console.log(response)
+      const response = await axios.get("dislike/" + this.postData.id);
+      console.log(response);
       /* this.likesCount = response.data.likes
       this.dislikesCount = response.data.dislikes */
     },
     async handleFavorite() {
-      const response = await axios.get('favorite/' + this.postData.id)
-      console.log(response)
-      this.isFavorited = !this.isFavorited
+      const response = await axios.get("favorite/" + this.postData.id);
+      console.log(response);
+      this.isFavorited = !this.isFavorited;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -595,7 +595,7 @@ export default {
   padding: 11px 20px;
   width: 100%;
   transition: all 0.2s;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .product_btns a:hover {
   background: #2b2c2e;
@@ -679,14 +679,14 @@ export default {
   color: #555 !important;
   transition: all 0.2s;
   font-size: 15px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .breadcrumb-item a:hover {
   color: #000 !important;
 }
 .breadcrumb-item.active {
   color: #555 !important;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 15px;
 }
 
@@ -841,7 +841,7 @@ export default {
   font-size: 19px;
 
   color: #343538;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .product_revew_text:hover {
   color: #343538;
@@ -851,7 +851,7 @@ export default {
   font-weight: 500;
   position: relative;
   top: 5px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .product_adress h4 {
   font-weight: 500;
@@ -935,7 +935,7 @@ export default {
   padding: 0 20px 0 0;
 }
 .product_params .pp > span:first-child:after {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   bottom: 5px;
@@ -1031,7 +1031,7 @@ export default {
   pointer-events: none;
 }
 .control__indicator:after {
-  content: '';
+  content: "";
   position: absolute;
   display: none;
 }

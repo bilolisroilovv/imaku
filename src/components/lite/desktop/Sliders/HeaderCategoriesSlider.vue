@@ -1,46 +1,52 @@
 <template>
   <div>
     <div class="position-relative myswiper_hover mt-4">
-      <swiper class="swiper categories_slider" :options="categoriesSliderOption">
+      <swiper
+        class="swiper categories_slider"
+        :options="categoriesSliderOption"
+      >
         <swiper-slide
-        class="slide-1"
-        v-for="item in allHeaderCategories"
-        :key="item.id"
+          class="slide-1"
+          v-for="item in allHeaderCategories"
+          :key="item.id"
         >
           <router-link
-          :to="{ name: 'CategoryPage' }"
-          class="mybg_center categorie_block d-block h-100 w-100"
-          :style="{'background-image': 'url(' + item.image + ')' }">
-
+            :to="{ name: 'CategoryPage' }"
+            class="mybg_center categorie_block d-block h-100 w-100"
+            :style="{ 'background-image': 'url(' + item.image + ')' }"
+          >
           </router-link>
           <router-link to="/category" class="categorie_text">
             {{ item.name }}
-          </router-link>
-        </swiper-slide><!-- swiper-slide -->
-      </swiper><!-- swiper-container -->
+          </router-link> </swiper-slide
+        ><!-- swiper-slide --> </swiper
+      ><!-- swiper-container -->
       <!-- Add Arrows -->
       <div class="categories_slider_next main_slider_btns flex-center d-flex">
         <i class="fas fa-chevron-right"></i>
-      </div><!-- main_slider_next -->
+      </div>
+      <!-- main_slider_next -->
       <div class="categories_slider_prev main_slider_btns flex-center d-flex">
         <i class="fas fa-chevron-left"></i>
-      </div><!-- main_slider_prev -->
-    </div> <!-- position-relative -->
+      </div>
+      <!-- main_slider_prev -->
+    </div>
+    <!-- position-relative -->
   </div>
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-import { mapGetters } from 'vuex'
-import 'swiper/css/swiper.css'
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import { mapGetters } from "vuex";
+import "swiper/css/swiper.css";
 
 export default {
-  name: 'HeaderCategoriesSlider',
+  name: "HeaderCategoriesSlider",
   components: {
     Swiper,
     SwiperSlide
   },
-  data () {
+  data() {
     return {
       categoriesSliderOption: {
         slidesPerView: 7,
@@ -50,16 +56,16 @@ export default {
           disableOnInteraction: false
         },
         navigation: {
-          nextEl: '.categories_slider_next',
-          prevEl: '.categories_slider_prev'
+          nextEl: ".categories_slider_next",
+          prevEl: ".categories_slider_prev"
         }
       }
-    }
+    };
   },
   computed: {
-    ...mapGetters(['allHeaderCategories'])
+    ...mapGetters(["allHeaderCategories"])
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -105,8 +111,8 @@ export default {
 .categories_slider .categorie_text {
   font-weight: 500;
   font-size: 16px;
-  font-family: 'Inter', sans-serif;
-  color: #FFFFFF;
+  font-family: "Inter", sans-serif;
+  color: #ffffff;
   position: absolute;
   line-height: 1.1;
   left: 7%;

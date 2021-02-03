@@ -55,10 +55,10 @@
 </template>
 
 <script>
-import ToggleFavorite from '@/components/lite/desktop/ToggleFavorite'
+import ToggleFavorite from "@/components/lite/desktop/ToggleFavorite";
 
 export default {
-  name: 'CardBase',
+  name: "CardBase",
   components: {
     ToggleFavorite
   },
@@ -69,7 +69,7 @@ export default {
       image3: "'https://picsum.photos/500?random=3'",
       image4: "'https://picsum.photos/500?random=4'",
       products: []
-    }
+    };
   },
   props: {
     post: {
@@ -79,17 +79,17 @@ export default {
       },
       slug: {
         type: String,
-        default: ''
+        default: ""
       }
     }
   },
   methods: {
     updatePage() {
-      event.preventDefault()
-      location.reload()
+      event.preventDefault();
+      location.reload();
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -115,7 +115,7 @@ export default {
   font-size: 17px;
   color: rgba(0, 0, 0, 0.87);
   letter-spacing: inherit;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .mycard3 .mycard_favorite {
   position: inherit;
@@ -154,7 +154,7 @@ export default {
   transition: all 0.15s;
 }
 .mycard_img_list .slide_item:after {
-  content: '';
+  content: "";
   display: block;
   width: 100%;
   height: 2px;
@@ -166,7 +166,7 @@ export default {
   border-bottom: 2px solid #ccc;
 }
 .mycard_img_list .slide_item:before {
-  content: '';
+  content: "";
   display: block;
   width: 100%;
   height: 3px;

@@ -12,41 +12,41 @@
 </template>
 
 <script>
-import FavoriteIcon from '@/components/lite/desktop/FavoriteIcon'
+import FavoriteIcon from "@/components/lite/desktop/FavoriteIcon";
 
 export default {
-  name: 'ToggleFavorite',
+  name: "ToggleFavorite",
   components: {
     FavoriteIcon
   },
-  data () {
+  data() {
     return {
       favorited: false,
       animating: false
-    }
+    };
   },
   computed: {
-    iconClasses () {
+    iconClasses() {
       return {
-        'toggle-favorite__icon--favorited': this.favorited,
-        'toggle-favorite__icon--animate': this.animating
-      }
+        "toggle-favorite__icon--favorited": this.favorited,
+        "toggle-favorite__icon--animate": this.animating
+      };
     }
   },
   methods: {
-    toggle () {
+    toggle() {
       // Only animate on favoriting.
       if (!this.favorited) {
-        this.animating = true
+        this.animating = true;
       }
 
-      this.favorited = !this.favorited
+      this.favorited = !this.favorited;
     },
-    onIconAnimationEnds () {
-      this.animating = false
+    onIconAnimationEnds() {
+      this.animating = false;
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

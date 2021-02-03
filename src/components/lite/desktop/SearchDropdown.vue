@@ -1,41 +1,70 @@
 <template>
-    <div class="search_dropdown">
-      <ul class="" role="listbox">
-        <li>
-            <a href="categories.html" target="_blank">
-            <b>бытов</b>ая техника <br>
-            <span>Электротехника</span>
-            </a>
-        </li>
-        <li>
-            <a href="categories.html" target="_blank">
-            <b>Iphon</b>e 12 Pro <br>
-            <span>Мобильные телефоны</span>
-            </a>
-        </li>
-        <li><a href="categories.html" target="_blank"><b>бытов</b>ая химия для дома</a></li>
+  <div class="search_dropdown">
+    <ul class="" role="listbox">
+      <li>
+        <a href="categories.html" target="_blank">
+          <b>бытов</b>ая техника <br />
+          <span>Электротехника</span>
+        </a>
+      </li>
+      <li>
+        <a href="categories.html" target="_blank">
+          <b>Iphon</b>e 12 Pro <br />
+          <span>Мобильные телефоны</span>
+        </a>
+      </li>
+      <li>
+        <a href="categories.html" target="_blank"
+          ><b>бытов</b>ая химия для дома</a
+        >
+      </li>
 
-        <li><a href="categories.html" target="_blank"><b>бытов</b>ая техника для дома</a></li>
-        <li><a href="categories.html" target="_blank"><b>бытов</b>ая химия frosch</a></li>
-        <li><a href="categories.html" target="_blank"><b>бытов</b>ая химия grass</a></li>
-        <li><a href="categories.html" target="_blank"><b>бытов</b>ая химия unicum</a></li>
-        <li><a href="categories.html" target="_blank"><b>бытов</b>ая химия для унитаза</a></li>
-        <li><a href="categories.html" target="_blank"><b>бытов</b>ая химия frosch</a></li>
-        <li><a href="categories.html" target="_blank"><b>бытов</b>ая химия чистящие средства</a></li>
-      </ul>
-    </div> <!-- search_dropdown -->
+      <li>
+        <a href="categories.html" target="_blank"
+          ><b>бытов</b>ая техника для дома</a
+        >
+      </li>
+      <li>
+        <a href="categories.html" target="_blank"
+          ><b>бытов</b>ая химия frosch</a
+        >
+      </li>
+      <li>
+        <a href="categories.html" target="_blank"><b>бытов</b>ая химия grass</a>
+      </li>
+      <li>
+        <a href="categories.html" target="_blank"
+          ><b>бытов</b>ая химия unicum</a
+        >
+      </li>
+      <li>
+        <a href="categories.html" target="_blank"
+          ><b>бытов</b>ая химия для унитаза</a
+        >
+      </li>
+      <li>
+        <a href="categories.html" target="_blank"
+          ><b>бытов</b>ая химия frosch</a
+        >
+      </li>
+      <li>
+        <a href="categories.html" target="_blank"
+          ><b>бытов</b>ая химия чистящие средства</a
+        >
+      </li>
+    </ul>
+  </div>
+  <!-- search_dropdown -->
 </template>
 
 <script>
 export default {
-  name: 'SearchDropdown',
-  data () {
-    return {
-    }
+  name: "SearchDropdown",
+  data() {
+    return {};
   },
-  methods: {
-  }
-}
+  methods: {}
+};
 </script>
 
 <style scoped>
@@ -51,7 +80,7 @@ export default {
   padding: 10px 0;
 }
 .search_dropdown:before {
-  content: '';
+  content: "";
   /* width: 15px; */
   /* height: 25px; */
   background: #fff;
@@ -61,7 +90,7 @@ export default {
   top: -5%;
 }
 .search_dropdown:after {
-  content: '';
+  content: "";
   /* width: 15px; */
   /* height: 25px; */
   background: #fff;

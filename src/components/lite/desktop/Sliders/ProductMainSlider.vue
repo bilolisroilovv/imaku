@@ -48,13 +48,13 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-import 'swiper/css/swiper.css'
-import 'lightgallery.js'
-import 'lightgallery.js/dist/css/lightgallery.css'
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
+import "lightgallery.js";
+import "lightgallery.js/dist/css/lightgallery.css";
 
 export default {
-  name: 'ProductMainSlider',
+  name: "ProductMainSlider",
   components: {
     Swiper,
     SwiperSlide
@@ -64,8 +64,8 @@ export default {
       swiperOptionTop: {
         spaceBetween: 10,
         navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
         }
       },
       swiperOptionThumbs: {
@@ -75,27 +75,27 @@ export default {
         touchRatio: 0.2,
         slideToClickedSlide: true
       }
-    }
+    };
   },
-  props: ['gallery'],
+  props: ["gallery"],
   computed: {
     swiperTop() {
-      return this.$refs.swiperTop.$swiper
+      return this.$refs.swiperTop.$swiper;
     },
     swiperThumbs() {
-      return this.$refs.swiperThumbs.$swiper
+      return this.$refs.swiperThumbs.$swiper;
     }
   },
   mounted() {
-    this.swiperTop.controller.control = this.swiperThumbs
-    this.swiperThumbs.controller.control = this.swiperTop
-    const el = document.getElementById('lightgallery')
+    this.swiperTop.controller.control = this.swiperThumbs;
+    this.swiperThumbs.controller.control = this.swiperTop;
+    const el = document.getElementById("lightgallery");
     window.lightGallery(el, {
       thumbnail: true,
-      selector: '.item'
-    })
+      selector: ".item"
+    });
   }
-}
+};
 </script>
 
 <style lang="scss">

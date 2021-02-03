@@ -9,56 +9,60 @@
                 <ol class="breadcrumb mb-0 p-0">
                   <li class="breadcrumb-item"><a href="/">Главная</a></li>
                   <span class="mx-2 px-1">/</span>
-                  <li class="breadcrumb-item active" aria-current="page">Алексеев Эдуaрд Львович</li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    Алексеев Эдуaрд Львович
+                  </li>
                 </ol>
               </nav>
-
-            </div> <!-- d-flex -->
-
-          </div> <!-- col-md-12 -->
-        </div> <!-- row -->
-
-      </div> <!-- container -->
-    </section> <!-- product_section -->
-    <ShopInfo/>
+            </div>
+            <!-- d-flex -->
+          </div>
+          <!-- col-md-12 -->
+        </div>
+        <!-- row -->
+      </div>
+      <!-- container -->
+    </section>
+    <!-- product_section -->
+    <ShopInfo />
     <div class="container">
       <PostsSection class="pt-0" />
-    </div> <!-- container -->
-
+    </div>
+    <!-- container -->
   </div>
 </template>
 
 <script>
-import ShopInfo from '@/components/lite/desktop/ShopInfo'
-import PostsSection from '@/components/lite/desktop/postsSection/PostsSection'
-import axios from 'axios'
-import { mapGetters } from 'vuex'
+import ShopInfo from "@/components/lite/desktop/ShopInfo";
+import PostsSection from "@/components/lite/desktop/postsSection/PostsSection";
+import axios from "axios";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'ProductPage',
+  name: "ProductPage",
   components: {
     ShopInfo,
     PostsSection
   },
   computed: {
-    ...mapGetters(['currentUser'])
+    ...mapGetters(["currentUser"])
   },
-  data () {
+  data() {
     return {
       avatarImage: "'https://picsum.photos/500?random=1'"
-    }
+    };
   },
-  async mounted () {
-    const response = await axios.get('/shop/' + this.id)
-    this.postData = response.data
+  async mounted() {
+    const response = await axios.get("/shop/" + this.id);
+    this.postData = response.data;
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
 .see_more_btn {
-  background: transparent!important;
-  border: 2px solid var(--main-color)!important;
+  background: transparent !important;
+  border: 2px solid var(--main-color) !important;
   color: var(--main-color);
   font-weight: 500;
   font-size: 14px;
@@ -73,28 +77,28 @@ export default {
 }
 .see_more_btn:hover {
   color: #fff;
-  background: var(--main-color)!important;
+  background: var(--main-color) !important;
 }
 .see_more_btn:hover svg g {
   fill: #fff;
 }
 .breadcrumb {
-  background: transparent!important;
+  background: transparent !important;
   display: flex;
   align-items: center;
 }
 .breadcrumb-item a {
-  color: #555!important;
+  color: #555 !important;
   transition: all 0.2s;
   font-size: 15px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .breadcrumb-item a:hover {
-  color: #000!important;
+  color: #000 !important;
 }
 .breadcrumb-item.active {
-  color: #555!important;
-  font-family: 'Inter', sans-serif;
+  color: #555 !important;
+  font-family: "Inter", sans-serif;
   font-size: 15px;
 }
 .breadcrumb span {

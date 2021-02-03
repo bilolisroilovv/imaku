@@ -12,209 +12,327 @@
                 v-model="select1"
                 placeholder="Выберите"
                 @change="handleSelectCategory"
-                >
-                <vs-select-item :key="index" :value="item.id" :text="item.title" v-for="(item,index) in this.mainCategories" />
+              >
+                <vs-select-item
+                  :key="index"
+                  :value="item.id"
+                  :text="item.title"
+                  v-for="(item, index) in this.mainCategories"
+                />
               </vs-select>
-            </div> <!-- d-flex -->
+            </div>
+            <!-- d-flex -->
 
-            <div class="d-flex align-items-center myinput_group pb-4" v-if="isSubcategoryShow">
+            <div
+              class="d-flex align-items-center myinput_group pb-4"
+              v-if="isSubcategoryShow"
+            >
               <label for="">Подкатегории <span>*</span></label>
               <vs-select
                 class="selectExample"
                 v-model="select2"
                 placeholder="Выберите"
                 @change="handleSelectSubcategory"
-                >
-                <vs-select-item :key="index" :value="item.id" :text="item.title" v-for="(item,index) in this.mainSubcategories" />
+              >
+                <vs-select-item
+                  :key="index"
+                  :value="item.id"
+                  :text="item.title"
+                  v-for="(item, index) in this.mainSubcategories"
+                />
               </vs-select>
-            </div> <!-- d-flex -->
+            </div>
+            <!-- d-flex -->
             <div v-if="isCharactersShow">
-
-              <div class="d-flex align-items-center myinput_group pb-4" v-for="(character, index) in this.characters" :key="character.id">
+              <div
+                class="d-flex align-items-center myinput_group pb-4"
+                v-for="(character, index) in this.characters"
+                :key="character.id"
+              >
                 <label for="">{{ character.title }}</label>
                 <vs-select
                   class="selectExample"
                   placeholder="Выберите"
                   v-model="userCharacters[index].option_id"
                 >
-                <vs-select-item :key="item.id" :value="item.id" :text="item.value" v-for="item in character.options" />
+                  <vs-select-item
+                    :key="item.id"
+                    :value="item.id"
+                    :text="item.value"
+                    v-for="item in character.options"
+                  />
                 </vs-select>
-              </div> <!-- d-flex -->
+              </div>
+              <!-- d-flex -->
 
-                <div class="d-flex align-items-center myinput_group pb-4">
-                  <label for="">Название товара <span>*</span></label>
-                  <input type="text" placeholder="" v-model="name">
-                </div> <!-- d-flex -->
-                <div class="d-flex align-items-center price_input_group myinput_group pb-4">
-                  <label for="">Цена <span>*</span></label>
-                  <input type="tel" v-model="price" v-mask="['#', '##', '###', '####', '# ###', '## ###', '### ###', '#### ###', '# ### ###', '## ### ###', '### ### ###', '#### ### ###', '# ### ### ###', '## ### ### ###', '### ### ### ###', '#### ### ### ###', '# ### ### ### ###', '## ### ### ### ###', '### ### ### ### ###']" placeholder="" class="price_input mr-2 ">
-                  <vs-select
-                    class="selectExample"
-                    v-model="priceTypeSelect"
-                    >
-                    <vs-select-item :key="index" :value="item.text" :text="item.text" v-for="(item,index) in priceType" />
-                  </vs-select>
-                </div> <!-- d-flex -->
-                <div class="d-flex myinput_group pb-4">
-                  <label for="">Описание <span>*</span></label>
-                  <textarea id="" rows="7" v-model="description"></textarea>
-                </div> <!-- d-flex -->
-                <div class="d-flex myinput_group pb-4">
-                  <label for="">Фотографии</label>
-                  <div class="w-100">
-                    <div class="photos_block">
-                      <!-- <vs-upload multiple single-upload="true" :text="'Добавить'" id="files" ref="files" :change="handleFilesUpload" :show-upload-button="false" @on-success="successUpload">
+              <div class="d-flex align-items-center myinput_group pb-4">
+                <label for="">Название товара <span>*</span></label>
+                <input type="text" placeholder="" v-model="name" />
+              </div>
+              <!-- d-flex -->
+              <div
+                class="d-flex align-items-center price_input_group myinput_group pb-4"
+              >
+                <label for="">Цена <span>*</span></label>
+                <input
+                  type="tel"
+                  v-model="price"
+                  v-mask="[
+                    '#',
+                    '##',
+                    '###',
+                    '####',
+                    '# ###',
+                    '## ###',
+                    '### ###',
+                    '#### ###',
+                    '# ### ###',
+                    '## ### ###',
+                    '### ### ###',
+                    '#### ### ###',
+                    '# ### ### ###',
+                    '## ### ### ###',
+                    '### ### ### ###',
+                    '#### ### ### ###',
+                    '# ### ### ### ###',
+                    '## ### ### ### ###',
+                    '### ### ### ### ###'
+                  ]"
+                  placeholder=""
+                  class="price_input mr-2 "
+                />
+                <vs-select class="selectExample" v-model="priceTypeSelect">
+                  <vs-select-item
+                    :key="index"
+                    :value="item.text"
+                    :text="item.text"
+                    v-for="(item, index) in priceType"
+                  />
+                </vs-select>
+              </div>
+              <!-- d-flex -->
+              <div class="d-flex myinput_group pb-4">
+                <label for="">Описание <span>*</span></label>
+                <textarea id="" rows="7" v-model="description"></textarea>
+              </div>
+              <!-- d-flex -->
+              <div class="d-flex myinput_group pb-4">
+                <label for="">Фотографии</label>
+                <div class="w-100">
+                  <div class="photos_block">
+                    <!-- <vs-upload multiple single-upload="true" :text="'Добавить'" id="files" ref="files" :change="handleFilesUpload" :show-upload-button="false" @on-success="successUpload">
                       </vs-upload> -->
-                      <input type="file" id="files" ref="files" multiple @change="handleFilesUpload($event)"/>
-                    </div> <!-- photos_block -->
-                    <p class="photos_p pt-2">
-                      Первое фото будет отображаться в результатах поиска, выберите наиболее удачное. <br>
-                      Вы можете загрузить до 12 фотографий в формате JPG или PNG. <br>
-                      Максимальный размер фото — 25MB.
-                    </p>
+                    <input
+                      type="file"
+                      id="files"
+                      ref="files"
+                      multiple
+                      @change="handleFilesUpload($event)"
+                    />
                   </div>
-                </div> <!-- d-flex -->
-                <div class="d-flex myinput_group pb-4">
-                  <label for="">Местоположение <span>*</span></label>
-                  <div class="w-100">
-                    <div class="map">
-                      <div class="position-relative mb-3">
-                        <input type="text" class="" value="Узбекистан, Ташкент">
-                        <img src="@/assets/lite/search_icon.svg" class="search_icon" alt="">
-                      </div> <!-- position-relative -->
-                      <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Abba8008a5450056cb02076d704d37f7a73e78cb7fb71ec31993b722f7295c93a&amp;source=constructor" width="100%" height="250" frameborder="0"></iframe>
-                    </div> <!-- map -->
+                  <!-- photos_block -->
+                  <p class="photos_p pt-2">
+                    Первое фото будет отображаться в результатах поиска,
+                    выберите наиболее удачное. <br />
+                    Вы можете загрузить до 12 фотографий в формате JPG или PNG.
+                    <br />
+                    Максимальный размер фото — 25MB.
+                  </p>
+                </div>
+              </div>
+              <!-- d-flex -->
+              <div class="d-flex myinput_group pb-4">
+                <label for="">Местоположение <span>*</span></label>
+                <div class="w-100">
+                  <div class="map">
+                    <div class="position-relative mb-3">
+                      <input type="text" class="" value="Узбекистан, Ташкент" />
+                      <img
+                        src="@/assets/lite/search_icon.svg"
+                        class="search_icon"
+                        alt=""
+                      />
+                    </div>
+                    <!-- position-relative -->
+                    <iframe
+                      src="https://yandex.ru/map-widget/v1/?um=constructor%3Abba8008a5450056cb02076d704d37f7a73e78cb7fb71ec31993b722f7295c93a&amp;source=constructor"
+                      width="100%"
+                      height="250"
+                      frameborder="0"
+                    ></iframe>
                   </div>
-                </div> <!-- d-flex -->
-                <div class="d-flex myinput_group pb-4">
-                  <label for="">Телефон <span>*</span></label>
-                  <div class="w-100">
-                    <input type="tel" v-mask="'+998 (##) ###-##-##'" v-model="phone" placeholder="Ваш номер..." required value="+998 (90) 478-21-42">
-                  </div>
-                </div> <!-- d-flex -->
-                <div class="d-flex justify-content-end myinput_group pt-4">
-                  <a href="#"  @click.prevent="handleSubmit" class="mainbtn inter_font text-bold">Опубликовать</a>
-                </div> <!-- d-flex -->
-            </div> <!-- v-if="isCharactersShow" -->
-          </div> <!-- post_add_block -->
-        </div> <!-- col-md-8 -->
+                  <!-- map -->
+                </div>
+              </div>
+              <!-- d-flex -->
+              <div class="d-flex myinput_group pb-4">
+                <label for="">Телефон <span>*</span></label>
+                <div class="w-100">
+                  <input
+                    type="tel"
+                    v-mask="'+998 (##) ###-##-##'"
+                    v-model="phone"
+                    placeholder="Ваш номер..."
+                    required
+                    value="+998 (90) 478-21-42"
+                  />
+                </div>
+              </div>
+              <!-- d-flex -->
+              <div class="d-flex justify-content-end myinput_group pt-4">
+                <a
+                  href="#"
+                  @click.prevent="handleSubmit"
+                  class="mainbtn inter_font text-bold"
+                  >Опубликовать</a
+                >
+              </div>
+              <!-- d-flex -->
+            </div>
+            <!-- v-if="isCharactersShow" -->
+          </div>
+          <!-- post_add_block -->
+        </div>
+        <!-- col-md-8 -->
         <div class="col-md-4">
-          <a href="#" class="right_block mt-4" :style="{'background-image': 'url(' + require('@/assets/lite/post-add-banner.jpg') + ')'}">
-          </a> <!-- ad_block -->
-        </div> <!-- col-md-4 -->
-      </div> <!-- row -->
-    </div> <!-- container -->
+          <a
+            href="#"
+            class="right_block mt-4"
+            :style="{
+              'background-image':
+                'url(' + require('@/assets/lite/post-add-banner.jpg') + ')'
+            }"
+          >
+          </a>
+          <!-- ad_block -->
+        </div>
+        <!-- col-md-4 -->
+      </div>
+      <!-- row -->
+    </div>
+    <!-- container -->
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import axios from 'axios'
+import { mapGetters } from "vuex";
+import axios from "axios";
 export default {
-  name: 'PostAddPage',
-  data () {
+  name: "PostAddPage",
+  data() {
     return {
-      name: '',
+      name: "",
       price: Number,
-      description: '',
+      description: "",
       isSubcategoryShow: false,
       isCharactersShow: false,
-      priceTypeSelect: 'сум',
+      priceTypeSelect: "сум",
       phone: Number,
       files: null,
       characters: [],
       characteristics: [],
-      select1Normal: '',
-      select1: 'Выберите',
-      select2: 'Выберите',
+      select1Normal: "",
+      select1: "Выберите",
+      select2: "Выберите",
       userCharacters: [],
       selectValue: 1,
       mainCategories: [],
       mainSubcategories: [],
       priceType: [
-        { text: 'сум', value: 1 },
-        { text: 'y.e.', value: 2 }
+        { text: "сум", value: 1 },
+        { text: "y.e.", value: 2 }
       ],
       selectedItems: []
-    }
+    };
   },
   methods: {
-    handle (e) {
-      const datas = e.target.value
-      this.selectedItems.push(datas)
-      console.log(this.selectedItems)
+    handle(e) {
+      const datas = e.target.value;
+      this.selectedItems.push(datas);
+      console.log(this.selectedItems);
     },
-    successUpload () {
-      this.$vs.notify({ color: 'success', title: 'Загрузка успешно выполнена', text: 'Загрузка успешно выполнена' })
+    successUpload() {
+      this.$vs.notify({
+        color: "success",
+        title: "Загрузка успешно выполнена",
+        text: "Загрузка успешно выполнена"
+      });
     },
-    checkLogin () {
+    checkLogin() {
       if (!this.currentUser) {
-        this.$router.push('/')
+        this.$router.push("/");
       }
     },
-    async handleSelectCategory () {
-      const response = await axios.get('categories/subcategories/' + this.select1)
-      this.mainSubcategories = response.data
-      this.isSubcategoryShow = true
-      this.isCharactersShow = false
+    async handleSelectCategory() {
+      const response = await axios.get(
+        "categories/subcategories/" + this.select1
+      );
+      this.mainSubcategories = response.data;
+      this.isSubcategoryShow = true;
+      this.isCharactersShow = false;
     },
-    async handleSelectSubcategory () {
-      const response = await axios.get('characters/' + this.select2)
+    async handleSelectSubcategory() {
+      const response = await axios.get("characters/" + this.select2);
       const userKharacters = response.data.map(char => {
         return {
           characterId: char.id,
           option_id: null
-        }
-      })
+        };
+      });
 
-      this.isCharactersShow = true
-      this.characters = response.data
-      this.userCharacters = userKharacters
+      this.isCharactersShow = true;
+      this.characters = response.data;
+      this.userCharacters = userKharacters;
     },
-    handleFilesUpload (event) {
-      this.files = event.target.files
+    handleFilesUpload(event) {
+      this.files = event.target.files;
     },
-    async handleSubmit () {
-      const form = new FormData()
-      form.append('cat_id', this.select1)
-      form.append('subcategory_id', this.select2)
-      form.append('name', this.name)
-      form.append('price', this.price)
-      form.append('price_type', this.priceTypeSelect)
-      form.append('description', this.description)
-      form.append('phone', this.phone)
-      form.append('description', this.description)
+    async handleSubmit() {
+      const form = new FormData();
+      form.append("cat_id", this.select1);
+      form.append("subcategory_id", this.select2);
+      form.append("name", this.name);
+      form.append("price", this.price);
+      form.append("price_type", this.priceTypeSelect);
+      form.append("description", this.description);
+      form.append("phone", this.phone);
+      form.append("description", this.description);
       /* form.append('gallery', this.files) */
       for (var i = 0; i < this.userCharacters.length; i++) {
-        form.append('characters[' + i + '][character_id]', this.userCharacters[i].characterId)
-        form.append('characters[' + i + '][option_id]', this.userCharacters[i].option_id)
+        form.append(
+          "characters[" + i + "][character_id]",
+          this.userCharacters[i].characterId
+        );
+        form.append(
+          "characters[" + i + "][option_id]",
+          this.userCharacters[i].option_id
+        );
       }
       for (let i = 0; i < this.files.length; i++) {
-        const file = this.files[i]
-        console.log(file)
-        form.append('gallery[' + i + ']', file)
+        const file = this.files[i];
+        console.log(file);
+        form.append("gallery[" + i + "]", file);
       }
 
-      const response = await axios.post('posts/store', form, {
+      const response = await axios.post("posts/store", form, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          "Content-Type": "multipart/form-data"
         }
-      })
-      console.log(response)
+      });
+      console.log(response);
     }
   },
   computed: {
-    ...mapGetters(['currentUser'])
+    ...mapGetters(["currentUser"])
   },
-  async mounted () {
-    this.checkLogin()
-    const response = await axios.get('posts/create')
-    this.mainCategories = response.data.categories
-    this.phone = response.data.phone
+  async mounted() {
+    this.checkLogin();
+    const response = await axios.get("posts/create");
+    this.mainCategories = response.data.categories;
+    this.phone = response.data.phone;
   },
-  components: {
-  }
-}
+  components: {}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -227,26 +345,26 @@ export default {
 }
 .map {
   padding: 15px;
-  background: #F8F8FC;
+  background: #f8f8fc;
   width: 100%;
   border-radius: 4px;
   border: none;
 }
 .map input {
-  background: #FFFFFF!important;
-  border-radius: 4px!important;
+  background: #ffffff !important;
+  border-radius: 4px !important;
   width: 100%;
   font-size: 15px;
-  padding: 10px 25px 10px 42px!important;
+  padding: 10px 25px 10px 42px !important;
 }
 .photos_p {
   font-size: 12px;
-  color: #8A8A8A;
+  color: #8a8a8a;
   font-family: "Inter", sans-serif;
 }
 .photos_block {
   padding: 10px 10px 5px 10px;
-  background: #F8F8FC;
+  background: #f8f8fc;
   width: 100%;
   border-radius: 4px;
   border: none;
@@ -277,7 +395,7 @@ export default {
 }
 .myinput_group input {
   min-width: 65%;
-  background: #F8F8FC;
+  background: #f8f8fc;
   border-radius: 4px;
   border: none;
   padding: 10px 20px;
@@ -291,7 +409,7 @@ export default {
 }
 .myinput_group textarea {
   min-width: 68.7%;
-  background: #F8F8FC;
+  background: #f8f8fc;
   border-radius: 4px;
   border: none;
   padding: 20px;
@@ -309,6 +427,6 @@ export default {
   background-position: center;
 }
 .price_input_group .con-select {
-  width: 120px!important;
+  width: 120px !important;
 }
 </style>

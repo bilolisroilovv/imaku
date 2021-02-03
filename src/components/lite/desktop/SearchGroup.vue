@@ -1,77 +1,100 @@
 <template>
-<div class="search_group">
-  <form
-  action=""
-  class="navbar_form position-relative"
-  >
-  <div class="border-radius-100" ref="button" @click="searchDropdownVisible = true">
-    <input type="text" placeholder="Поиск объявлений, магазинов, аккаунтов..." class="navbar_search_input" :class="{'active': searchDropdownVisible}">
-  </div>
-    <img src="@/assets/lite/search_icon.svg" class="search_icon" alt="">
-    <div class="d-flex search_input_icons">
+  <div class="search_group">
+    <form action="" class="navbar_form position-relative">
+      <div
+        class="border-radius-100"
+        ref="button"
+        @click="searchDropdownVisible = true"
+      >
+        <input
+          type="text"
+          placeholder="Поиск объявлений, магазинов, аккаунтов..."
+          class="navbar_search_input"
+          :class="{ active: searchDropdownVisible }"
+        />
+      </div>
+      <img src="@/assets/lite/search_icon.svg" class="search_icon" alt="" />
+      <div class="d-flex search_input_icons">
         <button type="reset" class="input_reset_icon mr-2">
-        <img src="@/assets/lite/cancel.svg" class="img-width" alt="">
+          <img src="@/assets/lite/cancel.svg" class="img-width" alt="" />
         </button>
-        <a href="#" class="header_input_icon" data-toggle="tooltip" data-placement="top"
-        title="Голосовой поиск">
-        <img src="@/assets/lite/microphone.svg" class="img-width" alt="">
-        </a> <!-- header_input_icon -->
-        <a href="#" class="header_input_icon" data-toggle="tooltip" data-placement="top"
-        title="Поиск по фото">
-        <img src="@/assets/lite/camera.svg" class="img-width" alt="">
-        </a> <!-- header_input_icon -->
-    </div> <!-- search_input_icons -->
-    <SearchDropdown
-    v-show="searchDropdownVisible"
-    v-closable="{
-    exclude: ['button'],
-    handler: 'onClose'
-    }"
-    />
-  </form> <!-- navbar_form -->
-  <div class="px-2 pt-2 search_prompts" :class="{'d-none': scrollPosition > 220}">
-    <a href="#" class="myhover_text">Худи</a>
-    <span>|</span>
-    <a href="#" class="myhover_text">Iphone 12</a>
-    <span>|</span>
-    <a href="#" class="myhover_text">Chevrolet Cobalt</a>
-    <span>|</span>
-    <a href="#" class="myhover_text">Ноутбук 8gb</a>
-    <span>|</span>
-    <a href="#" class="myhover_text">Дача Аренда</a>
-  </div> <!-- d-flex -->
-</div> <!-- w-100 -->
+        <a
+          href="#"
+          class="header_input_icon"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Голосовой поиск"
+        >
+          <img src="@/assets/lite/microphone.svg" class="img-width" alt="" />
+        </a>
+        <!-- header_input_icon -->
+        <a
+          href="#"
+          class="header_input_icon"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Поиск по фото"
+        >
+          <img src="@/assets/lite/camera.svg" class="img-width" alt="" />
+        </a>
+        <!-- header_input_icon -->
+      </div>
+      <!-- search_input_icons -->
+      <SearchDropdown
+        v-show="searchDropdownVisible"
+        v-closable="{
+          exclude: ['button'],
+          handler: 'onClose'
+        }"
+      />
+    </form>
+    <!-- navbar_form -->
+    <div
+      class="px-2 pt-2 search_prompts"
+      :class="{ 'd-none': scrollPosition > 220 }"
+    >
+      <a href="#" class="myhover_text">Худи</a>
+      <span>|</span>
+      <a href="#" class="myhover_text">Iphone 12</a>
+      <span>|</span>
+      <a href="#" class="myhover_text">Chevrolet Cobalt</a>
+      <span>|</span>
+      <a href="#" class="myhover_text">Ноутбук 8gb</a>
+      <span>|</span>
+      <a href="#" class="myhover_text">Дача Аренда</a>
+    </div>
+    <!-- d-flex -->
+  </div>
+  <!-- w-100 -->
 </template>
 
 <script>
-import SearchDropdown from '@/components/lite/desktop/SearchDropdown'
+import SearchDropdown from "@/components/lite/desktop/SearchDropdown";
 
 export default {
-  name: 'SearchGroup',
+  name: "SearchGroup",
   components: {
     SearchDropdown
   },
   props: {
     scrollPosition: Number
   },
-  data () {
+  data() {
     return {
       searchDropdownVisible: false
-    }
+    };
   },
   methods: {
-    searchDropdowntoggle () {
-      this.searchDropdownVisible = !this.searchDropdownVisible
+    searchDropdowntoggle() {
+      this.searchDropdownVisible = !this.searchDropdownVisible;
     },
-    onClose () {
-      this.searchDropdownVisible = false
+    onClose() {
+      this.searchDropdownVisible = false;
     }
   },
-  computed: {
-  },
-  events: {
-  }
-}
+  computed: {},
+  events: {}
+};
 </script>
 
 <style scoped>
@@ -91,7 +114,7 @@ export default {
   font-size: 15px;
   color: #505050;
   transition: all 0.2s;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .navbar_search_input:hover {
   background: #e3e3ed;
@@ -155,6 +178,6 @@ export default {
   font-size: 13px;
   padding: 0 12px;
   color: #555555;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 </style>
