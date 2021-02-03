@@ -30,12 +30,12 @@
             </div> <!-- d-flex -->
             <div v-if="isCharactersShow">
 
-              <div class="d-flex align-items-center myinput_group pb-4" v-for="character in this.characters" :key="character.id">
+              <div class="d-flex align-items-center myinput_group pb-4" v-for="(character, index) in this.characters" :key="character.id">
                 <label for="">{{ character.title }}</label>
                 <vs-select
                   class="selectExample"
                   placeholder="Выберите"
-                  v-model="character.select"
+                  v-model="userCharacters[index].option_id"
                 >
                 <vs-select-item :key="item.id" :value="item.id" :text="item.value" v-for="item in character.options" />
                 </vs-select>
@@ -50,9 +50,9 @@
                   <input type="tel" v-model="price" v-mask="['#', '##', '###', '####', '# ###', '## ###', '### ###', '#### ###', '# ### ###', '## ### ###', '### ### ###', '#### ### ###', '# ### ### ###', '## ### ### ###', '### ### ### ###', '#### ### ### ###', '# ### ### ### ###', '## ### ### ### ###', '### ### ### ### ###']" placeholder="" class="price_input mr-2 ">
                   <vs-select
                     class="selectExample"
-                    v-model="select6"
+                    v-model="priceTypeSelect"
                     >
-                    <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in options6" />
+                    <vs-select-item :key="index" :value="item.text" :text="item.text" v-for="(item,index) in priceType" />
                   </vs-select>
                 </div> <!-- d-flex -->
                 <div class="d-flex myinput_group pb-4">
@@ -63,9 +63,11 @@
                   <label for="">Фотографии</label>
                   <div class="w-100">
                     <div class="photos_block">
-                      <vs-upload :single-upload="true" automatic :text="'Добавить'" :show-upload-button="false" action="https://jsonplaceholder.typicode.com/posts/" @on-success="successUpload">
+                      <vs-upload multiple :text="'Добавить'" ref="files" action="https://jsonplaceholder.typicode.com/posts/" :change="handleFilesUpload" :show-upload-button="false" @on-success="successUpload">
                       </vs-upload>
                     </div> <!-- photos_block -->
+
+                    <input type="file" multiple>
                     <p class="photos_p pt-2">
                       Первое фото будет отображаться в результатах поиска, выберите наиболее удачное. <br>
                       Вы можете загрузить до 12 фотографий в формате JPG или PNG. <br>
@@ -88,7 +90,7 @@
                 <div class="d-flex myinput_group pb-4">
                   <label for="">Телефон <span>*</span></label>
                   <div class="w-100">
-                    <input type="tel" v-mask="'+998 (##) ###-##-##'" placeholder="Ваш номер..." required value="+998 (90) 478-21-42">
+                    <input type="tel" v-mask="'+998 (##) ###-##-##'" v-model="phone" placeholder="Ваш номер..." required value="+998 (90) 478-21-42">
                   </div>
                 </div> <!-- d-flex -->
                 <div class="d-flex justify-content-end myinput_group pt-4">
@@ -118,20 +120,19 @@ export default {
       description: '',
       isSubcategoryShow: false,
       isCharactersShow: false,
+      priceTypeSelect: 'сум',
+      phone: Number,
+      files: '',
       characters: [],
       characteristics: [],
-      adImage: "'https://picsum.photos/430/700?random=1'",
       select1Normal: '',
       select1: 'Выберите',
       select2: 'Выберите',
-      select3: 'Выберите',
-      select4: 'Выберите',
-      select5: 'Выберите',
+      userCharacters: [],
       selectValue: 1,
-      select6: 1,
       mainCategories: [],
       mainSubcategories: [],
-      options6: [
+      priceType: [
         { text: 'сум', value: 1 },
         { text: 'y.e.', value: 2 }
       ],
@@ -160,14 +161,46 @@ export default {
     },
     async handleSelectSubcategory () {
       const response = await axios.get('characters/' + this.select2)
-      this.characters = response.data
+      const userKharacters = response.data.map(char => {
+        return {
+          characterId: char.id,
+          option_id: null
+        }
+      })
+
       this.isCharactersShow = true
+      this.characters = response.data
+      this.userCharacters = userKharacters
+    },
+    handleFilesUpload () {
+      this.file = this.$refs.file.files[0]
     },
     handleSubmit () {
-      console.log(this.characters[0].id, this.characters[0].select, this.characters[1].id, this.characters[1].select)
-      console.log(this.name)
-      console.log(this.price)
-      console.log(this.description)
+      console.log(this.userCharacters)
+      const form = new FormData()
+      form.append('cat_id', this.select1)
+      form.append('subcategory_id', this.select2)
+      form.append('subcategory_id', this.select2)
+      form.append('name', this.name)
+      form.append('price', this.price)
+      form.append('price_type', this.priceTypeSelect)
+      form.append('description', this.description)
+      form.append('phone', this.phone)
+      form.append('characters', this.userCharacters)
+      form.append('description', this.description)
+      for (let i = 0; i < this.files.length; i++) {
+        const file = this.files[i]
+        form.append('files[' + i + ']', file)
+      }
+
+      axios.post('posts/store',
+        form
+      ).then(function () {
+        alert('SUCCESS!!')
+      }).catch(function (error) {
+        alert('FAILURE!!')
+        console.log(error)
+      })
     }
   },
   computed: {
@@ -176,7 +209,8 @@ export default {
   async mounted () {
     this.checkLogin()
     const response = await axios.get('posts/create')
-    this.mainCategories = response.data
+    this.mainCategories = response.data.categories
+    this.phone = response.data.phone
   },
   components: {
   }

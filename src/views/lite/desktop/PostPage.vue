@@ -194,7 +194,7 @@
                     v-for="character in postData.characters"
                     :key="character.id"
                     >
-                      <span><b>{{ character.name }}</b></span>
+                      <span><b>{{ character.title }}</b></span>
                       <span>{{ character.value }}</span>
                     </div> <!-- pp -->
                   </div> <!-- product_params -->

@@ -41,7 +41,7 @@ const routes = [
         component: () => import('../views/lite/desktop/ProfilePage.vue')
       },
       {
-        path: 'shop:id',
+        path: 'shop',
         name: 'ShopPage',
         props: true,
         meta: { layout: 'second' },
