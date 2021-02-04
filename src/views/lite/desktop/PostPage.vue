@@ -472,7 +472,6 @@ export default {
   props: {
     id: {},
   },
-
   data() {
     return {
       otherSellerGoodsOption: {
@@ -497,7 +496,7 @@ export default {
     this.getPost();
   },
   watch: {
-    id: function () {
+    id () {
       this.getPost();
     },
   },
