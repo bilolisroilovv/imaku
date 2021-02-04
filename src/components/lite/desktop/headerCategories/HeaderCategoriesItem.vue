@@ -1,6 +1,11 @@
 <template>
   <li class="mymenu_li">
-    <a href="categories.html" class="mymenu_li_a">
+    <router-link
+    :to="{
+      name: 'CategoryPage',
+      params: { id: category.id, slug: category.slug }
+    }"
+    class="mymenu_li_a">
       <div class="d-flex">
         <div class="mymenu_li_a_img">
           <svg
@@ -48,7 +53,7 @@
         {{ category.name }}
       </div>
       <i class="fas fa-angle-right"></i>
-    </a>
+    </router-link>
     <!-- mymenu_li_a -->
 
     <ul class="submenu">
@@ -79,7 +84,14 @@ export default {
   },
   props: {
     category: {
-      type: Object
+      id: {
+        type: Number,
+        default: null
+      },
+      slug: {
+        type: String,
+        default: ""
+      }
     }
   },
   mounted() {}
