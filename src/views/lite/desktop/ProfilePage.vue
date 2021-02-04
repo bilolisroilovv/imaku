@@ -2,19 +2,9 @@
   <div class="w-71">
     <div class="grid-container grid-template-4 grid-gap-10">
       <Card4 />
-      <Card4 />
-      <Card4 />
-      <Card4 />
-      <Card4 />
-      <Card4 />
-      <Card4 />
-      <Card4 />
-      <Card4 />
-      <Card4 />
-      <Card4 />
     </div>
     <!-- grid-container -->
-    <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
+    <!-- <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
       <svg
         width="12"
         height="12"
@@ -46,7 +36,7 @@
         <g></g>
       </svg>
       Показать еще
-    </button>
+    </button> -->
   </div>
 </template>
 

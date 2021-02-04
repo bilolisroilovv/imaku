@@ -148,13 +148,13 @@
                 <div class="pt-2 pb-2 profile_links">
                   <ul class="product_adress_ul">
                     <li>
-                      <router-link to="/profile-posts">
+                      <router-link :to="{ name: 'ProfilePosts' }">
                         <i class="far fa-file"></i>
                         Мои объявления
                       </router-link>
                     </li>
-                    <li active-class="active">
-                      <router-link to="/profile">
+                    <li>
+                      <router-link :to="{ name: 'ProfilePage' }">
                         <i class="far fa-heart"></i>
                         Избранные
                       </router-link>
@@ -253,7 +253,7 @@
 </template>
 
 <script>
-import Header from "@/components/lite/desktop/Header2";
+import Header from "@/components/lite/desktop/Header";
 import { mapGetters } from "vuex";
 
 export default {
@@ -325,18 +325,19 @@ export default {
 .product_adress_ul li a svg path {
   transition: all 0.2s;
 }
-.product_adress_ul li.active a {
+.product_adress_ul li a.active, .product_adress_ul li a.router-link-active {
   background: var(--main-color);
   box-shadow: 0px 6px 10px rgba(255, 144, 41, 0.21);
   color: #fff;
 }
-.product_adress_ul li.active a svg path {
+
+.product_adress_ul li a.active svg path, .product_adress_ul li a.router-link-active svg path {
   stroke: #fff;
 }
-.product_adress_ul li.active a:hover {
+.product_adress_ul li a.active:hover, .product_adress_ul li a.router-link-active:hover {
   color: #fff;
 }
-.product_adress_ul li.active a:hover svg path {
+.product_adress_ul li a.active:hover svg path, .product_adress_ul li a.router-link-active:hover svg path {
   stroke: #fff;
 }
 .product_adress_ul li a:hover {

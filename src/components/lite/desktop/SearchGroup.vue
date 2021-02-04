@@ -52,6 +52,7 @@
     <div
       class="px-2 pt-2 search_prompts"
       :class="{ 'd-none': scrollPosition > 220 }"
+      v-if="$route.path === '/ru/' || $route.path === '/uz/' || $route.path === '/ru' || $route.path === '/uz' || $route.path === '/'"
     >
       <a href="#" class="myhover_text">Худи</a>
       <span>|</span>

@@ -268,14 +268,19 @@
                 >
                 </a>
                 <vs-dropdown-menu class="header_profile_links">
-                  <router-link :to="{ name: 'ProfilePage' }">
+                  <router-link :to="{ name: 'ProfilePosts' }">
                     <vs-dropdown-item class="navbar_top_link">
                       Профиль
                     </vs-dropdown-item>
                   </router-link>
-                  <router-link :to="{ name: 'ProfilePosts' }">
+                  <router-link :to="{ name: 'ProfilePage' }">
                     <vs-dropdown-item class="navbar_top_link">
-                      Мои объявления
+                      Избранные
+                    </vs-dropdown-item>
+                  </router-link>
+                  <router-link :to="{ name: 'ProfileSettings' }">
+                    <vs-dropdown-item class="navbar_top_link">
+                      Настройки
                     </vs-dropdown-item>
                   </router-link>
                   <vs-dropdown-item

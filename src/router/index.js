@@ -66,7 +66,7 @@ const routes = [
       {
         path: "profile-posts",
         name: "ProfilePosts",
-        meta: { layout: "second" },
+        meta: { layout: "profile" },
         component: () => import("../views/lite/desktop/ProfilePosts.vue")
       },
       { path: "*", redirect: "/" }
