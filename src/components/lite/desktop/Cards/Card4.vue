@@ -9,32 +9,18 @@
       >
         <div class="mycard_img mybg_center position-relative d-block">
           <div class="mycard_img_list">
-            <div class="slide_item"></div>
             <div
-              class="mybg_center myimg"
-              :style="{ 'background-image': 'url(' + this.image + ')' }"
-            ></div>
-
-            <div class="slide_item"></div>
-            <!-- slide_item -->
-            <div
-              class="mybg_center myimg"
-              :style="{ 'background-image': 'url(' + this.image2 + ')' }"
-            ></div>
-
-            <div class="slide_item"></div>
-            <!-- slide_item -->
-            <div
-              class="mybg_center myimg"
-              :style="{ 'background-image': 'url(' + this.image3 + ')' }"
-            ></div>
-
-            <div class="slide_item"></div>
-            <!-- slide_item -->
-            <div
-              class="mybg_center myimg"
-              :style="{ 'background-image': 'url(' + this.image4 + ')' }"
-            ></div>
+              class="d-block w-100"
+              v-for="(image, index) in this.post.gallery"
+              :key="index"
+            >
+              <div class="slide_item"></div>
+              <div
+                class="mybg_center myimg"
+                :style="{ 'background-image': 'url(' + image + ')' }"
+              ></div>
+            </div>
+            <!-- d-block -->
           </div>
           <!-- mycard_img_list -->
         </div>
@@ -60,9 +46,9 @@
       title="Диван две кресла PANDA механизмом дельфин ткань туркия"
       class="mycard_title text_ellipsis2 mb-2 pt-2 mt-1 myhover_text"
     >
-      Диван две кресла PANDA механизмом дельфин ткань туркия
+      {{ post.name }}
     </router-link>
-    <h4 class="mycard_price text_ellipsis1">1 050 у.е.</h4>
+    <h4 class="mycard_price text_ellipsis1">{{ post.price }}</h4>
     <!-- mycard_price -->
     <div class="d-flex align-items-center">
       <star-rating

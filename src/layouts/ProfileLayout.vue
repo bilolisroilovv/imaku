@@ -240,7 +240,7 @@
             </div>
             <!-- w-29 -->
 
-            <router-view />
+            <router-view :post="profileData.posts" />
             <!-- w-71 -->
           </div>
           <!-- row -->
@@ -285,7 +285,7 @@ export default {
   async mounted() {
     const response = await axios.get("/profile");
     this.profileData = response.data;
-    console.log(response.data)
+    // console.log(this.profileData.posts)
   }
 };
 </script>

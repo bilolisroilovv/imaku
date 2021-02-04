@@ -1,35 +1,21 @@
 <template>
   <div class="mycard">
     <div class="position-relative">
-      <router-link :to="{ name: 'ProductPage' }">
+      <router-link :to="{ name: 'PostPage', params: { id:post.id, slug: post.slug } }">
         <div class="mycard_img mybg_center position-relative d-block">
           <div class="mycard_img_list">
-            <div class="slide_item"></div>
             <div
-              class="mybg_center myimg"
-              :style="{ 'background-image': 'url(' + this.image + ')' }"
-            ></div>
-
-            <div class="slide_item"></div>
-            <!-- slide_item -->
-            <div
-              class="mybg_center myimg"
-              :style="{ 'background-image': 'url(' + this.image2 + ')' }"
-            ></div>
-
-            <div class="slide_item"></div>
-            <!-- slide_item -->
-            <div
-              class="mybg_center myimg"
-              :style="{ 'background-image': 'url(' + this.image3 + ')' }"
-            ></div>
-
-            <div class="slide_item"></div>
-            <!-- slide_item -->
-            <div
-              class="mybg_center myimg"
-              :style="{ 'background-image': 'url(' + this.image4 + ')' }"
-            ></div>
+              class="d-block w-100"
+              v-for="(image, index) in this.post.gallery"
+              :key="index"
+            >
+              <div class="slide_item"></div>
+              <div
+                class="mybg_center myimg"
+                :style="{ 'background-image': 'url(' + image + ')' }"
+              ></div>
+            </div>
+            <!-- d-block -->
           </div>
           <!-- mycard_img_list -->
         </div>
@@ -41,11 +27,11 @@
       <div class="d-flex justify-content-between">
         <div>
           <router-link
-            :to="{ name: 'ProductPage' }"
+            :to="{ name: 'PostPage', params: { id: post.id, slug: post.slug } }"
             title="Диван две кресла PANDA механизмом дельфин ткань туркия"
             class="mycard_title text_ellipsis1 pt-1 myhover_text"
           >
-            Диван две кресла PANDA механизмом дельфин ткань туркия
+            {{ post.name }}
           </router-link>
           <div class="d-flex align-items-center pt-1">
             <star-rating
@@ -83,16 +69,14 @@
             ></star-rating>
           </div>
         </div>
-        <h4 class="mycard_price pt-2">1 050 y.e.</h4>
+        <h4 class="mycard_price pt-2">{{ post.price }}</h4>
       </div>
       <!-- d-flex -->
       <p class="card_location mb-0 pt-1">
-        С: 12 янв. По: 14 янв. | Ташкент, Ташкентская область, Алмазарский район
+        С: {{ post.createdAt }} | {{ post.location }}
       </p>
       <p class="mycard_text mb-0 mt-1 text_ellipsis2">
-        Беспроводная подставка для быстрой зарядки iOttie Ion ||
-        Сертифицированное Qi зарядное устройство 7,5 Вт В комплекте кабель USB C
-        и адаптер переменного тока.
+        {{ post.desc }}
       </p>
       <!-- mycard_text -->
       <hr class="mt-1" />
@@ -124,7 +108,7 @@
               </svg>
             </div>
             <!-- like_btn_icon -->
-            <div class="like_btn_count">+900</div>
+            <div class="like_btn_count">{{ post.likes }}</div>
             <!-- like_btn_count -->
           </button>
           <!-- like_btn -->
@@ -151,7 +135,7 @@
               </svg>
             </div>
             <!-- dislike_btn_icon -->
-            <div class="dislike_btn_count">-55</div>
+            <div class="dislike_btn_count">{{ post.dislikes }}</div>
             <!-- dislike_btn_count -->
           </button>
           <!-- dislike_btn -->
@@ -161,7 +145,7 @@
               title="Просмотры"
             >
               <i class="far fa-eye mr-1"></i>
-              <span>3486</span>
+              <span>{{ post.views }}</span>
             </div>
             <!-- d-flex -->
           </vs-tooltip>
@@ -171,7 +155,7 @@
               title="Просмотры номера"
             >
               <i class="fas fa-phone-alt mr-1"></i>
-              <span>52</span>
+              <span>{{ post.phoneViews }}</span>
             </div>
             <!-- d-flex -->
           </vs-tooltip>
@@ -181,7 +165,7 @@
               title="Просмотры номера"
             >
               <i class="far fa-heart mr-1"></i>
-              <span>52</span>
+              <span>{{ post.favouritesCount }}</span>
             </div>
             <!-- d-flex -->
           </vs-tooltip>
@@ -191,7 +175,7 @@
               title="Сообщений"
             >
               <i class="far fa-comment-alt mr-1"></i>
-              <span>52</span>
+              <span>{{ post.comment }}</span>
             </div>
             <!-- d-flex -->
           </vs-tooltip>
@@ -225,7 +209,8 @@ export default {
       image3: "'https://picsum.photos/500?random=3'",
       image4: "'https://picsum.photos/500?random=4'"
     };
-  }
+  },
+  props: ["post"]
 };
 </script>
 

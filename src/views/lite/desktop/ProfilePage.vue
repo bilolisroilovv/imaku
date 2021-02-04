@@ -1,7 +1,11 @@
 <template>
   <div class="w-71">
     <div class="grid-container grid-template-4 grid-gap-10">
-      <Card4 />
+      <Card4
+        :post="post"
+        v-for="(post, index) in profileData.posts"
+        :key="index"
+      />
     </div>
     <!-- grid-container -->
     <!-- <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
@@ -42,11 +46,26 @@
 
 <script>
 import Card4 from "@/components/lite/desktop/Cards/Card4";
-
+import axios from "axios";
 export default {
   name: "ProductPage",
+  data() {
+    return {
+      profileData: []
+    };
+  },
   components: {
     Card4
+  },
+  methods: {
+    async getPost() {
+      const response = await axios.get("/profile/favourites");
+      this.profileData = response.data;
+      // console.log(this.profileData.posts);
+    }
+  },
+  mounted() {
+    this.getPost();
   }
 };
 </script>

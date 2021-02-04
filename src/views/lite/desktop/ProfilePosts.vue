@@ -1,8 +1,12 @@
 <template>
   <div class="w-71">
     <div class="row">
-      <div class="col-md-12">
-        <Card5 class="mb-3" />
+      <div
+        class="col-md-12"
+        v-for="(post, index) in profileData.posts"
+        :key="index"
+      >
+        <Card5 class="mb-3" :post="post" />
       </div>
       <!-- col-md-12 -->
     </div>
@@ -46,6 +50,7 @@
 <script>
 import Card5 from "@/components/lite/desktop/Cards/Card5";
 import { mapGetters } from "vuex";
+import axios from "axios";
 
 export default {
   name: "ProfilePosts",
@@ -54,7 +59,8 @@ export default {
   },
   data() {
     return {
-      avatarImage: "'https://picsum.photos/500?random=1'"
+      avatarImage: "'https://picsum.photos/500?random=1'",
+      profileData: []
     };
   },
   methods: {
@@ -67,6 +73,11 @@ export default {
       if (!this.currentUser) {
         this.$router.push("/");
       }
+    },
+    async getPost() {
+      const response = await axios.get("/profile/posts");
+      this.profileData = response.data;
+      console.log(this.profileData.posts);
     }
   },
   computed: {
@@ -75,11 +86,13 @@ export default {
   // mounted() {
   //   this.checkLogin();
   // }
+  mounted() {
+    this.getPost();
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-
 .w-29 {
   width: 29%;
   padding: 0 15px;

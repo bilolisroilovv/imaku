@@ -42,7 +42,8 @@ const routes = [
         path: "profile",
         name: "ProfilePage",
         meta: { layout: "profile" },
-        component: () => import("../views/lite/desktop/ProfilePage.vue")
+        component: () => import("../views/lite/desktop/ProfilePage.vue"),
+        props: true
       },
       {
         path: "shop",
@@ -68,7 +69,8 @@ const routes = [
         path: "profile-posts",
         name: "ProfilePosts",
         meta: { layout: "profile" },
-        component: () => import("../views/lite/desktop/ProfilePosts.vue")
+        component: () => import("../views/lite/desktop/ProfilePosts.vue"),
+        props: true
       },
       { path: "*", redirect: "/" }
     ]
