@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import Header2 from "@/components/lite/desktop/Header2";
+import Header2 from "@/components/lite/desktop/Header";
 
 export default {
   name: "SecondLayout",
