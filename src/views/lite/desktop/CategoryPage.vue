@@ -64,11 +64,11 @@
                     />
                     <div class="d-flex justify-content-between">
                       <div class="position-relative">
-                        <input type="text" max="10000000" v-model="value1[0]" />
+                        <input type="text" max="10000000" @change="changePrice()" v-model="value1[0]" />
                         <span>От</span>
                       </div>
                       <div class="position-relative ml-3">
-                        <input type="text" max="10000000" v-model="value1[1]" />
+                        <input type="text" max="10000000" @change="changePrice()" v-model="value1[1]" />
                         <span>До</span>
                       </div>
                     </div>
@@ -247,7 +247,12 @@ export default {
     const response = await axios.get("categories/" + this.id);
     this.catData = response.data;
     console.log(this.catData);
-  }
+  },
+  methods: {
+    async changePrice () {
+      await axios.get("categories/" + this.id, this.value1)
+    }
+  },
 };
 </script>
 
