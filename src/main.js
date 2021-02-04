@@ -11,6 +11,8 @@ import vSelect from "vue-select";
 import Vuesax from "vuesax";
 import InputMask from "vue-input-mask";
 import i18n from "./i18n";
+import VueFileAgent from 'vue-file-agent';
+import VueFileAgentStyles from 'vue-file-agent/dist/vue-file-agent.css';
 import "./axios";
 import "vuesax/dist/vuesax.css";
 import "material-icons/iconfont/material-icons.css";
@@ -19,6 +21,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "./registerServiceWorker";
 
+Vue.use(VueFileAgent);
+Vue.use(VueFileAgentStyles);
 Vue.component("input-mask", InputMask);
 Vue.use(Vuesax);
 Vue.component("v-select", vSelect);

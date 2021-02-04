@@ -96,10 +96,10 @@
                     '#### ### ### ###',
                     '# ### ### ### ###',
                     '## ### ### ### ###',
-                    '### ### ### ### ###'
+                    '### ### ### ### ###',
                   ]"
                   placeholder=""
-                  class="price_input mr-2 "
+                  class="price_input mr-2"
                 />
                 <vs-select class="selectExample" v-model="priceTypeSelect">
                   <vs-select-item
@@ -120,8 +120,8 @@
                 <label for="">Фотографии</label>
                 <div class="w-100">
                   <div class="photos_block">
-                    <!-- <vs-upload multiple single-upload="true" :text="'Добавить'" id="files" ref="files" :change="handleFilesUpload" :show-upload-button="false" @on-success="successUpload">
-                      </vs-upload> -->
+                    <!-- <vs-upload :text="'Добавить'" id="files" ref="files" @change="handleFilesUpload($event)" :show-upload-button="false" @on-success="successUpload">
+                    </vs-upload> -->
                     <input
                       type="file"
                       id="files"
@@ -129,6 +129,21 @@
                       multiple
                       @change="handleFilesUpload($event)"
                     />
+                    <!-- <VueFileAgent
+                      ref="files"
+                      @change="handleFilesUpload($event)"
+                      :theme="'default'"
+                      :multiple="true"
+                      :deletable="true"
+                      :meta="true"
+                      :maxSize="'10MB'"
+                      :maxFiles="14"
+                      :helpText="'Choose images or zip files'"
+                      :errorText="{
+                        type: 'Invalid file type. Only images or zip Allowed',
+                        size: 'Files should not exceed 10MB in size',
+                      }"
+                    ></VueFileAgent> -->
                   </div>
                   <!-- photos_block -->
                   <p class="photos_p pt-2">
@@ -182,7 +197,7 @@
               <div class="d-flex justify-content-end myinput_group pt-4">
                 <a
                   href="#"
-                  @click.prevent="handleSubmit"
+                  @click.prevent="handleSubmit()"
                   class="mainbtn inter_font text-bold"
                   >Опубликовать</a
                 >
@@ -200,7 +215,7 @@
             class="right_block mt-4"
             :style="{
               'background-image':
-                'url(' + require('@/assets/lite/post-add-banner.jpg') + ')'
+                'url(' + require('@/assets/lite/post-add-banner.jpg') + ')',
             }"
           >
           </a>
@@ -240,9 +255,9 @@ export default {
       mainSubcategories: [],
       priceType: [
         { text: "сум", value: 1 },
-        { text: "y.e.", value: 2 }
+        { text: "y.e.", value: 2 },
       ],
-      selectedItems: []
+      selectedItems: [],
     };
   },
   methods: {
@@ -255,7 +270,7 @@ export default {
       this.$vs.notify({
         color: "success",
         title: "Загрузка успешно выполнена",
-        text: "Загрузка успешно выполнена"
+        text: "Загрузка успешно выполнена",
       });
     },
     checkLogin() {
@@ -273,10 +288,10 @@ export default {
     },
     async handleSelectSubcategory() {
       const response = await axios.get("characters/" + this.select2);
-      const userKharacters = response.data.map(char => {
+      const userKharacters = response.data.map((char) => {
         return {
           characterId: char.id,
-          option_id: null
+          option_id: null,
         };
       });
 
@@ -314,16 +329,15 @@ export default {
         form.append("gallery[" + i + "]", file);
       }
 
-      const response = await axios.post("posts/store", form, {
+      await axios.post("posts/store", form, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
       });
-      console.log(response);
     }
   },
   computed: {
-    ...mapGetters(["currentUser"])
+    ...mapGetters(["currentUser"]),
   },
   async mounted() {
     this.checkLogin();
@@ -332,7 +346,7 @@ export default {
     this.phone = response.data.phone;
   },
   components: {}
-};
+}
 </script>
 
 <style lang="scss" scoped>

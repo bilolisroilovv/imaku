@@ -350,7 +350,7 @@
                         :key="character.id"
                       >
                         <span
-                          ><b>{{ character.name }}</b></span
+                          ><b>{{ character.title }}</b></span
                         >
                         <span>{{ character.value }}</span>
                       </div>
