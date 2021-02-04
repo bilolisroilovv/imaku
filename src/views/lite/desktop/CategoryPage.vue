@@ -250,7 +250,11 @@ export default {
   },
   methods: {
     async changePrice () {
-      await axios.get("categories/" + this.id, this.value1)
+      const form = new FormData();
+      form.append('params[from]', this.value1[0])
+      form.append('params[to]', this.value1[1])
+      const response = await axios.post("categories/" + this.id, form)
+      this.catData = response.data
     }
   },
 };
