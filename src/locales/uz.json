@@ -4,5 +4,18 @@
   "contact-support": "Yordam",
   "chat": "Xabarlar",
   "favourites": "Saralangan e‘lonlar",
-  "faq": "Faq"
+  "faq": "Faq",
+  "profile": {
+    "posts": "Mening e'lonlarim",
+    "favorite": "Sevimlilar",
+    "chat": "Xabarlar",
+    "settings": "Sozlash",
+    "logout": "Chiqish",
+    "created_at": "Ro'yxatga olingan sana",
+    "post_count": "E'lonlar soni",
+    "post_followers": "Obunachilar",
+    "post_subscriptions": "Obunalarim",
+    "my_socials": "Mening ijtimoiy tarmoqlarim",
+    "home": "Bosh sahifa"
+  }
 }

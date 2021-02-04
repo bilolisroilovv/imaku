@@ -29,10 +29,10 @@
               <div class="d-flex align-items-center mb-2">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb mb-0 p-0">
-                    <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                    <li class="breadcrumb-item"><a href="/">{{ $t('profile.home') }}</a></li>
                     <span class="mx-2 px-1">/</span>
                     <li class="breadcrumb-item active" aria-current="page">
-                      Исроилов Билол
+                      {{ profileData.name }}
                     </li>
                   </ol>
                 </nav>
@@ -75,7 +75,7 @@
                     <div
                       class="product_sidebar_date text-center justify-content-center d-flex align-items-center"
                     >
-                      <span class="mr-2 mt-1">Дата регистрации:</span>
+                      <span class="mr-2 mt-1">{{ $t('profile.created_at') }}:</span>
                       <h6 class="">{{ profileData.createdAt }}</h6>
                     </div>
                     <!-- product_sidebar_date -->
@@ -128,17 +128,17 @@
                 >
                   <button class="seller_info_box">
                     <span>{{ profileData.postsCount }}</span>
-                    <h6>Объявлении</h6>
+                    <h6>{{ $t('profile.post_count') }}</h6>
                   </button>
                   <!-- seller_info_box -->
                   <button class="seller_info_box">
                     <span>859</span>
-                    <h6>Подписчики</h6>
+                    <h6>{{ $t('profile.post_followers') }}</h6>
                   </button>
                   <!-- seller_info_box -->
                   <button class="seller_info_box">
                     <span>84</span>
-                    <h6>Подписки</h6>
+                    <h6>{{ $t('profile.post_subscriptions') }}</h6>
                   </button>
                   <!-- seller_info_box -->
                 </div>
@@ -150,19 +150,19 @@
                     <li>
                       <router-link :to="{ name: 'ProfilePosts' }">
                         <i class="far fa-file"></i>
-                        Мои объявления
+                        {{ $t("profile.posts") }}
                       </router-link>
                     </li>
                     <li>
                       <router-link :to="{ name: 'ProfilePage' }">
                         <i class="far fa-heart"></i>
-                        Избранные
+                        {{ $t("profile.favorite") }}
                       </router-link>
                     </li>
                     <li>
                       <router-link to="/chatting">
                         <i class="far fa-comment-dots"></i>
-                        Сообщения
+                        {{ $t("profile.chat") }}
                       </router-link>
                     </li>
                     <li>
@@ -170,13 +170,13 @@
                         to="/profile-settings"
                       >
                         <i class="far fa-edit"></i>
-                        Настройки
+                        {{ $t("profile.settings") }}
                       </router-link>
                     </li>
                     <li>
                       <a href="" @click.prevent="handleLogout">
                         <i class="fas fa-sign-out-alt"></i>
-                        Выход
+                        {{ $t("profile.logout") }}
                       </a>
                     </li>
                   </ul>
@@ -192,7 +192,7 @@
                   <div
                     class="product_sidebar_socials d-flex align-items-center"
                   >
-                    <span class="pt-1 mr-2">Мои Соцсети:</span>
+                    <span class="pt-1 mr-2">{{ $t('profile.my_socials') }}:</span>
                     <div class="d-flex pt-1">
                       <a href="#" target="_blank">
                         <img

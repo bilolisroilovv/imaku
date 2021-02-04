@@ -76,7 +76,7 @@
           <!-- d-flex -->
           <div class="d-flex justify-content-between align-items-center">
             <a href="#" class="navbar_top_link bg">
-               {{ $t("mobile-app") }}
+              {{ $t("mobile-app") }}
             </a>
             <!-- navbar_top_link -->
             <vs-dropdown class="header_lang_link">

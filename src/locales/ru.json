@@ -4,5 +4,18 @@
   "contact-support": "Обратиться в поддержку",
   "chat": "Сообщения",
   "favourites": "Избранные",
-  "faq": "Частые вопросы"
+  "faq": "Частые вопросы",
+  "profile": {
+    "posts": "Мои объявления",
+    "favorite": "Избранные",
+    "chat": "Сообщения",
+    "settings": "Настройки",
+    "logout": "Выход",
+    "created_at": "Дата регистрации",
+    "post_count": "Объявлении",
+    "post_followers": "Подписчики",
+    "post_subscriptions": "Подписки",
+    "my_socials": "Мои Соцсети",
+    "home": "Главная"
+  }
 }
