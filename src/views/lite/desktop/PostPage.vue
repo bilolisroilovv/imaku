@@ -60,7 +60,7 @@
           <div class="col-md-4">
             <div class="bg-white product_sidebar">
               <div
-                class="d-flex justify-content-between align-items-center pb-2 "
+                class="d-flex justify-content-between align-items-center pb-2"
               >
                 <h2 class="product_price">{{ postData.price }}</h2>
 
@@ -99,7 +99,7 @@
                     46,
                     19,
                     31,
-                    17
+                    17,
                   ]"
                   :star-size="20"
                   inactive-color="transparent"
@@ -205,7 +205,7 @@
                   target="_blank"
                   class="product_seller_img mybg_center mr-3"
                   :style="{
-                    'background-image': 'url(' + postData.author.avatar + ')'
+                    'background-image': 'url(' + postData.author.avatar + ')',
                   }"
                 ></a>
                 <!-- product_cusomer_img -->
@@ -328,7 +328,7 @@
 
       <div class="py-4">
         <div class="container">
-          <div class="row ">
+          <div class="row">
             <div class="col-md-12">
               <div class="bg-white product_bottom_info">
                 <h3 class="pb-3">Описание</h3>
@@ -427,9 +427,7 @@
 
     <section class="section pt-0">
       <div class="container">
-        <h2 class="section_title pb-4">
-          Похожие объявления
-        </h2>
+        <h2 class="section_title pb-4">Похожие объявления</h2>
         <!-- section_title -->
         <PostsSlider :posts="postData.similarAds" />
       </div>
@@ -438,9 +436,7 @@
 
     <section class="section">
       <div class="container">
-        <h2 class="section_title pb-4">
-          Специально для вас
-        </h2>
+        <h2 class="section_title pb-4">Специально для вас</h2>
         <!-- section_title -->
         <PostsSection :posts="postData.posts" />
       </div>
@@ -471,9 +467,12 @@ export default {
     PostsSection,
     Swiper,
     SwiperSlide,
-    Card3
+    Card3,
   },
-  props: ["id"],
+  props: {
+    id: {},
+  },
+
   data() {
     return {
       otherSellerGoodsOption: {
@@ -481,8 +480,8 @@ export default {
         slidesPerView: 3,
         navigation: {
           nextEl: ".other_seller_goods_slider_next",
-          prevEl: ".other_seller_goods_slider_prev"
-        }
+          prevEl: ".other_seller_goods_slider_prev",
+        },
       },
       likesCount: null,
       disLikesCount: null,
@@ -491,19 +490,16 @@ export default {
       isFavorited: false,
       postData: [],
       gallery: [],
-      authorPosts: []
+      authorPosts: [],
     };
   },
   async mounted() {
-    const response = await axios.get("posts/" + this.id);
-    this.postData = response.data;
-    this.likesCount = response.data.likes;
-    this.disLikesCount = response.data.dislikes;
-    this.isLiked = response.data.isLiked;
-    this.isDisliked = response.data.isDisliked;
-    this.isFavorited = response.data.favorite;
-    this.gallery = response.data.gallery;
-    this.authorPosts = response.data.author.posts;
+    this.getPost();
+  },
+  watch: {
+    id: function () {
+      this.getPost();
+    },
   },
   methods: {
     async handleLike() {
@@ -542,8 +538,21 @@ export default {
       const response = await axios.get("favorite/" + this.postData.id);
       console.log(response);
       this.isFavorited = !this.isFavorited;
-    }
-  }
+    },
+
+    async getPost() {
+      const response = await axios.get("posts/" + this.id);
+
+      this.postData = response.data;
+      this.likesCount = response.data.likes;
+      this.disLikesCount = response.data.dislikes;
+      this.isLiked = response.data.isLiked;
+      this.isDisliked = response.data.isDisliked;
+      this.isFavorited = response.data.favorite;
+      this.gallery = response.data.gallery;
+      this.authorPosts = response.data.author.posts;
+    },
+  },
 };
 </script>
 
