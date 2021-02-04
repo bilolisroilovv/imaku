@@ -41,7 +41,7 @@ const routes = [
       {
         path: "profile",
         name: "ProfilePage",
-        meta: { layout: "second" },
+        meta: { layout: "profile" },
         component: () => import("../views/lite/desktop/ProfilePage.vue")
       },
       {

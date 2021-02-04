@@ -10,6 +10,7 @@
 import MainLayout from "@/layouts/MainLayout";
 import SecondLayout from "@/layouts/SecondLayout";
 import EmptyLayout from "@/layouts/EmptyLayout";
+import ProfileLayout from '@/layouts/ProfileLayout.vue';
 /* import axios from 'axios' */
 /* import {mapGetters} from 'vuex' */
 
@@ -26,7 +27,8 @@ export default {
   components: {
     MainLayout,
     SecondLayout,
-    EmptyLayout
+    EmptyLayout,
+    ProfileLayout
   },
   async created() {
     this.$store.dispatch("fetchCategories");
