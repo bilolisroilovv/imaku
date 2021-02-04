@@ -1,7 +1,12 @@
 <template>
   <div class="mycard">
     <div class="position-relative">
-      <router-link :to="{ name: 'ProductPage' }" target="_blank">
+      <router-link
+        :to="{
+          name: 'PostPage',
+          params: { id: this.post.id, slug: this.post.slug }
+        }"
+      >
         <div class="mycard_img mybg_center position-relative d-block">
           <div class="mycard_img_list">
             <div class="slide_item"></div>
@@ -47,7 +52,10 @@
     <!-- position-relative -->
 
     <router-link
-      :to="{ name: 'ProductPage' }"
+      :to="{
+        name: 'PostPage',
+        params: { id: this.post.id, slug: this.post.slug }
+      }"
       target="_blank"
       title="Диван две кресла PANDA механизмом дельфин ткань туркия"
       class="mycard_title text_ellipsis2 mb-2 pt-2 mt-1 myhover_text"
@@ -184,6 +192,18 @@ export default {
       image3: "'https://picsum.photos/500?random=3'",
       image4: "'https://picsum.photos/500?random=4'"
     };
+  },
+  props: {
+    post: {
+      id: {
+        type: Number,
+        default: null
+      },
+      slug: {
+        type: String,
+        default: ""
+      }
+    }
   }
 };
 </script>

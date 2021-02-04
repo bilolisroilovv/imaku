@@ -25,7 +25,7 @@ const routes = [
         component: HomePage
       },
       {
-        path: "posts/:id-:slug",
+        path: "posts/:slug:id",
         name: "PostPage",
         meta: { layout: "second" },
         props: true,
@@ -58,8 +58,9 @@ const routes = [
         component: () => import("../views/lite/desktop/PostAddPage.vue")
       },
       {
-        path: "category",
+        path: "category/:id:slug",
         name: "CategoryPage",
+        props: true,
         meta: { layout: "second" },
         component: () => import("../views/lite/desktop/CategoryPage.vue")
       },

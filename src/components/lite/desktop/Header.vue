@@ -69,14 +69,14 @@
                   fill="black"
                 />
               </svg>
-              {{ $t("message") }}
+              {{ $t("city") }}
             </a>
             <!-- navbar_top_link -->
           </div>
           <!-- d-flex -->
           <div class="d-flex justify-content-between align-items-center">
             <a href="#" class="navbar_top_link bg">
-              Мобильное приложение
+              {{ $t("mobile-app") }}
             </a>
             <!-- navbar_top_link -->
             <vs-dropdown class="header_lang_link">
@@ -106,19 +106,19 @@
               :to="`${$i18n.locale}/product`"
               class="navbar_top_link"
             >
-              Обратиться в поддержку
+              {{ $t("contact-support") }}
             </router-link>
             <!-- navbar_top_link -->
             <a href="#" class="navbar_top_link">
-              Сообщения
+              {{ $t("chat") }}
             </a>
             <!-- navbar_top_link -->
             <a href="#" class="navbar_top_link">
-              Избранные
+              {{ $t("favourites") }}
             </a>
             <!-- navbar_top_link -->
             <a href="#" class="navbar_top_link pr-0">
-              Частые вопросы
+              {{ $t("faq") }}
             </a>
             <!-- navbar_top_link -->
           </div>

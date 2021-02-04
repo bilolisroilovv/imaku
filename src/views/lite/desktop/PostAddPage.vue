@@ -334,6 +334,7 @@ export default {
           "Content-Type": "multipart/form-data"
         }
       });
+      this.$router.push('/')
     }
   },
   computed: {

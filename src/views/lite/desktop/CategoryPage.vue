@@ -28,26 +28,22 @@
     <section class="category_section">
       <div class="container">
         <h2 class="section_title pb-4">
-          Смартфоны и телефоны <span>102 200 результатов</span>
+          {{ catData.category.title }} <span>{{ catData.postsCount }} результатов</span>
         </h2>
         <div class="row">
           <div class="w-26 pr-0">
             <div class="category_sidebar bg-white">
               <div class="category_sidebar_categories">
-                <a href="#" class="title">Смартфоны и телефоны</a>
+                <a href="#" class="title">{{ catData.category.title }}</a>
                 <div class="ml-3 pt-1 cateogires_links">
-                  <a href="#">Гарнитуры и наушники</a>
-                  <a href="#">Смартфоны</a>
-                  <a href="#">Держатели</a>
-                  <a href="#">Планшеты</a>
-                  <a href="#">Моноподы и штативы</a>
-                  <a href="#">Кабели и адаптеры</a>
-                  <a href="#">Стан</a>
-                  <a href="#">Моноподы и штативы</a>
-                  <a href="#">Планшеты</a>
-                  <a href="#">Стекла и пленки</a>
-                  <a href="#">Чехлы</a>
-                  <a href="#">Чехлы-аккумуляторы</a>
+                  <router-link
+                  v-for="subcategorie in catData.category.subcategories"
+                  :key="subcategorie.id"
+                  :to="{
+                    name: 'CategoryPage',
+                    params: { id: subcategorie.id, slug: subcategorie.slug }
+                  }"
+                  >{{ subcategorie.title }}</router-link>
                 </div>
               </div>
               <!-- category_sidebar_categories -->
@@ -173,32 +169,9 @@
             </div>
 
             <div class="grid-container grid-template-4 grid-gap-10">
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
+              <CardBase
+              v-for="post in catData.posts" :key="post.id" :post="post"
+              />
             </div>
             <!-- grid-container -->
             <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
@@ -245,15 +218,18 @@
 </template>
 
 <script>
-import Card4 from "@/components/lite/desktop/Cards/Card4";
+import CardBase from "@/components/lite/desktop/Cards/CardBase";
+import axios from 'axios'
 
 export default {
   name: "CategoryPage",
   components: {
-    Card4
+    CardBase
   },
+  props: ["id"],
   data() {
     return {
+      catData: [],
       select1Normal: "",
       select1: 1,
       value1: [500000, 2000000],
@@ -266,6 +242,11 @@ export default {
         { text: "Высокий рейтинг", value: 5 }
       ]
     };
+  },
+  async mounted() {
+    const response = await axios.get("categories/" + this.id);
+    this.catData = response.data;
+    console.log(this.catData);
   }
 };
 </script>
