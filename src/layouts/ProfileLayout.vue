@@ -59,7 +59,7 @@
                     target="_blank"
                     class="product_seller_img mybg_center"
                     :style="{
-                      'background-image': 'url(' + this.avatarImage + ')'
+                      'background-image': 'url(' + profileData.avatar + ')'
                     }"
                   ></a>
                   <!-- product_cusomer_img -->
@@ -69,14 +69,14 @@
                       target="_blank"
                       class="product_seller_name d-block text_ellipsis1 mt-3"
                     >
-                      Исроилов Билол
+                      {{ profileData.name }}
                     </h3>
                     <!-- product_seller_name -->
                     <div
                       class="product_sidebar_date text-center justify-content-center d-flex align-items-center"
                     >
                       <span class="mr-2 mt-1">Дата регистрации:</span>
-                      <h6 class="">13.02.2020</h6>
+                      <h6 class="">{{ profileData.createdAt }}</h6>
                     </div>
                     <!-- product_sidebar_date -->
                   </div>
@@ -127,7 +127,7 @@
                   class="seller_info d-flex justify-content-between mb-3 mt-4"
                 >
                   <button class="seller_info_box">
-                    <span>52</span>
+                    <span>{{ profileData.postsCount }}</span>
                     <h6>Объявлении</h6>
                   </button>
                   <!-- seller_info_box -->
@@ -255,7 +255,7 @@
 <script>
 import Header from "@/components/lite/desktop/Header";
 import { mapGetters } from "vuex";
-
+import axios from 'axios';
 export default {
   name: "ProfileLayout",
   components: {
@@ -263,7 +263,8 @@ export default {
   },
   data() {
     return {
-      avatarImage: "'https://picsum.photos/500?random=1'"
+      avatarImage: "'https://picsum.photos/500?random=1'",
+      profileData: []
     };
   },
   methods: {
@@ -280,6 +281,11 @@ export default {
   },
   computed: {
     ...mapGetters(["currentUser"])
+  },
+  async mounted() {
+    const response = await axios.get("/profile");
+    this.profileData = response.data;
+    console.log(response.data)
   }
 };
 </script>
