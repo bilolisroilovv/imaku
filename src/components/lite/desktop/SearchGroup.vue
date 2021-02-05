@@ -152,6 +152,7 @@ export default {
       e.preventDefault();
       /* Update input and icon CSS to show that the browser is listening */
       $searchInput.attr("placeholder", "Говорите...");
+      $searchInput.attr("placeholder", "Говорите...");
       $voiceTrigger.addClass("active");
       /* Start voice recognition */
       recognition.start();
@@ -183,6 +184,9 @@ export default {
 </script>
 
 <style scoped>
+#voice-trigger.active {
+  background: rgb(248, 154, 154);
+}
 .border-radius-100 {
   border-radius: 100px;
 }
