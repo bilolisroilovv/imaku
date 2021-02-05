@@ -99,6 +99,13 @@ const routes = [
         component: () => import("../views/lite/desktop/ProfileShops.vue"),
         props: true
       },
+      {
+        path: "chat",
+        name: "Chat",
+        meta: { layout: "profile" },
+        component: () => import("../views/lite/desktop/Chat.vue"),
+        props: true
+      },
       { path: "*", redirect: "/" }
     ]
   }
