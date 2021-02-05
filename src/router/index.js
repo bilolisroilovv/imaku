@@ -85,6 +85,13 @@ const routes = [
         component: () => import("../views/lite/desktop/ProfileSettings.vue"),
         props: true
       },
+      {
+        path: "profile-shops",
+        name: "ProfileShops",
+        meta: { layout: "profile" },
+        component: () => import("../views/lite/desktop/ProfileShops.vue"),
+        props: true
+      },
       { path: "*", redirect: "/" }
     ]
   }

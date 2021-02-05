@@ -161,7 +161,7 @@
                 </div>
               </div>
               <!-- d-flex -->
-              <div class="d-flex myinput_group pb-4">
+              <!-- <div class="d-flex myinput_group pb-4">
                 <label for="">Местоположение <span>*</span></label>
                 <div class="w-100">
                   <div class="map">
@@ -173,7 +173,6 @@
                         alt=""
                       />
                     </div>
-                    <!-- position-relative -->
                     <iframe
                       src="https://yandex.ru/map-widget/v1/?um=constructor%3Abba8008a5450056cb02076d704d37f7a73e78cb7fb71ec31993b722f7295c93a&amp;source=constructor"
                       width="100%"
@@ -181,8 +180,11 @@
                       frameborder="0"
                     ></iframe>
                   </div>
-                  <!-- map -->
                 </div>
+              </div> -->
+              <div class="d-flex myinput_group pb-4">
+                <label for="">Местоположение <span>*</span></label>
+                <textarea id="" rows="7" v-model="description"></textarea>
               </div>
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">

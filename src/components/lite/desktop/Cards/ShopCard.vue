@@ -7,11 +7,8 @@
 export default {
   name: 'ShopCard',
   props: {
-    shop: {
-      type: Number,
-      default: 
-    },
-  },
+    shop: {}
+  }
 }
 </script>
 
@@ -20,5 +17,6 @@ export default {
   width: 100%;
   height: 300px;
   border-radius: 5px;
+  background: red;
 }
 </style>

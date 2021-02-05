@@ -56,13 +56,13 @@
                     <h5>Цена</h5>
                   </div>
                   <div class="price_filter">
-                    <vs-slider
+                    <!-- <vs-slider
                       class="w-100"
                       @focusout="changePrice()"
                       max="10000000"
                       :color="colorx"
                       v-model="value1"
-                    />
+                    /> -->
                     <div class="d-flex justify-content-between">
                       <div class="position-relative">
                         <input type="text" max="10000000" @change="changePrice()" v-model="value1[0]" />

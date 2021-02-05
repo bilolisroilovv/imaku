@@ -1,6 +1,6 @@
 <template>
   <div class="search_group">
-    <form action="" class="navbar_form position-relative">
+    <form action="" @submit.prevent="handleSubmit" class="navbar_form position-relative">
       <div
         class="border-radius-100"
         ref="button"
@@ -10,6 +10,7 @@
           type="text"
           placeholder="Поиск объявлений, магазинов, аккаунтов..."
           class="navbar_search_input"
+          v-model="searchContent"
           :class="{ active: searchDropdownVisible }"
         />
       </div>
@@ -40,13 +41,13 @@
         <!-- header_input_icon -->
       </div>
       <!-- search_input_icons -->
-      <SearchDropdown
+      <!-- <SearchDropdown
         v-show="searchDropdownVisible"
         v-closable="{
           exclude: ['button'],
           handler: 'onClose'
         }"
-      />
+      /> -->
     </form>
     <!-- navbar_form -->
     <div
@@ -70,19 +71,20 @@
 </template>
 
 <script>
-import SearchDropdown from "@/components/lite/desktop/SearchDropdown";
-
+/* import SearchDropdown from "@/components/lite/desktop/SearchDropdown"; */
+import axios from 'axios'
 export default {
   name: "SearchGroup",
   components: {
-    SearchDropdown
+    /* SearchDropdown */
   },
   props: {
     scrollPosition: Number
   },
   data() {
     return {
-      searchDropdownVisible: false
+      searchDropdownVisible: false,
+      searchContent: null
     };
   },
   methods: {
@@ -91,6 +93,10 @@ export default {
     },
     onClose() {
       this.searchDropdownVisible = false;
+    },
+    handleSubmit () {
+      axios.get('search?query=' + this.searchContent)
+      router.push({ name: 'CategoryPage', params: { userId: '123' } })
     }
   },
   computed: {},
@@ -120,13 +126,13 @@ export default {
 .navbar_search_input:hover {
   background: #e3e3ed;
 }
-.navbar_search_input:focus {
+/* .navbar_search_input:focus {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   background: #fff;
   border-top-left-radius: 27px;
   border-top-right-radius: 27px;
-}
+} */
 .search_icon {
   position: absolute;
   top: 50%;
