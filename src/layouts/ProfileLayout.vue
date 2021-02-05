@@ -159,6 +159,14 @@
                       </router-link>
                     </li>
                     <li>
+                      <router-link
+                        :to="{ name: 'ProfileShops' }"
+                      >
+                        <i class="fas fa-store"></i>
+                        {{ $t("profile.shops") }}
+                      </router-link>
+                    </li>
+                    <li>
                       <router-link to="/chatting">
                         <i class="far fa-comment-dots"></i>
                         {{ $t("profile.chat") }}

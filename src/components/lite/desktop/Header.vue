@@ -308,10 +308,10 @@
 </template>
 
 <script>
-import SearchGroup from "@/components/lite/desktop/SearchGroup";
-import HeaderCategoriesDropdown from "@/components/lite/desktop/headerCategories/HeaderCategoriesDropdown";
-import AuthModal from "@/components/lite/desktop/Modals/AuthModal";
-import { mapGetters } from "vuex";
+import SearchGroup from "@/components/lite/desktop/SearchGroup"
+import HeaderCategoriesDropdown from "@/components/lite/desktop/headerCategories/HeaderCategoriesDropdown"
+import AuthModal from "@/components/lite/desktop/Modals/AuthModal"
+import { mapGetters } from "vuex"
 
 export default {
   name: "Header",
