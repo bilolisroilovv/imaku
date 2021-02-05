@@ -96,7 +96,7 @@ export default {
     },
     handleSubmit () {
       axios.get('search?query=' + this.searchContent)
-      router.push({ name: 'CategoryPage', params: { userId: '123' } })
+      this.$router.push({ name: 'CategoryPage', params: { userId: '123' } })
     }
   },
   computed: {},
