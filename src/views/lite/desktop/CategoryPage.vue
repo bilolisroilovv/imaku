@@ -1,30 +1,5 @@
 <template>
   <div>
-    <section class="product_section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="d-flex align-items-center mb-3">
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 p-0">
-                  <li class="breadcrumb-item"><a href="/">Главная</a></li>
-                  <span class="mx-2 px-1">/</span>
-                  <li class="breadcrumb-item active" aria-current="page">
-                    Смартфоны и телефоны
-                  </li>
-                </ol>
-              </nav>
-            </div>
-            <!-- d-flex -->
-          </div>
-          <!-- col-md-12 -->
-        </div>
-        <!-- row -->
-      </div>
-      <!-- container -->
-    </section>
-    <!-- product_section -->
-
     <section class="category_section">
       <div class="container">
         <h2 class="section_title pb-4">
@@ -235,7 +210,7 @@ export default {
       catData: [],
       select1Normal: "",
       select1: 1,
-      value1: [500000, 2000000],
+      value1: [0, 999999999],
       colorx: "var(--main-color)",
       options1: [
         { text: "Популярные", value: 1 },

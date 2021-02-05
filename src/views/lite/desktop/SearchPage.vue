@@ -6,7 +6,6 @@
           {{ searchData.query }}
           <span>{{ searchData.count }} результатов</span>
         </h2>
-        <div class="row">
           <div class="w-100 position-relative">
             <div class="mb-3 d-flex">
               <vs-select
@@ -69,7 +68,6 @@
             </button> -->
           </div>
           <!-- w-74 -->
-        </div>
         <!-- row -->
       </div>
       <!-- container -->

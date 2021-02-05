@@ -7,7 +7,16 @@
 export default {
   name: 'ShopCard',
   props: {
-    shop: {}
+    shop: {
+      id: {
+        type: Number,
+        default: null
+      },
+      slug: {
+        type: String,
+        default: ""
+      }
+    }
   }
 }
 </script>

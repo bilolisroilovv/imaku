@@ -15,7 +15,7 @@
               </a>
               <!-- back_btn -->
 
-              <nav aria-label="breadcrumb">
+              <!-- <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                   <li class="breadcrumb-item">
                     <router-link to="/">Главная</router-link>
@@ -39,7 +39,7 @@
                     Mercedes Benz E-53
                   </li>
                 </ol>
-              </nav>
+              </nav> -->
             </div>
             <!-- d-flex -->
             <h2 class="section_title">
@@ -231,8 +231,8 @@
                   >
                   <!-- product_seller_name -->
                   <span>({{ postData.author.postsCount }} объявлений)</span>
-                  <button class="d-block mt-1 subscribe_btn" data-show="true">
-                    Подписаться
+                  <button class="d-block mt-1 subscribe_btn" @click.prevent="toggleSub" data-show="true">
+                    {{ subText }}
                   </button>
                 </div>
                 <!-- seller_text -->
@@ -241,11 +241,11 @@
 
               <div class="product_btns mt-4">
                 <a
-                  href="#"
                   class="show_number_btn mb-2 d-block w-100 text-center"
+                  @click.prevent="toggleView"
                 >
                   <img src="@/assets/lite/show_number_icon.png" alt="" />
-                  Показать номер
+                  {{ text }}
                 </a>
                 <!-- show_number_btn -->
                 <a
@@ -265,12 +265,12 @@
                 <p class="mb-2">
                   Г. Ташкент, Яккасарайский район, улица Таффакур, дом 15
                 </p>
-                <iframe
+                <!-- <iframe
                   src="https://yandex.ru/map-widget/v1/?um=constructor%3A82c9b4a2e8ccf86a57718e06a3d4ec2a03aee27235dcf51300db4b6fdc836b89&amp;source=constructor"
                   width="100%"
                   height="123"
                   frameborder="0"
-                ></iframe>
+                ></iframe> -->
               </div>
               <!-- product_adress -->
 
@@ -487,6 +487,10 @@ export default {
   },
   data() {
     return {
+      expanded: false,
+      text: "Показать номер",
+      subExpanded: false,
+      subText: "Подписаться",
       otherSellerGoodsOption: {
         spaceBetween: 15,
         slidesPerView: 3,
@@ -515,6 +519,23 @@ export default {
     },
   },
   methods: {
+    async toggleView() {
+      this.expanded = !this.expanded;
+      const response = await axios.post("author/" + this.postData.author.id);
+      if (this.expanded) {
+         this.text = response.data;
+      } else {
+         this.text = "Показать номер";
+      }
+   },
+  toggleSub() {
+      this.subExpanded = !this.subExpanded;
+      if (this.subExpanded) {
+         this.subText = "Отписаться";
+      } else {
+         this.subText = "Подписаться";
+      }
+   },
     async handleLike() {
       this.isLiked = !this.isLiked;
       if (this.isLiked === true) {
@@ -631,6 +652,7 @@ export default {
   background: #2b2c2e;
 }
 .show_number_btn {
+  cursor: pointer!important;
 }
 .product_btns a img {
   position: relative;

@@ -55,26 +55,7 @@
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">
                 <label for="">Местоположение <span>*</span></label>
-                <div class="w-100">
-                  <div class="map">
-                    <div class="position-relative mb-3">
-                      <input type="text" class="" value="Узбекистан, Ташкент" />
-                      <img
-                        src="@/assets/lite/search_icon.svg"
-                        class="search_icon"
-                        alt=""
-                      />
-                    </div>
-                    <!-- position-relative -->
-                    <iframe
-                      src="https://yandex.ru/map-widget/v1/?um=constructor%3Abba8008a5450056cb02076d704d37f7a73e78cb7fb71ec31993b722f7295c93a&amp;source=constructor"
-                      width="100%"
-                      height="250"
-                      frameborder="0"
-                    ></iframe>
-                  </div>
-                  <!-- map -->
-                </div>
+                <textarea id="" rows="7" v-model="location"></textarea>
               </div>
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">
@@ -134,9 +115,10 @@ export default {
     return {
       name: "",
       description: "",
+      location: "",
       phone: Number,
       files: null,
-      colorLoading: "var(--main-color)",
+      colorLoading: "var(--main-color)"
     };
   },
   methods: {
@@ -144,7 +126,7 @@ export default {
       this.$vs.notify({
         color: "success",
         title: "Загрузка успешно выполнена",
-        text: "Загрузка успешно выполнена",
+        text: "Загрузка успешно выполнена"
       });
     },
     checkLogin() {
@@ -159,11 +141,12 @@ export default {
       this.$vs.loading({
         container: ".post_add_block",
         scale: 0.8,
-        color: this.colorLoading,
+        color: this.colorLoading
       });
       const form = new FormData();
       form.append("name", this.name);
       form.append("description", this.description);
+      form.append("location", this.location);
       form.append("phone", this.phone);
       for (let i = 0; i < this.files.length; i++) {
         const file = this.files[i];
@@ -172,7 +155,7 @@ export default {
       }
 
       await axios
-        .post("posts/store", form, {
+        .post("shops/store", form, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

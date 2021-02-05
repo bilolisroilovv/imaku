@@ -213,7 +213,16 @@ export default {
         default: ""
       }
     }
-  }
+  },
+  methods: {
+    ToggleFavorite() {
+      this.$vs.notify({
+        color: "success",
+        title: "Успех",
+        text: "Объявлено успешно размещена",
+      });
+    }
+  },
 };
 </script>
 

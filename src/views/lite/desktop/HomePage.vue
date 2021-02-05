@@ -54,7 +54,7 @@ import HeaderCategoriesSlider from "@/components/lite/desktop/Sliders/HeaderCate
 import SelectionSection from "@/components/lite/desktop/SelectionSection/SelectionSection";
 import PostsSection from "@/components/lite/desktop/postsSection/PostsSection";
 import PostsSlider from "@/components/lite/desktop/Sliders/PostsSlider";
-import { mapGetters } from "vuex";
+import { mapGetters } from "vuex"; 
 import axios from "axios";
 
 export default {

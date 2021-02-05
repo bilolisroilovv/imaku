@@ -1,6 +1,31 @@
 <template>
   <div class="search_group">
-    <form action="" @submit.prevent="handleSubmit" class="navbar_form position-relative">
+    <form
+      id="search"
+      role="search"
+      method="get"
+      class="search-form"
+      action="http://blog.vamshop.ru/"
+    >
+      <label>
+        <span class="screen-reader-text">Найти:</span>
+        <input
+          id="search-field"
+          type="search"
+          class="search-field"
+          placeholder="Поиск"
+          value=""
+          name="s"
+        />
+      </label>
+      <input type="submit" class="search-submit" value="Поиск" />
+    </form>
+    <span id="voice-trigger">Голосовой поиск</span>
+    <form
+      action=""
+      @submit.prevent="handleSubmit"
+      class="navbar_form position-relative"
+    >
       <div
         class="border-radius-100"
         ref="button"
@@ -73,18 +98,19 @@
 <script>
 /* import SearchDropdown from "@/components/lite/desktop/SearchDropdown"; */
 /* import axios from 'axios' */
+import $ from "jquery";
 export default {
   name: "SearchGroup",
   components: {
     /* SearchDropdown */
   },
   props: {
-    scrollPosition: Number
+    scrollPosition: Number,
   },
   data() {
     return {
       searchDropdownVisible: false,
-      searchContent: null
+      searchContent: null,
     };
   },
   methods: {
@@ -94,13 +120,88 @@ export default {
     onClose() {
       this.searchDropdownVisible = false;
     },
-    handleSubmit () {
+    handleSubmit() {
       /* axios.get('search?query=' + this.searchContent) */
-      this.$router.push({ name: 'SearchPage', params: { query: this.searchContent } })
-    }
+      this.$router.push({
+        name: "SearchPage",
+        params: { query: this.searchContent },
+      });
+    },
   },
   computed: {},
-  events: {}
+  events: {},
+  mounted() {
+    //Voice Search
+    /* setup vars for our trigger, form, text input and result elements */
+    var $voiceTrigger = $("#voice-trigger");
+    var $searchForm = $("#search");
+    var $searchInput = $("#search-field");
+
+    
+    window.SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+    /* Check if browser support Web Speech API, remove the voice trigger if not supported */
+    if (window.SpeechRecognition) {
+      /* setup Speech Recognition */
+      var recognition = new SpeechRecognition(); // eslint-disable-line
+       
+      recognition.interimResults = true;
+      recognition.lang = "ru-RU";
+      recognition.addEventListener("result", _transcriptHandler);
+
+      recognition.onerror = function (event) {
+        console.log(event.error);
+
+        /* Revert input and icon CSS if no speech is detected */
+        if (event.error == "no-speech") {
+          $voiceTrigger.removeClass("active");
+          $searchInput.attr("placeholder", "Поиск...");
+        }
+      };
+    } else {
+      $voiceTrigger.remove();
+    }
+
+    /*  set Web Speech API for Chrome or Firefox */
+   
+
+    $(document).ready(function () {
+      /* Trigger listen event when our trigger is clicked */
+      $voiceTrigger.on("click touch", listenStart);
+    });
+
+    /* Our listen event */
+    function listenStart(e) {
+      e.preventDefault();
+      /* Update input and icon CSS to show that the browser is listening */
+      $searchInput.attr("placeholder", "Говорите...");
+      $voiceTrigger.addClass("active");
+      /* Start voice recognition */
+      recognition.start();
+    }
+
+    /* Parse voice input */
+    function _parseTranscript(e) {
+      return Array.from(e.results)
+        .map(function (result) {
+          return result[0];
+        })
+        .map(function (result) {
+          return result.transcript;
+        })
+        .join("");
+    }
+
+    /* Convert our voice input into text and submit the form */
+    function _transcriptHandler(e) {
+      var speechOutput = _parseTranscript(e);
+      $searchInput.val(speechOutput);
+      //$result.html(speechOutput);
+      if (e.results[0].isFinal) {
+        $searchForm.submit();
+      }
+    }
+  },
 };
 </script>
 

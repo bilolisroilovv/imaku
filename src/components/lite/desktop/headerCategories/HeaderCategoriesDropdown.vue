@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="mymenu"  @click="clickHide">
+    <ul class="mymenu">
       <HeaderCategoriesItem
         v-for="category in allCategories"
         :key="category.id"
