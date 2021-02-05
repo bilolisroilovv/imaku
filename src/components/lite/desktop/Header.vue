@@ -467,7 +467,7 @@ export default {
 }
 .mynavbar {
   width: 100%;
-  padding: 0 0 35px 0;
+  padding: 0 0 15px 0;
   background: transparent;
   position: absolute;
   top: 20px;
@@ -635,7 +635,7 @@ export default {
 }
 .mynavbar_inner {
   height: 10px;
-  margin-bottom: 160px;
+  margin-bottom: 130px;
   /* background: linear-gradient(to right, #ffb88c, #de6262 ); */
 }
 .mygradient {

@@ -50,7 +50,7 @@
       /> -->
     </form>
     <!-- navbar_form -->
-    <div
+    <!-- <div
       class="px-2 pt-2 search_prompts"
       :class="{ 'd-none': scrollPosition > 220 }"
       v-if="$route.path === '/ru/' || $route.path === '/uz/' || $route.path === '/ru' || $route.path === '/uz' || $route.path === '/'"
@@ -64,7 +64,7 @@
       <a href="#" class="myhover_text">Ноутбук 8gb</a>
       <span>|</span>
       <a href="#" class="myhover_text">Дача Аренда</a>
-    </div>
+    </div> -->
     <!-- d-flex -->
   </div>
   <!-- w-100 -->
@@ -72,7 +72,7 @@
 
 <script>
 /* import SearchDropdown from "@/components/lite/desktop/SearchDropdown"; */
-import axios from 'axios'
+/* import axios from 'axios' */
 export default {
   name: "SearchGroup",
   components: {
@@ -95,8 +95,8 @@ export default {
       this.searchDropdownVisible = false;
     },
     handleSubmit () {
-      axios.get('search?query=' + this.searchContent)
-      this.$router.push({ name: 'CategoryPage', params: { userId: '123' } })
+      /* axios.get('search?query=' + this.searchContent) */
+      this.$router.push({ name: 'SearchPage', params: { query: this.searchContent } })
     }
   },
   computed: {},

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="mymenu">
+    <ul class="mymenu"  @click="clickHide">
       <HeaderCategoriesItem
         v-for="category in allCategories"
         :key="category.id"
@@ -31,6 +31,8 @@ export default {
   },
   computed: {
     ...mapGetters(["allCategories"])
+  },
+  methods: {
   },
   async mounted() {}
 };

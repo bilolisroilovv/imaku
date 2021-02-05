@@ -72,6 +72,13 @@ const routes = [
         component: () => import("../views/lite/desktop/CategoryPage.vue")
       },
       {
+        path: "search/:query",
+        name: "SearchPage",
+        props: true,
+        meta: { layout: "second" },
+        component: () => import("../views/lite/desktop/SearchPage.vue")
+      },
+      {
         path: "profile-posts",
         name: "ProfilePosts",
         meta: { layout: "profile" },
