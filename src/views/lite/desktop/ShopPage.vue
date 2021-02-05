@@ -49,12 +49,37 @@ export default {
   },
   data() {
     return {
-      avatarImage: "'https://picsum.photos/500?random=1'"
+      avatarImage: "'https://picsum.photos/500?random=1'",
+      shopData: []
     };
+  },
+  props: {
+    id: {},
+  },
+  watch: {
+    id() {
+      this.getShop();
+    },
   },
   async mounted() {
     const response = await axios.get("/shop/" + this.id);
     this.postData = response.data;
+    this.getShop();
+  },
+  methods: {
+    async getShop() {
+      this.$vs.loading({
+        container: "",
+        scale: 0.8,
+        color: this.colorLoading,
+      });
+
+      const response = await axios
+        .get("shop/" + this.id)
+        .finally(() => this.$vs.loading.close(".con-vs-loading"));
+
+      this.shopData = response.data;
+    }
   }
 };
 </script>

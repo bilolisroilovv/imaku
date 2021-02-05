@@ -58,6 +58,7 @@
                   <div class="price_filter">
                     <vs-slider
                       class="w-100"
+                      @focusout="changePrice()"
                       max="10000000"
                       :color="colorx"
                       v-model="value1"
@@ -153,7 +154,7 @@
           </div>
           <!-- w-26 -->
 
-          <div class="w-74">
+          <div class="w-74 position-relative">
             <div class="mb-3 d-flex">
               <vs-select
                 class="selectExample category_select"
@@ -168,13 +169,13 @@
               </vs-select>
             </div>
 
-            <div class="grid-container grid-template-4 grid-gap-10">
+            <div class="grid-container loading_div grid-template-4 grid-gap-10">
               <CardBase
               v-for="post in catData.posts" :key="post.id" :post="post"
               />
             </div>
-            <!-- grid-container -->
-            <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
+
+           <!--  <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
               <svg
                 width="12"
                 height="12"
@@ -206,7 +207,7 @@
                 <g></g>
               </svg>
               Показать еще
-            </button>
+            </button> -->
           </div>
           <!-- w-74 -->
         </div>
@@ -226,7 +227,9 @@ export default {
   components: {
     CardBase
   },
-  props: ["id"],
+  props: {
+    id: {}
+  },
   data() {
     return {
       catData: [],
@@ -240,27 +243,58 @@ export default {
         { text: "Сначала дешевые", value: 3 },
         { text: "Сначала дорогие", value: 4 },
         { text: "Высокий рейтинг", value: 5 }
-      ]
+      ],
+      colorLoading: "var(--main-color)"
     };
   },
-  async mounted() {
-    const response = await axios.get("categories/" + this.id);
-    this.catData = response.data;
-    console.log(this.catData);
+  watch: {
+    id () {
+      this.getCategory();
+    },
+  },
+  mounted() {
+    this.getCategory();
   },
   methods: {
     async changePrice () {
+      this.catData.posts = null
+      this.$vs.loading({
+        container: ".loading_div",
+        scale: 0.8,
+        color: this.colorLoading
+      });
       const form = new FormData();
       form.append('params[from]', this.value1[0])
       form.append('params[to]', this.value1[1])
-      const response = await axios.post("categories/" + this.id, form)
+      const response = await axios
+      .post("categories/" + this.id, form)
+      .finally(() =>
+        this.$vs.loading.close(".loading_div > .con-vs-loading")
+      );
       this.catData = response.data
+    },
+    async getCategory() {
+      this.$vs.loading({
+        container: "",
+        scale: 0.8,
+        color: this.colorLoading
+      });
+      const response = await axios
+      .get("categories/" + this.id)
+      .finally(() =>
+        this.$vs.loading.close(".con-vs-loading")
+      );
+      this.catData = response.data;
     }
-  },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+.loading_div {
+  max-height: 100%;
+  max-width: 100%;
+}
 .control {
   font-weight: 500;
   font-family: "Inter", sans-serif;

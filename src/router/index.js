@@ -25,14 +25,14 @@ const routes = [
         component: HomePage
       },
       {
-        path: "posts/:slug:id",
+        path: "posts/:id:slug",
         name: "PostPage",
         meta: { layout: "second" },
         props: true,
         component: () => import("../views/lite/desktop/PostPage.vue")
       },
       {
-        path: "seller:id",
+        path: "seller/:id:name",
         name: "SellerPage",
         meta: { layout: "second" },
         props: true,
@@ -46,17 +46,23 @@ const routes = [
         props: true
       },
       {
-        path: "shop",
+        path: "shop:id:slug",
         name: "ShopPage",
         props: true,
         meta: { layout: "second" },
         component: () => import("../views/lite/desktop/ShopPage.vue")
       },
       {
-        path: "post-add",
-        name: "PostAddPage",
+        path: "post-create",
+        name: "PostCreatePage",
         meta: { layout: "second" },
-        component: () => import("../views/lite/desktop/PostAddPage.vue")
+        component: () => import("../views/lite/desktop/PostCreatePage.vue")
+      },
+      {
+        path: "shop-create",
+        name: "ShopCreatePage",
+        meta: { layout: "second" },
+        component: () => import("../views/lite/desktop/ShopCreatePage.vue")
       },
       {
         path: "category/:id:slug",
@@ -70,6 +76,13 @@ const routes = [
         name: "ProfilePosts",
         meta: { layout: "profile" },
         component: () => import("../views/lite/desktop/ProfilePosts.vue"),
+        props: true
+      },
+      {
+        path: "profile-settings",
+        name: "ProfileSettings",
+        meta: { layout: "profile" },
+        component: () => import("../views/lite/desktop/ProfileSettings.vue"),
         props: true
       },
       { path: "*", redirect: "/" }

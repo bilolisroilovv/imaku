@@ -38,14 +38,13 @@
             <div class="bg-white product_sidebar seller_sidebar">
               <!-- mycard_btns -->
               <div class="product_seller d-flex align-items-center ">
-                <a
-                  href="seller.html"
+                <div
                   target="_blank"
                   class="product_seller_img mybg_center mr-3"
                   :style="{
                     'background-image': 'url(' + this.avatarImage + ')'
                   }"
-                ></a>
+                ></div>
                 <!-- product_cusomer_img -->
                 <div class="seller_text">
                   <h3
@@ -53,12 +52,12 @@
                     target="_blank"
                     class="product_seller_name d-block text_ellipsis1"
                   >
-                    Алексеев Эдуaрд Львович
+                    {{ this.sellerData.name }}
                   </h3>
                   <!-- product_seller_name -->
                   <div class="product_sidebar_date">
                     <span class="mt- d-block">Дата регистрации:</span>
-                    <h6 class="mt-1">13.02.2020</h6>
+                    <h6 class="mt-1">{{ this.sellerData.createdAt }}</h6>
                   </div>
                   <!-- product_sidebar_date -->
                 </div>
@@ -108,7 +107,7 @@
 
               <div class="seller_info d-flex justify-content-between my-3">
                 <button class="seller_info_box">
-                  <span>52</span>
+                  <span>{{ this.sellerData.postsCount }}</span>
                   <h6>Объявлении</h6>
                 </button>
                 <!-- seller_info_box -->
@@ -159,7 +158,7 @@
                 ></iframe>
               </div>
               <!-- product_adress -->
-
+<!-- 
               <hr />
               <div class="py-3">
                 <div class="mb-1">
@@ -172,7 +171,7 @@
                     Сообщить о нарушении
                   </a>
                 </div>
-              </div>
+              </div> -->
 
               <hr />
 
@@ -230,17 +229,11 @@
 
           <div class="col-md-8 pl-0">
             <div class="grid-container grid-template-4 grid-gap-10">
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
-              <Card4 />
+              <Card4
+                v-for="(post, index) in this.sellerData.posts"
+                :key="index"
+                :post="post"
+              />
             </div>
             <!-- grid-container -->
             <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
@@ -296,14 +289,18 @@ export default {
   components: {
     Card4
   },
+  props: {
+    id: {}
+  },
   data() {
     return {
+      sellerData: [],
       avatarImage: "'https://picsum.photos/500?random=1'"
     };
   },
   async mounted() {
     const response = await axios.get("/seller/" + this.id);
-    this.postData = response.data;
+    this.sellerData = response.data;
   }
 };
 </script>

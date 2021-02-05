@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="product_section">
-      <div class="container">
+      <div class="container loading_div">
         <div class="row">
           <div class="col-md-12">
             <div class="d-flex align-items-center mb-3">
@@ -200,22 +200,34 @@
 
               <!-- mycard_btns -->
               <div class="product_seller d-flex align-items-center mt-4">
-                <a
-                  href="seller.html"
+                <router-link
+                  :to="{
+                    name: 'SellerPage',
+                    params: {
+                      id: this.postData.author.id,
+                      name: this.postData.author.name,
+                    },
+                  }"
                   target="_blank"
                   class="product_seller_img mybg_center mr-3"
                   :style="{
                     'background-image': 'url(' + postData.author.avatar + ')',
                   }"
-                ></a>
+                ></router-link>
                 <!-- product_cusomer_img -->
                 <div class="seller_text">
-                  <a
-                    href="seller.html"
+                  <router-link
+                    :to="{
+                      name: 'SellerPage',
+                      params: {
+                        id: this.postData.author.id,
+                        name: this.postData.author.name,
+                      },
+                    }"
                     title="Алексеев Эдуaрд Львович"
                     target="_blank"
                     class="product_seller_name d-block text_ellipsis1 myhover_text"
-                    >{{ postData.author.name }}</a
+                    >{{ postData.author.name }}</router-link
                   >
                   <!-- product_seller_name -->
                   <span>({{ postData.author.postsCount }} объявлений)</span>
@@ -428,6 +440,7 @@
     <section class="section pt-0">
       <div class="container">
         <h2 class="section_title pb-4">Похожие объявления</h2>
+        <h5 v-if="!postData.similarAds">К сожалению похожих объявлений нет (</h5>
         <!-- section_title -->
         <PostsSlider :posts="postData.similarAds" />
       </div>
@@ -490,13 +503,14 @@ export default {
       postData: [],
       gallery: [],
       authorPosts: [],
+      colorLoading: "var(--main-color)",
     };
   },
   async mounted() {
     this.getPost();
   },
   watch: {
-    id () {
+    id() {
       this.getPost();
     },
   },
@@ -540,7 +554,15 @@ export default {
     },
 
     async getPost() {
-      const response = await axios.get("posts/" + this.id);
+      this.$vs.loading({
+        container: "",
+        scale: 0.8,
+        color: this.colorLoading,
+      });
+
+      const response = await axios
+        .get("posts/" + this.id)
+        .finally(() => this.$vs.loading.close(".con-vs-loading"));
 
       this.postData = response.data;
       this.likesCount = response.data.likes;
@@ -801,7 +823,6 @@ export default {
 }
 .product_favourite:hover {
 }
-
 .product_favourite .mycard_favorite {
   position: inherit;
 }

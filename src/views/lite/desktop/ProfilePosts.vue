@@ -1,12 +1,13 @@
 <template>
   <div class="w-71">
-    <div class="row">
-      <div
-        class="col-md-12"
-        v-for="(post, index) in profileData.posts"
-        :key="index"
-      >
-        <Card5 class="mb-3" :post="post" />
+    <div class="row position-relative">
+      <div class="col-md-12">
+        <Card5
+          v-for="(post, index) in profileData.posts"
+          :key="index"
+          class="mb-3"
+          :post="post"
+        />
       </div>
       <!-- col-md-12 -->
     </div>
@@ -55,12 +56,13 @@ import axios from "axios";
 export default {
   name: "ProfilePosts",
   components: {
-    Card5
+    Card5,
   },
   data() {
     return {
       avatarImage: "'https://picsum.photos/500?random=1'",
-      profileData: []
+      profileData: [],
+      colorLoading: "var(--main-color)"
     };
   },
   methods: {
@@ -75,24 +77,39 @@ export default {
       }
     },
     async getPost() {
-      const response = await axios.get("/profile/posts");
+      this.$vs.loading({
+        container: "",
+        scale: 0.8,
+        color: this.colorLoading
+      });
+      const response = await axios
+      .get("/profile/posts")
+      .finally(() =>
+        setTimeout( ()=> {
+          this.$vs.loading.close(".con-vs-loading")
+        }, 10)
+      );
       this.profileData = response.data;
       console.log(this.profileData.posts);
-    }
+    },
   },
   computed: {
-    ...mapGetters(["currentUser"])
+    ...mapGetters(["currentUser"]),
   },
   // mounted() {
   //   this.checkLogin();
   // }
   mounted() {
     this.getPost();
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+.loading_div {
+  max-height: 100%;
+  max-width: 100%;
+}
 .w-29 {
   width: 29%;
   padding: 0 15px;

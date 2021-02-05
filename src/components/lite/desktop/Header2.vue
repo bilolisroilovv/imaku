@@ -175,15 +175,15 @@
           <!-- d-flex -->
           <div>
             <div class="d-flex align-items-center" v-if="!currentUser">
-              <a
-                href="#"
+              <router-link
+                :to="{ name: 'ShopCreatePage' }"
                 class="create_store_btn d-flex align-items-center mr-2"
               >
                 Создать магазин
-              </a>
+              </router-link>
               <!-- mainbtn -->
               <router-link
-                :to="{ name: 'PostAddPage' }"
+                :to="{ name: 'PostCreatePage' }"
                 class="mainbtn create_ad_btn d-flex align-items-center mr-2"
               >
                 Подать объявление
@@ -247,15 +247,15 @@
             </div>
 
             <div class="d-flex align-items-center" v-if="currentUser">
-              <a
-                href="#"
-                class="create_store_btn d-flex align-items-center mr-3"
+              <router-link
+                :to="{ name: 'ShopCreatePage' }"
+                class="create_store_btn d-flex align-items-center mr-2"
               >
                 Создать магазин
-              </a>
+              </router-link>
               <!-- mainbtn -->
               <router-link
-                :to="{ name: 'PostAddPage' }"
+                :to="{ name: 'PostCreatePage' }"
                 class="mainbtn create_ad_btn d-flex align-items-center mr-2"
               >
                 Подать объявление

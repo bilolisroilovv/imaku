@@ -54,14 +54,13 @@
               <div class="bg-white product_sidebar seller_sidebar">
                 <!-- mycard_btns -->
                 <div class="product_seller">
-                  <a
-                    href="seller.html"
+                  <div
                     target="_blank"
                     class="product_seller_img mybg_center"
                     :style="{
                       'background-image': 'url(' + profileData.avatar + ')'
                     }"
-                  ></a>
+                  ></div>
                   <!-- product_cusomer_img -->
                   <div class="seller_text text-center">
                     <h3
@@ -167,7 +166,7 @@
                     </li>
                     <li>
                       <router-link
-                        to="/profile-settings"
+                        :to="{ name: 'ProfileSettings' }"
                       >
                         <i class="far fa-edit"></i>
                         {{ $t("profile.settings") }}
@@ -451,7 +450,7 @@ export default {
   color: #000;
 }
 .product_sidebar {
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 30px 30px 20px 30px;
 }
 .seller_info_box {

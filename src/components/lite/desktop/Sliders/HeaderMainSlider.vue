@@ -7,7 +7,10 @@
         :key="item.id"
       >
         <router-link
-          :to="{ name: 'CategoryPage' }"
+          :to="{
+            name: 'CategoryPage',
+            params: { id: item.id, slug: item.slug }
+          }"
           class="mybg_center d-block h-100 w-100"
           :style="{ 'background-image': 'url(' + item.image + ')' }"
         >
