@@ -1,28 +1,8 @@
 <template>
   <div class="search_group">
     <form
-      id="search"
-      role="search"
-      method="get"
-      class="search-form"
-      action="http://blog.vamshop.ru/"
-    >
-      <label>
-        <span class="screen-reader-text">Найти:</span>
-        <input
-          id="search-field"
-          type="search"
-          class="search-field"
-          placeholder="Поиск"
-          value=""
-          name="s"
-        />
-      </label>
-      <input type="submit" class="search-submit" value="Поиск" />
-    </form>
-    <span id="voice-trigger">Голосовой поиск</span>
-    <form
       action=""
+      id="search"
       @submit.prevent="handleSubmit"
       class="navbar_form position-relative"
     >
@@ -33,6 +13,7 @@
       >
         <input
           type="text"
+          id="search-field"
           placeholder="Поиск объявлений, магазинов, аккаунтов..."
           class="navbar_search_input"
           v-model="searchContent"
@@ -44,15 +25,15 @@
         <button type="reset" class="input_reset_icon mr-2">
           <img src="@/assets/lite/cancel.svg" class="img-width" alt="" />
         </button>
-        <a
-          href="#"
+        <span
           class="header_input_icon"
           data-toggle="tooltip"
           data-placement="top"
+          id="voice-trigger"
           title="Голосовой поиск"
         >
           <img src="@/assets/lite/microphone.svg" class="img-width" alt="" />
-        </a>
+        </span>
         <!-- header_input_icon -->
         <a
           href="#"
@@ -131,20 +112,19 @@ export default {
   computed: {},
   events: {},
   mounted() {
-    //Voice Search
-    /* setup vars for our trigger, form, text input and result elements */
     var $voiceTrigger = $("#voice-trigger");
     var $searchForm = $("#search");
     var $searchInput = $("#search-field");
+    var $result = $("#result"); // eslint-disable-line
 
-    
+    /*  set Web Speech API for Chrome or Firefox */
     window.SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
     /* Check if browser support Web Speech API, remove the voice trigger if not supported */
     if (window.SpeechRecognition) {
       /* setup Speech Recognition */
       var recognition = new SpeechRecognition(); // eslint-disable-line
-       
       recognition.interimResults = true;
       recognition.lang = "ru-RU";
       recognition.addEventListener("result", _transcriptHandler);
@@ -161,9 +141,6 @@ export default {
     } else {
       $voiceTrigger.remove();
     }
-
-    /*  set Web Speech API for Chrome or Firefox */
-   
 
     $(document).ready(function () {
       /* Trigger listen event when our trigger is clicked */
@@ -264,6 +241,7 @@ export default {
   justify-content: center;
   border-radius: 5px;
   padding: 6px;
+  cursor: pointer;
 }
 .header_input_icon:hover {
   background: #dddde6;
