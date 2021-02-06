@@ -429,9 +429,23 @@ body.modal-open {
 .grid-template-4 {
   grid-template-columns: repeat(4, 1fr);
 }
-
+.vue-file-agent .is-deletable .file-preview .file-name {
+  display: none!important;
+}
+.vue-file-agent .file-category-video-playable .file-preview:before, .vue-file-agent .file-preview-wrapper-image .file-preview:before {
+  display: none!important;
+}
+.vue-file-agent .file-preview .image-dimension {
+  display: none!important;
+}
+.vue-file-agent .file-category-video-playable .file-preview:after, .vue-file-agent .file-preview-wrapper-image .file-preview:after {
+  display: none!important;
+}
 .grid-template-3 {
   grid-template-columns: repeat(3, 1fr);
+}
+.grid-template-2 {
+  grid-template-columns: repeat(2, 1fr);
 }
 .grid-gap-15 {
   grid-gap: 15px;

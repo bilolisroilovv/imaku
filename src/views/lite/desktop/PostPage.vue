@@ -506,7 +506,7 @@ export default {
       postData: [],
       gallery: [],
       authorPosts: [],
-      colorLoading: "var(--main-color)",
+      colorLoading: "var(--main-color)"
     };
   },
   mounted() {
@@ -525,7 +525,7 @@ export default {
       this.$vs.loading({
         container: "",
         scale: 0.8,
-        color: this.colorLoading,
+        color: this.colorLoading
       });
 
       const response = await axios
@@ -558,43 +558,43 @@ export default {
          this.subText = "Подписаться";
       }
    },
-    async handleLike() {
-      this.isLiked = !this.isLiked;
-      if (this.isLiked === true) {
-        this.likesCount++;
-      } else {
-        this.likesCount--;
-      }
-      if (this.isDisliked === true) {
-        this.isDisliked = false;
-        this.disLikesCount--;
-      }
-      const response = await axios.get("like/" + this.postData.id);
-      console.log(response);
-      /* this.likesCount = response.data.likes
-      this.dislikesCount = response.data.dislikes */
-    },
-    async handleDislike() {
-      this.isDisliked = !this.isDisliked;
-      if (this.isDisliked === true) {
-        this.disLikesCount++;
-      } else {
-        this.disLikesCount--;
-      }
-      if (this.isLiked === true) {
-        this.isLiked = false;
-        this.likesCount--;
-      }
-      const response = await axios.get("dislike/" + this.postData.id);
-      console.log(response);
-      /* this.likesCount = response.data.likes
-      this.dislikesCount = response.data.dislikes */
-    },
-    async handleFavorite() {
-      const response = await axios.get("favorite/" + this.postData.id);
-      console.log(response);
-      this.isFavorited = !this.isFavorited;
+  async handleLike() {
+    this.isLiked = !this.isLiked;
+    if (this.isLiked === true) {
+      this.likesCount++;
+    } else {
+      this.likesCount--;
     }
+    if (this.isDisliked === true) {
+      this.isDisliked = false;
+      this.disLikesCount--;
+    }
+    const response = await axios.get("like/" + this.postData.id);
+    console.log(response);
+    /* this.likesCount = response.data.likes
+    this.dislikesCount = response.data.dislikes */
+  },
+  async handleDislike() {
+    this.isDisliked = !this.isDisliked;
+    if (this.isDisliked === true) {
+      this.disLikesCount++;
+    } else {
+      this.disLikesCount--;
+    }
+    if (this.isLiked === true) {
+      this.isLiked = false;
+      this.likesCount--;
+    }
+    const response = await axios.get("dislike/" + this.postData.id);
+    console.log(response);
+    /* this.likesCount = response.data.likes
+    this.dislikesCount = response.data.dislikes */
+  },
+  async handleFavorite() {
+    const response = await axios.get("favorite/" + this.postData.id);
+    console.log(response);
+    this.isFavorited = !this.isFavorited;
+  }
   },
 };
 </script>

@@ -148,6 +148,7 @@
                         size: 'Files should not exceed 10MB in size',
                       }"
                       v-model="files"
+                      @beforedelete="postImagesDelete($event)"
                     ></VueFileAgent>
                   </div>
                   <!-- photos_block -->

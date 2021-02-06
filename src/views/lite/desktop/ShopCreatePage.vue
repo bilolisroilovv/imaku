@@ -189,13 +189,13 @@ export default {
       for (let i = 0; i < this.files.length; i++) {
         const file = this.files[i];
         console.log(file);
-        form.append("avatar", file);
+        form.append("banner", file);
       }
 
       for (let i = 0; i < this.files2.length; i++) {
         const file = this.files2[i];
         console.log(file);
-        form.append("banner", file);
+        form.append("avatar", file);
       }
 
       await axios

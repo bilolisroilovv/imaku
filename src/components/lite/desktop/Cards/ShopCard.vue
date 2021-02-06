@@ -3,7 +3,12 @@
     <router-link :to="{ name: 'ShopPage', params: { id: shop.id, slug: shop.slug } }" class="media p-2">
       <img :src="shop.banner" alt="" />
       <div class="d-flex align-items-center">
-        <vs-avatar size="50px" :src="shop.avatar" />
+        <vs-avatar size="40px" :src="shop.avatar" />
+        <div class="shop_logo mybg_center"
+        
+        >
+
+        </div> <!-- shop_logo -->
         <p class="mb-0 text-white ml-2">{{ shop.name }}</p>
       </div>
     </router-link>
@@ -40,8 +45,8 @@ export default {
 <style lang="scss" scoped>
 .shop_card {
   width: 100%;
-  height: 250px;
-  border-radius: 5px;
+  height: 220px;
+  border-radius: 10px;
   overflow: hidden;
   border: none;
 
@@ -55,7 +60,7 @@ export default {
     overflow: hidden;
     border: none;
     &::after {
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.548), transparent);
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.24) 10%, transparent);
       content: "";
       position: absolute;
       top: 0;
@@ -71,7 +76,7 @@ export default {
       position: absolute;
       top: 0;
       left: 0;
-      transition: all 0.3s linear 0s;
+      transition: all 0.25s;
     }
 
     & > div {
@@ -81,24 +86,24 @@ export default {
 
     &:hover {
       & > img {
-        transform: scale(1.1);
+        transform: scale(1.05);
       }
     }
   }
   .mycard_edit_btns {
     position: absolute;
-    bottom: -10px;
+    bottom: -5px;
     width: 100%;
-    transition: all 0.3s linear 0s;
+    transition: all 0.25s;
     opacity: 0;
-    visibility: hidden;
+    pointer-events: none;
   }
 
   &:hover {
     .mycard_edit_btns {
       opacity: 1;
-      visibility: visible;
-      bottom: 15px;
+      bottom: 5px;
+      pointer-events: inherit;
     }
   }
 }
