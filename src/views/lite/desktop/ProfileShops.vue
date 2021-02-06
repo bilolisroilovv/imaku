@@ -1,8 +1,8 @@
 <template>
   <div class="w-71">
-    <div class="grid-container grid-template-4 grid-gap-10"> 
+    <div class="grid-container grid-template-3 grid-gap-10">
       <ShopCard
-        v-for="(shop, index) in profileData.shops"
+        v-for="(shop, index) in profileData"
         :key="index"
         class="mb-3"
         :shop="shop"
@@ -79,14 +79,14 @@ export default {
         color: this.colorLoading
       });
       const response = await axios
-      .get("/profile/posts")
+      .get("profile/shops")
       .finally(() =>
         setTimeout( ()=> {
           this.$vs.loading.close(".con-vs-loading")
         }, 10)
       );
       this.profileData = response.data;
-      console.log(this.profileData.posts);
+      console.log(this.profileData);
     },
   },
   computed: {
