@@ -3,7 +3,7 @@
     <section class="category_section">
       <div class="container">
         <h2 class="section_title pb-4">
-          {{ catData.category.title }} <span>{{ catData.postsCount }} результатов</span>
+          {{ catData.category.title }} <span>{{ catData.postsCount }} {{ $t('category_page.results') }}</span>
         </h2>
         <div class="row">
           <div class="w-26 pr-0">
@@ -28,7 +28,7 @@
               <vs-collapse class="filter_collapse">
                 <vs-collapse-item open>
                   <div slot="header">
-                    <h5>Цена</h5>
+                    <h5>{{ $t('category_page.price') }}</h5>
                   </div>
                   <div class="price_filter">
                     <!-- <vs-slider
@@ -41,11 +41,11 @@
                     <div class="d-flex justify-content-between">
                       <div class="position-relative">
                         <input type="text" max="10000000" @change="changePrice()" v-model="value1[0]" />
-                        <span>От</span>
+                        <span>{{ $t('category_page.from') }}</span>
                       </div>
                       <div class="position-relative ml-3">
                         <input type="text" max="10000000" @change="changePrice()" v-model="value1[1]" />
-                        <span>До</span>
+                        <span>{{ $t('category_page.to') }}</span>
                       </div>
                     </div>
                     <!-- d-flex -->
@@ -54,7 +54,7 @@
                 </vs-collapse-item>
                 <vs-collapse-item>
                   <div slot="header">
-                    <h5>Бренд</h5>
+                    <h5>{{ $t('category_page.brand') }}</h5>
                   </div>
                   <div class="">
                     <label class="control control--checkbox">
@@ -107,18 +107,18 @@
                 </vs-collapse-item>
                 <vs-collapse-item>
                   <div slot="header">
-                    <h5>Состояние</h5>
+                    <h5>{{ $t('category_page.status.status_title') }}</h5>
                   </div>
                   <div>
                     <label class="control control--checkbox">
                       <input type="checkbox" required />
                       <div class="control__indicator"></div>
-                      Новый
+                      {{ $t('category_page.status.status_new') }}
                     </label>
                     <label class="control control--checkbox">
                       <input type="checkbox" required />
                       <div class="control__indicator"></div>
-                      Б/У
+                      {{ $t('category_page.status.status_old') }}
                     </label>
                   </div>
                   <!-- price_filter -->

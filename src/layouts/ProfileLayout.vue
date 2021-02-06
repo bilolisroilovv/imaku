@@ -167,7 +167,7 @@
                       </router-link>
                     </li>
                     <li>
-                      <router-link to="/chatting">
+                      <router-link :to="{ name: 'Chat' }">
                         <i class="far fa-comment-dots"></i>
                         {{ $t("profile.chat") }}
                       </router-link>

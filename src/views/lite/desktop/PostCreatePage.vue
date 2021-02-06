@@ -4,13 +4,13 @@
       <div class="row">
         <div class="col-md-8">
           <div class="post_add_block mt-4">
-            <h2 class="pb-4 mb-3">Подать объявление на IMAKU</h2>
+            <h2 class="pb-4 mb-3">{{ $t('post_create.title') }}</h2>
             <div class="d-flex align-items-center myinput_group pb-4">
-              <label for="">Категория <span>*</span></label>
+              <label for="">{{ $t('post_create.category') }} <span>*</span></label>
               <vs-select
                 class="selectExample"
                 v-model="select1"
-                placeholder="Выберите"
+                :placeholder="$t('post_create.select')"
                 @change="handleSelectCategory"
               >
                 <vs-select-item
@@ -27,11 +27,11 @@
               class="d-flex align-items-center myinput_group pb-4"
               v-if="isSubcategoryShow"
             >
-              <label for="">Подкатегории <span>*</span></label>
+              <label for="">{{ $t('post_create.subcategoory') }} <span>*</span></label>
               <vs-select
                 class="selectExample"
                 v-model="select2"
-                placeholder="Выберите"
+                :placeholder="$t('post_create.select')"
                 @change="handleSelectSubcategory"
               >
                 <vs-select-item
@@ -52,7 +52,7 @@
                 <label for="">{{ character.title }}</label>
                 <vs-select
                   class="selectExample"
-                  placeholder="Выберите"
+                  :placeholder="$t('post_create.select')"
                   v-model="userCharacters[index].option_id"
                 >
                   <vs-select-item
@@ -66,14 +66,14 @@
               <!-- d-flex -->
 
               <div class="d-flex align-items-center myinput_group pb-4">
-                <label for="">Название товара <span>*</span></label>
+                <label for="">{{ $t('post_create.product_name') }} <span>*</span></label>
                 <input type="text" placeholder="" v-model="name" />
               </div>
               <!-- d-flex -->
               <div
                 class="d-flex align-items-center price_input_group myinput_group pb-4"
               >
-                <label for="">Цена <span>*</span></label>
+                <label for="">{{ $t('post_create.price') }} <span>*</span></label>
                 <input
                   type="tel"
                   v-model="price"
@@ -112,12 +112,17 @@
               </div>
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">
-                <label for="">Описание <span>*</span></label>
+                <label for="">{{ $t('post_create.desc') }} <span>*</span></label>
                 <textarea id="" rows="7" v-model="description"></textarea>
               </div>
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">
-                <label for="">Фотографии</label>
+                <label for="">{{ $t('post_create.hesh') }}</label>
+                <multiselect v-model="value" :tag-placeholder="$t('post_create.add_hashtags')" :placeholder="$t('post_create.add_hashtags_placeholder')" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" @tag="addTag"></multiselect>
+              </div>
+              <!-- d-flex -->
+              <div class="d-flex myinput_group pb-4">
+                <label for="">{{ $t('post_create.photo') }}</label>
                 <div class="w-100">
                   <div class="photos_block">
                     <!-- <vs-upload :text="'Добавить'" id="files" ref="files" @change="handleFilesUpload($event)" :show-upload-button="false" @on-success="successUpload">
@@ -147,11 +152,9 @@
                   </div>
                   <!-- photos_block -->
                   <p class="photos_p pt-2">
-                    Первое фото будет отображаться в результатах поиска,
-                    выберите наиболее удачное. <br />
-                    Вы можете загрузить до 12 фотографий в формате JPG или PNG.
+                    {{ $t('post_create.photo_required') }}
                     <br />
-                    Максимальный размер фото — 25MB.
+                    {{ $t('post_create.photo_mb') }} — 25{{ $t('post_create.mb') }}.
                   </p>
                 </div>
               </div>
@@ -178,18 +181,18 @@
                 </div>
               </div> -->
               <div class="d-flex myinput_group pb-4">
-                <label for="">Местоположение <span>*</span></label>
+                <label for="">{{ $t('post_create.address') }} <span>*</span></label>
                 <textarea id="" rows="7" v-model="location"></textarea>
               </div>
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">
-                <label for="">Телефон <span>*</span></label>
+                <label for="">{{ $t('post_create.phone') }} <span>*</span></label>
                 <div class="w-100">
                   <input
                     type="tel"
                     v-mask="'+998 (##) ###-##-##'"
                     v-model="phone"
-                    placeholder="Ваш номер..."
+                    :placeholder="$t('modal.login')"
                     required
                     value="+998 (90) 478-21-42"
                   />
@@ -201,7 +204,7 @@
                   href="#"
                   @click.prevent="handleSubmit()"
                   class="mainbtn inter_font text-bold"
-                  >Опубликовать</a
+                  >{{ $t('post_create.post') }}</a
                 >
               </div>
               <!-- d-flex -->

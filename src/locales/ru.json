@@ -11,12 +11,130 @@
     "chat": "Сообщения",
     "settings": "Настройки",
     "logout": "Выход",
+    "logout_profile": "Выйти",
     "created_at": "Дата регистрации",
     "post_count": "Объявлении",
     "post_followers": "Подписчики",
     "post_subscriptions": "Подписки",
     "my_socials": "Мои Соцсети",
     "home": "Главная",
-    "shops": "Магазины"
-  }
+    "shops": "Магазины",
+    "profile": "Профиль"
+  },
+  "create_shop": "Создать магазин",
+  "create_post": "Подать объявление",
+  "login": "Войти",
+  "category_page": {
+    "results": "результатов",
+    "price": "Цена",
+    "from": "От",
+    "to": "До",
+    "brand": "Бренд",
+    "status": {
+      "status_title": "Состояние",
+      "status_new": "Новый",
+      "status_old": "Б/у"
+    }
+  },
+  "card_base": {
+    "toggle_favorite": "Добавить в избранное",
+    "like": "Мне нравится",
+    "dont_like": "Мне не нравится",
+    "view": "Просмотры",
+    "phone": "Просмотры номера",
+    "message": "Сообщений",
+    "delete": "Удалить",
+    "edit": "Редактировать"
+  },
+  "homepage": {
+    "give_it_away": "Отдам даром",
+    "popular_ads": "Популярные объявления",
+    "popular": {
+      "household_appliances": "Бытовая техника",
+      "fashion_trends": "Модные тренды",
+      "automobile": "Автомобили",
+      "popular_select": "Популярный выбор",
+      "mobile_phones": "Мобильные телефоны",
+      "xit_sellers": "Хиты продаж",
+      "notebook_computer": "Ноутбуки и компьютеры",
+      "popular": "Популярное"
+    },
+    "for_you": "Для вас"
+  },
+  "post_page": {
+    "back": "Назад",
+    "comments": "Комментарии",
+    "posts": "объявлений",
+    "contact_the_seller": "Написать продавцу",
+    "addess": "Адрес",
+    "share": "Поделиться в",
+    "created_at": "Дата публикации",
+    "desc": "Описание",
+    "characteristic": "Характеристики",
+    "hash": "Хештеги",
+    "other_products": "Другие товары продавца",
+    "similar_posts": "Похожие объявления",
+    "no_posts": "К сожалению похожих объявлений нет",
+    "for_you": "Специально для вас",
+    "add_to_favorites": "Добавить в избранное"
+  },
+  "search": {
+    "title": "Поиск объявлений, магазинов, аккаунтов...",
+    "voice_search": "Голосовой поиск",
+    "photo_search": "Поиск по фото",
+    "no_result": "К сожалению, ничего не найдено"
+  },
+  "catalog": "Каталог",
+  "modal": {
+    "login": "Вход и регистрация",
+    "title": "На этот номер будет высланно смс с кодом подтверждения",
+    "next": "Продолжить",
+    "title2": "На ваш номер был отправлен пароль для входа",
+    "phone": "Ваш номер...",
+    "password": "Код пароль"
+  },
+  "shop": {
+    "created_at": "Дата регистрации",
+    "subscribe_to": "Подписаться",
+    "update": "Объявлении",
+    "subscriber": "Подписчики",
+    "subscriptions": "Подписки",
+    "socials": "Соцсети",
+    "shop_phone": "Показать номера",
+    "send_message": "Написать сообщение",
+    "description": "Описание"
+  },
+  "post_create": {
+    "title": "Подать объявление на IMAKU",
+    "category": "Категория",
+    "subcategoory": "Подкатегории",
+    "product_name": "Название товара",
+    "price": "Цена",
+    "desc": "Описание",
+    "hesh": "Хештеги",
+    "photo": "Фотографии",
+    "photo_required": "Первое фото будет отображаться в результатах поиска, выберите наиболее удачное. <br /> Вы можете загрузить до 12 фотографий в формате JPG или PNG.",
+    "photo_mb": "Максимальный размер фото",
+    "mb": "MБ",
+    "address": "Местоположение",
+    "phone": "Телефон",
+    "post": "Опубликовать",
+    "select": "Выберите",
+    "add_hashtags": "Добавьте здесь хештег",
+    "add_hashtags_placeholder": "Hashtagni qidiring yoki qo'shing"
+  },
+  "shop_create": {
+    "title": "Создать магазин на IMAKU",
+    "banner": "Баннер",
+    "photo_banner": "Фото баннера для вашего магазина"
+  },
+  "profile_settings": {
+    "fullname": "ФИО",
+    "nickname": "Никнейм",
+    "desc": "Описание",
+    "phone": "Телефон",
+    "save": "Сохранить"
+  },
+  "seller_social": "Соцсети продавца",
+  "view_more": "Ko'proq ko'rish"
 }

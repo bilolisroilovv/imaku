@@ -28,7 +28,7 @@
       </router-link>
       <div class="product_favourite flex-center d-flex">
         <ToggleFavorite
-          title="Добавить в избранное"
+          :title="$t('card_base.toggle_favorite')"
           class="position-bottom-right mycard_favorite2 flex-center d-flex"
         />
       </div>
@@ -42,7 +42,7 @@
         name: 'PostPage',
         params: { id: this.post.id, slug: this.post.slug }
       }"
-      title="Диван две кресла PANDA механизмом дельфин ткань туркия"
+      :title="post.name"
       class="mycard_title text_ellipsis2 mb-2 pt-2 mt-1 myhover_text"
     >
       {{ this.post.name }}
@@ -88,7 +88,7 @@
     <div class="mycard_btns d-flex align-items-center pt-2 pb-1">
       <button
         class="like_btn card_like_btn d-flex align-items-center mr-2"
-        title="Мне нравится"
+        :title="$t('card_base.like')"
       >
         <div class="like_btn_icon d-flex align-items-center">
           <svg
@@ -115,7 +115,7 @@
       <!-- like_btn -->
       <button
         class="dislike_btn card_like_btn d-flex align-items-center mr-2"
-        title="Мне не нравится"
+        :title="$t('card_base.dont_like')"
       >
         <div class="dislike_btn_icon d-flex align-items-center">
           <svg
@@ -140,7 +140,7 @@
         <!-- dislike_btn_count -->
       </button>
       <!-- dislike_btn -->
-      <div class="d-flex align-items-center mycard_views" title="Просмотры">
+      <div class="d-flex align-items-center mycard_views" :title="$t('card_base.view')">
         <svg
           width="18"
           height="10"
@@ -177,7 +177,7 @@
           params: { id: this.post.author.id }
         }"
         class="mycard_store_name myhover_text text_ellipsis1"
-        title="Furniture store"
+        :title="post.author.name"
       >
         {{ this.post.author.name }}
       </router-link>

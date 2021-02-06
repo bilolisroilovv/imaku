@@ -8,7 +8,7 @@
       >
         <input
           type="text"
-          placeholder="Поиск объявлений, магазинов, аккаунтов..."
+          :placeholder="$t('search.title')"
           class="navbar_search_input"
           :class="{ active: searchDropdownVisible }"
         />
@@ -23,7 +23,7 @@
           class="header_input_icon"
           data-toggle="tooltip"
           data-placement="top"
-          title="Голосовой поиск"
+          :title="$t('search.voice_search')"
         >
           <img src="@/assets/lite/microphone.svg" class="img-width" alt="" />
         </a>
@@ -33,7 +33,7 @@
           class="header_input_icon"
           data-toggle="tooltip"
           data-placement="top"
-          title="Поиск по фото"
+          :title="$t('search.photo_search')"
         >
           <img src="@/assets/lite/camera.svg" class="img-width" alt="" />
         </a>
