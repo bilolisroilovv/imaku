@@ -206,9 +206,8 @@
                     params: {
                       id: this.postData.author.id,
                       name: this.postData.author.name,
-                    },
+                    }
                   }"
-                  target="_blank"
                   class="product_seller_img mybg_center mr-3"
                   :style="{
                     'background-image': 'url(' + postData.author.avatar + ')',
@@ -222,10 +221,9 @@
                       params: {
                         id: this.postData.author.id,
                         name: this.postData.author.name,
-                      },
+                      }
                     }"
-                    title="Алексеев Эдуaрд Львович"
-                    target="_blank"
+                    title="postData.author.name"
                     class="product_seller_name d-block text_ellipsis1 myhover_text"
                     >{{ postData.author.name }}</router-link
                   >
@@ -469,6 +467,7 @@ import PostsSection from "@/components/lite/desktop/postsSection/PostsSection";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import Card3 from "@/components/lite/desktop/Cards/Card3";
 import axios from "axios";
+import { mapGetters } from "vuex";
 import "swiper/css/swiper.css";
 
 export default {
@@ -510,7 +509,7 @@ export default {
       colorLoading: "var(--main-color)",
     };
   },
-  async mounted() {
+  mounted() {
     this.getPost();
   },
   watch: {
@@ -518,7 +517,30 @@ export default {
       this.getPost();
     },
   },
+  computed: {
+    ...mapGetters(["currentUser"])
+  },
   methods: {
+    async getPost() {
+      this.$vs.loading({
+        container: "",
+        scale: 0.8,
+        color: this.colorLoading,
+      });
+
+      const response = await axios
+        .get("posts/" + this.id)
+        .finally(() => this.$vs.loading.close(".con-vs-loading"));
+
+      this.postData = response.data;
+      this.likesCount = response.data.likes;
+      this.disLikesCount = response.data.dislikes;
+      this.isLiked = response.data.isLiked;
+      this.isDisliked = response.data.isDisliked;
+      this.isFavorited = response.data.favorite;
+      this.gallery = response.data.gallery;
+      this.authorPosts = response.data.author.posts;
+    },
     async toggleView() {
       this.expanded = !this.expanded;
       const response = await axios.post("author/" + this.postData.author.id);
@@ -572,28 +594,7 @@ export default {
       const response = await axios.get("favorite/" + this.postData.id);
       console.log(response);
       this.isFavorited = !this.isFavorited;
-    },
-
-    async getPost() {
-      this.$vs.loading({
-        container: "",
-        scale: 0.8,
-        color: this.colorLoading,
-      });
-
-      const response = await axios
-        .get("posts/" + this.id)
-        .finally(() => this.$vs.loading.close(".con-vs-loading"));
-
-      this.postData = response.data;
-      this.likesCount = response.data.likes;
-      this.disLikesCount = response.data.dislikes;
-      this.isLiked = response.data.isLiked;
-      this.isDisliked = response.data.isDisliked;
-      this.isFavorited = response.data.favorite;
-      this.gallery = response.data.gallery;
-      this.authorPosts = response.data.author.posts;
-    },
+    }
   },
 };
 </script>

@@ -134,6 +134,7 @@
               <vs-select
                 class="selectExample category_select"
                 v-model="select1"
+                @change="sortBy"
               >
                 <vs-select-item
                   :key="index"
@@ -209,15 +210,14 @@ export default {
     return {
       catData: [],
       select1Normal: "",
-      select1: 1,
+      select1: 0,
       value1: [0, 999999999],
       colorx: "var(--main-color)",
       options1: [
-        { text: "Популярные", value: 1 },
-        { text: "Новинки", value: 2 },
-        { text: "Сначала дешевые", value: 3 },
-        { text: "Сначала дорогие", value: 4 },
-        { text: "Высокий рейтинг", value: 5 }
+        { text: "Популярные", value: 0 },
+        { text: "Новинки", value: 1 },
+        { text: "Сначала дешевые", value: 2 },
+        { text: "Сначала дорогие", value: 3 }
       ],
       colorLoading: "var(--main-color)"
     };
@@ -231,23 +231,6 @@ export default {
     this.getCategory();
   },
   methods: {
-    async changePrice () {
-      this.catData.posts = null
-      this.$vs.loading({
-        container: ".loading_div",
-        scale: 0.8,
-        color: this.colorLoading
-      });
-      const form = new FormData();
-      form.append('params[from]', this.value1[0])
-      form.append('params[to]', this.value1[1])
-      const response = await axios
-      .post("categories/" + this.id, form)
-      .finally(() =>
-        this.$vs.loading.close(".loading_div > .con-vs-loading")
-      );
-      this.catData = response.data
-    },
     async getCategory() {
       this.$vs.loading({
         container: "",
@@ -260,6 +243,44 @@ export default {
         this.$vs.loading.close(".con-vs-loading")
       );
       this.catData = response.data;
+    },
+    async changePrice () {
+      this.catData.posts = null
+      this.$vs.loading({
+        container: ".loading_div",
+        scale: 0.8,
+        color: this.colorLoading
+      });
+      const form = new FormData();
+      form.append('params[from]', this.value1[0])
+      form.append('params[to]', this.value1[1])
+      form.append('params[sort]', this.select1)
+
+      const response = await axios
+      .post("categories/" + this.id, form)
+      .finally(() =>
+        this.$vs.loading.close(".loading_div > .con-vs-loading")
+      );
+      this.catData = response.data
+    },
+    async sortBy () {
+      this.catData.posts = null
+      this.$vs.loading({
+        container: ".loading_div",
+        scale: 0.8,
+        color: this.colorLoading
+      });
+      const form = new FormData();
+      form.append('params[from]', this.value1[0])
+      form.append('params[to]', this.value1[1])
+      form.append('params[sort]', this.select1)
+
+      const response = await axios
+      .post('categories/' + this.id, form)
+      .finally(() =>
+        this.$vs.loading.close(".loading_div > .con-vs-loading")
+      );
+      this.catData = response.data
     }
   }
 };
