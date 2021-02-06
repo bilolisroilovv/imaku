@@ -226,7 +226,7 @@ export default {
       this.$vs.notify({
         color: "success",
         title: "Успех",
-        text: "Объявлено успешно размещена",
+        text: "Объявление успешно удалено",
       });
       this.$emit('removePost', response)
     },

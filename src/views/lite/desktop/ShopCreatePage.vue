@@ -53,15 +53,15 @@
               </div>
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">
-                <label for="">Баннер</label>
+                <label for="">{{ $t('shop_create.logo') }}</label>
                 <div class="w-100">
                   <div class="photos_block">
                     <!-- <vs-upload :text="'Добавить'" id="files" ref="files" @change="handleFilesUpload($event)" :show-upload-button="false" @on-success="successUpload">
                     </vs-upload> -->
                     <input
                       type="file"
-                      id="files"
-                      ref="files"
+                      id="files2"
+                      ref="files2"
                       @change="handleFilesUpload2($event)"
                     />
                     <!-- <VueFileAgent
@@ -81,7 +81,7 @@
                     ></VueFileAgent> -->
                   </div>
                   <!-- photos_block -->
-                  <p class="photos_p pt-2">Фото баннера для вашего магазина</p>
+                  <p class="photos_p pt-2">Лого для вашего магазина</p>
                 </div>
               </div>
               <!-- d-flex -->
@@ -109,7 +109,7 @@
                   href="#"
                   @click.prevent="handleSubmit()"
                   class="mainbtn inter_font text-bold"
-                  >{{ $t('post_create.post') }}</a
+                  >{{ $t('shop_create.create_btn') }}</a
                 >
               </div>
               <!-- d-flex -->
@@ -189,13 +189,13 @@ export default {
       for (let i = 0; i < this.files.length; i++) {
         const file = this.files[i];
         console.log(file);
-        form.append("avatar[" + i + "]", file);
+        form.append("avatar", file);
       }
 
       for (let i = 0; i < this.files2.length; i++) {
         const file = this.files2[i];
         console.log(file);
-        form.append("banner[" + i + "]", file);
+        form.append("banner", file);
       }
 
       await axios
@@ -220,8 +220,7 @@ export default {
   },
   async mounted() {
     this.checkLogin();
-    const response = await axios.get("shop/create");
-    this.phone = response.data.phone;
+    this.phone = this.currentUser.phone;
   },
   components: {},
 };

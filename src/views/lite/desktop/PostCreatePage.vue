@@ -142,7 +142,7 @@
                       :meta="true"
                       :maxSize="'10MB'"
                       :maxFiles="14"
-                      :helpText="'Choose images or zip files'"
+                      :helpText="'Добавьте фотографии'"
                       :errorText="{
                         type: 'Invalid file type. Only images or zip Allowed',
                         size: 'Files should not exceed 10MB in size',
@@ -373,7 +373,7 @@ export default {
       this.$vs.notify({
         color: "success",
         title: "Успех",
-        text: "Объявлено успешно размещена",
+        text: "Объявлено успешно размещено",
       });
       this.$router.push("/");
     },

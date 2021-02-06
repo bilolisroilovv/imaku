@@ -126,7 +126,9 @@
   "shop_create": {
     "title": "Создать магазин на IMAKU",
     "banner": "Баннер",
-    "photo_banner": "Фото баннера для вашего магазина"
+    "logo": "Лого",
+    "photo_banner": "Фото баннера для вашего магазина",
+    "create_btn": "Создать"
   },
   "profile_settings": {
     "fullname": "ФИО",

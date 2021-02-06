@@ -126,7 +126,9 @@
   "shop_create": {
     "title": "IMAKU-da do'kon yarating",
     "banner": "Banner",
-    "photo_banner": "Do'koningiz uchun banner fotosurati"
+    "logo": "Logo",
+    "photo_banner": "Do'koningiz uchun banner fotosurati",
+    "create_btn": "Yaratish"
   },
   "profile_settings": {
     "fullname": "FIO",
