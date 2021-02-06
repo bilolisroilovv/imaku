@@ -11,7 +11,7 @@
                 class="back_btn mainbtn mr-4 dark"
               >
                 <img src="@/assets/lite/back_btn.png" class="mr-2" alt="" />
-                Назад
+                {{ $t('post_page.back') }}
               </a>
               <!-- back_btn -->
 
@@ -67,7 +67,7 @@
                 <div
                   class="product_favourite mycard_favorite_stroke2 flex-center d-flex"
                   v-b-tooltip.hover
-                  title="Добавить в избранное"
+                  :title="$t('post_page.add_to_favorites')"
                 >
                   <ToggleFavorite class="d-flex align-items-center" />
                 </div>
@@ -110,7 +110,7 @@
                   :increment="0.5"
                 ></star-rating>
                 <a href="#reviews" class="product_revew_text ml-4 anim"
-                  >Комментарии (2762)</a
+                  >{{ $t('post_page.comments') }} (2762)</a
                 >
               </div>
               <!-- d-flex -->
@@ -230,7 +230,7 @@
                     >{{ postData.author.name }}</router-link
                   >
                   <!-- product_seller_name -->
-                  <span>({{ postData.author.postsCount }} объявлений)</span>
+                  <span>({{ postData.author.postsCount }} {{ $t('post_page.posts') }})</span>
                   <button class="d-block mt-1 subscribe_btn" @click.prevent="toggleSub" data-show="true">
                     {{ subText }}
                   </button>
@@ -253,7 +253,7 @@
                   class="send_message_btn mainbtn d-block w-100 text-center"
                 >
                   <img src="@/assets/lite/send_message_icon.png" alt="" />
-                  Написать продавцу
+                  {{ $t('post_page.contact_the_seller') }}
                 </a>
                 <!-- send_message_btn -->
               </div>
@@ -261,7 +261,7 @@
 
               <hr class="mt-3" />
               <div class="pt-2 pb-2 product_adress">
-                <h4 class="pb-2">Адрес:</h4>
+                <h4 class="pb-2">{{ $t('post_page.addess') }}:</h4>
                 <p class="mb-2">
                   Г. Ташкент, Яккасарайский район, улица Таффакур, дом 15
                 </p>
@@ -280,7 +280,7 @@
                 class="d-flex justify-content-between product_sidebar_bottom mt-2"
               >
                 <div class="product_sidebar_socials">
-                  <span>Поделиться в :</span>
+                  <span>{{ $t('post_page.share') }} :</span>
                   <div class="d-flex pt-1">
                     <a href="#" target="_blank">
                       <img
@@ -323,7 +323,7 @@
                 <!-- product_sidebar_socials -->
 
                 <div class="product_sidebar_date text-right">
-                  <span class="mt-2 d-block">Дата публикации:</span>
+                  <span class="mt-2 d-block">{{ $t('post_page.created_at') }}:</span>
                   <h6 class="mt-1">{{ postData.createdAt }}</h6>
                 </div>
                 <!-- product_sidebar_date -->
@@ -343,7 +343,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="bg-white product_bottom_info">
-                <h3 class="pb-3">Описание</h3>
+                <h3 class="pb-3">{{ $t('post_page.desc') }}</h3>
                 <div class="desc_text">
                   <p>
                     {{ postData.description }}
@@ -353,7 +353,7 @@
 
                 <div class="row pt-4">
                   <div class="col-md-6">
-                    <h4 class="pb-4">Характеристики</h4>
+                    <h4 class="pb-4">{{ $t('post_page.characteristic') }}</h4>
 
                     <div class="product_params">
                       <div
@@ -372,7 +372,7 @@
                   </div>
                   <!-- col-md-6 -->
                   <div class="col-md-6">
-                    <h4 class="pb-3">Хештеги</h4>
+                    <h4 class="pb-3">{{ $t('post_page.hash') }}</h4>
                     <div class="product_hashtags mb-4">
                       <router-link
                         :to="{ name: 'CategoryPage' }"
@@ -386,7 +386,7 @@
                     </div>
                     <!-- product_hashtags -->
 
-                    <h4 class="pb-4">Другие товары продавца</h4>
+                    <h4 class="pb-4">{{ $t('post_page.other_products') }}</h4>
 
                     <div>
                       <div class="position-relative">
@@ -439,8 +439,8 @@
 
     <section class="section pt-0">
       <div class="container">
-        <h2 class="section_title pb-4">Похожие объявления</h2>
-        <h5 v-if="!postData.similarAds">К сожалению похожих объявлений нет (</h5>
+        <h2 class="section_title pb-4">{{ $t('post_page.similar_posts') }}</h2>
+        <h5 v-if="!postData.similarAds">{{ $t('post_page.no_posts') }} (</h5>
         <!-- section_title -->
         <PostsSlider :posts="postData.similarAds" />
       </div>
@@ -449,7 +449,7 @@
 
     <section class="section">
       <div class="container">
-        <h2 class="section_title pb-4">Специально для вас</h2>
+        <h2 class="section_title pb-4">{{ $t('post_page.for_you') }}</h2>
         <!-- section_title -->
         <PostsSection :posts="postData.posts" />
       </div>

@@ -7,7 +7,7 @@
           <img src="@/assets/lite/close.png" class="img-width" alt="" />
         </button>
         <h5 class="modal-title pb-4" id="exampleModalLabel">
-          Вход и регистрация
+          {{ $t('modal.login') }}
         </h5>
       </div>
       <!-- mymodal-header -->
@@ -18,15 +18,15 @@
             v-model="phone"
             type="text"
             v-mask="'+998 (##) ###-##-##'"
-            placeholder="Ваш номер..."
+            :placeholder="$t('modal.phone')"
             required
           />
           <span class="mt-1">
-            На этот номер будет высланно смс с кодом подтверждения
+            {{ $t('modal.title') }}
           </span>
           <div>
             <button class="mt-3 mainbtn w-100" @click.prevent="nextStep">
-              Продолжить
+              {{ $t('modal.next') }}
             </button>
           </div>
         </div>
@@ -37,13 +37,13 @@
             id="code_phone"
             type="text"
             v-mask="'######'"
-            placeholder="Код пароль"
+            :placeholder="$t('modal.password')"
             required
             v-model="code"
           />
-          <span class="mt-1">На ваш номер был отправлен пароль для входа</span>
+          <span class="mt-1">{{ $t('modal.title2') }}</span>
           <div>
-            <button class="mt-3 mainbtn w-100" type="submit">Продолжить</button>
+            <button class="mt-3 mainbtn w-100" type="submit">{{ $t('modal.next') }}</button>
           </div>
         </div>
         <!-- step2 -->

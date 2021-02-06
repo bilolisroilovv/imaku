@@ -153,7 +153,7 @@
                       <path class="line--2" d="M0 50h70" />
                       <path class="line--3" d="M0 60h62c13 0 6-28-4-18L35 65" />
                     </svg>
-                    <span>Каталог</span>
+                    <span>{{ $t('catalog') }}</span>
                   </label>
                 </div>
               </button>
@@ -179,14 +179,14 @@
                 :to="{ name: 'ShopCreatePage' }"
                 class="create_store_btn d-flex align-items-center mr-2"
               >
-                Создать магазин
+                {{ $t('create_shop') }}
               </router-link>
               <!-- mainbtn -->
               <router-link
                 :to="{ name: 'PostCreatePage' }"
                 class="mainbtn create_ad_btn d-flex align-items-center mr-2"
               >
-                Подать объявление
+                {{ $t('create_post') }}
               </router-link>
               <!-- mainbtn -->
               <a
@@ -242,7 +242,7 @@
                   <g></g>
                   <g></g>
                 </svg>
-                <span>Войти</span>
+                <span>{{ $t('login') }}</span>
               </a>
             </div>
 
@@ -251,14 +251,14 @@
                 :to="{ name: 'ShopCreatePage' }"
                 class="create_store_btn d-flex align-items-center mr-2"
               >
-                Создать магазин
+                {{ $t('create_shop') }}
               </router-link>
               <!-- mainbtn -->
               <router-link
                 :to="{ name: 'PostCreatePage' }"
                 class="mainbtn create_ad_btn d-flex align-items-center mr-2"
               >
-                Подать объявление
+                {{ $t('create_post') }}
               </router-link>
               <!-- mainbtn -->
               <vs-dropdown class="header_profile_link ml-3">
@@ -273,24 +273,24 @@
                 <vs-dropdown-menu class="header_profile_links">
                   <router-link :to="{ name: 'ProfilePosts' }">
                     <vs-dropdown-item class="navbar_top_link">
-                      Профиль
+                      {{ $t('profile.profile') }}
                     </vs-dropdown-item>
                   </router-link>
                   <router-link :to="{ name: 'ProfilePage' }">
                     <vs-dropdown-item class="navbar_top_link">
-                      Избранные
+                      {{ $t('profile.favorite') }}
                     </vs-dropdown-item>
                   </router-link>
                   <router-link :to="{ name: 'ProfileSettings' }">
                     <vs-dropdown-item class="navbar_top_link">
-                      Настройки
+                      {{ $t('profile.settings') }}
                     </vs-dropdown-item>
                   </router-link>
                   <vs-dropdown-item
                     class="navbar_top_link"
                     @click.prevent="handleLogout"
                   >
-                    Выйти
+                    {{ $t('profile.logout_profile') }}
                   </vs-dropdown-item>
                 </vs-dropdown-menu>
               </vs-dropdown>

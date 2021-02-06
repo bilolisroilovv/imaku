@@ -4,7 +4,7 @@
       <div class="container">
         <h2 class="section_title pb-4">
           {{ searchData.query }}
-          <span>{{ searchData.count }} результатов</span>
+          <span>{{ searchData.count }} {{ $t('category_page.results') }}</span>
         </h2>
           <div class="w-100 position-relative">
             <div class="mb-3 d-flex">
@@ -30,7 +30,7 @@
             </div>
 
             <h3 class="text-center" v-if="searchData.count === 0">
-              К сожалению ничего не нашлось(
+              {{ $t('search.no_result') }} (
             </h3>
 
             <!--  <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">

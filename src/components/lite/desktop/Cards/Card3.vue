@@ -28,7 +28,7 @@
       <!-- mycard_img -->
       <div class="product_favourite flex-center d-flex">
         <ToggleFavorite
-          title="Добавить в избранное"
+          :title="$t('post_page.add_to_favorites')"
           class="position-bottom-right mycard_favorite2 flex-center d-flex"
         />
       </div>

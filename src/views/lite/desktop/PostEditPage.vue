@@ -191,7 +191,7 @@
                     type="tel"
                     v-mask="'+998 (##) ###-##-##'"
                     v-model="phone"
-                    placeholder="Ваш номер..."
+                    :placeholder="$t('modal.login')"
                     required
                     value="+998 (90) 478-21-42"
                   />

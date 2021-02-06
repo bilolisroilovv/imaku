@@ -14,7 +14,7 @@
         <input
           type="text"
           id="search-field"
-          placeholder="Поиск объявлений, магазинов, аккаунтов..."
+          :placeholder="$t('search.title')"
           class="navbar_search_input"
           v-model="searchContent"
           :class="{ active: searchDropdownVisible }"
@@ -30,7 +30,7 @@
           data-toggle="tooltip"
           data-placement="top"
           id="voice-trigger"
-          title="Голосовой поиск"
+          :title="$t('search.voice_search')"
         >
           <img src="@/assets/lite/microphone.svg" class="img-width" alt="" />
         </span>
@@ -40,7 +40,7 @@
           class="header_input_icon"
           data-toggle="tooltip"
           data-placement="top"
-          title="Поиск по фото"
+          :title="$t('search.photo_search')"
         >
           <img src="@/assets/lite/camera.svg" class="img-width" alt="" />
         </a>

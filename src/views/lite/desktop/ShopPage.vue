@@ -7,7 +7,7 @@
             <div class="d-flex align-items-center mb-3">
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
-                  <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                  <li class="breadcrumb-item"><a href="/">{{ $t('profile.home') }}</a></li>
                   <span class="mx-2 px-1">/</span>
                   <li class="breadcrumb-item active" aria-current="page">
                     Алексеев Эдуaрд Львович
