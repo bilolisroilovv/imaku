@@ -153,7 +153,8 @@
             fill="#7D95AE"
           />
         </svg>
-        <span>{{ this.post.views }}</span>
+        <span class="mr-2">{{ this.post.views }}</span>
+        <span>{{ this.post.createdAt }}</span>
       </div>
       <!-- d-flex -->
     </div>

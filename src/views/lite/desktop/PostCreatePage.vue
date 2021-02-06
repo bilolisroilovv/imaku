@@ -122,16 +122,15 @@
                   <div class="photos_block">
                     <!-- <vs-upload :text="'Добавить'" id="files" ref="files" @change="handleFilesUpload($event)" :show-upload-button="false" @on-success="successUpload">
                     </vs-upload> -->
-                    <input
+                    <!-- <input
                       type="file"
                       id="files"
                       ref="files"
                       multiple
                       @change="handleFilesUpload($event)"
-                    />
-                    <!-- <VueFileAgent
+                    /> -->
+                    <VueFileAgent
                       ref="files"
-                      @change="handleFilesUpload($event)"
                       :theme="'default'"
                       :multiple="true"
                       :deletable="true"
@@ -143,7 +142,8 @@
                         type: 'Invalid file type. Only images or zip Allowed',
                         size: 'Files should not exceed 10MB in size',
                       }"
-                    ></VueFileAgent> -->
+                      v-model="files"
+                    ></VueFileAgent>
                   </div>
                   <!-- photos_block -->
                   <p class="photos_p pt-2">
@@ -247,7 +247,7 @@ export default {
       isCharactersShow: false,
       priceTypeSelect: "сум",
       phone: Number,
-      files: null,
+      files: [],
       characters: [],
       characteristics: [],
       select1Normal: "",
@@ -257,29 +257,28 @@ export default {
       selectValue: 1,
       mainCategories: [],
       mainSubcategories: [],
-      value: [
-      ],
+      value: [],
       options: [
-        { name: 'Vue.js', code: 'vu' },
-        { name: 'Javascript', code: 'js' },
-        { name: 'Open Source', code: 'os' }
+        { name: "Vue.js", code: "vu" },
+        { name: "Javascript", code: "js" },
+        { name: "Open Source", code: "os" },
       ],
       priceType: [
         { text: "сум", value: 1 },
         { text: "y.e.", value: 2 },
       ],
       selectedItems: [],
-      colorLoading: "var(--main-color)"
+      colorLoading: "var(--main-color)",
     };
   },
   methods: {
-    addTag (newTag) {
+    addTag(newTag) {
       const tag = {
         name: newTag,
-        code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-      }
-      this.options.push(tag)
-      this.value.push(tag)
+        code: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.options.push(tag);
+      this.value.push(tag);
     },
     successUpload() {
       this.$vs.notify({
@@ -297,13 +296,11 @@ export default {
       this.$vs.loading({
         container: "",
         scale: 0.8,
-        color: this.colorLoading
+        color: this.colorLoading,
       });
-      const response = await axios.get(
-        "categories/subcategories/" + this.select1
-      ).finally(() =>
-        this.$vs.loading.close(".con-vs-loading")
-      );
+      const response = await axios
+        .get("categories/subcategories/" + this.select1)
+        .finally(() => this.$vs.loading.close(".con-vs-loading"));
       this.mainSubcategories = response.data;
       this.isSubcategoryShow = true;
       this.isCharactersShow = false;
@@ -312,13 +309,11 @@ export default {
       this.$vs.loading({
         container: "",
         scale: 0.8,
-        color: this.colorLoading
+        color: this.colorLoading,
       });
       const response = await axios
-      .get("characters/" + this.select2)
-      .finally(() =>
-        this.$vs.loading.close(".con-vs-loading")
-      );
+        .get("characters/" + this.select2)
+        .finally(() => this.$vs.loading.close(".con-vs-loading"));
       const userKharacters = response.data.map((char) => {
         return {
           characterId: char.id,
@@ -337,7 +332,7 @@ export default {
       this.$vs.loading({
         container: "",
         scale: 0.8,
-        color: this.colorLoading
+        color: this.colorLoading,
       });
       const form = new FormData();
       form.append("cat_id", this.select1);
@@ -360,26 +355,25 @@ export default {
           this.userCharacters[i].option_id
         );
       }
-      for (let i = 0; i < this.files.length; i++) {
-        const file = this.files[i];
-        console.log(file);
-        form.append("gallery[" + i + "]", file);
+
+      for (var screens = 0; screens < this.files.length; screens++) {
+        form.append("gallery[" + screens + "]", this.files[screens].file);
       }
 
-      await axios.post("posts/store", form, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      }).finally(() =>
-        this.$vs.loading.close(".con-vs-loading")
-      );
+      await axios
+        .post("posts/store", form, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .finally(() => this.$vs.loading.close(".con-vs-loading"));
       this.$vs.notify({
         color: "success",
         title: "Успех",
         text: "Объявлено успешно размещена",
       });
-      this.$router.push('/')
-    }
+      this.$router.push("/");
+    },
   },
   computed: {
     ...mapGetters(["currentUser"]),
@@ -388,18 +382,18 @@ export default {
     this.$vs.loading({
       container: ".post_add_block",
       scale: 0.8,
-      color: this.colorLoading
+      color: this.colorLoading,
     });
     this.checkLogin();
     const response = await axios
-    .get("posts/create")
-    .finally(() =>
-      this.$vs.loading.close(".post_add_block > .con-vs-loading")
-    );
+      .get("posts/create")
+      .finally(() =>
+        this.$vs.loading.close(".post_add_block > .con-vs-loading")
+      );
     this.mainCategories = response.data.categories;
     this.phone = response.data.phone;
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>
