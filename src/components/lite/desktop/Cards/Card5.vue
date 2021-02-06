@@ -82,7 +82,7 @@
       <hr class="mt-1" />
       <!-- d-flex -->
       <div
-        class="mycard_btns d-flex align-items-center justify-content-between mt-3"
+        class="mycard_btns d-flex align-items-center justify-content-between mt-1"
       >
         <div class="d-flex align-items-center">
           <button
@@ -182,12 +182,12 @@
         </div>
         <!-- d-flex -->
         <div class="mycard_edit_btns">
-          <a href="#" class="post_remove_btn mainbtn"
-            ><i class="far fa-trash-alt mr-1"></i> Удалить</a
-          >
-          <a href="#" class="post_edit_btn ml-2"
-            ><i class="far fa-edit mr-1"></i> Редактировать</a
-          >
+          <button @click.prevent="removePost" class="post_remove_btn mainbtn"
+            ><i class="far fa-trash-alt mr-1"></i> Удалить
+          </button>
+          <button @click.prevent="editPost" class="post_edit_btn ml-2">
+            <i class="far fa-edit mr-1"></i> Редактировать
+          </button>
         </div>
         <!-- mycard_edit_btns -->
       </div>
@@ -199,18 +199,41 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "Card5",
   components: {},
   data() {
     return {
-      image: "'https://picsum.photos/500?random=1'",
-      image2: "'https://picsum.photos/500?random=2'",
-      image3: "'https://picsum.photos/500?random=3'",
-      image4: "'https://picsum.photos/500?random=4'"
+      colorLoading: "var(--main-color)"
     };
   },
-  props: ["post"]
+  props: ["post"],
+  methods: {
+    async removePost () {
+      this.$vs.loading({
+        container: "",
+        scale: 0.8,
+        color: this.colorLoading
+      });
+      const response = await axios
+      .get('posts/delete/' + this.post.id)
+      .finally(() =>
+        setTimeout( ()=> {
+          this.$vs.loading.close(".con-vs-loading")
+        }, 10)
+      );
+      this.$vs.notify({
+        color: "success",
+        title: "Успех",
+        text: "Объявлено успешно размещена",
+      });
+      this.$emit('removePost', response)
+    },
+    editPost () {
+
+    }
+  },
 };
 </script>
 
@@ -223,6 +246,7 @@ export default {
   font-size: 14px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
+  background: transparent;
 }
 .post_remove_btn {
   font-family: "Inter", sans-serif;

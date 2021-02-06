@@ -299,7 +299,7 @@ export default {
     };
   },
   async mounted() {
-    const response = await axios.get("/seller/" + this.id);
+    const response = await axios.get("seller/" + this.id);
     this.sellerData = response.data;
   }
 };

@@ -117,11 +117,6 @@
               </div>
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">
-                <label for="">Хештеги</label>
-                <multiselect v-model="value" tag-placeholder="Добавьте здесь хештег" placeholder="Поиск или добавить хештег" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" @tag="addTag"></multiselect>
-              </div>
-              <!-- d-flex -->
-              <div class="d-flex myinput_group pb-4">
                 <label for="">Фотографии</label>
                 <div class="w-100">
                   <div class="photos_block">
@@ -184,7 +179,7 @@
               </div> -->
               <div class="d-flex myinput_group pb-4">
                 <label for="">Местоположение <span>*</span></label>
-                <textarea id="" rows="7" v-model="description"></textarea>
+                <textarea id="" rows="7" v-model="location"></textarea>
               </div>
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">
@@ -239,7 +234,6 @@
 <script>
 import { mapGetters } from "vuex";
 import axios from "axios";
-import Multiselect from 'vue-multiselect'
 
 export default {
   name: "PostCreatePage",
@@ -248,6 +242,7 @@ export default {
       name: "",
       price: Number,
       description: "",
+      location: "",
       isSubcategoryShow: false,
       isCharactersShow: false,
       priceTypeSelect: "сум",
@@ -300,14 +295,14 @@ export default {
     },
     async handleSelectCategory() {
       this.$vs.loading({
-        container: ".post_add_block",
+        container: "",
         scale: 0.8,
         color: this.colorLoading
       });
       const response = await axios.get(
         "categories/subcategories/" + this.select1
       ).finally(() =>
-        this.$vs.loading.close(".post_add_block > .con-vs-loading")
+        this.$vs.loading.close(".con-vs-loading")
       );
       this.mainSubcategories = response.data;
       this.isSubcategoryShow = true;
@@ -315,14 +310,14 @@ export default {
     },
     async handleSelectSubcategory() {
       this.$vs.loading({
-        container: ".post_add_block",
+        container: "",
         scale: 0.8,
         color: this.colorLoading
       });
       const response = await axios
       .get("characters/" + this.select2)
       .finally(() =>
-        this.$vs.loading.close(".post_add_block > .con-vs-loading")
+        this.$vs.loading.close(".con-vs-loading")
       );
       const userKharacters = response.data.map((char) => {
         return {
@@ -340,7 +335,7 @@ export default {
     },
     async handleSubmit() {
       this.$vs.loading({
-        container: ".post_add_block",
+        container: "",
         scale: 0.8,
         color: this.colorLoading
       });
@@ -353,6 +348,7 @@ export default {
       form.append("description", this.description);
       form.append("phone", this.phone);
       form.append("description", this.description);
+      form.append("location", this.location);
       /* form.append('gallery', this.files) */
       for (var i = 0; i < this.userCharacters.length; i++) {
         form.append(
@@ -375,7 +371,7 @@ export default {
           "Content-Type": "multipart/form-data"
         }
       }).finally(() =>
-        this.$vs.loading.close(".post_add_block > .con-vs-loading")
+        this.$vs.loading.close(".con-vs-loading")
       );
       this.$vs.notify({
         color: "success",
@@ -402,14 +398,9 @@ export default {
     );
     this.mainCategories = response.data.categories;
     this.phone = response.data.phone;
-  },
-  components: {
-    Multiselect 
   }
 }
 </script>
-
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style lang="scss" scoped>
 .search_icon {

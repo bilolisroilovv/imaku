@@ -155,6 +155,26 @@ export default {
       $searchInput.attr("placeholder", "Говорите...");
       $voiceTrigger.addClass("active");
       /* Start voice recognition */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
       recognition.start();
     }
 

@@ -265,7 +265,7 @@
                 <a
                   class="header_profile_img mybg_center"
                   :style="{
-                    'background-image': 'url(' + this.profileLogo + ')'
+                    'background-image': 'url(' + currentUser.avatar + ')'
                   }"
                   href="#"
                 >
@@ -449,7 +449,7 @@ export default {
   min-height: 600px;
   position: absolute;
   left: -131px;
-  top: 70%;
+  top: 120%;
   background: #ffffff;
   box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.03);
   border-radius: 8px;
