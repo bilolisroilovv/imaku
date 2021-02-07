@@ -11,12 +11,132 @@
     "chat": "Xabarlar",
     "settings": "Sozlash",
     "logout": "Chiqish",
+    "logout_profile": "Chiqish",
     "created_at": "Ro'yxatga olingan sana",
     "post_count": "E'lonlar soni",
     "post_followers": "Obunachilar",
     "post_subscriptions": "Obunalarim",
     "my_socials": "Mening ijtimoiy tarmoqlarim",
     "home": "Bosh sahifa",
-    "shops": "Do'konlar"
-  }
+    "shops": "Do'konlar",
+    "profile": "Mening profilim"
+  },
+  "create_shop": "Do'kon yaratish",
+  "create_post": "E'lon berish",
+  "login": "Kirish",
+  "category_page": {
+    "results": "natija",
+    "price": "Narh",
+    "from": "dan",
+    "to": "gacha",
+    "brand": "Brend nomi",
+    "status": {
+      "status_title": "Holati",
+      "status_new": "Yangi",
+      "status_old": "F/b"
+    }
+  },
+  "card_base": {
+    "toggle_favorite": "Saralanganlarga qo'shish",
+    "like": "Menga yoqdi",
+    "dont_like": "Menga yoqmadi",
+    "view": "Ko'rib chiqishlar soni",
+    "phone": "Raqamni ko'rish",
+    "message": "Xabar",
+    "delete": "O'chirish",
+    "edit": "Tahrirlash"
+  },
+  "homepage": {
+    "give_it_away": "Tekinga beraman",
+    "popular_ads": "Ommabop e'lonlar",
+    "popular": {
+      "household_appliances": "Maishiy texnika",
+      "fashion_trends": "Moda yo'nalishlari",
+      "automobile": "Avtomobillar",
+      "popular_select": "Ommabop tanlov",
+      "mobile_phones": "Mobil telefonlar",
+      "xit_sellers": "Eng ko'p solilgan",
+      "notebook_computer": "Noutbuklar va kompyuterlar",
+      "popular": "Ommabop"
+    },
+    "for_you": "Siz uchun"
+  },
+  "post_page": {
+    "back": "Orqaga",
+    "comments": "Izohlar",
+    "posts": "e'lon",
+    "contact_the_seller": "Sotuvchiga murojaat qilish",
+    "addess": "Manzil",
+    "share": "Ulashish",
+    "created_at": "E'lon qilingan sana",
+    "desc": "Tavsif",
+    "characteristic": "Xususiyatlari",
+    "hash": "Xeshteglar",
+    "other_products": "Sotuvchining boshqa e'lonlari",
+    "similar_posts": "O'xshash e'lonlar",
+    "no_posts": "Afsuski, shunga o'xshash e'lon mavjud emas",
+    "for_you": "Faqat siz uchun",
+    "add_to_favorites": "Saralanganlarga qo'shish"
+  },
+  "search": {
+    "title": "Reklama, do'kon, hisob qaydnomalarini qidirish ...",
+    "voice_search": "Ovozli qidirish",
+    "photo_search": "Surat bo'yicha qidirish",
+    "no_result": "Afsuski, hech narsa topilmadi"
+  },
+  "catalog": "Katalog",
+  "modal": {
+    "login": "Kirish va ro'yxatdan o'tish",
+    "title": "Ushbu raqamga tasdiqlash kodi bilan SMS yuboriladi",
+    "next": "Davom etish",
+    "title2": "Kirish parolingiz raqamingizga yuborildi",
+    "phone": "Nomeringiz kiririting...",
+    "password": "Kodni kiriting"
+  },
+  "shop": {
+    "created_at": "Ro'yxatga olingan sana",
+    "subscribe_to": "Obuna bo'lish",
+    "update": "E'lon",
+    "subscriber": "Obunachilar",
+    "subscriptions": "Obuna bo'lgan",
+    "socials": "Ijtimoiy tarmoqlar",
+    "shop_phone": "Nomerni ko'rish",
+    "send_message": "Xabar yozish",
+    "description": "Tavsif"
+  },
+  "post_create": {
+    "title": "E'loningizni IMAKU-ga chiqarish",
+    "category": "Toifa",
+    "subcategoory": "Ichki toifalar",
+    "product_name": "Mahsulot nomi",
+    "price": "Narh",
+    "desc": "Tavsif",
+    "hesh": "Xeshteglar",
+    "photo": "Fotosuratlar",
+    "photo_required": "Birinchi fotosurat qidiruv natijalarida ko'rsatiladi, eng yaxshisini tanlang. <br /> Siz JPG yoki PNG formatida 12 tagacha fotosuratlarni yuklashingiz mumkin.",
+    "photo_mb": "Suratning maksimal hajmi",
+    "mb": "MB",
+    "address": "Manzil",
+    "phone": "Telefon",
+    "post": "E'lon qilish",
+    "select": "Iltimos tanlang",
+    "add_hashtags": "Bu erga hashtag qo'shing",
+    "add_hashtags_placeholder": "Bu erga hashtag qo'shing"
+  },
+  "shop_create": {
+    "title": "IMAKU-da do'kon yarating",
+    "banner": "Banner",
+    "logo": "Logo",
+    "photo_banner": "Do'koningiz uchun banner fotosurati",
+    "create_btn": "Yaratish"
+  },
+  "profile_settings": {
+    "fullname": "FIO",
+    "nickname": "Taxallus",
+    "desc": "Tavsif",
+    "phone": "Telefon",
+    "save": "Saqlash"
+  },
+  "seller_social": "Sotuvchining ijtimoiy tarmoqlari",
+  "view_more": "Ko'proq ko'rish"
 }

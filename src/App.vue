@@ -10,7 +10,7 @@
 import MainLayout from "@/layouts/MainLayout";
 import SecondLayout from "@/layouts/SecondLayout";
 import EmptyLayout from "@/layouts/EmptyLayout";
-import ProfileLayout from '@/layouts/ProfileLayout.vue';
+import ProfileLayout from "@/layouts/ProfileLayout.vue";
 /* import axios from 'axios' */
 /* import {mapGetters} from 'vuex' */
 
@@ -21,20 +21,20 @@ export default {
   computed: {
     layout() {
       return (this.$route.meta.layout || "second") + "-layout";
-    }
+    },
     /* ...mapGetters(['currentUser']) */
   },
   components: {
     MainLayout,
     SecondLayout,
     EmptyLayout,
-    ProfileLayout
+    ProfileLayout,
   },
   async created() {
     this.$store.dispatch("fetchCategories");
     this.$store.dispatch("fetchUser");
     this.$store.dispatch("fetchPosts");
-  }
+  },
 };
 </script>
 
@@ -226,9 +226,6 @@ body.modal-open {
   font-size: 12px;
   color: #adadad;
   display: inherit;
-}
-.con-vs-loading {
-  position: absolute !important;
 }
 .sign_modal_form label {
   font-weight: normal;
@@ -432,9 +429,23 @@ body.modal-open {
 .grid-template-4 {
   grid-template-columns: repeat(4, 1fr);
 }
-
+.vue-file-agent .is-deletable .file-preview .file-name {
+  display: none!important;
+}
+.vue-file-agent .file-category-video-playable .file-preview:before, .vue-file-agent .file-preview-wrapper-image .file-preview:before {
+  display: none!important;
+}
+.vue-file-agent .file-preview .image-dimension {
+  display: none!important;
+}
+.vue-file-agent .file-category-video-playable .file-preview:after, .vue-file-agent .file-preview-wrapper-image .file-preview:after {
+  display: none!important;
+}
 .grid-template-3 {
   grid-template-columns: repeat(3, 1fr);
+}
+.grid-template-2 {
+  grid-template-columns: repeat(2, 1fr);
 }
 .grid-gap-15 {
   grid-gap: 15px;

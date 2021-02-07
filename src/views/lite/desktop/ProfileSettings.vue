@@ -5,28 +5,28 @@
       <div>
 
         <div class="d-flex align-items-center myinput_group pb-4">
-          <label for="">ФИО <span>*</span></label>
+          <label for="">{{ $t('profile_settings.fullname') }} <span>*</span></label>
           <input type="text" placeholder="" v-model="name" />
         </div>
         <!-- d-flex -->
         <div class="d-flex align-items-center myinput_group pb-4">
-          <label for="">Никнейм</label>
+          <label for="">{{ $t('profile_settings.nickname') }}</label>
           <input type="text" placeholder="" v-model="username" />
         </div>
         <!-- d-flex -->
 
         <div class="d-flex myinput_group pb-4">
-          <label for="">Описание</label>
+          <label for="">{{ $t('profile_settings.desc') }}</label>
           <textarea id="" rows="7" v-model="description"></textarea>
         </div>
         <div class="d-flex myinput_group pb-4">
-          <label for="">Телефон <span>*</span></label>
+          <label for="">{{ $t('profile_settings.phone') }} <span>*</span></label>
           <div class="w-100">
             <input
               type="tel"
               v-mask="'+998 (##) ###-##-##'"
               v-model="phone"
-              placeholder="Ваш номер..."
+              :placeholder="$t('modal.login')"
               required
               value="+998 (90) 478-21-42"
             />
@@ -38,7 +38,7 @@
             href="#"
             @click.prevent="handleSubmit()"
             class="mainbtn inter_font text-bold"
-            >Сохранить</a
+            >{{ $t('profile_settings.save') }}</a
           >
         </div>
         <!-- d-flex -->

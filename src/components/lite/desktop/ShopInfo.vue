@@ -26,7 +26,7 @@
             ></div>
             <!-- shop_logo -->
             <div class="product_sidebar_date">
-              <span class="mr-2">Дата регистрации:</span>
+              <span class="mr-2">{{ $t('shop.created_at') }}:</span>
               <h6 class="pb-1">13.02.2020</h6>
               <star-rating
                 border-color="#fc8301"
@@ -62,7 +62,7 @@
                 :increment="0.5"
               ></star-rating>
               <button class="d-block mt-1 subscribe_btn" data-show="true">
-                Подписаться
+                {{ $t('shop.subscribe_to') }}
               </button>
             </div>
             <!-- product_sidebar_date -->
@@ -77,23 +77,23 @@
                 <div class="seller_info d-flex justify-content-between my-3">
                   <button class="seller_info_box">
                     <span>52</span>
-                    <h6>Объявлении</h6>
+                    <h6>{{ $t('shop.update') }}</h6>
                   </button>
                   <!-- seller_info_box -->
                   <button class="seller_info_box">
                     <span>859</span>
-                    <h6>Подписчики</h6>
+                    <h6>{{ $t('shop.subscriber') }}</h6>
                   </button>
                   <!-- seller_info_box -->
                   <button class="seller_info_box">
                     <span>84</span>
-                    <h6>Подписки</h6>
+                    <h6>{{ $t('shop.subscriptions') }}</h6>
                   </button>
                   <!-- seller_info_box -->
                 </div>
                 <!-- seller_info -->
                 <div class="product_sidebar_socials d-flex align-items-center">
-                  <span class="pt-1 mr-3">Соцсети:</span>
+                  <span class="pt-1 mr-3">{{ $t('shop.socials') }}:</span>
                   <div class="d-flex pt-1">
                     <a href="#" target="_blank">
                       <img
@@ -144,14 +144,14 @@
                     href="#"
                     class="show_number_btn mb-3 d-block w-100 text-center"
                   >
-                    Показать номера
+                    {{ $t('shop.shop_phone') }}
                   </a>
                   <!-- show_number_btn -->
                   <a
                     href="#"
                     class="send_message_btn mainbtn d-block w-100 text-center"
                   >
-                    Написать сообщение
+                    {{ $t('shop.send_message') }}
                   </a>
                   <!-- send_message_btn -->
                 </div>
@@ -169,7 +169,7 @@
       <div class="row mt-3">
         <div class="col-md-6 pr-0">
           <div class="shop_block3">
-            <h3 class="pb-3">Описание</h3>
+            <h3 class="pb-3">{{ $t('shop.description') }}</h3>
             <p>
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex
               possimus harum hic consequuntur repudiandae rerum iste natus quia

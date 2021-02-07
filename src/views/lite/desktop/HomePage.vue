@@ -16,7 +16,7 @@
     <section class="section pt-5 pb-3">
       <div class="container">
         <h2 class="section_title pb-4">
-          Отдам даром
+          {{ $t('homepage.give_it_away') }}
         </h2>
         <!-- section_title -->
         <PostsSlider :posts="givesSliderData" />
@@ -27,7 +27,7 @@
     <section class="section section2 pb-5">
       <div class="container">
         <h2 class="section_title pb-4">
-          Популярные объявления
+          {{ $t('homepage.popular_ads') }}
         </h2>
         <!-- section_title -->
         <SelectionSection :posts="allPosts" />
@@ -38,7 +38,7 @@
     <section class="section pt-0">
       <div class="container">
         <h2 class="section_title pb-4">
-          Для вас
+          {{ $t('homepage.for_you') }}
         </h2>
         <!-- section_title -->
         <PostsSection :posts="allPosts" />

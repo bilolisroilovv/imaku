@@ -7,13 +7,13 @@
             <div class="d-flex align-items-center mb-3">
               <a href="index.html" class="back_btn mainbtn mr-4 dark">
                 <img src="@/assets/lite/back_btn.png" class="mr-2" alt="" />
-                Назад
+                {{ $t('post_page.back') }}
               </a>
               <!-- back_btn -->
 
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
-                  <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                  <li class="breadcrumb-item"><a href="/">{{ $t('profile.home') }}</a></li>
                   <span class="mx-2 px-1">/</span>
                   <li class="breadcrumb-item active" aria-current="page">
                     Алексеев Эдуaрд Львович
@@ -56,7 +56,7 @@
                   </h3>
                   <!-- product_seller_name -->
                   <div class="product_sidebar_date">
-                    <span class="mt- d-block">Дата регистрации:</span>
+                    <span class="mt- d-block">{{ $t('shop.created_at') }}:</span>
                     <h6 class="mt-1">{{ this.sellerData.createdAt }}</h6>
                   </div>
                   <!-- product_sidebar_date -->
@@ -108,17 +108,17 @@
               <div class="seller_info d-flex justify-content-between my-3">
                 <button class="seller_info_box">
                   <span>{{ this.sellerData.postsCount }}</span>
-                  <h6>Объявлении</h6>
+                  <h6>{{ $t('shop.update') }}</h6>
                 </button>
                 <!-- seller_info_box -->
                 <button class="seller_info_box">
                   <span>859</span>
-                  <h6>Подписчики</h6>
+                  <h6>{{ $t('profile.post_followers') }}</h6>
                 </button>
                 <!-- seller_info_box -->
                 <button class="seller_info_box">
                   <span>84</span>
-                  <h6>Подписки</h6>
+                  <h6>{{ $t('profile.post_subscriptions') }}</h6>
                 </button>
                 <!-- seller_info_box -->
               </div>
@@ -130,7 +130,7 @@
                   class="show_number_btn mb-2 d-block w-100 text-center"
                 >
                   <img src="@/assets/lite/show_number_icon.png" alt="" />
-                  Показать номер
+                  {{ $t('shop.shop_phone') }}
                 </a>
                 <!-- show_number_btn -->
                 <a
@@ -138,7 +138,7 @@
                   class="send_message_btn mainbtn d-block w-100 text-center"
                 >
                   <img src="@/assets/lite/send_message_icon.png" alt="" />
-                  Написать продавцу
+                  {{ $t('post_page.contact_the_seller') }}
                 </a>
                 <!-- send_message_btn -->
               </div>
@@ -146,7 +146,7 @@
 
               <hr class="mt-3" />
               <div class="pt-2 pb-2 product_adress">
-                <h4 class="pb-2">Адрес:</h4>
+                <h4 class="pb-2">{{ $t('post_page.addess') }}:</h4>
                 <p class="mb-2">
                   Г. Ташкент, Яккасарайский район, улица Таффакур, дом 15
                 </p>
@@ -179,7 +179,7 @@
                 class="d-flex justify-content-between product_sidebar_bottom mt-3"
               >
                 <div class="product_sidebar_socials d-flex align-items-center">
-                  <span class="pt-1 mr-2">Соцсети продавца:</span>
+                  <span class="pt-1 mr-2">{{ $t('seller_social') }}:</span>
                   <div class="d-flex pt-1">
                     <a href="#" target="_blank">
                       <img
@@ -267,7 +267,7 @@
                 <g></g>
                 <g></g>
               </svg>
-              Показать еще
+              {{ $t('view_more') }}
             </button>
           </div>
           <!-- col-md-8 -->
@@ -299,7 +299,7 @@ export default {
     };
   },
   async mounted() {
-    const response = await axios.get("/seller/" + this.id);
+    const response = await axios.get("seller/" + this.id);
     this.sellerData = response.data;
   }
 };

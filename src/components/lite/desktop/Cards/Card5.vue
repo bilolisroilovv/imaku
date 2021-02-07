@@ -28,7 +28,7 @@
         <div>
           <router-link
             :to="{ name: 'PostPage', params: { id: post.id, slug: post.slug } }"
-            title="Диван две кресла PANDA механизмом дельфин ткань туркия"
+            :title="post.name"
             class="mycard_title text_ellipsis1 pt-1 myhover_text"
           >
             {{ post.name }}
@@ -82,12 +82,12 @@
       <hr class="mt-1" />
       <!-- d-flex -->
       <div
-        class="mycard_btns d-flex align-items-center justify-content-between mt-3"
+        class="mycard_btns d-flex align-items-center justify-content-between mt-1"
       >
         <div class="d-flex align-items-center">
           <button
             class="like_btn card_like_btn d-flex align-items-center mr-2"
-            title="Мне нравится"
+            :title="$t('card_base.like')"
           >
             <div class="like_btn_icon d-flex align-items-center">
               <svg
@@ -114,7 +114,7 @@
           <!-- like_btn -->
           <button
             class="dislike_btn card_like_btn d-flex align-items-center mr-2"
-            title="Мне не нравится"
+            :title="$t('card_base.dont_like')"
           >
             <div class="dislike_btn_icon d-flex align-items-center">
               <svg
@@ -139,40 +139,40 @@
             <!-- dislike_btn_count -->
           </button>
           <!-- dislike_btn -->
-          <vs-tooltip text="Просмотры">
+          <vs-tooltip :text="$t('card_base.view')">
             <div
               class="d-flex align-items-center mycard_views mr-2"
-              title="Просмотры"
+              :title="$t('card_base.view')"
             >
               <i class="far fa-eye mr-1"></i>
               <span>{{ post.views }}</span>
             </div>
             <!-- d-flex -->
           </vs-tooltip>
-          <vs-tooltip text="Просмотры номера">
+          <vs-tooltip :text="$t('card_base.phone')">
             <div
               class="d-flex align-items-center mycard_views mr-2"
-              title="Просмотры номера"
+              :title="$t('card_base.phone')"
             >
               <i class="fas fa-phone-alt mr-1"></i>
               <span>{{ post.phoneViews }}</span>
             </div>
             <!-- d-flex -->
           </vs-tooltip>
-          <vs-tooltip text="Добавлений в избранное">
+          <vs-tooltip :text="$t('card_base.toggle_favorite')">
             <div
               class="d-flex align-items-center mycard_views mr-2"
-              title="Просмотры номера"
+              :title="$t('card_base.phone')"
             >
               <i class="far fa-heart mr-1"></i>
               <span>{{ post.favouritesCount }}</span>
             </div>
             <!-- d-flex -->
           </vs-tooltip>
-          <vs-tooltip text="Сообщений">
+          <vs-tooltip :text="$t('card_base.message')">
             <div
               class="d-flex align-items-center mycard_views"
-              title="Сообщений"
+              :title="$t('card_base.message')"
             >
               <i class="far fa-comment-alt mr-1"></i>
               <span>{{ post.comment }}</span>
@@ -182,12 +182,12 @@
         </div>
         <!-- d-flex -->
         <div class="mycard_edit_btns">
-          <a href="#" class="post_remove_btn mainbtn"
-            ><i class="far fa-trash-alt mr-1"></i> Удалить</a
-          >
-          <a href="#" class="post_edit_btn ml-2"
-            ><i class="far fa-edit mr-1"></i> Редактировать</a
-          >
+          <button @click.prevent="removePost" class="post_remove_btn mainbtn"
+            ><i class="far fa-trash-alt mr-1"></i> {{ $t('card_base.delete') }}
+          </button>
+          <button @click.prevent="editPost" class="post_edit_btn ml-2">
+            <i class="far fa-edit mr-1"></i> {{ $t('card_base.edit') }}
+          </button>
         </div>
         <!-- mycard_edit_btns -->
       </div>
@@ -199,18 +199,41 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "Card5",
   components: {},
   data() {
     return {
-      image: "'https://picsum.photos/500?random=1'",
-      image2: "'https://picsum.photos/500?random=2'",
-      image3: "'https://picsum.photos/500?random=3'",
-      image4: "'https://picsum.photos/500?random=4'"
+      colorLoading: "var(--main-color)"
     };
   },
-  props: ["post"]
+  props: ["post"],
+  methods: {
+    async removePost () {
+      this.$vs.loading({
+        container: "",
+        scale: 0.8,
+        color: this.colorLoading
+      });
+      const response = await axios
+      .get('posts/delete/' + this.post.id)
+      .finally(() =>
+        setTimeout( ()=> {
+          this.$vs.loading.close(".con-vs-loading")
+        }, 10)
+      );
+      this.$vs.notify({
+        color: "success",
+        title: "Успех",
+        text: "Объявление успешно удалено",
+      });
+      this.$emit('removePost', response)
+    },
+    editPost () {
+
+    }
+  },
 };
 </script>
 
@@ -223,6 +246,7 @@ export default {
   font-size: 14px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
+  background: transparent;
 }
 .post_remove_btn {
   font-family: "Inter", sans-serif;

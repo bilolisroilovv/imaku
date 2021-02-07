@@ -4,22 +4,21 @@
       <div class="row">
         <div class="col-md-8">
           <div class="post_add_block mt-4">
-            <h2 class="pb-4 mb-3">Подать объявление на IMAKU</h2>
+            <h2 class="pb-4 mb-3">{{ $t('shop_create.title') }}</h2>
             <div>
-
               <div class="d-flex align-items-center myinput_group pb-4">
-                <label for="">Название товара <span>*</span></label>
+                <label for="">{{ $t('post_create.product_name') }} <span>*</span></label>
                 <input type="text" placeholder="" v-model="name" />
               </div>
               <!-- d-flex -->
 
               <div class="d-flex myinput_group pb-4">
-                <label for="">Описание <span>*</span></label>
+                <label for="">{{ $t('post_create.desc') }} <span>*</span></label>
                 <textarea id="" rows="7" v-model="description"></textarea>
               </div>
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">
-                <label for="">Баннер</label>
+                <label for="">{{ $t('shop_create.banner') }}</label>
                 <div class="w-100">
                   <div class="photos_block">
                     <!-- <vs-upload :text="'Добавить'" id="files" ref="files" @change="handleFilesUpload($event)" :show-upload-button="false" @on-success="successUpload">
@@ -48,24 +47,57 @@
                   </div>
                   <!-- photos_block -->
                   <p class="photos_p pt-2">
-                    Фото баннера для вашего магазина
+                    {{ $t('shop_create.photo_banner') }}
                   </p>
                 </div>
               </div>
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">
-                <label for="">Местоположение <span>*</span></label>
+                <label for="">{{ $t('shop_create.logo') }}</label>
+                <div class="w-100">
+                  <div class="photos_block">
+                    <!-- <vs-upload :text="'Добавить'" id="files" ref="files" @change="handleFilesUpload($event)" :show-upload-button="false" @on-success="successUpload">
+                    </vs-upload> -->
+                    <input
+                      type="file"
+                      id="files2"
+                      ref="files2"
+                      @change="handleFilesUpload2($event)"
+                    />
+                    <!-- <VueFileAgent
+                      ref="files"
+                      @change="handleFilesUpload($event)"
+                      :theme="'default'"
+                      :multiple="true"
+                      :deletable="true"
+                      :meta="true"
+                      :maxSize="'10MB'"
+                      :maxFiles="14"
+                      :helpText="'Choose images or zip files'"
+                      :errorText="{
+                        type: 'Invalid file type. Only images or zip Allowed',
+                        size: 'Files should not exceed 10MB in size',
+                      }"
+                    ></VueFileAgent> -->
+                  </div>
+                  <!-- photos_block -->
+                  <p class="photos_p pt-2">Лого для вашего магазина</p>
+                </div>
+              </div>
+              <!-- d-flex -->
+              <div class="d-flex myinput_group pb-4">
+                <label for="">{{ $t('post_create.address') }} <span>*</span></label>
                 <textarea id="" rows="7" v-model="location"></textarea>
               </div>
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">
-                <label for="">Телефон <span>*</span></label>
+                <label for="">{{ $t('post_create.phone') }} <span>*</span></label>
                 <div class="w-100">
                   <input
                     type="tel"
                     v-mask="'+998 (##) ###-##-##'"
                     v-model="phone"
-                    placeholder="Ваш номер..."
+                    :placeholder="$t('modal.login')"
                     required
                     value="+998 (90) 478-21-42"
                   />
@@ -77,13 +109,14 @@
                   href="#"
                   @click.prevent="handleSubmit()"
                   class="mainbtn inter_font text-bold"
-                  >Опубликовать</a
+                  >{{ $t('shop_create.create_btn') }}</a
                 >
               </div>
               <!-- d-flex -->
             </div>
             <!-- v-if="isCharactersShow" -->
-          </div><!-- post_add_block -->
+          </div>
+          <!-- post_add_block -->
         </div>
         <!-- col-md-8 -->
         <div class="col-md-4">
@@ -118,7 +151,8 @@ export default {
       location: "",
       phone: Number,
       files: null,
-      colorLoading: "var(--main-color)"
+      files2: null,
+      colorLoading: "var(--main-color)",
     };
   },
   methods: {
@@ -126,7 +160,7 @@ export default {
       this.$vs.notify({
         color: "success",
         title: "Загрузка успешно выполнена",
-        text: "Загрузка успешно выполнена"
+        text: "Загрузка успешно выполнена",
       });
     },
     checkLogin() {
@@ -137,21 +171,31 @@ export default {
     handleFilesUpload(event) {
       this.files = event.target.files;
     },
+    handleFilesUpload2(event) {
+      this.files2 = event.target.files;
+    },
     async handleSubmit() {
       this.$vs.loading({
         container: ".post_add_block",
         scale: 0.8,
-        color: this.colorLoading
+        color: this.colorLoading,
       });
       const form = new FormData();
       form.append("name", this.name);
       form.append("description", this.description);
       form.append("location", this.location);
       form.append("phone", this.phone);
+      
       for (let i = 0; i < this.files.length; i++) {
         const file = this.files[i];
         console.log(file);
-        form.append("gallery[" + i + "]", file);
+        form.append("banner", file);
+      }
+
+      for (let i = 0; i < this.files2.length; i++) {
+        const file = this.files2[i];
+        console.log(file);
+        form.append("avatar", file);
       }
 
       await axios
@@ -176,9 +220,7 @@ export default {
   },
   async mounted() {
     this.checkLogin();
-    const response = await axios
-      .get("shop/create")
-    this.phone = response.data.phone;
+    this.phone = this.currentUser.phone;
   },
   components: {},
 };

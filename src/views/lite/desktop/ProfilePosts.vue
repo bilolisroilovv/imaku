@@ -7,6 +7,7 @@
           :key="index"
           class="mb-3"
           :post="post"
+          @removePost="getPost"
         />
       </div>
       <!-- col-md-12 -->

@@ -3,7 +3,7 @@
     <section class="category_section">
       <div class="container">
         <h2 class="section_title pb-4">
-          {{ catData.category.title }} <span>{{ catData.postsCount }} результатов</span>
+          {{ catData.category.title }} <span>{{ catData.postsCount }} {{ $t('category_page.results') }}</span>
         </h2>
         <div class="row">
           <div class="w-26 pr-0">
@@ -28,7 +28,7 @@
               <vs-collapse class="filter_collapse">
                 <vs-collapse-item open>
                   <div slot="header">
-                    <h5>Цена</h5>
+                    <h5>{{ $t('category_page.price') }}</h5>
                   </div>
                   <div class="price_filter">
                     <!-- <vs-slider
@@ -41,11 +41,11 @@
                     <div class="d-flex justify-content-between">
                       <div class="position-relative">
                         <input type="text" max="10000000" @change="changePrice()" v-model="value1[0]" />
-                        <span>От</span>
+                        <span>{{ $t('category_page.from') }}</span>
                       </div>
                       <div class="position-relative ml-3">
                         <input type="text" max="10000000" @change="changePrice()" v-model="value1[1]" />
-                        <span>До</span>
+                        <span>{{ $t('category_page.to') }}</span>
                       </div>
                     </div>
                     <!-- d-flex -->
@@ -54,7 +54,7 @@
                 </vs-collapse-item>
                 <vs-collapse-item>
                   <div slot="header">
-                    <h5>Бренд</h5>
+                    <h5>{{ $t('category_page.brand') }}</h5>
                   </div>
                   <div class="">
                     <label class="control control--checkbox">
@@ -107,18 +107,18 @@
                 </vs-collapse-item>
                 <vs-collapse-item>
                   <div slot="header">
-                    <h5>Состояние</h5>
+                    <h5>{{ $t('category_page.status.status_title') }}</h5>
                   </div>
                   <div>
                     <label class="control control--checkbox">
                       <input type="checkbox" required />
                       <div class="control__indicator"></div>
-                      Новый
+                      {{ $t('category_page.status.status_new') }}
                     </label>
                     <label class="control control--checkbox">
                       <input type="checkbox" required />
                       <div class="control__indicator"></div>
-                      Б/У
+                      {{ $t('category_page.status.status_old') }}
                     </label>
                   </div>
                   <!-- price_filter -->
@@ -134,6 +134,7 @@
               <vs-select
                 class="selectExample category_select"
                 v-model="select1"
+                @change="sortBy"
               >
                 <vs-select-item
                   :key="index"
@@ -209,15 +210,14 @@ export default {
     return {
       catData: [],
       select1Normal: "",
-      select1: 1,
+      select1: 0,
       value1: [0, 999999999],
       colorx: "var(--main-color)",
       options1: [
-        { text: "Популярные", value: 1 },
-        { text: "Новинки", value: 2 },
-        { text: "Сначала дешевые", value: 3 },
-        { text: "Сначала дорогие", value: 4 },
-        { text: "Высокий рейтинг", value: 5 }
+        { text: "Популярные", value: 0 },
+        { text: "Новинки", value: 1 },
+        { text: "Сначала дешевые", value: 2 },
+        { text: "Сначала дорогие", value: 3 }
       ],
       colorLoading: "var(--main-color)"
     };
@@ -231,23 +231,6 @@ export default {
     this.getCategory();
   },
   methods: {
-    async changePrice () {
-      this.catData.posts = null
-      this.$vs.loading({
-        container: ".loading_div",
-        scale: 0.8,
-        color: this.colorLoading
-      });
-      const form = new FormData();
-      form.append('params[from]', this.value1[0])
-      form.append('params[to]', this.value1[1])
-      const response = await axios
-      .post("categories/" + this.id, form)
-      .finally(() =>
-        this.$vs.loading.close(".loading_div > .con-vs-loading")
-      );
-      this.catData = response.data
-    },
     async getCategory() {
       this.$vs.loading({
         container: "",
@@ -260,6 +243,44 @@ export default {
         this.$vs.loading.close(".con-vs-loading")
       );
       this.catData = response.data;
+    },
+    async changePrice () {
+      this.catData.posts = null
+      this.$vs.loading({
+        container: ".loading_div",
+        scale: 0.8,
+        color: this.colorLoading
+      });
+      const form = new FormData();
+      form.append('params[from]', this.value1[0])
+      form.append('params[to]', this.value1[1])
+      form.append('params[sort]', this.select1)
+
+      const response = await axios
+      .post("categories/" + this.id, form)
+      .finally(() =>
+        this.$vs.loading.close(".loading_div > .con-vs-loading")
+      );
+      this.catData = response.data
+    },
+    async sortBy () {
+      this.catData.posts = null
+      this.$vs.loading({
+        container: ".loading_div",
+        scale: 0.8,
+        color: this.colorLoading
+      });
+      const form = new FormData();
+      form.append('params[from]', this.value1[0])
+      form.append('params[to]', this.value1[1])
+      form.append('params[sort]', this.select1)
+
+      const response = await axios
+      .post('categories/' + this.id, form)
+      .finally(() =>
+        this.$vs.loading.close(".loading_div > .con-vs-loading")
+      );
+      this.catData = response.data
     }
   }
 };

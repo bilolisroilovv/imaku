@@ -4,10 +4,10 @@
       <div class="col-md-6">
         <div class="d-flex justify-content-between mt-4">
           <a href="categoru.html" class="myhover_text section2_grouptitle"
-            >Бытовая техника</a
+            >{{ $t('homepage.popular.household_appliances') }}</a
           >
           <a href="#" class="black_label d-flex align-items-center"
-            >Модные тренды</a
+            >{{ $t('homepage.popular.fashion_trends') }}</a
           >
         </div>
         <!-- d-flex -->
@@ -99,10 +99,10 @@
       <div class="col-md-6">
         <div class="d-flex justify-content-between mt-4">
           <a href="categoru.html" class="myhover_text section2_grouptitle"
-            >Автомобили</a
+            >{{ $t('homepage.popular.automobile') }}</a
           >
           <a href="#" class="black_label d-flex align-items-center">
-            Популярный выбор
+            {{ $t('homepage.popular.popular_select') }}
           </a>
         </div>
         <!-- d-flex -->
@@ -194,10 +194,10 @@
       <div class="col-md-6">
         <div class="d-flex justify-content-between mt-4">
           <a href="categoru.html" class="myhover_text section2_grouptitle"
-            >Мобильные телефоны</a
+            >{{ $t('homepage.popular.mobile_phones') }}</a
           >
           <a href="#" class="black_label d-flex align-items-center">
-            Хиты продаж
+            {{ $t('homepage.popular.xit_sellers') }}
           </a>
         </div>
         <!-- d-flex -->
@@ -289,10 +289,10 @@
       <div class="col-md-6">
         <div class="d-flex justify-content-between mt-4">
           <a href="categoru.html" class="myhover_text section2_grouptitle"
-            >Ноутбуки и компьютеры</a
+            >{{ $t('homepage.popular.notebook_computer') }}</a
           >
           <a href="#" class="black_label d-flex align-items-center">
-            Популярное
+            {{ $t('homepage.popular.popular') }}
           </a>
         </div>
         <!-- d-flex -->
