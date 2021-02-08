@@ -46,7 +46,7 @@ const routes = [
         props: true
       },
       {
-        path: "shop:id:slug",
+        path: "shop/:id:slug",
         name: "ShopPage",
         props: true,
         meta: { layout: "second" },
@@ -57,6 +57,13 @@ const routes = [
         name: "PostCreatePage",
         meta: { layout: "second" },
         component: () => import("../views/lite/desktop/PostCreatePage.vue")
+      },
+      {
+        path: "post-edit/:id:slug",
+        name: "PostEdit",
+        meta: { layout: "second" },
+        props: true,
+        component: () => import("../views/lite/desktop/PostEdit.vue")
       },
       {
         path: "shop-create",

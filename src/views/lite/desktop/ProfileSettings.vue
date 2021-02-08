@@ -49,13 +49,22 @@
 </template>
 
 <script>
+/* import axios from 'axios' */
+
 export default {
   name: 'ProfileSettings',
   data() {
     return {
       phone: 998901112233
     }
-  }
+  },
+  async mounted () {
+    /* const response = await axios.get('profile/settings/' + author.id);
+    this.name = response.data.name
+    this.username = response.data.username
+    this.description = response.data.description
+    this.phone = response.data.phone */
+  },
 };
 </script>
 

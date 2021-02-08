@@ -24,14 +24,14 @@
       <!-- container -->
     </section>
 
-    <!-- <section class="section section2 pb-5">
+    <section class="section section2 pb-5">
       <div class="container">
         <h2 class="section_title pb-4">
           {{ $t('homepage.popular_ads') }}
         </h2>
-        <SelectionSection :posts="allPosts" />
+        <SelectionSection :posts="selectionSection" />
       </div>
-    </section> -->
+    </section>
 
     <section class="section pt-0">
       <div class="container">
@@ -53,6 +53,7 @@ import HeaderCategoriesSlider from "@/components/lite/desktop/Sliders/HeaderCate
 /* import SelectionSection from "@/components/lite/desktop/SelectionSection/SelectionSection"; */
 import PostsSection from "@/components/lite/desktop/postsSection/PostsSection";
 import PostsSlider from "@/components/lite/desktop/Sliders/PostsSlider";
+import SelectionSection from "@/components/lite/desktop/SelectionSection/SelectionSection";
 import { mapGetters } from "vuex"; 
 import axios from "axios";
 
@@ -61,11 +62,12 @@ export default {
   data() {
     return {
       content: "",
-      givesSliderData: []
+      givesSliderData: [],
+      selectionSection: []
     };
   },
   components: {
-    /* SelectionSection, */
+    SelectionSection,
     PostsSection,
     PostsSlider,
     HeaderMainSlider,
@@ -82,6 +84,7 @@ export default {
   async mounted() {
     const response = await axios.get("");
     this.givesSliderData = response.data.gives;
+    this.selectionSection = response.data.selectionSection;
   }
 };
 </script>

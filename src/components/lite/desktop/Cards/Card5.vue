@@ -185,9 +185,14 @@
           <button @click.prevent="removePost" class="post_remove_btn mainbtn"
             ><i class="far fa-trash-alt mr-1"></i> {{ $t('card_base.delete') }}
           </button>
-          <button @click.prevent="editPost" class="post_edit_btn ml-2">
+          <router-link
+          :to="{
+            name: 'PostEdit',
+            params: { id: post.id, slug: post.slug }
+          }"
+          class="post_edit_btn ml-2">
             <i class="far fa-edit mr-1"></i> {{ $t('card_base.edit') }}
-          </button>
+          </router-link>
         </div>
         <!-- mycard_edit_btns -->
       </div>

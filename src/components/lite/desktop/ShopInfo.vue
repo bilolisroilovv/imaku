@@ -3,7 +3,7 @@
     <div class="position-relative">
       <div
         class="shop_banner"
-        :style="{ 'background-image': 'url(' + this.shopBanner + ')' }"
+        :style="{ 'background-image': 'url(' + this.shop.banner + ')' }"
       >
         <div class="container position-relative">
           <h2 class="shop_title">Prime Tech Pro</h2>
@@ -22,7 +22,7 @@
           <div class="shop_block1">
             <div
               class="shop_logo mr-3"
-              :style="{ 'background-image': 'url(' + this.shopLogo + ')' }"
+              :style="{ 'background-image': 'url(' + this.shop.avatar + ')' }"
             ></div>
             <!-- shop_logo -->
             <div class="product_sidebar_date">
@@ -216,6 +216,12 @@ export default {
       shopBanner: "'https://picsum.photos/1920/400?random=1'",
       shopLogo: "'https://picsum.photos/500?random=2'"
     };
+  },
+  props: {
+    shop: []
+  },
+  mounted() {
+    console.log(this.shop);
   }
 };
 </script>

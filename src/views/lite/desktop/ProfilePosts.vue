@@ -91,7 +91,6 @@ export default {
         }, 10)
       );
       this.profileData = response.data;
-      console.log(this.profileData.posts);
     },
   },
   computed: {
