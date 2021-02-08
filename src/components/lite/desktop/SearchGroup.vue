@@ -152,7 +152,6 @@ export default {
       e.preventDefault();
       /* Update input and icon CSS to show that the browser is listening */
       $searchInput.attr("placeholder", "Говорите...");
-      $searchInput.attr("placeholder", "Говорите...");
       $voiceTrigger.addClass("active");
       /* Start voice recognition */
       

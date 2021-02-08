@@ -20,12 +20,19 @@
       </svg> </a
     ><!-- top_btn -->
     <router-view />
+
+    <Footer />
+    
   </div>
 </template>
 
 <script>
+import Footer from '@/components/lite/desktop/Footer'
 export default {
-  name: "empty"
+  name: "empty",
+  components: {
+    Footer
+  }
 };
 </script>
 

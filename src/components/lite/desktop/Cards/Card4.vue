@@ -26,8 +26,9 @@
         </div>
         <!-- mycard_img -->
       </router-link>
-      <div class="product_favourite flex-center d-flex">
+      <div class="product_favourite flex-center d-flex" @click.prevent="ToggleFavoriteRequest">
         <ToggleFavorite
+          :isFavorite="this.isFavorite"
           :title="$t('post_page.add_to_favorites')"
           class="position-bottom-right mycard_favorite2 flex-center d-flex"
         />
@@ -165,7 +166,7 @@
 
 <script>
 import ToggleFavorite from "@/components/lite/desktop/ToggleFavorite";
-
+import axios from 'axios'
 export default {
   name: "Card4",
   components: {
@@ -173,10 +174,7 @@ export default {
   },
   data() {
     return {
-      image: "'https://picsum.photos/500?random=1'",
-      image2: "'https://picsum.photos/500?random=2'",
-      image3: "'https://picsum.photos/500?random=3'",
-      image4: "'https://picsum.photos/500?random=4'"
+      isFavorite: this.post.isFavourite
     };
   },
   props: {
@@ -189,6 +187,18 @@ export default {
         type: String,
         default: ""
       }
+    }
+  },
+  methods: {
+    async ToggleFavoriteRequest() {
+      const response = await axios.get('favourite/' + this.post.id)
+      this.isFavorite = response.data.isFavourite
+      console.log(this.isFavorite);
+      this.$vs.notify({
+        color: "success",
+        title: "Успех",
+        text: "Объявлено успешно добавлено/удалено из избранных",
+      });
     }
   }
 };

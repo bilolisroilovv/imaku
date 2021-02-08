@@ -3,7 +3,7 @@
     <div class="grid-container grid-template-4 grid-gap-10"> 
       <Card4
         :post="post"
-        v-for="(post, index) in profileData.posts"
+        v-for="(post, index) in profileData"
         :key="index"
       />
     </div>
@@ -60,14 +60,14 @@ export default {
     Card4
   },
   methods: {
-    async getPost() {
+    async getPosts() {
       this.$vs.loading({
         container: "",
         scale: 0.8,
         color: this.colorLoading
       });
       const response = await axios
-      .get("/profile/favourites")
+      .get("profile/favourites")
       .finally(() =>
         setTimeout( ()=> {
           this.$vs.loading.close(".con-vs-loading")
@@ -78,7 +78,7 @@ export default {
     }
   },
   mounted() {
-    this.getPost();
+    this.getPosts();
   }
 };
 </script>

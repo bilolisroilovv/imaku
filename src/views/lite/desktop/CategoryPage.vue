@@ -247,7 +247,7 @@ export default {
     async changePrice () {
       this.catData.posts = null
       this.$vs.loading({
-        container: ".loading_div",
+        container: "",
         scale: 0.8,
         color: this.colorLoading
       });
@@ -259,14 +259,14 @@ export default {
       const response = await axios
       .post("categories/" + this.id, form)
       .finally(() =>
-        this.$vs.loading.close(".loading_div > .con-vs-loading")
+        this.$vs.loading.close(".con-vs-loading")
       );
       this.catData = response.data
     },
     async sortBy () {
       this.catData.posts = null
       this.$vs.loading({
-        container: ".loading_div",
+        container: "",
         scale: 0.8,
         color: this.colorLoading
       });
@@ -278,7 +278,7 @@ export default {
       const response = await axios
       .post('categories/' + this.id, form)
       .finally(() =>
-        this.$vs.loading.close(".loading_div > .con-vs-loading")
+        this.$vs.loading.close(".con-vs-loading")
       );
       this.catData = response.data
     }

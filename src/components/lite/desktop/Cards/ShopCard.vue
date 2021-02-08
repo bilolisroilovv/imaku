@@ -3,9 +3,8 @@
     <router-link :to="{ name: 'ShopPage', params: { id: shop.id, slug: shop.slug } }" class="media p-2">
       <img :src="shop.banner" alt="" />
       <div class="d-flex align-items-center">
-        <vs-avatar size="40px" :src="shop.avatar" />
         <div class="shop_logo mybg_center"
-        
+        :style="{ 'background-image': 'url(' + shop.avatar + ')' }"
         >
 
         </div> <!-- shop_logo -->
@@ -25,8 +24,14 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "ShopCard",
+  data() {
+    return {
+      colorLoading: "var(--main-color)"
+    }
+  },
   props: {
     shop: {
       id: {
@@ -38,6 +43,28 @@ export default {
         default: ""
       }
     }
+  },
+  methods: {
+    async removePost () {
+      this.$vs.loading({
+        container: "",  
+        scale: 0.8,
+        color: this.colorLoading
+      });
+      const response = await axios
+      .get('shops/delete/' + this.shop.id)
+      .finally(() =>
+        setTimeout( ()=> {
+          this.$vs.loading.close(".con-vs-loading")
+        }, 10)
+      );
+      this.$vs.notify({
+        color: "success",
+        title: "Успех",
+        text: "Магазин успешно удален",
+      });
+      this.$emit('removePost', response)
+    },
   }
 };
 </script>
@@ -106,6 +133,11 @@ export default {
       pointer-events: inherit;
     }
   }
+}
+.shop_logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 .post_edit_btn {
   border: 1px solid var(--main-color);

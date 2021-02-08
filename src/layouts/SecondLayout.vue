@@ -20,20 +20,25 @@
       </svg> </a
     ><!-- top_btn -->
     <Header2 />
-
     <div class="app_content">
       <router-view />
     </div>
+
+    <Footer />
+
+    
   </div>
 </template>
 
 <script>
 import Header2 from "@/components/lite/desktop/Header";
+import Footer from "@/components/lite/desktop/Footer";
 
 export default {
   name: "SecondLayout",
   components: {
-    Header2
+    Header2,
+    Footer
   }
 };
 </script>

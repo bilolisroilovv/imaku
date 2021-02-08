@@ -6,6 +6,7 @@
         :key="index"
         class="mb-3"
         :shop="shop"
+        @removePost="getShop"
       />
     </div>
     <!-- <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">

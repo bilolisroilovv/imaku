@@ -73,7 +73,7 @@
                 <label for=""
                   >{{ $t("post_create.product_name") }} <span>*</span></label
                 >
-                <input type="text" placeholder="" v-model="name" />
+                <input type="text" placeholder="" required v-model="name" />
               </div>
               <!-- d-flex -->
               <div
@@ -85,6 +85,7 @@
                 <input
                   type="tel"
                   v-model="price"
+                  required
                   v-mask="[
                     '#',
                     '##',
@@ -163,6 +164,7 @@
                       :maxSize="'10MB'"
                       :maxFiles="14"
                       :helpText="'Добавьте фотографии'"
+                      required
                       :errorText="{
                         type: 'Invalid file type. Only images or zip Allowed',
                         size: 'Files should not exceed 10MB in size',
@@ -207,7 +209,7 @@
                 <label for=""
                   >{{ $t("post_create.address") }} <span>*</span></label
                 >
-                <textarea id="" rows="7" v-model="location"></textarea>
+                <textarea required id="" rows="7" v-model="location"></textarea>
               </div>
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">

@@ -29,7 +29,12 @@
               <div class="d-flex align-items-center mb-2">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb mb-0 p-0">
-                    <li class="breadcrumb-item"><a href="/">{{ $t('profile.home') }}</a></li>
+                    <li class="breadcrumb-item">
+                      <router-link
+                      :to="{ name: 'HomePage' }"
+                      >
+                      {{ $t('profile.home') }}
+                      </router-link></li>
                     <span class="mx-2 px-1">/</span>
                     <li class="breadcrumb-item active" aria-current="page">
                       {{ profileData.name }}
@@ -256,17 +261,21 @@
       </section>
       <!-- section -->
     </div>
+
+    <Footer />
   </div>
 </template>
 
 <script>
 import Header from "@/components/lite/desktop/Header";
+import Footer from "@/components/lite/desktop/Footer";
 import { mapGetters } from "vuex";
 import axios from 'axios';
 export default {
   name: "ProfileLayout",
   components: {
-    Header
+    Header,
+    Footer
   },
   data() {
     return {

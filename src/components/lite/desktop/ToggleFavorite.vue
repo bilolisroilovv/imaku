@@ -19,6 +19,12 @@ export default {
   components: {
     FavoriteIcon
   },
+  props: {
+    isFavorite: {
+      type: Boolean,
+      default: false
+    },
+  },
   data() {
     return {
       favorited: false,
@@ -31,6 +37,13 @@ export default {
         "toggle-favorite__icon--favorited": this.favorited,
         "toggle-favorite__icon--animate": this.animating
       };
+    }
+  },
+  mounted () {
+    if (this.isFavorite === true) {
+      this.favorited = true
+    } else {
+      this.favorited = false
     }
   },
   methods: {

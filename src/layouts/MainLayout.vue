@@ -24,16 +24,20 @@
     <div class="app_content">
       <router-view />
     </div>
+
+    <Footer />
   </div>
 </template>
 
 <script>
 import Header from "@/components/lite/desktop/Header";
+import Footer from "@/components/lite/desktop/Footer";
 
 export default {
   name: "MainLayout",
   components: {
-    Header
+    Header,
+    Footer
   }
 };
 </script>
