@@ -75,7 +75,7 @@
               </div>
               <!-- d-flex -->
 
-              <div class="d-flex align-items-center mt-0 mb-3">
+              <!-- <div class="d-flex align-items-center mt-0 mb-3">
                 <star-rating
                   border-color="#fc8301"
                   :border-width="2"
@@ -112,8 +112,7 @@
                 <a href="#reviews" class="product_revew_text ml-4 anim"
                   >{{ $t('post_page.comments') }} (2762)</a
                 >
-              </div>
-              <!-- d-flex -->
+              </div> -->
 
               <hr />
 
@@ -225,13 +224,12 @@
                     }"
                     title="postData.author.name"
                     class="product_seller_name d-block text_ellipsis1 myhover_text"
-                    >{{ postData.author.name }}</router-link
-                  >
+                    >{{ postData.author.name }}</router-link>
                   <!-- product_seller_name -->
                   <span>({{ postData.author.postsCount }} {{ $t('post_page.posts') }})</span>
-                  <button class="d-block mt-1 subscribe_btn" @click.prevent="toggleSub" data-show="true">
+                  <!-- <button class="d-block mt-1 subscribe_btn" @click.prevent="toggleSub" data-show="true">
                     {{ subText }}
-                  </button>
+                  </button> -->
                 </div>
                 <!-- seller_text -->
               </div>
@@ -370,7 +368,7 @@
                   </div>
                   <!-- col-md-6 -->
                   <div class="col-md-6">
-                    <h4 class="pb-3">{{ $t('post_page.hash') }}</h4>
+                    <!-- <h4 class="pb-3">{{ $t('post_page.hash') }}</h4>
                     <div class="product_hashtags mb-4">
                       <router-link
                         :to="{ name: 'CategoryPage' }"
@@ -380,9 +378,7 @@
                       >
                         <span>#{{ hashtag.name }}</span>
                       </router-link>
-                      <!-- product_hashtag -->
-                    </div>
-                    <!-- product_hashtags -->
+                    </div> -->
 
                     <h4 class="pb-4">{{ $t('post_page.other_products') }}</h4>
 
@@ -543,13 +539,14 @@ export default {
     },
     async toggleView() {
       this.expanded = !this.expanded;
-      const response = await axios.post("author/" + this.postData.author.id);
+      const response = await axios.post("author/" + this.postData.id);
       if (this.expanded) {
-         this.text = response.data;
-      } else {
-         this.text = "Показать номер";
+          this.text = response.data;
+      } 
+      else {
+          this.text = "Показать номер";
       }
-   },
+  },
   toggleSub() {
       this.subExpanded = !this.subExpanded;
       if (this.subExpanded) {

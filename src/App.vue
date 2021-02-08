@@ -641,7 +641,7 @@ body.modal-open {
 .vs-select--input {
   border: none !important;
   border-radius: 3px !important;
-  background: #f8f8fc !important;
+  background: #efeff8 !important;
   padding: 11px 25px 11px 10px !important;
   transition: all 0.2s !important;
   font-family: "Inter", sans-serif !important;
@@ -671,6 +671,9 @@ body.modal-open {
   background: rgba(255, 201, 150, 0.377) !important;
   color: var(--main-color) !important;
   font-weight: 500 !important;
+}
+.con-vs-loading {
+  position: absolute!important;
 }
 .con-img-upload {
   padding: 0 !important;

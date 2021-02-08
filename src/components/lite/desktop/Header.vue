@@ -52,7 +52,7 @@
           :class="{ 'd-none': scrollPosition > 220 }"
         >
           <div class="d-flex justify-content-between align-items-center">
-            <a href="#" class="navbar_top_link geo_link">
+            <!-- <a href="#" class="navbar_top_link geo_link">
               <svg
                 width="16"
                 height="15"
@@ -70,7 +70,7 @@
                 />
               </svg>
               {{ $t("city") }}
-            </a>
+            </a> -->
             <!-- navbar_top_link -->
           </div>
           <!-- d-flex -->
@@ -378,7 +378,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-@media screen and (min-width: 1350px) {
+@media screen and (max-width: 1400px) {
 	.create_store_btn {
     font-size: 14px!important;
   }
@@ -397,7 +397,7 @@ export default {
   color: var(--main-color);
   padding: 10px 14px;
   border-radius: 3px;
-  font-size: 15px;
+  font-size: 15px!important;
   font-family: "Inter", sans-serif;
   transition: all 0.2s;
   font-weight: 500;
@@ -407,7 +407,7 @@ export default {
   color: var(--main-color);
 }
 .create_ad_btn {
-  font-size: 15px;
+  font-size: 15px!important;
   font-family: "Inter", sans-serif;
   padding: 10px 14px !important;
 }
@@ -480,7 +480,7 @@ export default {
   position: absolute;
   top: 20px;
   left: 0;
-  z-index: 999999;
+  z-index: 20;
   /* box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.05); */
 }
 .mynavbar.fixed {
