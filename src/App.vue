@@ -411,6 +411,15 @@ body.modal-open {
     max-width: 1350px !important;
   }
 }
+@media (min-width: 1350px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1300px !important;
+  }
+}
 /* START Btns styles */
 .grid-container {
   display: grid;

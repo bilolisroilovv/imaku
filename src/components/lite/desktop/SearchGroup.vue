@@ -155,25 +155,6 @@ export default {
       $searchInput.attr("placeholder", "Говорите...");
       $voiceTrigger.addClass("active");
       /* Start voice recognition */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       
       recognition.start();
     }
@@ -206,6 +187,11 @@ export default {
 <style scoped>
 #voice-trigger.active {
   background: rgb(248, 154, 154);
+}
+@media screen and (min-width: 1350px) {
+	.navbar_search_input {
+    width: 600px!important;
+  }
 }
 .border-radius-100 {
   border-radius: 100px;

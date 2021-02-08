@@ -24,9 +24,9 @@
       <!-- container -->
     </section>
     <!-- product_section -->
-    <ShopInfo />
+    <ShopInfo :shop="shopData"/>
     <div class="container">
-      <PostsSection class="pt-0" />
+      <PostsSection :posts="shopData.posts" class="pt-0" />
     </div>
     <!-- container -->
   </div>

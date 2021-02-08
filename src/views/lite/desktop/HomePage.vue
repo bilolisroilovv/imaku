@@ -24,16 +24,14 @@
       <!-- container -->
     </section>
 
-    <section class="section section2 pb-5">
+    <!-- <section class="section section2 pb-5">
       <div class="container">
         <h2 class="section_title pb-4">
           {{ $t('homepage.popular_ads') }}
         </h2>
-        <!-- section_title -->
         <SelectionSection :posts="allPosts" />
       </div>
-      <!-- container -->
-    </section>
+    </section> -->
 
     <section class="section pt-0">
       <div class="container">
@@ -45,15 +43,18 @@
       </div>
       <!-- container -->
     </section>
+
+    <Footer />
   </div>
 </template>
 
 <script>
 import HeaderMainSlider from "@/components/lite/desktop/Sliders/HeaderMainSlider";
 import HeaderCategoriesSlider from "@/components/lite/desktop/Sliders/HeaderCategoriesSlider";
-import SelectionSection from "@/components/lite/desktop/SelectionSection/SelectionSection";
+/* import SelectionSection from "@/components/lite/desktop/SelectionSection/SelectionSection"; */
 import PostsSection from "@/components/lite/desktop/postsSection/PostsSection";
 import PostsSlider from "@/components/lite/desktop/Sliders/PostsSlider";
+import Footer from "@/components/lite/desktop/Footer";
 import { mapGetters } from "vuex"; 
 import axios from "axios";
 
@@ -66,11 +67,12 @@ export default {
     };
   },
   components: {
-    SelectionSection,
+    /* SelectionSection, */
     PostsSection,
     PostsSlider,
     HeaderMainSlider,
-    HeaderCategoriesSlider
+    HeaderCategoriesSlider,
+    Footer
   },
   created() {
     this.$store.dispatch("fetchHeaderCategories");

@@ -378,6 +378,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
+@media screen and (min-width: 1350px) {
+	.create_store_btn {
+    font-size: 14px!important;
+  }
+  .create_ad_btn {
+    font-size: 14px!important;
+  }
+}
 .header_profile_img {
   width: 43px;
   height: 43px;
@@ -472,7 +480,7 @@ export default {
   position: absolute;
   top: 20px;
   left: 0;
-  z-index: 10;
+  z-index: 999999;
   /* box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.05); */
 }
 .mynavbar.fixed {
