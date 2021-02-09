@@ -3,7 +3,7 @@
     <swiper class="swiper main_slider" :options="mainSliderOption">
       <swiper-slide
         class="slide-1 myhover_bg"
-        v-for="item in allHeaderMainSlider"
+        v-for="item in allIndexInfo.sliders"
         :key="item.id"
       >
         <router-link
@@ -61,7 +61,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["allHeaderMainSlider"])
+    ...mapGetters(["allIndexInfo"])
   }
 };
 </script>

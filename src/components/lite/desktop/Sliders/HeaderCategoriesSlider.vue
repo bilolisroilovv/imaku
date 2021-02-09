@@ -7,7 +7,7 @@
       >
         <swiper-slide
           class="slide-1"
-          v-for="item in allHeaderCategories"
+          v-for="item in allIndexInfo.categories"
           :key="item.id"
         >
           <router-link
@@ -66,7 +66,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["allHeaderCategories"])
+    ...mapGetters(["allIndexInfo"])
   }
 };
 </script>

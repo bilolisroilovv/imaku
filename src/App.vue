@@ -33,7 +33,6 @@ export default {
   async created() {
     this.$store.dispatch("fetchCategories");
     this.$store.dispatch("fetchUser");
-    this.$store.dispatch("fetchPosts");
   },
 };
 </script>

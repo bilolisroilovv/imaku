@@ -19,7 +19,7 @@
           {{ $t('homepage.give_it_away') }}
         </h2>
         <!-- section_title -->
-        <PostsSlider :posts="givesSliderData" />
+        <PostsSlider :posts="allIndexInfo.gives" />
       </div>
       <!-- container -->
     </section>
@@ -29,7 +29,7 @@
         <h2 class="section_title pb-4">
           {{ $t('homepage.popular_ads') }}
         </h2>
-        <SelectionSection :posts="selectionSection" />
+        <SelectionSection :posts="allIndexInfo.selectionSection" />
       </div>
     </section>
 
@@ -39,7 +39,7 @@
           {{ $t('homepage.for_you') }}
         </h2>
         <!-- section_title -->
-        <PostsSection :posts="allPosts" />
+        <PostsSection :posts="allIndexInfo.posts" />
       </div>
       <!-- container -->
     </section>
@@ -55,15 +55,15 @@ import PostsSection from "@/components/lite/desktop/postsSection/PostsSection";
 import PostsSlider from "@/components/lite/desktop/Sliders/PostsSlider";
 import SelectionSection from "@/components/lite/desktop/SelectionSection/SelectionSection";
 import { mapGetters } from "vuex"; 
-import axios from "axios";
+/* import axios from "axios"; */
 
 export default {
   name: "HomePage",
   data() {
     return {
       content: "",
-      givesSliderData: [],
-      selectionSection: []
+      givesSliderData: this.allIndexInfo.gives,
+      selectionSection: this.allIndexInfo.selectionSection
     };
   },
   components: {
@@ -76,15 +76,12 @@ export default {
   created() {
     this.$store.dispatch("fetchHeaderCategories");
     this.$store.dispatch("fetchHeaderMainSlider");
-    this.$store.dispatch("fetchPosts");
+    this.$store.dispatch("fetchInfo");
   },
   computed: {
-    ...mapGetters(["allPosts"])
+    ...mapGetters(["allIndexInfo"])
   },
   async mounted() {
-    const response = await axios.get("");
-    this.givesSliderData = response.data.gives;
-    this.selectionSection = response.data.selectionSection;
   }
 };
 </script>
