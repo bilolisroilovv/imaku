@@ -61,9 +61,7 @@ export default {
   name: "HomePage",
   data() {
     return {
-      content: "",
-      givesSliderData: this.allIndexInfo.gives,
-      selectionSection: this.allIndexInfo.selectionSection
+      content: ""
     };
   },
   components: {
@@ -74,8 +72,6 @@ export default {
     HeaderCategoriesSlider
   },
   created() {
-    this.$store.dispatch("fetchHeaderCategories");
-    this.$store.dispatch("fetchHeaderMainSlider");
     this.$store.dispatch("fetchInfo");
   },
   computed: {
