@@ -6,7 +6,6 @@
           <div class="post_add_block mt-4">
             <h2 class="pb-4 mb-3">{{ $t("post_create.title") }}</h2>
             <div>
-
               <div class="d-flex align-items-center myinput_group pb-4">
                 <label for=""
                   >{{ $t("post_create.product_name") }} <span>*</span></label
@@ -63,48 +62,6 @@
                   >{{ $t("post_create.desc") }} <span>*</span></label
                 >
                 <textarea id="" rows="7" v-model="description"></textarea>
-              </div>
-              <!-- d-flex -->
-              <div class="d-flex myinput_group pb-4">
-                <label for="">{{ $t("post_create.photo") }}</label>
-                <div class="w-100">
-                  <div class="photos_block">
-                    <!-- <vs-upload :text="'Добавить'" id="files" ref="files" @change="handleFilesUpload($event)" :show-upload-button="false" @on-success="successUpload">
-                    </vs-upload> -->
-                    <!-- <input
-                      type="file"
-                      id="files"
-                      ref="files"
-                      multiple
-                      @change="handleFilesUpload($event)"
-                    /> -->
-                    <VueFileAgent
-                      ref="files"
-                      :theme="'default'"
-                      :multiple="true"
-                      :deletable="true"
-                      :meta="true"
-                      :maxSize="'10MB'"
-                      :maxFiles="14"
-                      :helpText="'Добавьте фотографии'"
-                      required
-                      :errorText="{
-                        type: 'Invalid file type. Only images or zip Allowed',
-                        size: 'Files should not exceed 10MB in size',
-                      }"
-                      v-model="files"
-                      @beforedelete="postImagesDelete($event)"
-                    ></VueFileAgent>
-                  </div>
-                  <!-- photos_block -->
-                  <p class="photos_p pt-2">
-                    {{ $t("post_create.photo_required") }}
-                    <br />
-                    {{ $t("post_create.photo_mb") }} — 25{{
-                      $t("post_create.mb")
-                    }}.
-                  </p>
-                </div>
               </div>
               <!-- d-flex -->
               <!-- <div class="d-flex myinput_group pb-4">
@@ -218,7 +175,7 @@ export default {
       this.$vs.notify({
         color: "success",
         title: "Загрузка успешно выполнена",
-        text: "Загрузка успешно выполнена"
+        text: "Загрузка успешно выполнена",
       });
     },
     checkLogin() {
@@ -278,12 +235,12 @@ export default {
         this.$vs.loading.close(".post_add_block > .con-vs-loading")
       );
     console.log(response.data);
-    this.name = response.data.name
+    this.name = response.data.name;
     this.phone = response.data.phone;
     this.description = response.data.description;
     this.location = response.data.location;
     this.price = response.data.price;
-    this.files = response.data.gallery
+    this.files = response.data.gallery;
   },
 };
 </script>

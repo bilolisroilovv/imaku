@@ -7,10 +7,14 @@
             <div class="d-flex align-items-center mb-3">
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
-                  <li class="breadcrumb-item"><a href="/">{{ $t('profile.home') }}</a></li>
+                  <li class="breadcrumb-item">
+                    <router-link
+                    :to="{name: 'HomePage'}"
+                    >{{ $t('profile.home') }}</router-link>
+                  </li>
                   <span class="mx-2 px-1">/</span>
                   <li class="breadcrumb-item active" aria-current="page">
-                    Алексеев Эдуaрд Львович
+                    {{ shopData.name }}
                   </li>
                 </ol>
               </nav>
@@ -50,7 +54,8 @@ export default {
   data() {
     return {
       avatarImage: "'https://picsum.photos/500?random=1'",
-      shopData: []
+      shopData: [],
+      colorLoading: "var(--main-color)"
     };
   },
   props: {
@@ -61,10 +66,9 @@ export default {
       this.getShop();
     },
   },
-  async mounted() {
-    const response = await axios.get("/shop/" + this.id);
-    this.postData = response.data;
+  mounted() {
     this.getShop();
+    console.log(this.id);
   },
   methods: {
     async getShop() {
@@ -75,7 +79,7 @@ export default {
       });
 
       const response = await axios
-        .get("shop/" + this.id)
+        .get("shops/" + this.id)
         .finally(() => this.$vs.loading.close(".con-vs-loading"));
 
       this.shopData = response.data;

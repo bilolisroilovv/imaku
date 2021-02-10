@@ -121,47 +121,7 @@
               </div>
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">
-                <label for="">Фотографии</label>
-                <div class="w-100">
-                  <div class="photos_block">
-                    <!-- <vs-upload :text="'Добавить'" id="files" ref="files" @change="handleFilesUpload($event)" :show-upload-button="false" @on-success="successUpload">
-                    </vs-upload> -->
-                    <input
-                      type="file"
-                      id="files"
-                      ref="files"
-                      multiple
-                      @change="handleFilesUpload($event)"
-                    />
-                    <!-- <VueFileAgent
-                      ref="files"
-                      @change="handleFilesUpload($event)"
-                      :theme="'default'"
-                      :multiple="true"
-                      :deletable="true"
-                      :meta="true"
-                      :maxSize="'10MB'"
-                      :maxFiles="14"
-                      :helpText="'Choose images or zip files'"
-                      :errorText="{
-                        type: 'Invalid file type. Only images or zip Allowed',
-                        size: 'Files should not exceed 10MB in size',
-                      }"
-                    ></VueFileAgent> -->
-                  </div>
-                  <!-- photos_block -->
-                  <p class="photos_p pt-2">
-                    Первое фото будет отображаться в результатах поиска,
-                    выберите наиболее удачное. <br />
-                    Вы можете загрузить до 12 фотографий в формате JPG или PNG.
-                    <br />
-                    Максимальный размер фото — 25MB.
-                  </p>
-                </div>
-              </div>
-              <!-- d-flex -->
-              <div class="d-flex myinput_group pb-4">
-                <label for="">Местоположение <span>*</span></label>
+                <label for="">Местоположение<span>*</span></label>
                 <div class="w-100">
                   <div class="map">
                     <div class="position-relative mb-3">

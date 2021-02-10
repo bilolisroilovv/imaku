@@ -3,10 +3,10 @@
     <div class="position-relative">
       <div
         class="shop_banner"
-        :style="{ 'background-image': 'url(' + this.shop.banner + ')' }"
+        :style="{ 'background-image': 'url(' + shop.banner + ')' }"
       >
         <div class="container position-relative">
-          <h2 class="shop_title">Prime Tech Pro</h2>
+          <h2 class="shop_title">{{shop.name}}</h2>
         </div>
         <!-- container -->
       </div>
@@ -22,13 +22,13 @@
           <div class="shop_block1">
             <div
               class="shop_logo mr-3"
-              :style="{ 'background-image': 'url(' + this.shop.avatar + ')' }"
+              :style="{ 'background-image': 'url(' + shop.avatar + ')' }"
             ></div>
             <!-- shop_logo -->
             <div class="product_sidebar_date">
               <span class="mr-2">{{ $t('shop.created_at') }}:</span>
-              <h6 class="pb-1">13.02.2020</h6>
-              <star-rating
+              <h6 class="pb-1">{{ shop.createdAt }}</h6>
+              <!-- <star-rating
                 border-color="#fc8301"
                 :border-width="2"
                 :star-points="[
@@ -60,7 +60,7 @@
                 text-class="custom-text"
                 :read-only="true"
                 :increment="0.5"
-              ></star-rating>
+              ></star-rating> -->
               <button class="d-block mt-1 subscribe_btn" data-show="true">
                 {{ $t('shop.subscribe_to') }}
               </button>
@@ -141,10 +141,10 @@
               <div class="col-md-3">
                 <div class="product_btns mt-4">
                   <a
-                    href="#"
+                    @click.prevent="toggleView"
                     class="show_number_btn mb-3 d-block w-100 text-center"
                   >
-                    {{ $t('shop.shop_phone') }}
+                    {{ text }}
                   </a>
                   <!-- show_number_btn -->
                   <a
@@ -171,13 +171,7 @@
           <div class="shop_block3">
             <h3 class="pb-3">{{ $t('shop.description') }}</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex
-              possimus harum hic consequuntur repudiandae rerum iste natus quia
-              <br />
-              incidunt quasi, pariatur dolores ipsum dolor at dolorem magnam
-              saepe magni numquam Ex possimus harum hic consequuntur repudiandae
-              rerum iste natus quia incidunt quasi, pariatur dolores ipsum dolor
-              at dolorem magnam saepe magni numquam.
+              {{ shop.description }}
             </p>
           </div>
           <!-- shop_block3 -->
@@ -209,12 +203,15 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "ShopInfo",
   data() {
     return {
-      shopBanner: "'https://picsum.photos/1920/400?random=1'",
-      shopLogo: "'https://picsum.photos/500?random=2'"
+      expanded: false,
+      text: "Показать номер",
+      subExpanded: false,
+      subText: "Подписаться"
     };
   },
   props: {
@@ -222,7 +219,19 @@ export default {
   },
   mounted() {
     console.log(this.shop);
-  }
+  },
+  methods: {
+    async toggleView() {
+      this.expanded = !this.expanded;
+      const response = await axios.post("shops/phone/" + this.shop.id);
+      if (this.expanded) {
+          this.text = response.data;
+      } 
+      else {
+          this.text = "Показать номер";
+      }
+    },
+  },
 };
 </script>
 
