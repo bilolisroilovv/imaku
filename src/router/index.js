@@ -46,7 +46,7 @@ const routes = [
         props: true
       },
       {
-        path: "shop/:id:slug",
+        path: "shop/:slug-:id",
         name: "ShopPage",
         props: true,
         meta: { layout: "second" },

@@ -128,21 +128,6 @@
               </div>
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">
-                <label for="">{{ $t("post_create.hesh") }}</label>
-                <multiselect
-                  v-model="value"
-                  :tag-placeholder="$t('post_create.add_hashtags')"
-                  :placeholder="$t('post_create.add_hashtags_placeholder')"
-                  label="name"
-                  track-by="code"
-                  :options="options"
-                  :multiple="true"
-                  :taggable="true"
-                  @tag="addTag"
-                ></multiselect>
-              </div>
-              <!-- d-flex -->
-              <div class="d-flex myinput_group pb-4">
                 <label for="">{{ $t("post_create.photo") }}</label>
                 <div class="w-100">
                   <div class="photos_block">
