@@ -25,14 +25,14 @@ const routes = [
         component: HomePage
       },
       {
-        path: "posts/:id:slug",
+        path: "posts/:id/:slug",
         name: "PostPage",
         meta: { layout: "second" },
         props: true,
         component: () => import("../views/lite/desktop/PostPage.vue")
       },
       {
-        path: "seller/:id:name",
+        path: "seller/:id/:name",
         name: "SellerPage",
         meta: { layout: "second" },
         props: true,
@@ -46,7 +46,7 @@ const routes = [
         props: true
       },
       {
-        path: "shop/:slug-:id",
+        path: "shop/:slug/:id",
         name: "ShopPage",
         props: true,
         meta: { layout: "second" },
@@ -59,7 +59,7 @@ const routes = [
         component: () => import("../views/lite/desktop/PostCreatePage.vue")
       },
       {
-        path: "post-edit/:id:slug",
+        path: "post-edit/:id/:slug",
         name: "PostEdit",
         meta: { layout: "second" },
         props: true,

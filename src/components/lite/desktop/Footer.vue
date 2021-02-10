@@ -109,6 +109,7 @@ footer {
   margin-top: 30px;
   padding: 40px 0 55px 0;
   background: #fff;
+  min-height: 345px;
 }
 .footer_top {
   padding-bottom: 40px;

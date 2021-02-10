@@ -118,7 +118,7 @@ export default {
   methods: {
     async nextStep() {
       this.$vs.loading({
-        container: ".loading_div",
+        container: "",
         scale: 0.6,
         color: this.colorLoading
       });
@@ -128,7 +128,7 @@ export default {
           phone: this.phone
         })
         .finally(() =>
-          this.$vs.loading.close(".loading_div > .con-vs-loading")
+          this.$vs.loading.close(".con-vs-loading")
         );
 
       if (response.status === 200) {
@@ -140,7 +140,7 @@ export default {
 
     async handleSubmit() {
       this.$vs.loading({
-        container: ".loading_div",
+        container: "",
         scale: 0.6,
         color: this.colorLoading
       });
@@ -151,7 +151,7 @@ export default {
           code: this.code
         })
         .finally(() =>
-          this.$vs.loading.close(".loading_div > .con-vs-loading")
+          this.$vs.loading.close(".con-vs-loading")
         );
       localStorage.setItem("token", response.data.token);
       this.$router.go(this.$router.currentRoute);
