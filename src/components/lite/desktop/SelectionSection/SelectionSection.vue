@@ -7,8 +7,13 @@
         :key="postPart.id"
       >
         <div class="d-flex justify-content-between mt-4">
-          <a href="categoru.html" class="myhover_text section2_grouptitle"
-            >{{postPart.title}}</a
+          <router-link
+          :to="{
+            name: 'CategoryPage',
+            params: { id: postPart.id, slug: postPart.slug }
+          }"
+          class="myhover_text section2_grouptitle"
+            >{{postPart.title}}</router-link
           >
         </div>
         <!-- d-flex -->

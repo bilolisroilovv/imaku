@@ -671,9 +671,9 @@ body.modal-open {
   color: var(--main-color) !important;
   font-weight: 500 !important;
 }
-.con-vs-loading {
+/* .con-vs-loading {
   position: absolute!important;
-}
+} */
 .con-img-upload {
   padding: 0 !important;
   margin: 0 !important;
@@ -740,7 +740,7 @@ body.modal-open {
 }
 .filter_collapse .vs-collapse-item--header h5 {
   font-weight: bold !important;
-  font-size: 21px;
+  font-size: 19px;
   font-family: "Inter", sans-serif !important;
 }
 .filter_collapse .con-content--item {
@@ -788,5 +788,10 @@ body.modal-open {
 }
 .header_profile_links a {
   font-size: 15px !important;
+}
+.wrapper {
+  min-height: 100vh;
+}
+footer {
 }
 </style>

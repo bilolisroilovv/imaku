@@ -52,73 +52,22 @@
                   </div>
                   <!-- price_filter -->
                 </vs-collapse-item>
-                <vs-collapse-item>
+                <vs-collapse-item
+                v-for="filter in catData.category.characters"
+                :key="filter.id"
+                >
                   <div slot="header">
-                    <h5>{{ $t('category_page.brand') }}</h5>
+                    <h5>{{filter.title}}</h5>
                   </div>
                   <div class="">
-                    <label class="control control--checkbox">
-                      <input type="checkbox" checked="checked" required />
+                    <label
+                    class="control control--checkbox"
+                    v-for="option in filter.options"
+                    :key="option.id"
+                    >
+                      <input type="checkbox" @change="changeFilter" :value="option.id" required v-model="checkedOptions"/>
                       <div class="control__indicator"></div>
-                      Apple
-                    </label>
-                    <label class="control control--checkbox">
-                      <input type="checkbox" required />
-                      <div class="control__indicator"></div>
-                      Samsung
-                    </label>
-                    <label class="control control--checkbox">
-                      <input type="checkbox" required />
-                      <div class="control__indicator"></div>
-                      Xiaomi
-                    </label>
-                    <label class="control control--checkbox">
-                      <input type="checkbox" required />
-                      <div class="control__indicator"></div>
-                      Oppo
-                    </label>
-                    <label class="control control--checkbox">
-                      <input type="checkbox" required />
-                      <div class="control__indicator"></div>
-                      Oneplus
-                    </label>
-                    <label class="control control--checkbox">
-                      <input type="checkbox" required />
-                      <div class="control__indicator"></div>
-                      Lg
-                    </label>
-                    <label class="control control--checkbox">
-                      <input type="checkbox" required />
-                      <div class="control__indicator"></div>
-                      Sony
-                    </label>
-                    <label class="control control--checkbox">
-                      <input type="checkbox" required />
-                      <div class="control__indicator"></div>
-                      Artel
-                    </label>
-                    <label class="control control--checkbox">
-                      <input type="checkbox" required />
-                      <div class="control__indicator"></div>
-                      Redmi
-                    </label>
-                  </div>
-                  <!-- price_filter -->
-                </vs-collapse-item>
-                <vs-collapse-item>
-                  <div slot="header">
-                    <h5>{{ $t('category_page.status.status_title') }}</h5>
-                  </div>
-                  <div>
-                    <label class="control control--checkbox">
-                      <input type="checkbox" required />
-                      <div class="control__indicator"></div>
-                      {{ $t('category_page.status.status_new') }}
-                    </label>
-                    <label class="control control--checkbox">
-                      <input type="checkbox" required />
-                      <div class="control__indicator"></div>
-                      {{ $t('category_page.status.status_old') }}
+                      {{ option.value }}
                     </label>
                   </div>
                   <!-- price_filter -->
@@ -209,6 +158,7 @@ export default {
   data() {
     return {
       catData: [],
+      checkedOptions: [],
       select1Normal: "",
       select1: 0,
       value1: [0, 999999999],
@@ -255,6 +205,26 @@ export default {
       form.append('params[from]', this.value1[0])
       form.append('params[to]', this.value1[1])
       form.append('params[sort]', this.select1)
+
+      const response = await axios
+      .post("categories/" + this.id, form)
+      .finally(() =>
+        this.$vs.loading.close(".con-vs-loading")
+      );
+      this.catData = response.data
+    },
+    async changeFilter () {
+      this.catData.posts = null
+      this.$vs.loading({
+        container: "",
+        scale: 0.8,
+        color: this.colorLoading
+      });
+      const form = new FormData();
+      form.append('params[from]', this.value1[0])
+      form.append('params[to]', this.value1[1])
+      form.append('params[sort]', this.select1)
+      form.append('params[characters][option_id]', this.checkedOptions)
 
       const response = await axios
       .post("categories/" + this.id, form)
