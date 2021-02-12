@@ -103,14 +103,7 @@
                   :read-only="true"
                   :increment="0.5"
                 ></star-rating>
-
-                <button
-                  class="d-block mt-1 ml-3 subscribe_btn"
-                  @click.prevent="toggleSub"
-                  data-show="true"
-                >
-                  {{ subText }}
-                </button>
+                <SubscribeBtn class="d-block mt-1 ml-3 subscribe_btn" :isSubscribed="this.isSubscribed" data-show="true" @click.prevent="toggleSub"/>
               </div>
               <!-- d-flex -->
 
@@ -121,12 +114,12 @@
                 </button>
                 <!-- seller_info_box -->
                 <button class="seller_info_box">
-                  <span>{{ sellerData.followers }}</span>
+                  <span>{{ sellerData.followersCount }}</span>
                   <h6>{{ $t("profile.post_followers") }}</h6>
                 </button>
                 <!-- seller_info_box -->
                 <button class="seller_info_box">
-                  <span>{{ sellerData.following }}</span>
+                  <span>{{ sellerData.followingCount }}</span>
                   <h6>{{ $t("profile.post_subscriptions") }}</h6>
                 </button>
                 <!-- seller_info_box -->
@@ -291,12 +284,14 @@
 
 <script>
 import Card4 from "@/components/lite/desktop/Cards/Card4";
+import SubscribeBtn from "@/components/lite/desktop/SubscribeBtn";
 import axios from "axios";
 
 export default {
   name: "ProductPage",
   components: {
-    Card4
+    Card4,
+    SubscribeBtn
   },
   props: {
     id: {}
@@ -305,8 +300,7 @@ export default {
     return {
       expanded: false,
       text: "Показать номер",
-      subExpanded: false,
-      subText: "Подписаться",
+      isSubscribed: true,
       sellerData: [],
       avatarImage: "'https://picsum.photos/500?random=1'"
     };

@@ -61,13 +61,7 @@
                 :read-only="true"
                 :increment="0.5"
               ></star-rating> -->
-              <button
-                @click.prevent="toggleSub"
-                class="d-block mt-1 subscribe_btn"
-                data-show="true"
-              >
-                {{ subText }}
-              </button>
+              <SubscribeBtn :isSubscribed="this.isSubscribed" data-show="true" @click.prevent="toggleSub"/>
             </div>
             <!-- product_sidebar_date -->
           </div>
@@ -208,15 +202,18 @@
 </template>
 
 <script>
+import SubscribeBtn from "@/components/lite/desktop/SubscribeBtn";
 import axios from "axios";
 export default {
   name: "ShopInfo",
+  components: {
+    SubscribeBtn
+  },
   data() {
     return {
       expanded: false,
       text: "Показать номер",
-      subExpanded: false,
-      subText: "Подписаться",
+      isSubscribed: true,
       shopType: "shop"
     };
   },

@@ -68,8 +68,11 @@
                   class="product_favourite mycard_favorite_stroke2 flex-center d-flex"
                   v-b-tooltip.hover
                   :title="$t('post_page.add_to_favorites')"
+                  @click.prevent="ToggleFavoriteRequest"
                 >
-                  <ToggleFavorite class="d-flex align-items-center" />
+                  <ToggleFavorite
+                  :isFavorite="this.isFavorite"
+                  class="d-flex align-items-center" />
                 </div>
                 <!-- product_favourite -->
               </div>
@@ -231,13 +234,8 @@
                     >({{ postData.author.postsCount }}
                     {{ $t("post_page.posts") }})</span
                   >
-                  <button
-                    class="d-block mt-1 subscribe_btn"
-                    @click.prevent="toggleSub"
-                    data-show="true"
-                  >
-                    {{ subText }}
-                  </button>
+                  
+                  <SubscribeBtn :isSubscribed="this.isSubscribed" data-show="true" @click.prevent="toggleSub"/>
                 </div>
                 <!-- seller_text -->
               </div>
@@ -472,6 +470,7 @@ import PostsSlider from "@/components/lite/desktop/Sliders/PostsSlider";
 import PostsSection from "@/components/lite/desktop/postsSection/PostsSection";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import Card3 from "@/components/lite/desktop/Cards/Card3";
+import SubscribeBtn from "@/components/lite/desktop/SubscribeBtn";
 import axios from "axios";
 import { mapGetters } from "vuex";
 import "swiper/css/swiper.css";
@@ -485,7 +484,8 @@ export default {
     PostsSection,
     Swiper,
     SwiperSlide,
-    Card3
+    Card3,
+    SubscribeBtn
   },
   props: {
     id: {}
@@ -493,6 +493,7 @@ export default {
   data() {
     return {
       expanded: false,
+      isSubscribed: true,
       text: "Показать номер",
       subExpanded: false,
       subText: "Подписаться",
@@ -508,7 +509,7 @@ export default {
       disLikesCount: null,
       isLiked: false,
       isDisliked: false,
-      isFavorited: false,
+      isFavorite: Boolean,
       postData: [],
       gallery: [],
       authorPosts: [],
@@ -527,6 +528,16 @@ export default {
     ...mapGetters(["currentUser"])
   },
   methods: {
+    async ToggleFavoriteRequest() {
+      const response = await axios.get("favourite/" + this.id);
+      this.isFavorite = response.data.isFavourite;
+      console.log(this.isFavorite);
+      this.$vs.notify({
+        color: "success",
+        title: "Успех",
+        text: "Объявлено успешно добавлено/удалено из избранных"
+      });
+    },
     async getPost() {
       this.$vs.loading({
         container: "",
@@ -543,7 +554,7 @@ export default {
       this.disLikesCount = response.data.dislikes;
       this.isLiked = response.data.isLiked;
       this.isDisliked = response.data.isDisliked;
-      this.isFavorited = response.data.favorite;
+      this.isFavorite = response.data.isFavourite;
       this.gallery = response.data.gallery;
       this.authorPosts = response.data.author.posts;
     },
