@@ -1,7 +1,9 @@
 <template>
   <div class="mycard">
     <div class="position-relative">
-      <router-link :to="{ name: 'PostPage', params: { id:post.id, slug: post.slug } }">
+      <router-link
+        :to="{ name: 'PostPage', params: { id: post.id, slug: post.slug } }"
+      >
         <div class="mycard_img mybg_center position-relative d-block">
           <div class="mycard_img_list">
             <div
@@ -182,16 +184,17 @@
         </div>
         <!-- d-flex -->
         <div class="mycard_edit_btns">
-          <button @click.prevent="removePost" class="post_remove_btn mainbtn"
-            ><i class="far fa-trash-alt mr-1"></i> {{ $t('card_base.delete') }}
+          <button @click.prevent="removePost" class="post_remove_btn mainbtn">
+            <i class="far fa-trash-alt mr-1"></i> {{ $t("card_base.delete") }}
           </button>
           <router-link
-          :to="{
-            name: 'PostEdit',
-            params: { id: post.id, slug: post.slug }
-          }"
-          class="post_edit_btn ml-2">
-            <i class="far fa-edit mr-1"></i> {{ $t('card_base.edit') }}
+            :to="{
+              name: 'PostEdit',
+              params: { id: post.id, slug: post.slug }
+            }"
+            class="post_edit_btn ml-2"
+          >
+            <i class="far fa-edit mr-1"></i> {{ $t("card_base.edit") }}
           </router-link>
         </div>
         <!-- mycard_edit_btns -->
@@ -204,7 +207,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   name: "Card5",
   components: {},
@@ -215,30 +218,28 @@ export default {
   },
   props: ["post"],
   methods: {
-    async removePost () {
+    async removePost() {
       this.$vs.loading({
         container: "",
         scale: 0.8,
         color: this.colorLoading
       });
       const response = await axios
-      .get('posts/delete/' + this.post.id)
-      .finally(() =>
-        setTimeout( ()=> {
-          this.$vs.loading.close(".con-vs-loading")
-        }, 10)
-      );
+        .get("posts/delete/" + this.post.id)
+        .finally(() =>
+          setTimeout(() => {
+            this.$vs.loading.close(".con-vs-loading");
+          }, 10)
+        );
       this.$vs.notify({
         color: "success",
         title: "Успех",
-        text: "Объявление успешно удалено",
+        text: "Объявление успешно удалено"
       });
-      this.$emit('removePost', response)
+      this.$emit("removePost", response);
     },
-    editPost () {
-
-    }
-  },
+    editPost() {}
+  }
 };
 </script>
 

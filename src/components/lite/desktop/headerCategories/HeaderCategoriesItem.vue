@@ -1,11 +1,12 @@
 <template>
   <li class="mymenu_li">
     <router-link
-    :to="{
-      name: 'CategoryPage',
-      params: { id: category.id, slug: category.slug }
-    }"
-    class="mymenu_li_a">
+      :to="{
+        name: 'CategoryPage',
+        params: { id: category.id, slug: category.slug }
+      }"
+      class="mymenu_li_a"
+    >
       <div class="d-flex">
         <div class="mymenu_li_a_img">
           <svg

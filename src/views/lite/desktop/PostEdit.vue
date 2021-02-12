@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-8">
           <div class="post_add_block mt-4">
-            <h2 class="pb-4 mb-3">{{ $t("post_create.title") }}</h2>
+            <h2 class="pb-4 mb-3">Редактировать объявление</h2>
             <div>
               <div class="d-flex align-items-center myinput_group pb-4">
                 <label for=""
@@ -42,7 +42,7 @@
                     '#### ### ### ###',
                     '# ### ### ### ###',
                     '## ### ### ### ###',
-                    '### ### ### ### ###',
+                    '### ### ### ### ###'
                   ]"
                   placeholder=""
                   class="price_input mr-2"
@@ -128,7 +128,7 @@
             class="right_block mt-4"
             :style="{
               'background-image':
-                'url(' + require('@/assets/lite/post-add-banner.jpg') + ')',
+                'url(' + require('@/assets/lite/post-add-banner.jpg') + ')'
             }"
           >
           </a>
@@ -149,7 +149,7 @@ import axios from "axios";
 export default {
   name: "PostEdit",
   props: {
-    id: {},
+    id: {}
   },
   data() {
     return {
@@ -164,10 +164,10 @@ export default {
       value: [],
       priceType: [
         { text: "сум", value: 1 },
-        { text: "y.e.", value: 2 },
+        { text: "y.e.", value: 2 }
       ],
       selectedItems: [],
-      colorLoading: "var(--main-color)",
+      colorLoading: "var(--main-color)"
     };
   },
   methods: {
@@ -175,7 +175,7 @@ export default {
       this.$vs.notify({
         color: "success",
         title: "Загрузка успешно выполнена",
-        text: "Загрузка успешно выполнена",
+        text: "Загрузка успешно выполнена"
       });
     },
     checkLogin() {
@@ -190,7 +190,7 @@ export default {
       this.$vs.loading({
         container: "",
         scale: 0.8,
-        color: this.colorLoading,
+        color: this.colorLoading
       });
       const form = new FormData();
       form.append("name", this.name);
@@ -200,40 +200,36 @@ export default {
       form.append("phone", this.phone);
       form.append("location", this.location);
 
-      for (var screens = 0; screens < this.files.length; screens++) {
+      /* for (var screens = 0; screens < this.files.length; screens++) {
         form.append("gallery[" + screens + "]", this.files[screens].file);
-      }
+      } */
 
       await axios
-        .post("posts/store", form, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
+        .post("posts/update/" + this.id, form)
         .finally(() => this.$vs.loading.close(".con-vs-loading"));
       this.$vs.notify({
         color: "success",
         title: "Успех",
-        text: "Объявлено успешно размещено",
+        text: "Объявлено успешно размещено"
       });
       this.$router.push("/");
-    },
+    }
   },
   computed: {
-    ...mapGetters(["currentUser"]),
+    ...mapGetters(["currentUser"])
   },
   async mounted() {
     this.$vs.loading({
       container: ".post_add_block",
       scale: 0.8,
-      color: this.colorLoading,
+      color: this.colorLoading
     });
     this.checkLogin();
     const response = await axios
-      .get("posts/" + this.id)
-      .finally(() =>
-        this.$vs.loading.close(".post_add_block > .con-vs-loading")
-      );
+    .get("posts/update/" + this.id)
+    .finally(() =>
+      this.$vs.loading.close(".post_add_block > .con-vs-loading")
+    );
     console.log(response.data);
     this.name = response.data.name;
     this.phone = response.data.phone;
@@ -241,7 +237,7 @@ export default {
     this.location = response.data.location;
     this.price = response.data.price;
     this.files = response.data.gallery;
-  },
+  }
 };
 </script>
 

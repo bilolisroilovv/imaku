@@ -32,8 +32,7 @@ export default {
   computed: {
     ...mapGetters(["allCategories"])
   },
-  methods: {
-  },
+  methods: {},
   async mounted() {}
 };
 </script>

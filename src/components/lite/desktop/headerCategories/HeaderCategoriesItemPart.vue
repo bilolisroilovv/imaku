@@ -3,20 +3,21 @@
     <ul class="submenu_list">
       <li class="submenu_title">
         <router-link
-        :to="{
-          name: 'CategoryPage',
-          params: { id: this.category.id, slug: this.category.slug }
-        }">
+          :to="{
+            name: 'CategoryPage',
+            params: { id: this.category.id, slug: this.category.slug }
+          }"
+        >
           {{ category.name }}
         </router-link>
       </li>
       <!-- submenu_title -->
       <li v-for="category in category.subCategories" :key="category.id">
         <router-link
-        :to="{
-          name: 'CategoryPage',
-          params: { id: category.id, slug: category.slug }
-        }"
+          :to="{
+            name: 'CategoryPage',
+            params: { id: category.id, slug: category.slug }
+          }"
         >
           {{ category.name }}
         </router-link>

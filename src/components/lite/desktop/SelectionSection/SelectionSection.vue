@@ -1,19 +1,15 @@
 <template>
   <div class="bg-white pt-1 pl-4 pr-4 pb-4">
     <div class="row">
-      <div
-        class="col-md-6"
-        v-for="postPart in this.posts"
-        :key="postPart.id"
-      >
+      <div class="col-md-6" v-for="postPart in this.posts" :key="postPart.id">
         <div class="d-flex justify-content-between mt-4">
           <router-link
-          :to="{
-            name: 'CategoryPage',
-            params: { id: postPart.id, slug: postPart.slug }
-          }"
-          class="myhover_text section2_grouptitle"
-            >{{postPart.title}}</router-link
+            :to="{
+              name: 'CategoryPage',
+              params: { id: postPart.id, slug: postPart.slug }
+            }"
+            class="myhover_text section2_grouptitle"
+            >{{ postPart.title }}</router-link
           >
         </div>
         <!-- d-flex -->
@@ -47,10 +43,10 @@
               title="{post.name}"
               class="mycard_title text_ellipsis2 mb-2 pt-2"
             >
-              {{post.name}}
+              {{ post.name }}
             </router-link>
             <!-- mycard_title -->
-            <h4 class="mycard_price text_ellipsis1">{{post.price}}</h4>
+            <h4 class="mycard_price text_ellipsis1">{{ post.price }}</h4>
             <!-- mycard_price -->
           </div>
           <!-- mycard2 -->
@@ -88,8 +84,7 @@ export default {
       image12: "'https://picsum.photos/500?random=12'"
     };
   },
-  mounted() {
-  }
+  mounted() {}
 };
 </script>
 

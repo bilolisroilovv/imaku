@@ -7,7 +7,7 @@
           <img src="@/assets/lite/close.png" class="img-width" alt="" />
         </button>
         <h5 class="modal-title pb-4" id="exampleModalLabel">
-          {{ $t('modal.login') }}
+          {{ $t("modal.login") }}
         </h5>
       </div>
       <!-- mymodal-header -->
@@ -22,11 +22,11 @@
             required
           />
           <span class="mt-1">
-            {{ $t('modal.title') }}
+            {{ $t("modal.title") }}
           </span>
           <div>
             <button class="mt-3 mainbtn w-100" @click.prevent="nextStep">
-              {{ $t('modal.next') }}
+              {{ $t("modal.next") }}
             </button>
           </div>
         </div>
@@ -41,9 +41,11 @@
             required
             v-model="code"
           />
-          <span class="mt-1">{{ $t('modal.title2') }}</span>
+          <span class="mt-1">{{ $t("modal.title2") }}</span>
           <div>
-            <button class="mt-3 mainbtn w-100" type="submit">{{ $t('modal.next') }}</button>
+            <button class="mt-3 mainbtn w-100" type="submit">
+              {{ $t("modal.next") }}
+            </button>
           </div>
         </div>
         <!-- step2 -->
@@ -127,9 +129,7 @@ export default {
         .post("authorize", {
           phone: this.phone
         })
-        .finally(() =>
-          this.$vs.loading.close(".con-vs-loading")
-        );
+        .finally(() => this.$vs.loading.close(".con-vs-loading"));
 
       if (response.status === 200) {
         this.step++;
@@ -150,9 +150,7 @@ export default {
           phone: this.phone,
           code: this.code
         })
-        .finally(() =>
-          this.$vs.loading.close(".con-vs-loading")
-        );
+        .finally(() => this.$vs.loading.close(".con-vs-loading"));
       localStorage.setItem("token", response.data.token);
       this.$router.go(this.$router.currentRoute);
       this.$router.push("/");

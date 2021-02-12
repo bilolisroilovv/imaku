@@ -3,7 +3,10 @@
     <section class="category_section">
       <div class="container">
         <h2 class="section_title pb-4">
-          {{ catData.category.title }} <span>{{ catData.postsCount }} {{ $t('category_page.results') }}</span>
+          {{ catData.category.title }}
+          <span
+            >{{ catData.postsCount }} {{ $t("category_page.results") }}</span
+          >
         </h2>
         <div class="row">
           <div class="w-26 pr-0">
@@ -12,13 +15,14 @@
                 <a href="#" class="title">{{ catData.category.title }}</a>
                 <div class="ml-3 pt-1 cateogires_links">
                   <router-link
-                  v-for="subcategorie in catData.category.subcategories"
-                  :key="subcategorie.id"
-                  :to="{
-                    name: 'CategoryPage',
-                    params: { id: subcategorie.id, slug: subcategorie.slug }
-                  }"
-                  >{{ subcategorie.title }}</router-link>
+                    v-for="subcategorie in catData.category.subcategories"
+                    :key="subcategorie.id"
+                    :to="{
+                      name: 'CategoryPage',
+                      params: { id: subcategorie.id, slug: subcategorie.slug }
+                    }"
+                    >{{ subcategorie.title }}</router-link
+                  >
                 </div>
               </div>
               <!-- category_sidebar_categories -->
@@ -28,7 +32,7 @@
               <vs-collapse class="filter_collapse">
                 <vs-collapse-item open>
                   <div slot="header">
-                    <h5>{{ $t('category_page.price') }}</h5>
+                    <h5>{{ $t("category_page.price") }}</h5>
                   </div>
                   <div class="price_filter">
                     <!-- <vs-slider
@@ -40,12 +44,22 @@
                     /> -->
                     <div class="d-flex justify-content-between">
                       <div class="position-relative">
-                        <input type="text" max="10000000" @change="changePrice()" v-model="value1[0]" />
-                        <span>{{ $t('category_page.from') }}</span>
+                        <input
+                          type="text"
+                          max="10000000"
+                          @change="changePrice()"
+                          v-model="value1[0]"
+                        />
+                        <span>{{ $t("category_page.from") }}</span>
                       </div>
                       <div class="position-relative ml-3">
-                        <input type="text" max="10000000" @change="changePrice()" v-model="value1[1]" />
-                        <span>{{ $t('category_page.to') }}</span>
+                        <input
+                          type="text"
+                          max="10000000"
+                          @change="changePrice()"
+                          v-model="value1[1]"
+                        />
+                        <span>{{ $t("category_page.to") }}</span>
                       </div>
                     </div>
                     <!-- d-flex -->
@@ -53,19 +67,25 @@
                   <!-- price_filter -->
                 </vs-collapse-item>
                 <vs-collapse-item
-                v-for="filter in catData.category.characters"
-                :key="filter.id"
+                  v-for="filter in catData.category.characters"
+                  :key="filter.id"
                 >
                   <div slot="header">
-                    <h5>{{filter.title}}</h5>
+                    <h5>{{ filter.title }}</h5>
                   </div>
                   <div class="">
                     <label
-                    class="control control--checkbox"
-                    v-for="option in filter.options"
-                    :key="option.id"
+                      class="control control--checkbox"
+                      v-for="option in filter.options"
+                      :key="option.id"
                     >
-                      <input type="checkbox" @change="changeFilter" :value="option.id" required v-model="checkedOptions"/>
+                      <input
+                        type="checkbox"
+                        @change="changeFilter"
+                        :value="option.id"
+                        required
+                        v-model="checkedOptions"
+                      />
                       <div class="control__indicator"></div>
                       {{ option.value }}
                     </label>
@@ -96,11 +116,13 @@
 
             <div class="grid-container loading_div grid-template-4 grid-gap-10">
               <CardBase
-              v-for="post in catData.posts" :key="post.id" :post="post"
+                v-for="post in catData.posts"
+                :key="post.id"
+                :post="post"
               />
             </div>
 
-           <!--  <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
+            <!--  <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
               <svg
                 width="12"
                 height="12"
@@ -145,7 +167,7 @@
 
 <script>
 import CardBase from "@/components/lite/desktop/Cards/CardBase";
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "CategoryPage",
@@ -173,9 +195,9 @@ export default {
     };
   },
   watch: {
-    id () {
+    id() {
       this.getCategory();
-    },
+    }
   },
   mounted() {
     this.getCategory();
@@ -188,69 +210,61 @@ export default {
         color: this.colorLoading
       });
       const response = await axios
-      .get("categories/" + this.id)
-      .finally(() =>
-        this.$vs.loading.close(".con-vs-loading")
-      );
+        .get("categories/" + this.id)
+        .finally(() => this.$vs.loading.close(".con-vs-loading"));
       this.catData = response.data;
     },
-    async changePrice () {
-      this.catData.posts = null
+    async changePrice() {
+      this.catData.posts = null;
       this.$vs.loading({
         container: "",
         scale: 0.8,
         color: this.colorLoading
       });
       const form = new FormData();
-      form.append('params[from]', this.value1[0])
-      form.append('params[to]', this.value1[1])
-      form.append('params[sort]', this.select1)
+      form.append("params[from]", this.value1[0]);
+      form.append("params[to]", this.value1[1]);
+      form.append("params[sort]", this.select1);
 
       const response = await axios
-      .post("categories/" + this.id, form)
-      .finally(() =>
-        this.$vs.loading.close(".con-vs-loading")
-      );
-      this.catData = response.data
+        .post("categories/" + this.id, form)
+        .finally(() => this.$vs.loading.close(".con-vs-loading"));
+      this.catData = response.data;
     },
-    async changeFilter () {
-      this.catData.posts = null
+    async changeFilter() {
+      this.catData.posts = null;
       this.$vs.loading({
         container: "",
         scale: 0.8,
         color: this.colorLoading
       });
       const form = new FormData();
-      form.append('params[from]', this.value1[0])
-      form.append('params[to]', this.value1[1])
-      form.append('params[sort]', this.select1)
-      form.append('params[characters][option_id]', this.checkedOptions)
+      form.append("params[from]", this.value1[0]);
+      form.append("params[to]", this.value1[1]);
+      form.append("params[sort]", this.select1);
+      form.append("params[characters][option_id]", this.checkedOptions);
 
       const response = await axios
-      .post("categories/" + this.id, form)
-      .finally(() =>
-        this.$vs.loading.close(".con-vs-loading")
-      );
-      this.catData = response.data
+        .post("categories/" + this.id, form)
+        .finally(() => this.$vs.loading.close(".con-vs-loading"));
+      this.catData = response.data;
     },
-    async sortBy () {
-      this.catData.posts = null
+    async sortBy() {
+      this.catData.posts = null;
       this.$vs.loading({
         container: "",
         scale: 0.8,
         color: this.colorLoading
       });
       const form = new FormData();
-      form.append('params[from]', this.value1[0])
-      form.append('params[to]', this.value1[1])
-      form.append('params[sort]', this.select1)
+      form.append("params[from]", this.value1[0]);
+      form.append("params[to]", this.value1[1]);
+      form.append("params[sort]", this.select1);
 
       const response = await axios
-      .post('categories/' + this.id, form)
-      .finally(() =>
-        this.$vs.loading.close(".con-vs-loading")
-      );
-      this.catData = response.data
+        .post("categories/" + this.id, form)
+        .finally(() => this.$vs.loading.close(".con-vs-loading"));
+      this.catData = response.data;
     }
   }
 };

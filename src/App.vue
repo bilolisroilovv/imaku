@@ -21,19 +21,19 @@ export default {
   computed: {
     layout() {
       return (this.$route.meta.layout || "second") + "-layout";
-    },
+    }
     /* ...mapGetters(['currentUser']) */
   },
   components: {
     MainLayout,
     SecondLayout,
     EmptyLayout,
-    ProfileLayout,
+    ProfileLayout
   },
   async created() {
     this.$store.dispatch("fetchCategories");
     this.$store.dispatch("fetchUser");
-  },
+  }
 };
 </script>
 
@@ -206,6 +206,9 @@ body.modal-open {
   #signModal .modal-dialog {
     max-width: 380px;
   }
+  #followersModal .modal-dialog {
+    max-width: 380px;
+  }
 }
 #signModal .modal-header {
   display: none;
@@ -215,6 +218,14 @@ body.modal-open {
 }
 #signModal .modal-body {
   padding: 27px 2rem;
+}
+#followersModal .modal-header {
+  display: none;
+}
+#followersModal .modal-footer {
+  display: none;
+}
+#followersModal .modal-body {
 }
 .sign_modal_form {
   display: flex;
@@ -438,16 +449,18 @@ body.modal-open {
   grid-template-columns: repeat(4, 1fr);
 }
 .vue-file-agent .is-deletable .file-preview .file-name {
-  display: none!important;
+  display: none !important;
 }
-.vue-file-agent .file-category-video-playable .file-preview:before, .vue-file-agent .file-preview-wrapper-image .file-preview:before {
-  display: none!important;
+.vue-file-agent .file-category-video-playable .file-preview:before,
+.vue-file-agent .file-preview-wrapper-image .file-preview:before {
+  display: none !important;
 }
 .vue-file-agent .file-preview .image-dimension {
-  display: none!important;
+  display: none !important;
 }
-.vue-file-agent .file-category-video-playable .file-preview:after, .vue-file-agent .file-preview-wrapper-image .file-preview:after {
-  display: none!important;
+.vue-file-agent .file-category-video-playable .file-preview:after,
+.vue-file-agent .file-preview-wrapper-image .file-preview:after {
+  display: none !important;
 }
 .grid-template-3 {
   grid-template-columns: repeat(3, 1fr);

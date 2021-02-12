@@ -26,7 +26,10 @@
         </div>
         <!-- mycard_img -->
       </router-link>
-      <div class="product_favourite flex-center d-flex" @click.prevent="ToggleFavoriteRequest">
+      <div
+        class="product_favourite flex-center d-flex"
+        @click.prevent="ToggleFavoriteRequest"
+      >
         <ToggleFavorite
           :isFavorite="this.isFavorite"
           :title="$t('post_page.add_to_favorites')"
@@ -142,7 +145,10 @@
         <!-- dislike_btn_count -->
       </button>
       <!-- dislike_btn -->
-      <div class="d-flex align-items-center mycard_views" :title="$t('card_base.view')">
+      <div
+        class="d-flex align-items-center mycard_views"
+        :title="$t('card_base.view')"
+      >
         <svg
           width="18"
           height="10"
@@ -166,7 +172,7 @@
 
 <script>
 import ToggleFavorite from "@/components/lite/desktop/ToggleFavorite";
-import axios from 'axios'
+import axios from "axios";
 export default {
   name: "Card4",
   components: {
@@ -191,13 +197,13 @@ export default {
   },
   methods: {
     async ToggleFavoriteRequest() {
-      const response = await axios.get('favourite/' + this.post.id)
-      this.isFavorite = response.data.isFavourite
+      const response = await axios.get("favourite/" + this.post.id);
+      this.isFavorite = response.data.isFavourite;
       console.log(this.isFavorite);
       this.$vs.notify({
         color: "success",
         title: "Успех",
-        text: "Объявлено успешно добавлено/удалено из избранных",
+        text: "Объявлено успешно добавлено/удалено из избранных"
       });
     }
   }

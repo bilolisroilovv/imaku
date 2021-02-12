@@ -1,13 +1,16 @@
 <template>
   <div class="shop_card mybg_center">
-    <router-link :to="{ name: 'ShopPage', params: { id: shop.id, slug: shop.slug } }" class="media p-2">
+    <router-link
+      :to="{ name: 'ShopPage', params: { id: shop.id, slug: shop.slug } }"
+      class="media p-2"
+    >
       <img :src="shop.banner" alt="" />
       <div class="d-flex align-items-center">
-        <div class="shop_logo mybg_center"
-        :style="{ 'background-image': 'url(' + shop.avatar + ')' }"
-        >
-
-        </div> <!-- shop_logo -->
+        <div
+          class="shop_logo mybg_center"
+          :style="{ 'background-image': 'url(' + shop.avatar + ')' }"
+        ></div>
+        <!-- shop_logo -->
         <p class="mb-0 text-white ml-2">{{ shop.name }}</p>
       </div>
     </router-link>
@@ -15,22 +18,27 @@
       <button @click.prevent="removePost" class="post_remove_btn mainbtn">
         <i class="far fa-trash-alt mr-1"></i> {{ $t("card_base.delete") }}
       </button>
-      <button @click.prevent="editPost" class="post_edit_btn ml-2">
+      <router-link
+      :to="{
+        name: 'ShopEdit',
+        params: { id: this.shop.id, slug: this.shop.slug }
+      }"
+      class="post_edit_btn ml-2">
         <i class="far fa-edit mr-1"></i> {{ $t("card_base.edit") }}
-      </button>
+      </router-link>
     </div>
   </div>
   <!-- shop_card -->
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   name: "ShopCard",
   data() {
     return {
       colorLoading: "var(--main-color)"
-    }
+    };
   },
   props: {
     shop: {
@@ -45,26 +53,26 @@ export default {
     }
   },
   methods: {
-    async removePost () {
+    async removePost() {
       this.$vs.loading({
-        container: "",  
+        container: "",
         scale: 0.8,
         color: this.colorLoading
       });
       const response = await axios
-      .get('shops/delete/' + this.shop.id)
-      .finally(() =>
-        setTimeout( ()=> {
-          this.$vs.loading.close(".con-vs-loading")
-        }, 10)
-      );
+        .get("shops/delete/" + this.shop.id)
+        .finally(() =>
+          setTimeout(() => {
+            this.$vs.loading.close(".con-vs-loading");
+          }, 10)
+        );
       this.$vs.notify({
         color: "success",
         title: "Успех",
-        text: "Магазин успешно удален",
+        text: "Магазин успешно удален"
       });
-      this.$emit('removePost', response)
-    },
+      this.$emit("removePost", response);
+    }
   }
 };
 </script>
@@ -87,7 +95,11 @@ export default {
     overflow: hidden;
     border: none;
     &::after {
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.24) 10%, transparent);
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.24) 10%,
+        transparent
+      );
       content: "";
       position: absolute;
       top: 0;

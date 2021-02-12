@@ -4,36 +4,33 @@
       <div class="container">
         <h2 class="section_title pb-4">
           {{ searchData.query }}
-          <span>{{ searchData.count }} {{ $t('category_page.results') }}</span>
+          <span>{{ searchData.count }} {{ $t("category_page.results") }}</span>
         </h2>
-          <div class="w-100 position-relative">
-            <div class="mb-3 d-flex">
-              <vs-select
-                class="selectExample category_select"
-                v-model="select1"
-              >
-                <vs-select-item
-                  :key="index"
-                  :value="item.value"
-                  :text="item.text"
-                  v-for="(item, index) in options1"
-                />
-              </vs-select>
-            </div>
-
-            <div class="grid-container loading_div grid-template-5 grid-gap-10">
-              <CardBase
-                v-for="post in searchData.posts"
-                :key="post.id"
-                :post="post"
+        <div class="w-100 position-relative">
+          <div class="mb-3 d-flex">
+            <vs-select class="selectExample category_select" v-model="select1">
+              <vs-select-item
+                :key="index"
+                :value="item.value"
+                :text="item.text"
+                v-for="(item, index) in options1"
               />
-            </div>
+            </vs-select>
+          </div>
 
-            <h3 class="text-center" v-if="searchData.count === 0">
-              {{ $t('search.no_result') }} (
-            </h3>
+          <div class="grid-container loading_div grid-template-5 grid-gap-10">
+            <CardBase
+              v-for="post in searchData.posts"
+              :key="post.id"
+              :post="post"
+            />
+          </div>
 
-            <!--  <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
+          <h3 class="text-center" v-if="searchData.count === 0">
+            {{ $t("search.no_result") }} (
+          </h3>
+
+          <!--  <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
               <svg
                 width="12"
                 height="12"
@@ -66,8 +63,8 @@
               </svg>
               Показать еще
             </button> -->
-          </div>
-          <!-- w-74 -->
+        </div>
+        <!-- w-74 -->
         <!-- row -->
       </div>
       <!-- container -->
@@ -82,10 +79,10 @@ import axios from "axios";
 export default {
   name: "SearchPage",
   components: {
-    CardBase,
+    CardBase
   },
   props: {
-    query: {},
+    query: {}
   },
   data() {
     return {
@@ -99,15 +96,15 @@ export default {
         { text: "Новинки", value: 2 },
         { text: "Сначала дешевые", value: 3 },
         { text: "Сначала дорогие", value: 4 },
-        { text: "Высокий рейтинг", value: 5 },
+        { text: "Высокий рейтинг", value: 5 }
       ],
-      colorLoading: "var(--main-color)",
+      colorLoading: "var(--main-color)"
     };
   },
   watch: {
     query() {
       this.getSearch();
-    },
+    }
   },
   mounted() {
     this.getSearch();
@@ -118,7 +115,7 @@ export default {
       this.$vs.loading({
         container: ".loading_div",
         scale: 0.8,
-        color: this.colorLoading,
+        color: this.colorLoading
       });
       const form = new FormData();
       form.append("params[from]", this.value1[0]);
@@ -134,15 +131,15 @@ export default {
       this.$vs.loading({
         container: "",
         scale: 0.8,
-        color: this.colorLoading,
+        color: this.colorLoading
       });
       const response = await axios
         .get("search?query=" + this.query)
         .finally(() => this.$vs.loading.close(".con-vs-loading"));
       this.searchData = response.data;
       console.log(this.searchData);
-    },
-  },
+    }
+  }
 };
 </script>
 

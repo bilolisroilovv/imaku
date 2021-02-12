@@ -4,15 +4,35 @@
       <div class="row">
         <div class="col-md-8">
           <div class="post_add_block mt-4">
-            <h2 class="pb-4 mb-3">{{ $t("shop_create.title") }}</h2>
+            <h2 class="pb-4 mb-3">Редактировать магазин</h2>
             <div>
               <div class="d-flex align-items-center myinput_group pb-4">
                 <label for=""
-                  >{{ $t("post_create.product_name") }} <span>*</span></label
+                  >Название магазина<span>*</span></label
                 >
-                <input type="text" placeholder="" v-model="name" />
+                <input type="text" placeholder="" required v-model="name" />
               </div>
               <!-- d-flex -->
+
+              <div class="d-flex align-items-center myinput_group pb-4">
+                <label for=""
+                  >Лого магазина</label
+                >
+                <input type="file" ref="files" @change="onLogoChange($event)" />
+              </div>
+              <div id="logoPreview" class="d-flex justify-content-center">
+                <img v-if="logoUrl" class="" :src="logoUrl" />
+              </div>
+
+              <div class="d-flex align-items-center myinput_group pb-4">
+                <label for=""
+                  >Баннер магазина</label
+                >
+                <input type="file" ref="files" @change="onBannerChange($event)" />
+              </div>
+              <div id="bannerPreview" class="d-flex justify-content-center">
+                <img v-if="bannerUrl" class="" :src="bannerUrl" />
+              </div>
 
               <div class="d-flex myinput_group pb-4">
                 <label for=""
@@ -21,79 +41,32 @@
                 <textarea id="" rows="7" v-model="description"></textarea>
               </div>
               <!-- d-flex -->
-              <div class="d-flex myinput_group pb-4">
-                <label for="">{{ $t("shop_create.banner") }}</label>
+              <!-- <div class="d-flex myinput_group pb-4">
+                <label for="">Местоположение <span>*</span></label>
                 <div class="w-100">
-                  <div class="photos_block">
-                    <!-- <vs-upload :text="'Добавить'" id="files" ref="files" @change="handleFilesUpload($event)" :show-upload-button="false" @on-success="successUpload">
-                    </vs-upload> -->
-                    <input
-                      type="file"
-                      id="files"
-                      ref="files"
-                      @change="handleFilesUpload($event)"
-                    />
-                    <!-- <VueFileAgent
-                      ref="files"
-                      @change="handleFilesUpload($event)"
-                      :theme="'default'"
-                      :multiple="true"
-                      :deletable="true"
-                      :meta="true"
-                      :maxSize="'10MB'"
-                      :maxFiles="14"
-                      :helpText="'Choose images or zip files'"
-                      :errorText="{
-                        type: 'Invalid file type. Only images or zip Allowed',
-                        size: 'Files should not exceed 10MB in size',
-                      }"
-                    ></VueFileAgent> -->
+                  <div class="map">
+                    <div class="position-relative mb-3">
+                      <input type="text" class="" value="Узбекистан, Ташкент" />
+                      <img
+                        src="@/assets/lite/search_icon.svg"
+                        class="search_icon"
+                        alt=""
+                      />
+                    </div>
+                    <iframe
+                      src="https://yandex.ru/map-widget/v1/?um=constructor%3Abba8008a5450056cb02076d704d37f7a73e78cb7fb71ec31993b722f7295c93a&amp;source=constructor"
+                      width="100%"
+                      height="250"
+                      frameborder="0"
+                    ></iframe>
                   </div>
-                  <!-- photos_block -->
-                  <p class="photos_p pt-2">
-                    {{ $t("shop_create.photo_banner") }}
-                  </p>
                 </div>
-              </div>
-              <!-- d-flex -->
-              <div class="d-flex myinput_group pb-4">
-                <label for="">{{ $t("shop_create.logo") }}</label>
-                <div class="w-100">
-                  <div class="photos_block">
-                    <!-- <vs-upload :text="'Добавить'" id="files" ref="files" @change="handleFilesUpload($event)" :show-upload-button="false" @on-success="successUpload">
-                    </vs-upload> -->
-                    <input
-                      type="file"
-                      id="files2"
-                      ref="files2"
-                      @change="handleFilesUpload2($event)"
-                    />
-                    <!-- <VueFileAgent
-                      ref="files"
-                      @change="handleFilesUpload($event)"
-                      :theme="'default'"
-                      :multiple="true"
-                      :deletable="true"
-                      :meta="true"
-                      :maxSize="'10MB'"
-                      :maxFiles="14"
-                      :helpText="'Choose images or zip files'"
-                      :errorText="{
-                        type: 'Invalid file type. Only images or zip Allowed',
-                        size: 'Files should not exceed 10MB in size',
-                      }"
-                    ></VueFileAgent> -->
-                  </div>
-                  <!-- photos_block -->
-                  <p class="photos_p pt-2">Лого для вашего магазина</p>
-                </div>
-              </div>
-              <!-- d-flex -->
+              </div> -->
               <div class="d-flex myinput_group pb-4">
                 <label for=""
                   >{{ $t("post_create.address") }} <span>*</span></label
                 >
-                <textarea id="" rows="7" v-model="location"></textarea>
+                <textarea required id="" rows="7" v-model="location"></textarea>
               </div>
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">
@@ -105,7 +78,6 @@
                     type="tel"
                     v-mask="'+998 (##) ###-##-##'"
                     v-model="phone"
-                    :placeholder="$t('modal.login')"
                     required
                     value="+998 (90) 478-21-42"
                   />
@@ -117,7 +89,7 @@
                   href="#"
                   @click.prevent="handleSubmit()"
                   class="mainbtn inter_font text-bold"
-                  >{{ $t("shop_create.create_btn") }}</a
+                  >Сохранить</a
                 >
               </div>
               <!-- d-flex -->
@@ -150,20 +122,46 @@
 <script>
 import { mapGetters } from "vuex";
 import axios from "axios";
+
 export default {
-  name: "ShopCreatePage",
+  name: "ShopEdit",
+  props: {
+    id: {}
+  },
   data() {
     return {
       name: "",
+      logoUrl: null,
+      logoFile: null,
+      bannerUrl: null,
+      bannerFile: null,
       description: "",
       location: "",
       phone: Number,
-      files: null,
-      files2: null,
+      files: [],
+      selectValue: 1,
+      value: [],
+      priceType: [
+        { text: "сум", value: 1 },
+        { text: "y.e.", value: 2 }
+      ],
+      selectedItems: [],
       colorLoading: "var(--main-color)"
     };
   },
   methods: {
+    onLogoChange(event) {
+      const file = event.target.files[0];
+      this.logoUrl = URL.createObjectURL(file);
+      this.logoFile = file;
+      console.log(this.logoFile);
+    },
+    onBannerChange(event) {
+      const file = event.target.files[0];
+      this.bannerUrl = URL.createObjectURL(file);
+      this.bannerFile = file;
+      console.log(this.logoFile);
+    },
     successUpload() {
       this.$vs.notify({
         color: "success",
@@ -179,46 +177,35 @@ export default {
     handleFilesUpload(event) {
       this.files = event.target.files;
     },
-    handleFilesUpload2(event) {
-      this.files2 = event.target.files;
-    },
     async handleSubmit() {
       this.$vs.loading({
-        container: ".post_add_block",
+        container: "",
         scale: 0.8,
         color: this.colorLoading
       });
       const form = new FormData();
       form.append("name", this.name);
       form.append("description", this.description);
-      form.append("location", this.location);
       form.append("phone", this.phone);
+      form.append("location", this.location);
+      form.append("avatar", this.logoFile);
+      form.append("banner", this.bannerFile);
 
-      for (let i = 0; i < this.files.length; i++) {
-        const file = this.files[i];
-        console.log(file);
-        form.append("banner", file);
-      }
-
-      for (let i = 0; i < this.files2.length; i++) {
-        const file = this.files2[i];
-        console.log(file);
-        form.append("avatar", file);
-      }
+      /* for (var screens = 0; screens < this.files.length; screens++) {
+        form.append("gallery[" + screens + "]", this.files[screens].file);
+      } */
 
       await axios
-        .post("shops/store", form, {
+        .post("shops/update/" + this.id, form, {
           headers: {
             "Content-Type": "multipart/form-data"
           }
         })
-        .finally(() =>
-          this.$vs.loading.close(".post_add_block > .con-vs-loading")
-        );
+        .finally(() => this.$vs.loading.close(".con-vs-loading"));
       this.$vs.notify({
         color: "success",
         title: "Успех",
-        text: "Объявлено успешно размещена"
+        text: "Объявлено успешно размещено"
       });
       this.$router.push("/");
     }
@@ -227,14 +214,57 @@ export default {
     ...mapGetters(["currentUser"])
   },
   async mounted() {
+    this.$vs.loading({
+      container: ".post_add_block",
+      scale: 0.8,
+      color: this.colorLoading
+    });
     this.checkLogin();
-    this.phone = this.currentUser.phone;
-  },
-  components: {}
+    const response = await axios
+    .get("shops/update/" + this.id)
+    .finally(() =>
+      this.$vs.loading.close(".post_add_block > .con-vs-loading")
+    );
+    console.log(response.data);
+    this.name = response.data.name;
+    this.phone = response.data.phone;
+    this.description = response.data.description;
+    this.location = response.data.location;
+    this.price = response.data.price;
+    this.logoUrl = response.data.avatar;
+    this.bannerUrl = response.data.banner;
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+#logoPreview {
+  margin-left: 252px;
+  width: 170px;
+  height: 170px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-bottom: 30px;
+  border: 3px solid #b8b8b8;
+  img {
+    object-fit: cover;
+    width: 100%;
+    object-position: center;
+  }
+}
+#bannerPreview {
+  width: 495px;
+  height: 200px;
+  margin-left: 252px;
+  margin-bottom: 30px;
+  border: 3px solid #b8b8b8;
+  overflow: hidden;
+  img {
+    object-fit: cover;
+    width: 100%;
+    object-position: center;
+  }
+}
 .search_icon {
   position: absolute;
   top: 50%;

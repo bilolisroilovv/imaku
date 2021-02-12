@@ -30,11 +30,10 @@
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item">
-                      <router-link
-                      :to="{ name: 'HomePage' }"
-                      >
-                      {{ $t('profile.home') }}
-                      </router-link></li>
+                      <router-link :to="{ name: 'HomePage' }">
+                        {{ $t("profile.home") }}
+                      </router-link>
+                    </li>
                     <span class="mx-2 px-1">/</span>
                     <li class="breadcrumb-item active" aria-current="page">
                       {{ profileData.name }}
@@ -79,7 +78,9 @@
                     <div
                       class="product_sidebar_date text-center justify-content-center d-flex align-items-center"
                     >
-                      <span class="mr-2 mt-1">{{ $t('profile.created_at') }}:</span>
+                      <span class="mr-2 mt-1"
+                        >{{ $t("profile.created_at") }}:</span
+                      >
                       <h6 class="">{{ profileData.createdAt }}</h6>
                     </div>
                     <!-- product_sidebar_date -->
@@ -132,17 +133,21 @@
                 >
                   <button class="seller_info_box">
                     <span>{{ profileData.postsCount }}</span>
-                    <h6>{{ $t('profile.post_count') }}</h6>
+                    <h6>{{ $t("profile.post_count") }}</h6>
+                  </button>
+                  <!-- seller_info_box -->
+                  <button
+                    class="seller_info_box"
+                    @click.prevent
+                    v-b-modal.followersModal
+                  >
+                    <span>{{ profileData.followersCount }}</span>
+                    <h6>{{ $t("profile.post_followers") }}</h6>
                   </button>
                   <!-- seller_info_box -->
                   <button class="seller_info_box">
-                    <span>859</span>
-                    <h6>{{ $t('profile.post_followers') }}</h6>
-                  </button>
-                  <!-- seller_info_box -->
-                  <button class="seller_info_box">
-                    <span>84</span>
-                    <h6>{{ $t('profile.post_subscriptions') }}</h6>
+                    <span>{{ profileData.followingCount }}</span>
+                    <h6>{{ $t("profile.post_subscriptions") }}</h6>
                   </button>
                   <!-- seller_info_box -->
                 </div>
@@ -164,9 +169,7 @@
                       </router-link>
                     </li>
                     <li>
-                      <router-link
-                        :to="{ name: 'ProfileShops' }"
-                      >
+                      <router-link :to="{ name: 'ProfileShops' }">
                         <i class="fas fa-store"></i>
                         {{ $t("profile.shops") }}
                       </router-link>
@@ -178,9 +181,7 @@
                       </router-link>
                     </li>
                     <li>
-                      <router-link
-                        :to="{ name: 'ProfileSettings' }"
-                      >
+                      <router-link :to="{ name: 'ProfileSettings' }">
                         <i class="far fa-edit"></i>
                         {{ $t("profile.settings") }}
                       </router-link>
@@ -204,7 +205,9 @@
                   <div
                     class="product_sidebar_socials d-flex align-items-center"
                   >
-                    <span class="pt-1 mr-2">{{ $t('profile.my_socials') }}:</span>
+                    <span class="pt-1 mr-2"
+                      >{{ $t("profile.my_socials") }}:</span
+                    >
                     <div class="d-flex pt-1">
                       <a href="#" target="_blank">
                         <img
@@ -263,24 +266,31 @@
     </div>
 
     <Footer />
+
+    <FollowersModal :followers="profileData.followers"/>
   </div>
 </template>
 
 <script>
 import Header from "@/components/lite/desktop/Header";
 import Footer from "@/components/lite/desktop/Footer";
+import FollowersModal from "@/components/lite/desktop/Modals/FollowersModal";
 import { mapGetters } from "vuex";
-import axios from 'axios';
+import axios from "axios";
+
 export default {
   name: "ProfileLayout",
   components: {
     Header,
-    Footer
+    Footer,
+    FollowersModal
   },
   data() {
     return {
       avatarImage: "'https://picsum.photos/500?random=1'",
-      profileData: []
+      profileData: {
+        followers: [],
+      }
     };
   },
   methods: {
@@ -298,10 +308,12 @@ export default {
   computed: {
     ...mapGetters(["currentUser"])
   },
-  async mounted() {
-    const response = await axios.get("/profile");
-    this.profileData = response.data;
-    // console.log(this.profileData.posts)
+  mounted() {
+    axios.get('/profile').then(response => {
+      this.profileData = response.data;
+    });
+    /* this.profileData = response.data; */
+    /* console.log(this.profileData.followers) */
   }
 };
 </script>
@@ -347,19 +359,23 @@ export default {
 .product_adress_ul li a svg path {
   transition: all 0.2s;
 }
-.product_adress_ul li a.active, .product_adress_ul li a.router-link-active {
+.product_adress_ul li a.active,
+.product_adress_ul li a.router-link-active {
   background: var(--main-color);
   box-shadow: 0px 6px 10px rgba(255, 144, 41, 0.21);
   color: #fff;
 }
 
-.product_adress_ul li a.active svg path, .product_adress_ul li a.router-link-active svg path {
+.product_adress_ul li a.active svg path,
+.product_adress_ul li a.router-link-active svg path {
   stroke: #fff;
 }
-.product_adress_ul li a.active:hover, .product_adress_ul li a.router-link-active:hover {
+.product_adress_ul li a.active:hover,
+.product_adress_ul li a.router-link-active:hover {
   color: #fff;
 }
-.product_adress_ul li a.active:hover svg path, .product_adress_ul li a.router-link-active:hover svg path {
+.product_adress_ul li a.active:hover svg path,
+.product_adress_ul li a.router-link-active:hover svg path {
   stroke: #fff;
 }
 .product_adress_ul li a:hover {
@@ -474,7 +490,7 @@ export default {
   background: #f8f8fc;
   border-radius: 9px;
   padding: 11px 9px;
-  width: 102px;
+  width: 97px;
   text-align: left;
 }
 .seller_info_box span {

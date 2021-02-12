@@ -66,6 +66,13 @@ const routes = [
         component: () => import("../views/lite/desktop/PostEdit.vue")
       },
       {
+        path: "shop-edit/:id/:slug",
+        name: "ShopEdit",
+        meta: { layout: "second" },
+        props: true,
+        component: () => import("../views/lite/desktop/ShopEdit.vue")
+      },
+      {
         path: "shop-create",
         name: "ShopCreatePage",
         meta: { layout: "second" },

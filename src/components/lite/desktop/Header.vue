@@ -153,7 +153,7 @@
                       <path class="line--2" d="M0 50h70" />
                       <path class="line--3" d="M0 60h62c13 0 6-28-4-18L35 65" />
                     </svg>
-                    <span>{{ $t('catalog') }}</span>
+                    <span>{{ $t("catalog") }}</span>
                   </label>
                 </div>
               </button>
@@ -179,14 +179,14 @@
                 :to="{ name: 'ShopCreatePage' }"
                 class="create_store_btn d-flex align-items-center mr-2"
               >
-                {{ $t('create_shop') }}
+                {{ $t("create_shop") }}
               </router-link>
               <!-- mainbtn -->
               <router-link
                 :to="{ name: 'PostCreatePage' }"
                 class="mainbtn create_ad_btn d-flex align-items-center mr-2"
               >
-                {{ $t('create_post') }}
+                {{ $t("create_post") }}
               </router-link>
               <!-- mainbtn -->
               <a
@@ -242,7 +242,7 @@
                   <g></g>
                   <g></g>
                 </svg>
-                <span>{{ $t('login') }}</span>
+                <span>{{ $t("login") }}</span>
               </a>
             </div>
 
@@ -251,14 +251,14 @@
                 :to="{ name: 'ShopCreatePage' }"
                 class="create_store_btn d-flex align-items-center mr-2"
               >
-                {{ $t('create_shop') }}
+                {{ $t("create_shop") }}
               </router-link>
               <!-- mainbtn -->
               <router-link
                 :to="{ name: 'PostCreatePage' }"
                 class="mainbtn create_ad_btn d-flex align-items-center mr-2"
               >
-                {{ $t('create_post') }}
+                {{ $t("create_post") }}
               </router-link>
               <!-- mainbtn -->
               <vs-dropdown class="header_profile_link ml-3">
@@ -273,24 +273,24 @@
                 <vs-dropdown-menu class="header_profile_links">
                   <router-link :to="{ name: 'ProfilePosts' }">
                     <vs-dropdown-item class="navbar_top_link">
-                      {{ $t('profile.profile') }}
+                      {{ $t("profile.profile") }}
                     </vs-dropdown-item>
                   </router-link>
                   <router-link :to="{ name: 'ProfilePage' }">
                     <vs-dropdown-item class="navbar_top_link">
-                      {{ $t('profile.favorite') }}
+                      {{ $t("profile.favorite") }}
                     </vs-dropdown-item>
                   </router-link>
                   <router-link :to="{ name: 'ProfileSettings' }">
                     <vs-dropdown-item class="navbar_top_link">
-                      {{ $t('profile.settings') }}
+                      {{ $t("profile.settings") }}
                     </vs-dropdown-item>
                   </router-link>
                   <vs-dropdown-item
                     class="navbar_top_link"
                     @click.prevent="handleLogout"
                   >
-                    {{ $t('profile.logout_profile') }}
+                    {{ $t("profile.logout_profile") }}
                   </vs-dropdown-item>
                 </vs-dropdown-menu>
               </vs-dropdown>
@@ -308,10 +308,10 @@
 </template>
 
 <script>
-import SearchGroup from "@/components/lite/desktop/SearchGroup"
-import HeaderCategoriesDropdown from "@/components/lite/desktop/headerCategories/HeaderCategoriesDropdown"
-import AuthModal from "@/components/lite/desktop/Modals/AuthModal"
-import { mapGetters } from "vuex"
+import SearchGroup from "@/components/lite/desktop/SearchGroup";
+import HeaderCategoriesDropdown from "@/components/lite/desktop/headerCategories/HeaderCategoriesDropdown";
+import AuthModal from "@/components/lite/desktop/Modals/AuthModal";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Header",
@@ -379,17 +379,18 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 @media screen and (max-width: 1400px) {
-	.create_store_btn {
-    font-size: 14px!important;
+  .create_store_btn {
+    font-size: 14px !important;
   }
   .create_ad_btn {
-    font-size: 14px!important;
+    font-size: 14px !important;
   }
 }
 .header_profile_img {
   width: 43px;
   height: 43px;
   border-radius: 50%;
+  border: 2px solid rgb(177, 177, 177);
   display: block;
 }
 .create_store_btn {
@@ -397,7 +398,7 @@ export default {
   color: var(--main-color);
   padding: 10px 14px;
   border-radius: 3px;
-  font-size: 15px!important;
+  font-size: 15px !important;
   font-family: "Inter", sans-serif;
   transition: all 0.2s;
   font-weight: 500;
@@ -407,7 +408,7 @@ export default {
   color: var(--main-color);
 }
 .create_ad_btn {
-  font-size: 15px!important;
+  font-size: 15px !important;
   font-family: "Inter", sans-serif;
   padding: 10px 14px !important;
 }

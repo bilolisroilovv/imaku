@@ -6,7 +6,7 @@
         :style="{ 'background-image': 'url(' + shop.banner + ')' }"
       >
         <div class="container position-relative">
-          <h2 class="shop_title">{{shop.name}}</h2>
+          <h2 class="shop_title">{{ shop.name }}</h2>
         </div>
         <!-- container -->
       </div>
@@ -26,7 +26,7 @@
             ></div>
             <!-- shop_logo -->
             <div class="product_sidebar_date">
-              <span class="mr-2">{{ $t('shop.created_at') }}:</span>
+              <span class="mr-2">{{ $t("shop.created_at") }}:</span>
               <h6 class="pb-1">{{ shop.createdAt }}</h6>
               <!-- <star-rating
                 border-color="#fc8301"
@@ -61,8 +61,12 @@
                 :read-only="true"
                 :increment="0.5"
               ></star-rating> -->
-              <button class="d-block mt-1 subscribe_btn" data-show="true">
-                {{ $t('shop.subscribe_to') }}
+              <button
+                @click.prevent="toggleSub"
+                class="d-block mt-1 subscribe_btn"
+                data-show="true"
+              >
+                {{ subText }}
               </button>
             </div>
             <!-- product_sidebar_date -->
@@ -74,26 +78,21 @@
           <div class="shop_block2">
             <div class="row">
               <div class="col-md-5">
-                <div class="seller_info d-flex justify-content-between my-3">
-                  <button class="seller_info_box">
-                    <span>52</span>
-                    <h6>{{ $t('shop.update') }}</h6>
+                <div class="seller_info d-flex my-3">
+                  <button class="seller_info_box mr-2">
+                    <span>{{ shop.postsCount }}</span>
+                    <h6>{{ $t("shop.update") }}</h6>
                   </button>
                   <!-- seller_info_box -->
                   <button class="seller_info_box">
-                    <span>859</span>
-                    <h6>{{ $t('shop.subscriber') }}</h6>
-                  </button>
-                  <!-- seller_info_box -->
-                  <button class="seller_info_box">
-                    <span>84</span>
-                    <h6>{{ $t('shop.subscriptions') }}</h6>
+                    <span>{{ shop.followersCount }}</span>
+                    <h6>{{ $t("shop.subscriber") }}</h6>
                   </button>
                   <!-- seller_info_box -->
                 </div>
                 <!-- seller_info -->
                 <div class="product_sidebar_socials d-flex align-items-center">
-                  <span class="pt-1 mr-3">{{ $t('shop.socials') }}:</span>
+                  <span class="pt-1 mr-3">{{ $t("shop.socials") }}:</span>
                   <div class="d-flex pt-1">
                     <a href="#" target="_blank">
                       <img
@@ -151,7 +150,7 @@
                     href="#"
                     class="send_message_btn mainbtn d-block w-100 text-center"
                   >
-                    {{ $t('shop.send_message') }}
+                    {{ $t("shop.send_message") }}
                   </a>
                   <!-- send_message_btn -->
                 </div>
@@ -169,7 +168,7 @@
       <div class="row mt-3">
         <div class="col-md-6 pr-0">
           <div class="shop_block3">
-            <h3 class="pb-3">{{ $t('shop.description') }}</h3>
+            <h3 class="pb-3">{{ $t("shop.description") }}</h3>
             <p>
               {{ shop.description }}
             </p>
@@ -177,7 +176,7 @@
           <!-- shop_block3 -->
         </div>
         <!-- col-md-6 -->
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
           <div class="shop_block4">
             <iframe
               src="https://yandex.ru/map-widget/v1/?um=constructor%3Abba8008a5450056cb02076d704d37f7a73e78cb7fb71ec31993b722f7295c93a&amp;source=constructor"
@@ -188,11 +187,17 @@
             <div class="shop_adress">
               <h5>Г. Ташкент, Яккасарайский район, улица Таффакур, дом 15</h5>
             </div>
-            <!-- shop_adress -->
           </div>
-          <!-- shop_block4 -->
+        </div> -->
+
+        <div class="col-md-6">
+          <div class="shop_block3">
+            <h3 class="pb-3">Адрес</h3>
+            <p>
+              {{shop.location}}
+            </p>
+          </div>
         </div>
-        <!-- col-md-6 -->
       </div>
       <!-- row -->
       <div class="row"></div>
@@ -203,7 +208,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   name: "ShopInfo",
   data() {
@@ -211,7 +216,8 @@ export default {
       expanded: false,
       text: "Показать номер",
       subExpanded: false,
-      subText: "Подписаться"
+      subText: "Подписаться",
+      shopType: "shop"
     };
   },
   props: {
@@ -221,17 +227,30 @@ export default {
     console.log(this.shop);
   },
   methods: {
+    async toggleSub() {
+      console.log("asdasd");
+      console.log(response);
+      const form = new FormData();
+      form.append("type", this.shopType);
+      const response = await axios.post("subscribe/" + this.shop.id, form);
+
+      this.subExpanded = !this.subExpanded;
+      if (this.subExpanded) {
+        this.subText = "Отписаться";
+      } else {
+        this.subText = "Подписаться";
+      }
+    },
     async toggleView() {
       this.expanded = !this.expanded;
       const response = await axios.post("shops/phone/" + this.shop.id);
       if (this.expanded) {
-          this.text = response.data;
-      } 
-      else {
-          this.text = "Показать номер";
+        this.text = response.data;
+      } else {
+        this.text = "Показать номер";
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -266,6 +285,7 @@ export default {
   background: #2b2c2e;
 }
 .show_number_btn {
+  cursor: pointer;
 }
 .product_btns a img {
   position: relative;

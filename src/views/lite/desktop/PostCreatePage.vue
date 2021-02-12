@@ -105,7 +105,7 @@
                     '#### ### ### ###',
                     '# ### ### ### ###',
                     '## ### ### ### ###',
-                    '### ### ### ### ###',
+                    '### ### ### ### ###'
                   ]"
                   placeholder=""
                   class="price_input mr-2"
@@ -152,7 +152,7 @@
                       required
                       :errorText="{
                         type: 'Invalid file type. Only images or zip Allowed',
-                        size: 'Files should not exceed 10MB in size',
+                        size: 'Files should not exceed 10MB in size'
                       }"
                       v-model="files"
                       @beforedelete="postImagesDelete($event)"
@@ -234,7 +234,7 @@
             class="right_block mt-4"
             :style="{
               'background-image':
-                'url(' + require('@/assets/lite/post-add-banner.jpg') + ')',
+                'url(' + require('@/assets/lite/post-add-banner.jpg') + ')'
             }"
           >
           </a>
@@ -278,21 +278,21 @@ export default {
       options: [
         { name: "Vue.js", code: "vu" },
         { name: "Javascript", code: "js" },
-        { name: "Open Source", code: "os" },
+        { name: "Open Source", code: "os" }
       ],
       priceType: [
         { text: "сум", value: 1 },
-        { text: "y.e.", value: 2 },
+        { text: "y.e.", value: 2 }
       ],
       selectedItems: [],
-      colorLoading: "var(--main-color)",
+      colorLoading: "var(--main-color)"
     };
   },
   methods: {
     addTag(newTag) {
       const tag = {
         name: newTag,
-        code: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+        code: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
       };
       this.options.push(tag);
       this.value.push(tag);
@@ -301,7 +301,7 @@ export default {
       this.$vs.notify({
         color: "success",
         title: "Загрузка успешно выполнена",
-        text: "Загрузка успешно выполнена",
+        text: "Загрузка успешно выполнена"
       });
     },
     checkLogin() {
@@ -313,7 +313,7 @@ export default {
       this.$vs.loading({
         container: "",
         scale: 0.8,
-        color: this.colorLoading,
+        color: this.colorLoading
       });
       const response = await axios
         .get("categories/subcategories/" + this.select1)
@@ -326,15 +326,15 @@ export default {
       this.$vs.loading({
         container: "",
         scale: 0.8,
-        color: this.colorLoading,
+        color: this.colorLoading
       });
       const response = await axios
         .get("characters/" + this.select2)
         .finally(() => this.$vs.loading.close(".con-vs-loading"));
-      const userKharacters = response.data.map((char) => {
+      const userKharacters = response.data.map(char => {
         return {
           characterId: char.id,
-          option_id: null,
+          option_id: null
         };
       });
 
@@ -349,7 +349,7 @@ export default {
       this.$vs.loading({
         container: "",
         scale: 0.8,
-        color: this.colorLoading,
+        color: this.colorLoading
       });
       const form = new FormData();
       form.append("cat_id", this.select1);
@@ -380,26 +380,26 @@ export default {
       await axios
         .post("posts/store", form, {
           headers: {
-            "Content-Type": "multipart/form-data",
-          },
+            "Content-Type": "multipart/form-data"
+          }
         })
         .finally(() => this.$vs.loading.close(".con-vs-loading"));
       this.$vs.notify({
         color: "success",
         title: "Успех",
-        text: "Объявлено успешно размещено",
+        text: "Объявлено успешно размещено"
       });
       this.$router.push("/");
-    },
+    }
   },
   computed: {
-    ...mapGetters(["currentUser"]),
+    ...mapGetters(["currentUser"])
   },
   async mounted() {
     this.$vs.loading({
       container: ".post_add_block",
       scale: 0.8,
-      color: this.colorLoading,
+      color: this.colorLoading
     });
     this.checkLogin();
     const response = await axios
@@ -409,7 +409,7 @@ export default {
       );
     this.mainCategories = response.data.categories;
     this.phone = response.data.phone;
-  },
+  }
 };
 </script>
 

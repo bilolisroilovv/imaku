@@ -3,9 +3,11 @@
     <div class="container">
       <div class="row footer_top">
         <div class="logo">
-          <img src="@/assets/lite/logo.png" class="img-fluid" alt="">
-        </div> <!-- logo -->
-      </div> <!-- row -->
+          <img src="@/assets/lite/logo.png" class="img-fluid" alt="" />
+        </div>
+        <!-- logo -->
+      </div>
+      <!-- row -->
       <div class="row">
         <div class="col-md-2">
           <ul class="footer_list">
@@ -25,7 +27,8 @@
               <a href="#">Условия использования</a>
             </li>
           </ul>
-        </div> <!-- col-md-2 -->
+        </div>
+        <!-- col-md-2 -->
         <div class="col-md-2">
           <ul class="footer_list">
             <li class="footer_list_title">
@@ -44,7 +47,8 @@
               <a href="#">Все для дома и сада</a>
             </li>
           </ul>
-        </div> <!-- col-md-2 -->
+        </div>
+        <!-- col-md-2 -->
         <div class="col-md-2">
           <ul class="footer_list">
             <li class="footer_list_title">
@@ -60,7 +64,8 @@
               <a href="#">Обратная связь</a>
             </li>
           </ul>
-        </div> <!-- col-md-2 -->
+        </div>
+        <!-- col-md-2 -->
         <div class="col-md-2">
           <ul class="footer_list">
             <li class="footer_list_title">
@@ -76,7 +81,8 @@
               <a href="#">Контакты</a>
             </li>
           </ul>
-        </div> <!-- col-md-2 -->
+        </div>
+        <!-- col-md-2 -->
         <div class="col-md-2">
           <ul class="footer_list">
             <li class="footer_list_title">
@@ -92,16 +98,19 @@
               <a href="#">Тикток</a>
             </li>
           </ul>
-        </div> <!-- col-md-2 -->
-      </div> <!-- row -->
-    </div> <!-- container -->
+        </div>
+        <!-- col-md-2 -->
+      </div>
+      <!-- row -->
+    </div>
+    <!-- container -->
   </footer>
 </template>
 
 <script>
 export default {
   name: "Footer"
-}
+};
 </script>
 
 <style lang="scss" scoped>

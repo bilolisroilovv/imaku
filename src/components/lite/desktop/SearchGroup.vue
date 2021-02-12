@@ -86,12 +86,12 @@ export default {
     /* SearchDropdown */
   },
   props: {
-    scrollPosition: Number,
+    scrollPosition: Number
   },
   data() {
     return {
       searchDropdownVisible: false,
-      searchContent: null,
+      searchContent: null
     };
   },
   methods: {
@@ -105,9 +105,9 @@ export default {
       /* axios.get('search?query=' + this.searchContent) */
       this.$router.push({
         name: "SearchPage",
-        params: { query: this.searchContent },
+        params: { query: this.searchContent }
       });
-    },
+    }
   },
   computed: {},
   events: {},
@@ -129,7 +129,7 @@ export default {
       recognition.lang = "ru-RU";
       recognition.addEventListener("result", _transcriptHandler);
 
-      recognition.onerror = function (event) {
+      recognition.onerror = function(event) {
         console.log(event.error);
 
         /* Revert input and icon CSS if no speech is detected */
@@ -142,7 +142,7 @@ export default {
       $voiceTrigger.remove();
     }
 
-    $(document).ready(function () {
+    $(document).ready(function() {
       /* Trigger listen event when our trigger is clicked */
       $voiceTrigger.on("click touch", listenStart);
     });
@@ -154,17 +154,17 @@ export default {
       $searchInput.attr("placeholder", "Говорите...");
       $voiceTrigger.addClass("active");
       /* Start voice recognition */
-      
+
       recognition.start();
     }
 
     /* Parse voice input */
     function _parseTranscript(e) {
       return Array.from(e.results)
-        .map(function (result) {
+        .map(function(result) {
           return result[0];
         })
-        .map(function (result) {
+        .map(function(result) {
           return result.transcript;
         })
         .join("");
@@ -179,7 +179,7 @@ export default {
         $searchForm.submit();
       }
     }
-  },
+  }
 };
 </script>
 
@@ -188,8 +188,8 @@ export default {
   background: rgb(248, 154, 154);
 }
 @media screen and (min-width: 1350px) {
-	.navbar_search_input {
-    width: 600px!important;
+  .navbar_search_input {
+    width: 600px !important;
   }
 }
 .border-radius-100 {

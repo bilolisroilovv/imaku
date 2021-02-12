@@ -11,7 +11,7 @@
                 class="back_btn mainbtn mr-4 dark"
               >
                 <img src="@/assets/lite/back_btn.png" class="mr-2" alt="" />
-                {{ $t('post_page.back') }}
+                {{ $t("post_page.back") }}
               </a>
               <!-- back_btn -->
 
@@ -204,12 +204,12 @@
                     name: 'SellerPage',
                     params: {
                       id: this.postData.author.id,
-                      name: this.postData.author.name,
+                      name: this.postData.author.name
                     }
                   }"
                   class="product_seller_img mybg_center mr-3"
                   :style="{
-                    'background-image': 'url(' + postData.author.avatar + ')',
+                    'background-image': 'url(' + postData.author.avatar + ')'
                   }"
                 ></router-link>
                 <!-- product_cusomer_img -->
@@ -219,17 +219,25 @@
                       name: 'SellerPage',
                       params: {
                         id: this.postData.author.id,
-                        name: this.postData.author.name,
+                        name: this.postData.author.name
                       }
                     }"
                     title="postData.author.name"
                     class="product_seller_name d-block text_ellipsis1 myhover_text"
-                    >{{ postData.author.name }}</router-link>
+                    >{{ postData.author.name }}</router-link
+                  >
                   <!-- product_seller_name -->
-                  <span>({{ postData.author.postsCount }} {{ $t('post_page.posts') }})</span>
-                  <!-- <button class="d-block mt-1 subscribe_btn" @click.prevent="toggleSub" data-show="true">
+                  <span
+                    >({{ postData.author.postsCount }}
+                    {{ $t("post_page.posts") }})</span
+                  >
+                  <button
+                    class="d-block mt-1 subscribe_btn"
+                    @click.prevent="toggleSub"
+                    data-show="true"
+                  >
                     {{ subText }}
-                  </button> -->
+                  </button>
                 </div>
                 <!-- seller_text -->
               </div>
@@ -249,7 +257,7 @@
                   class="send_message_btn mainbtn d-block w-100 text-center"
                 >
                   <img src="@/assets/lite/send_message_icon.png" alt="" />
-                  {{ $t('post_page.contact_the_seller') }}
+                  {{ $t("post_page.contact_the_seller") }}
                 </a>
                 <!-- send_message_btn -->
               </div>
@@ -257,7 +265,7 @@
 
               <hr class="mt-3" />
               <div class="pt-2 pb-2 product_adress">
-                <h4 class="pb-2">{{ $t('post_page.addess') }}:</h4>
+                <h4 class="pb-2">{{ $t("post_page.addess") }}:</h4>
                 <p class="mb-2">
                   Г. Ташкент, Яккасарайский район, улица Таффакур, дом 15
                 </p>
@@ -276,7 +284,7 @@
                 class="d-flex justify-content-between product_sidebar_bottom mt-2"
               >
                 <div class="product_sidebar_socials">
-                  <span>{{ $t('post_page.share') }} :</span>
+                  <span>{{ $t("post_page.share") }} :</span>
                   <div class="d-flex pt-1">
                     <a href="#" target="_blank">
                       <img
@@ -319,7 +327,9 @@
                 <!-- product_sidebar_socials -->
 
                 <div class="product_sidebar_date text-right">
-                  <span class="mt-2 d-block">{{ $t('post_page.created_at') }}:</span>
+                  <span class="mt-2 d-block"
+                    >{{ $t("post_page.created_at") }}:</span
+                  >
                   <h6 class="mt-1">{{ postData.createdAt }}</h6>
                 </div>
                 <!-- product_sidebar_date -->
@@ -339,7 +349,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="bg-white product_bottom_info">
-                <h3 class="pb-3">{{ $t('post_page.desc') }}</h3>
+                <h3 class="pb-3">{{ $t("post_page.desc") }}</h3>
                 <div class="desc_text">
                   <p>
                     {{ postData.description }}
@@ -349,7 +359,7 @@
 
                 <div class="row pt-4">
                   <div class="col-md-6">
-                    <h4 class="pb-4">{{ $t('post_page.characteristic') }}</h4>
+                    <h4 class="pb-4">{{ $t("post_page.characteristic") }}</h4>
 
                     <div class="product_params">
                       <div
@@ -380,7 +390,7 @@
                       </router-link>
                     </div> -->
 
-                    <h4 class="pb-4">{{ $t('post_page.other_products') }}</h4>
+                    <h4 class="pb-4">{{ $t("post_page.other_products") }}</h4>
 
                     <div>
                       <div class="position-relative">
@@ -433,8 +443,8 @@
 
     <section class="section pt-0">
       <div class="container">
-        <h2 class="section_title pb-4">{{ $t('post_page.similar_posts') }}</h2>
-        <h5 v-if="!postData.similarAds">{{ $t('post_page.no_posts') }} (</h5>
+        <h2 class="section_title pb-4">{{ $t("post_page.similar_posts") }}</h2>
+        <h5 v-if="!postData.similarAds">{{ $t("post_page.no_posts") }} (</h5>
         <!-- section_title -->
         <PostsSlider :posts="postData.similarAds" />
       </div>
@@ -443,7 +453,7 @@
 
     <section class="section">
       <div class="container">
-        <h2 class="section_title pb-4">{{ $t('post_page.for_you') }}</h2>
+        <h2 class="section_title pb-4">{{ $t("post_page.for_you") }}</h2>
         <!-- section_title -->
         <PostsSection :posts="postData.posts" />
       </div>
@@ -475,10 +485,10 @@ export default {
     PostsSection,
     Swiper,
     SwiperSlide,
-    Card3,
+    Card3
   },
   props: {
-    id: {},
+    id: {}
   },
   data() {
     return {
@@ -491,8 +501,8 @@ export default {
         slidesPerView: 3,
         navigation: {
           nextEl: ".other_seller_goods_slider_next",
-          prevEl: ".other_seller_goods_slider_prev",
-        },
+          prevEl: ".other_seller_goods_slider_prev"
+        }
       },
       likesCount: null,
       disLikesCount: null,
@@ -511,7 +521,7 @@ export default {
   watch: {
     id() {
       this.getPost();
-    },
+    }
   },
   computed: {
     ...mapGetters(["currentUser"])
@@ -539,60 +549,66 @@ export default {
     },
     async toggleView() {
       this.expanded = !this.expanded;
-      const response = await axios.post("author/" + this.postData.id);
+      const response = await axios.post("post-phone/" + this.postData.id);
       if (this.expanded) {
-          this.text = response.data;
-      } 
-      else {
-          this.text = "Показать номер";
+        this.text = response.data;
+      } else {
+        this.text = "Показать номер";
       }
-  },
-  toggleSub() {
+    },
+    async toggleSub() {
+      const form = new FormData();
+      form.append("type", this.postData.author.type);
+      const response = await axios.post(
+        "subscribe/" + this.postData.author.id,
+        form
+      );
+      console.log(response);
       this.subExpanded = !this.subExpanded;
       if (this.subExpanded) {
-         this.subText = "Отписаться";
+        this.subText = "Отписаться";
       } else {
-         this.subText = "Подписаться";
+        this.subText = "Подписаться";
       }
-   },
-  async handleLike() {
-    this.isLiked = !this.isLiked;
-    if (this.isLiked === true) {
-      this.likesCount++;
-    } else {
-      this.likesCount--;
+    },
+    async handleLike() {
+      this.isLiked = !this.isLiked;
+      if (this.isLiked === true) {
+        this.likesCount++;
+      } else {
+        this.likesCount--;
+      }
+      if (this.isDisliked === true) {
+        this.isDisliked = false;
+        this.disLikesCount--;
+      }
+      const response = await axios.get("like/" + this.postData.id);
+      console.log(response);
+      /* this.likesCount = response.data.likes
+      this.dislikesCount = response.data.dislikes */
+    },
+    async handleDislike() {
+      this.isDisliked = !this.isDisliked;
+      if (this.isDisliked === true) {
+        this.disLikesCount++;
+      } else {
+        this.disLikesCount--;
+      }
+      if (this.isLiked === true) {
+        this.isLiked = false;
+        this.likesCount--;
+      }
+      const response = await axios.get("dislike/" + this.postData.id);
+      console.log(response);
+      /* this.likesCount = response.data.likes
+      this.dislikesCount = response.data.dislikes */
+    },
+    async handleFavorite() {
+      const response = await axios.get("favorite/" + this.postData.id);
+      console.log(response);
+      this.isFavorited = !this.isFavorited;
     }
-    if (this.isDisliked === true) {
-      this.isDisliked = false;
-      this.disLikesCount--;
-    }
-    const response = await axios.get("like/" + this.postData.id);
-    console.log(response);
-    /* this.likesCount = response.data.likes
-    this.dislikesCount = response.data.dislikes */
-  },
-  async handleDislike() {
-    this.isDisliked = !this.isDisliked;
-    if (this.isDisliked === true) {
-      this.disLikesCount++;
-    } else {
-      this.disLikesCount--;
-    }
-    if (this.isLiked === true) {
-      this.isLiked = false;
-      this.likesCount--;
-    }
-    const response = await axios.get("dislike/" + this.postData.id);
-    console.log(response);
-    /* this.likesCount = response.data.likes
-    this.dislikesCount = response.data.dislikes */
-  },
-  async handleFavorite() {
-    const response = await axios.get("favorite/" + this.postData.id);
-    console.log(response);
-    this.isFavorited = !this.isFavorited;
   }
-  },
 };
 </script>
 
@@ -650,7 +666,7 @@ export default {
   background: #2b2c2e;
 }
 .show_number_btn {
-  cursor: pointer!important;
+  cursor: pointer !important;
 }
 .product_btns a img {
   position: relative;

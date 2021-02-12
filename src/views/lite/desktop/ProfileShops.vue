@@ -79,26 +79,24 @@ export default {
         scale: 0.8,
         color: this.colorLoading
       });
-      const response = await axios
-      .get("profile/shops")
-      .finally(() =>
-        setTimeout( ()=> {
-          this.$vs.loading.close(".con-vs-loading")
+      const response = await axios.get("profile/shops").finally(() =>
+        setTimeout(() => {
+          this.$vs.loading.close(".con-vs-loading");
         }, 10)
       );
       this.profileData = response.data;
       console.log(this.profileData);
-    },
+    }
   },
   computed: {
-    ...mapGetters(["currentUser"]),
+    ...mapGetters(["currentUser"])
   },
   // mounted() {
   //   this.checkLogin();
   // }
   mounted() {
     this.getShop();
-  },
+  }
 };
 </script>
 

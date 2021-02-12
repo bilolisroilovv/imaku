@@ -23,7 +23,7 @@ export default {
     isFavorite: {
       type: Boolean,
       default: false
-    },
+    }
   },
   data() {
     return {
@@ -39,11 +39,11 @@ export default {
       };
     }
   },
-  mounted () {
+  mounted() {
     if (this.isFavorite === true) {
-      this.favorited = true
+      this.favorited = true;
     } else {
-      this.favorited = false
+      this.favorited = false;
     }
   },
   methods: {

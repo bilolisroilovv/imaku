@@ -57,7 +57,7 @@ import axios from "axios";
 export default {
   name: "ProfilePosts",
   components: {
-    Card5,
+    Card5
   },
   data() {
     return {
@@ -83,25 +83,23 @@ export default {
         scale: 0.8,
         color: this.colorLoading
       });
-      const response = await axios
-      .get("/profile/posts")
-      .finally(() =>
-        setTimeout( ()=> {
-          this.$vs.loading.close(".con-vs-loading")
+      const response = await axios.get("/profile/posts").finally(() =>
+        setTimeout(() => {
+          this.$vs.loading.close(".con-vs-loading");
         }, 10)
       );
       this.profileData = response.data;
-    },
+    }
   },
   computed: {
-    ...mapGetters(["currentUser"]),
+    ...mapGetters(["currentUser"])
   },
   // mounted() {
   //   this.checkLogin();
   // }
   mounted() {
     this.getPost();
-  },
+  }
 };
 </script>
 

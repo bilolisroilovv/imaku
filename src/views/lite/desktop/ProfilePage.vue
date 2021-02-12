@@ -1,14 +1,10 @@
 <template>
   <div class="w-71 position-relative">
-    <div class="grid-container grid-template-4 grid-gap-10"> 
-      <Card4
-        :post="post"
-        v-for="(post, index) in profileData"
-        :key="index"
-      />
+    <div class="grid-container grid-template-4 grid-gap-10">
+      <Card4 :post="post" v-for="(post, index) in profileData" :key="index" />
     </div>
-      <!-- grid-container -->
-      <!-- <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
+    <!-- grid-container -->
+    <!-- <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
         <svg
           width="12"
           height="12"
@@ -66,11 +62,9 @@ export default {
         scale: 0.8,
         color: this.colorLoading
       });
-      const response = await axios
-      .get("profile/favourites")
-      .finally(() =>
-        setTimeout( ()=> {
-          this.$vs.loading.close(".con-vs-loading")
+      const response = await axios.get("profile/favourites").finally(() =>
+        setTimeout(() => {
+          this.$vs.loading.close(".con-vs-loading");
         }, 10)
       );
       this.profileData = response.data;

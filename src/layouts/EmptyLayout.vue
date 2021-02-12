@@ -22,12 +22,11 @@
     <router-view />
 
     <Footer />
-    
   </div>
 </template>
 
 <script>
-import Footer from '@/components/lite/desktop/Footer'
+import Footer from "@/components/lite/desktop/Footer";
 export default {
   name: "empty",
   components: {

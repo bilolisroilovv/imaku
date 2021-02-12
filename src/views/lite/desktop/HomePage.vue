@@ -16,7 +16,7 @@
     <section class="section pt-5 pb-3">
       <div class="container">
         <h2 class="section_title pb-4">
-          {{ $t('homepage.give_it_away') }}
+          {{ $t("homepage.give_it_away") }}
         </h2>
         <!-- section_title -->
         <PostsSlider :posts="allIndexInfo.gives" />
@@ -27,7 +27,7 @@
     <section class="section section2 pb-5">
       <div class="container">
         <h2 class="section_title pb-4">
-          {{ $t('homepage.popular_ads') }}
+          {{ $t("homepage.popular_ads") }}
         </h2>
         <SelectionSection :posts="allIndexInfo.selectionSection" />
       </div>
@@ -36,14 +36,13 @@
     <section class="section pt-0">
       <div class="container">
         <h2 class="section_title pb-4">
-          {{ $t('homepage.for_you') }}
+          {{ $t("homepage.for_you") }}
         </h2>
         <!-- section_title -->
         <PostsSection :posts="allIndexInfo.posts" />
       </div>
       <!-- container -->
     </section>
-
   </div>
 </template>
 
@@ -54,7 +53,7 @@ import HeaderCategoriesSlider from "@/components/lite/desktop/Sliders/HeaderCate
 import PostsSection from "@/components/lite/desktop/postsSection/PostsSection";
 import PostsSlider from "@/components/lite/desktop/Sliders/PostsSlider";
 import SelectionSection from "@/components/lite/desktop/SelectionSection/SelectionSection";
-import { mapGetters } from "vuex"; 
+import { mapGetters } from "vuex";
 /* import axios from "axios"; */
 
 export default {
@@ -77,8 +76,7 @@ export default {
   computed: {
     ...mapGetters(["allIndexInfo"])
   },
-  async mounted() {
-  }
+  async mounted() {}
 };
 </script>
 

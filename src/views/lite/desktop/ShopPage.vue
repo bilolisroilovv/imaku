@@ -8,9 +8,9 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                   <li class="breadcrumb-item">
-                    <router-link
-                    :to="{name: 'HomePage'}"
-                    >{{ $t('profile.home') }}</router-link>
+                    <router-link :to="{ name: 'HomePage' }">{{
+                      $t("profile.home")
+                    }}</router-link>
                   </li>
                   <span class="mx-2 px-1">/</span>
                   <li class="breadcrumb-item active" aria-current="page">
@@ -28,7 +28,7 @@
       <!-- container -->
     </section>
     <!-- product_section -->
-    <ShopInfo :shop="shopData"/>
+    <ShopInfo :shop="shopData" />
     <div class="container">
       <PostsSection :posts="shopData.posts" class="pt-0" />
     </div>
@@ -59,12 +59,12 @@ export default {
     };
   },
   props: {
-    id: {},
+    id: {}
   },
   watch: {
     id() {
       this.getShop();
-    },
+    }
   },
   mounted() {
     this.getShop();
@@ -75,7 +75,7 @@ export default {
       this.$vs.loading({
         container: "",
         scale: 0.8,
-        color: this.colorLoading,
+        color: this.colorLoading
       });
 
       const response = await axios
