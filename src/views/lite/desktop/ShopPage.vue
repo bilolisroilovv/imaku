@@ -29,24 +29,18 @@
     </section>
     <!-- product_section -->
     <ShopInfo :shop="shopData" />
-    <div class="container">
-      <PostsSection :posts="shopData.posts" class="pt-0" />
-    </div>
-    <!-- container -->
   </div>
 </template>
 
 <script>
 import ShopInfo from "@/components/lite/desktop/ShopInfo";
-import PostsSection from "@/components/lite/desktop/postsSection/PostsSection";
 import axios from "axios";
 import { mapGetters } from "vuex";
 
 export default {
   name: "ProductPage",
   components: {
-    ShopInfo,
-    PostsSection
+    ShopInfo
   },
   computed: {
     ...mapGetters(["currentUser"])

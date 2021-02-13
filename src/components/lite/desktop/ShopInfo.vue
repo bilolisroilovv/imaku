@@ -129,7 +129,8 @@
                 <!-- product_sidebar_socials -->
               </div>
               <!-- col-md-5 -->
-              <div class="col-md-4"></div>
+              <div class="col-md-4">
+              </div>
               <!-- col-md-4 -->
               <div class="col-md-3">
                 <div class="product_btns mt-4">
@@ -140,13 +141,25 @@
                     {{ text }}
                   </a>
                   <!-- show_number_btn -->
-                  <a
-                    href="#"
+                  <router-link
+                    :to="{
+                      name: 'PostCreatePage',
+                      params: { id:  shop.id }
+                    }"
+                    v-if="currentUser.id === shop.author_id"
+                    class="send_message_btn mainbtn d-block w-100 text-center"
+                  >
+                    Подать объявление
+                  </router-link>
+                  <router-link
+                    v-else
+                    to="/"
                     class="send_message_btn mainbtn d-block w-100 text-center"
                   >
                     {{ $t("shop.send_message") }}
-                  </a>
+                  </router-link>
                   <!-- send_message_btn -->
+                  
                 </div>
                 <!-- product_btns -->
               </div>
@@ -160,11 +173,15 @@
       </div>
       <!-- row -->
       <div class="row mt-3">
-        <div class="col-md-6 pr-0">
+        <div class="col-md-3 pr-0">
           <div class="shop_block3">
-            <h3 class="pb-3">{{ $t("shop.description") }}</h3>
+            <h3 class="pb-2">{{ $t("shop.description") }}</h3>
             <p>
               {{ shop.description }}
+            </p>
+            <h3 class="pb-2 pt-3">Адрес</h3>
+            <p>
+              {{shop.location}}
             </p>
           </div>
           <!-- shop_block3 -->
@@ -184,17 +201,13 @@
           </div>
         </div> -->
 
-        <div class="col-md-6">
-          <div class="shop_block3">
-            <h3 class="pb-3">Адрес</h3>
-            <p>
-              {{shop.location}}
-            </p>
+        <div class="col-md-9">
+          <div class="grid-container loading_div grid-template-4 grid-gap-10">
+            <CardBase
+            />
           </div>
-        </div>
+        </div> <!-- col-md-9 -->
       </div>
-      <!-- row -->
-      <div class="row"></div>
       <!-- row -->
     </div>
     <!-- container -->
@@ -203,11 +216,15 @@
 
 <script>
 import SubscribeBtn from "@/components/lite/desktop/SubscribeBtn";
+import CardBase from "@/components/lite/desktop/Cards/CardBase";
+import { mapGetters } from "vuex";
 import axios from "axios";
+
 export default {
   name: "ShopInfo",
   components: {
-    SubscribeBtn
+    SubscribeBtn,
+    CardBase
   },
   data() {
     return {
@@ -247,7 +264,10 @@ export default {
         this.text = "Показать номер";
       }
     }
-  }
+  },
+  computed: {
+    ...mapGetters(["currentUser"])
+  },
 };
 </script>
 
@@ -345,14 +365,14 @@ export default {
   height: 250px;
   background: #ffffff;
   border-radius: 6px;
-  padding: 25px 25px;
+  padding: 18px 18px;
 }
 .shop_block3 h3 {
-  font-size: 25px;
+  font-size: 24px;
   font-weight: 600;
 }
 .shop_block4 h3 {
-  font-size: 25px;
+  font-size: 24px;
   font-weight: 600;
 }
 .shop_block3 p {

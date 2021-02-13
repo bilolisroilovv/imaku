@@ -188,8 +188,12 @@ export default {
       form.append("description", this.description);
       form.append("phone", this.phone);
       form.append("location", this.location);
-      form.append("avatar", this.logoFile);
-      form.append("banner", this.bannerFile);
+      if (this.logoFile) {
+        form.append("avatar", this.logoFile);
+      }
+      if (this.bannerFile) {
+        form.append("banner", this.bannerFile);
+      }
 
       /* for (var screens = 0; screens < this.files.length; screens++) {
         form.append("gallery[" + screens + "]", this.files[screens].file);

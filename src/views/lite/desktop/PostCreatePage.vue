@@ -254,6 +254,9 @@ import axios from "axios";
 
 export default {
   name: "PostCreatePage",
+  props: {
+    id: []
+  },
   data() {
     return {
       name: "",
@@ -361,6 +364,9 @@ export default {
       form.append("phone", this.phone);
       form.append("description", this.description);
       form.append("location", this.location);
+      if (this.id) {
+        form.append("shop_id", this.id);
+      }
       /* form.append('gallery', this.files) */
       for (var i = 0; i < this.userCharacters.length; i++) {
         form.append(

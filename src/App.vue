@@ -30,7 +30,7 @@ export default {
     EmptyLayout,
     ProfileLayout
   },
-  async created() {
+  created() {
     this.$store.dispatch("fetchCategories");
     this.$store.dispatch("fetchUser");
   }

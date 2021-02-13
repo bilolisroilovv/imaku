@@ -309,9 +309,10 @@ export default {
     ...mapGetters(["currentUser"])
   },
   mounted() {
-    axios.get('/profile').then(response => {
+    axios.get('profile').then(response => {
       this.profileData = response.data;
     });
+    this.checkLogin()
     /* this.profileData = response.data; */
     /* console.log(this.profileData.followers) */
   }

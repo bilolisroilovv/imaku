@@ -242,8 +242,10 @@ export default {
       form.append("params[from]", this.value1[0]);
       form.append("params[to]", this.value1[1]);
       form.append("params[sort]", this.select1);
-      form.append("params[characters][option_id]", this.checkedOptions);
-
+      
+      for (var i = 0; i < this.checkedOptions.length; i++) {
+        form.append("params[characters][option_id][]", this.checkedOptions[i])
+      }
       const response = await axios
         .post("categories/" + this.id, form)
         .finally(() => this.$vs.loading.close(".con-vs-loading"));

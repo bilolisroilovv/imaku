@@ -234,8 +234,10 @@
                     >({{ postData.author.postsCount }}
                     {{ $t("post_page.posts") }})</span
                   >
+                  <div @click.prevent="toggleSub">
+                    <SubscribeBtn :isSubscribed="this.isSubscribed" data-show="true"/>
+                  </div>
                   
-                  <SubscribeBtn :isSubscribed="this.isSubscribed" data-show="true" @click.prevent="toggleSub"/>
                 </div>
                 <!-- seller_text -->
               </div>
@@ -493,7 +495,7 @@ export default {
   data() {
     return {
       expanded: false,
-      isSubscribed: true,
+      isSubscribed: Boolean,
       text: "Показать номер",
       subExpanded: false,
       subText: "Подписаться",
@@ -557,6 +559,7 @@ export default {
       this.isFavorite = response.data.isFavourite;
       this.gallery = response.data.gallery;
       this.authorPosts = response.data.author.posts;
+      this.isSubscribed = response.data.author.isSubscribed;
     },
     async toggleView() {
       this.expanded = !this.expanded;
@@ -568,19 +571,15 @@ export default {
       }
     },
     async toggleSub() {
+      this.isSubscribed = !this.isSubscribed
       const form = new FormData();
       form.append("type", this.postData.author.type);
       const response = await axios.post(
         "subscribe/" + this.postData.author.id,
         form
       );
-      console.log(response);
-      this.subExpanded = !this.subExpanded;
-      if (this.subExpanded) {
-        this.subText = "Отписаться";
-      } else {
-        this.subText = "Подписаться";
-      }
+      
+      console.log(response.data.isSubscribed);
     },
     async handleLike() {
       this.isLiked = !this.isLiked;
