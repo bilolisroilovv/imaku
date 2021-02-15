@@ -14,11 +14,11 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                   <li class="breadcrumb-item">
-                    <a href="/">{{ $t("profile.home") }}</a>
+                    <router-link :to="{ name: 'HomePage' }">{{ $t("profile.home") }}</router-link>
                   </li>
                   <span class="mx-2 px-1">/</span>
                   <li class="breadcrumb-item active" aria-current="page">
-                    Алексеев Эдуaрд Львович
+                    {{ sellerData.name }}
                   </li>
                 </ol>
               </nav>
@@ -44,7 +44,7 @@
                   target="_blank"
                   class="product_seller_img mybg_center mr-3"
                   :style="{
-                    'background-image': 'url(' + this.avatarImage + ')'
+                    'background-image': 'url(' + sellerData.avatar + ')'
                   }"
                 ></div>
                 <!-- product_cusomer_img -->
@@ -98,12 +98,15 @@
                   :star-size="15"
                   inactive-color="transparent"
                   active-color="#fc8301"
+                  class="mr-3"
                   :rating="4.5"
                   text-class="custom-text"
                   :read-only="true"
                   :increment="0.5"
                 ></star-rating>
-                <SubscribeBtn class="d-block mt-1 ml-3 subscribe_btn" :isSubscribed="this.isSubscribed" data-show="true" @click.prevent="toggleSub"/>
+                <div @click.prevent="toggleSub">
+                  <SubscribeBtn :isSubscribed="this.isSubscribed" data-show="true"/>
+                </div>
               </div>
               <!-- d-flex -->
 
@@ -147,17 +150,14 @@
               <!-- product_btns -->
 
               <hr class="mt-3" />
-              <div class="pt-2 pb-2 product_adress">
+              <div class="pt-3 pb-2 product_adress">
                 <h4 class="pb-2">{{ $t("post_page.addess") }}:</h4>
                 <p class="mb-2">
-                  Г. Ташкент, Яккасарайский район, улица Таффакур, дом 15
+                  {{ sellerData.location }}
                 </p>
-                <iframe
-                  src="https://yandex.ru/map-widget/v1/?um=constructor%3A82c9b4a2e8ccf86a57718e06a3d4ec2a03aee27235dcf51300db4b6fdc836b89&amp;source=constructor"
-                  width="100%"
-                  height="170"
-                  frameborder="0"
-                ></iframe>
+                <p class="noadress" v-if="sellerData.location === null">
+                  К сожалению пользователь не добавил свой адрес (
+                </p>
               </div>
               <!-- product_adress -->
               <!-- 
@@ -300,14 +300,14 @@ export default {
     return {
       expanded: false,
       text: "Показать номер",
-      isSubscribed: true,
-      sellerData: [],
-      avatarImage: "'https://picsum.photos/500?random=1'"
+      isSubscribed: Boolean,
+      sellerData: []
     };
   },
   async mounted() {
     const response = await axios.get("seller/" + this.id);
     this.sellerData = response.data;
+    this.isSubscribed = response.data.isSubscribed;
   },
   methods: {
     async toggleView() {
@@ -320,25 +320,26 @@ export default {
       }
     },
     async toggleSub() {
+      this.isSubscribed = !this.isSubscribed
       const form = new FormData();
       form.append("type", this.sellerData.type);
       const response = await axios.post(
         "subscribe/" + this.sellerData.id,
         form
       );
-      console.log(response);
-      this.subExpanded = !this.subExpanded;
-      if (this.subExpanded) {
-        this.subText = "Отписаться";
-      } else {
-        this.subText = "Подписаться";
-      }
-    }
+      
+      console.log(response.data.isSubscribed);
+    },
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.noadress {
+  font-family: 'Inter';
+  font-size: 14px;
+  color: #737680;
+}
 .product_btns a {
   background: #343538;
   border-radius: 4px;

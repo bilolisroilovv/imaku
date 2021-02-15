@@ -15,49 +15,20 @@
                   <span class="mr-3">Сортировать по:</span>
 
                   <div class="product_review_sort">
-                    <a
-                      href="#"
-                      class="product_review_sort_text product_review_sort_text1 mr-3 active"
+                    <vs-select
+                      class="selectExample mr-3 comments_select"
+                      v-model="select1"
+                      @change="sortBy"
                     >
-                      Дате
-                      <svg
-                        class="product_review_sort_icon product_review_sort_icon1 product_review_sort_icon_down"
-                        width="9"
-                        height="6"
-                        viewBox="0 0 9 6"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4.5 3.58579L1.5364 0.292893C1.18492 -0.0976311 0.615076 -0.0976311 0.263604 0.292893C-0.087868 0.683418 -0.087868 1.31658 0.263604 1.70711L3.8636 5.70711C4.21508 6.09763 4.78492 6.09763 5.1364 5.70711L8.7364 1.70711C9.08787 1.31658 9.08787 0.683418 8.7364 0.292893C8.38492 -0.0976311 7.81508 -0.0976311 7.4636 0.292893L4.5 3.58579Z"
-                          fill="#585858"
-                        />
-                      </svg>
-                    </a>
-                    <!-- product_review_sort_text -->
+                      <vs-select-item
+                        v-for="(item, index) in options1"
+                        :key="index"
+                        :value="item.value"
+                        :text="item.text"
+                      />
+                    </vs-select>
+                  </div><!-- product_review_sort -->
 
-                    <a
-                      href="#"
-                      class="product_review_sort_text product_review_sort_text2 mr-3"
-                    >
-                      Оценке
-                      <svg
-                        class="product_review_sort_icon product_review_sort_icon2 product_review_sort_icon_down"
-                        width="9"
-                        height="6"
-                        viewBox="0 0 9 6"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4.5 3.58579L1.5364 0.292893C1.18492 -0.0976311 0.615076 -0.0976311 0.263604 0.292893C-0.087868 0.683418 -0.087868 1.31658 0.263604 1.70711L3.8636 5.70711C4.21508 6.09763 4.78492 6.09763 5.1364 5.70711L8.7364 1.70711C9.08787 1.31658 9.08787 0.683418 8.7364 0.292893C8.38492 -0.0976311 7.81508 -0.0976311 7.4636 0.292893L4.5 3.58579Z"
-                          fill="#585858"
-                        />
-                      </svg>
-                    </a>
-                    <!-- product_review_sort_text -->
-                  </div>
-                  <!-- product_review_sort -->
                   <label class="control control--checkbox">
                     <input type="checkbox" checked="checked" />
                     <div class="control__indicator"></div>
@@ -185,15 +156,15 @@
                       </div>
                       <!-- d-flex -->
                       <div class="review_text">
-                        <p>
+                        <p class="mb-0">
                           {{ review.body }}
                         </p>
-                        <div class="review_photos" id="lightgallery">
+                        <div class="review_photos lightgallery" v-if="review.images">
                           <div
-                          class="zoom-imgs item"
-                          v-for="image in review.images"
-                          :key="image.id"
-                          :data-src="image"
+                            class="zoom-imgs item"
+                            v-for="image in review.images"
+                            :key="image.id"
+                            :data-src="image"
                           >
                             <img :src="image" />
                           </div>
@@ -454,6 +425,7 @@
 
 <script>
 import PostCommentModal from "@/components/lite/desktop/Modals/PostCommentModal"
+import axios from 'axios'
 import "lightgallery.js"
 import "lightgallery.js/dist/css/lightgallery.css"
 
@@ -465,9 +437,14 @@ export default {
   data() {
     return {
       colorLoading: "var(--main-color)",
-      bars: {
-        variant: 'var(--main-color)'
-      }
+      select1: 0,
+      colorx: "var(--main-color)",
+      options1: [
+        { text: "Популярные", value: 0 },
+        { text: "Новинки", value: 1 },
+        { text: "Низкая оценка", value: 2 },
+        { text: "Высокая оценка", value: 3 }
+      ]
     };
   },
   props: {
@@ -487,21 +464,39 @@ export default {
     }
   },
   methods: {
-    MathRound10(val) {
-      return Math.round(val / 10) * 10;
+    async sortBy() {
+      this.catData.posts = null;
+      this.$vs.loading({
+        container: "",
+        scale: 0.8,
+        color: this.colorLoading
+      });
+      const form = new FormData();
+      form.append("params[sort]", this.select1);
+
+      const response = await axios
+        .post("categories/" + this.id, form)
+        .finally(() => this.$vs.loading.close(".con-vs-loading"));
+      this.catData = response.data;
     }
   },
   mounted () {
-    const el = document.getElementById("lightgallery");
-    window.lightGallery(el, {
-      thumbnail: true,
-      selector: ".item"
-    });
+    const elements = document.getElementsByClassName('lightgallery');
+    elements.forEach(item=>{
+      window.lightGallery(item, {
+        thumbnail: true,
+        zoom: true,
+        selector: ".item"
+      })
+    })
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.comments_select {
+  width: 200px!important;
+}
 .product_reviews_section {
   background: #ffffff;
   border-radius: 8px;
@@ -676,7 +671,7 @@ export default {
   font-weight: normal;
   font-size: 15px;
   line-height: 26px;
-  margin: 10px 0;
+  margin: 5px 0;
   letter-spacing: 0.3px;
 
   color: #000;
@@ -687,10 +682,10 @@ export default {
 }
 .review_photos {
   display: flex;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
-.review_photos a {
+.review_photos .item {
   width: 105px;
   height: 120px;
   overflow: hidden;
@@ -698,16 +693,15 @@ export default {
   margin-right: 10px;
   position: relative;
   border-radius: 5px;
+  transition: all 0.3s;
+  cursor: pointer;
 }
 
-.review_photos a > div {
-  transition: all 0.35s;
-}
-.review_photos a:hover > div {
+.review_photos .item:hover {
   filter: brightness(80%);
   transform: scale(1.05);
 }
-.review_photos a img {
+.review_photos .item img {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -717,7 +711,7 @@ export default {
   filter: brightness(100%);
 }
 
-.review_photos a:hover > div {
+.review_photos .item:hover > div {
 }
 .review_btn {
   background: transparent;

@@ -396,6 +396,9 @@
 
                     <div>
                       <div class="position-relative">
+                        <p v-if="postData.author.posts.length === 0" class="noposts">
+                          К сожалению у данного пользователя нет других обяъвний (
+                        </p>
                         <!-- Swiper -->
                         <swiper
                           class="swiper other_seller_goods_slider"
@@ -626,6 +629,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.noposts {
+  font-family: 'Inter';
+  font-size: 15px;
+  color: #737680;
+}
 .other_seller_goods_slider {
   width: 100%;
   height: 230px;

@@ -106,10 +106,10 @@
                 @change="sortBy"
               >
                 <vs-select-item
+                  v-for="(item, index) in options1"
                   :key="index"
                   :value="item.value"
                   :text="item.text"
-                  v-for="(item, index) in options1"
                 />
               </vs-select>
             </div>

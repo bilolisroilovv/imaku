@@ -841,6 +841,10 @@ body.modal-open {
 .wrapper {
   min-height: 100vh;
 }
+.comments_select .vs-select--input {
+  background: #f0f0f7!important;
+  padding: 9px 12px 9px 12px !important;
+}
 footer {
 }
 </style>

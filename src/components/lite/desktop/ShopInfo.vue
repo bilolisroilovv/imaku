@@ -61,7 +61,9 @@
                 :read-only="true"
                 :increment="0.5"
               ></star-rating> -->
-              <SubscribeBtn :isSubscribed="this.isSubscribed" data-show="true" @click.prevent="toggleSub"/>
+              <div @click.prevent="toggleSub">
+                <SubscribeBtn :isSubscribed="this.isSubscribed" data-show="true"/>
+              </div>
             </div>
             <!-- product_sidebar_date -->
           </div>
@@ -78,7 +80,11 @@
                     <h6>{{ $t("shop.update") }}</h6>
                   </button>
                   <!-- seller_info_box -->
-                  <button class="seller_info_box">
+                  <button
+                    class="seller_info_box"
+                    @click.prevent
+                    v-b-modal.followersModal
+                    >
                     <span>{{ shop.followersCount }}</span>
                     <h6>{{ $t("shop.subscriber") }}</h6>
                   </button>
@@ -222,12 +228,14 @@
       <!-- row -->
     </div>
     <!-- container -->
+    <FollowersModal :followers="shop.followers"/>
   </div>
 </template>
 
 <script>
 import SubscribeBtn from "@/components/lite/desktop/SubscribeBtn";
 import ShopCardBase from "@/components/lite/desktop/Cards/ShopCardBase";
+import FollowersModal from "@/components/lite/desktop/Modals/FollowersModal";
 import { mapGetters } from "vuex";
 import axios from "axios";
 
@@ -235,13 +243,14 @@ export default {
   name: "ShopInfo",
   components: {
     SubscribeBtn,
-    ShopCardBase
+    ShopCardBase,
+    FollowersModal
   },
   data() {
     return {
       expanded: false,
       text: "Показать номер",
-      isSubscribed: true,
+      isSubscribed: Boolean,
       shopType: "shop"
     };
   },
@@ -250,18 +259,15 @@ export default {
   },
   methods: {
     async toggleSub() {
-      console.log("asdasd");
-      console.log(response);
+      this.isSubscribed = !this.isSubscribed
       const form = new FormData();
       form.append("type", this.shopType);
-      const response = await axios.post("subscribe/" + this.shop.id, form);
-
-      this.subExpanded = !this.subExpanded;
-      if (this.subExpanded) {
-        this.subText = "Отписаться";
-      } else {
-        this.subText = "Подписаться";
-      }
+      const response = await axios.post(
+        "subscribe/" + this.shop.id,
+        form
+      );
+      
+      console.log(response.data.isSubscribed);
     },
     async toggleView() {
       this.expanded = !this.expanded;
@@ -373,7 +379,6 @@ export default {
   padding: 10px 25px;
 }
 .shop_block3 {
-  height: 250px;
   background: #ffffff;
   border-radius: 6px;
   padding: 18px 18px;
