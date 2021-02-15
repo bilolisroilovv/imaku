@@ -186,11 +186,7 @@ export default {
 #voice-trigger.active {
   background: rgb(248, 154, 154);
 }
-@media screen and (min-width: 1350px) {
-  .navbar_search_input {
-    width: 600px !important;
-  }
-}
+
 .border-radius-100 {
   border-radius: 100px;
 }
@@ -208,6 +204,11 @@ export default {
   color: #505050;
   transition: all 0.2s;
   font-family: "Inter", sans-serif;
+}
+@media screen and (max-width: 1400px) {
+  .navbar_search_input {
+    width: 600px !important;
+  }
 }
 .navbar_search_input:hover {
   background: #e3e3ed;

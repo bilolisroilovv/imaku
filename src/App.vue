@@ -209,6 +209,9 @@ body.modal-open {
   #followersModal .modal-dialog {
     max-width: 380px;
   }
+  #postCommentModal .modal-dialog {
+    max-width: 440px;
+  }
 }
 #signModal .modal-header {
   display: none;
@@ -219,6 +222,7 @@ body.modal-open {
 #signModal .modal-body {
   padding: 27px 2rem;
 }
+
 #followersModal .modal-header {
   display: none;
 }
@@ -226,6 +230,36 @@ body.modal-open {
   display: none;
 }
 #followersModal .modal-body {
+}
+
+#postCommentModal .modal-header {
+  display: none;
+}
+#postCommentModal .modal-footer {
+  display: none;
+}
+#postCommentModal .modal-body {
+  padding: 22px 1.6rem;
+}
+.grid-block-wrapper .grid-block {
+  min-width: 124px!important;
+}
+.vue-file-agent .file-preview-new .help-text {
+  font-size: 14px!important;
+  font-family: "Inter", sans-serif;
+  margin-top: 5px;
+  line-height: 16px!important;
+}
+.vue-file-agent.file-input-wrapper {
+  border: 2px dashed #bdc5cd!important;
+  padding: 6px;
+}
+.vue-file-agent.file-input-wrapper {
+  text-align: left!important;
+}
+.vue-file-agent .file-preview .file-ext,
+.vue-file-agent .file-preview .file-size {
+  display: none!important;
 }
 .sign_modal_form {
   display: flex;
@@ -412,15 +446,7 @@ body.modal-open {
   display: -webkit-box !important;
   text-overflow: ellipsis;
 }
-@media (min-width: 1400px) {
-  .container,
-  .container-lg,
-  .container-md,
-  .container-sm,
-  .container-xl {
-    max-width: 1350px !important;
-  }
-}
+
 @media (min-width: 1350px) {
   .container,
   .container-lg,
@@ -428,6 +454,16 @@ body.modal-open {
   .container-sm,
   .container-xl {
     max-width: 1300px !important;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1350px !important;
   }
 }
 /* START Btns styles */

@@ -125,6 +125,7 @@
                 <button
                   class="like_btn card_like_btn d-flex align-items-center mr-3"
                   @click.prevent="handleLike"
+                  :class="{ active: isLiked }"
                   title="Мне нравится"
                 >
                   <div class="like_btn_icon d-flex align-items-center">
@@ -153,6 +154,7 @@
                 <button
                   class="dislike_btn card_like_btn d-flex align-items-center mr-3"
                   @click.prevent="handleDislike"
+                  :class="{ active: isDisliked }"
                   title="Мне не нравится"
                 >
                   <div class="dislike_btn_icon d-flex align-items-center">
@@ -267,7 +269,7 @@
               <div class="pt-2 pb-2 product_adress">
                 <h4 class="pb-2">{{ $t("post_page.addess") }}:</h4>
                 <p class="mb-2">
-                  Г. Ташкент, Яккасарайский район, улица Таффакур, дом 15
+                  {{ postData.location }}
                 </p>
                 <!-- <iframe
                   src="https://yandex.ru/map-widget/v1/?um=constructor%3A82c9b4a2e8ccf86a57718e06a3d4ec2a03aee27235dcf51300db4b6fdc836b89&amp;source=constructor"
@@ -441,6 +443,9 @@
     </section>
     <!-- product_section -->
 
+
+    <PostComments :stars="postData.stars" :reviewCount="postData.reviewCount" :rating="postData.rating" :postId="postData.id" :reviews="postData.reviews"/>
+
     <section class="section pt-0">
       <div class="container">
         <h2 class="section_title pb-4">{{ $t("post_page.similar_posts") }}</h2>
@@ -460,8 +465,6 @@
       <!-- container -->
     </section>
 
-    <!-- The modal -->
-    <b-modal id="my-modal" centered> </b-modal>
   </div>
 </template>
 
@@ -473,6 +476,7 @@ import PostsSection from "@/components/lite/desktop/postsSection/PostsSection";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import Card3 from "@/components/lite/desktop/Cards/Card3";
 import SubscribeBtn from "@/components/lite/desktop/SubscribeBtn";
+import PostComments from "@/components/lite/desktop/PostComments";
 import axios from "axios";
 import { mapGetters } from "vuex";
 import "swiper/css/swiper.css";
@@ -487,7 +491,8 @@ export default {
     Swiper,
     SwiperSlide,
     Card3,
-    SubscribeBtn
+    SubscribeBtn,
+    PostComments
   },
   props: {
     id: {}
