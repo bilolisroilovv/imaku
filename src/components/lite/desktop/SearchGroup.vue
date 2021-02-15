@@ -113,7 +113,6 @@ export default {
   events: {},
   mounted() {
     var $voiceTrigger = $("#voice-trigger");
-    var $searchForm = $("#search");
     var $searchInput = $("#search-field");
     var $result = $("#result"); // eslint-disable-line
 
@@ -176,7 +175,7 @@ export default {
       $searchInput.val(speechOutput);
       //$result.html(speechOutput);
       if (e.results[0].isFinal) {
-        $searchForm.submit();
+        this.handleSubmit()
       }
     }
   }

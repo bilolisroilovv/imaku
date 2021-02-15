@@ -592,8 +592,7 @@ export default {
         this.isDisliked = false;
         this.disLikesCount--;
       }
-      const response = await axios.get("like/" + this.postData.id);
-      console.log(response);
+      await axios.get("like/" + this.postData.id);
       /* this.likesCount = response.data.likes
       this.dislikesCount = response.data.dislikes */
     },
@@ -608,8 +607,7 @@ export default {
         this.isLiked = false;
         this.likesCount--;
       }
-      const response = await axios.get("dislike/" + this.postData.id);
-      console.log(response);
+      await axios.get("dislike/" + this.postData.id);
       /* this.likesCount = response.data.likes
       this.dislikesCount = response.data.dislikes */
     },
