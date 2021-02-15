@@ -28,7 +28,7 @@
       <!-- container -->
     </section>
     <!-- product_section -->
-    <ShopInfo :shop="shopData" />
+    <ShopInfo :shop="shopData" @removePost="getShop"/>
   </div>
 </template>
 

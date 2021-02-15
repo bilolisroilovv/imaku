@@ -214,7 +214,7 @@
               v-for="post in shop.posts"
               :key="post.id"
               :post="post"
-              @removePost="location.reload()"
+              @removePost="removePost"
             />
           </div>
         </div> <!-- col-md-9 -->
@@ -271,6 +271,9 @@ export default {
       } else {
         this.text = "Показать номер";
       }
+    },
+    removePost() {
+      this.$emit("removePost", this.shop);
     }
   },
   computed: {
