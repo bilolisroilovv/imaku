@@ -142,11 +142,18 @@
                   </a>
                   <!-- show_number_btn -->
                   <router-link
+                    v-if="currentUser === null"
+                    to="/"
+                    class="send_message_btn mainbtn d-block w-100 text-center"
+                  >
+                    {{ $t("shop.send_message") }}
+                  </router-link>
+                  <router-link
                     :to="{
                       name: 'PostCreatePage',
                       params: { id:  shop.id }
                     }"
-                    v-if="currentUser.id === shop.author_id"
+                    v-else-if="currentUser.id === shop.author_id"
                     class="send_message_btn mainbtn d-block w-100 text-center"
                   >
                     Подать объявление
@@ -158,7 +165,7 @@
                   >
                     {{ $t("shop.send_message") }}
                   </router-link>
-                  <!-- send_message_btn -->
+
                   
                 </div>
                 <!-- product_btns -->
@@ -203,7 +210,11 @@
 
         <div class="col-md-9">
           <div class="grid-container loading_div grid-template-4 grid-gap-10">
-            <CardBase
+            <ShopCardBase
+              v-for="post in shop.posts"
+              :key="post.id"
+              :post="post"
+              @removePost="location.reload()"
             />
           </div>
         </div> <!-- col-md-9 -->
@@ -216,7 +227,7 @@
 
 <script>
 import SubscribeBtn from "@/components/lite/desktop/SubscribeBtn";
-import CardBase from "@/components/lite/desktop/Cards/CardBase";
+import ShopCardBase from "@/components/lite/desktop/Cards/ShopCardBase";
 import { mapGetters } from "vuex";
 import axios from "axios";
 
@@ -224,7 +235,7 @@ export default {
   name: "ShopInfo",
   components: {
     SubscribeBtn,
-    CardBase
+    ShopCardBase
   },
   data() {
     return {
@@ -236,9 +247,6 @@ export default {
   },
   props: {
     shop: []
-  },
-  mounted() {
-    console.log(this.shop);
   },
   methods: {
     async toggleSub() {
