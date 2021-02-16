@@ -6,14 +6,15 @@
           <div class="chat-left">
             <div class="chat-left__header">
               <div class="title">
-                Сообщения <span class="chat-count">3</span>
+                {{ $t("chat") }}
+                <span class="chat-count">{{ chatData.length }}</span>
               </div>
               <div class="search">
                 <img src="@/assets/lite/chat/search.svg" alt="" />
               </div>
             </div>
             <div class="chat-left__body">
-              <div class="chat-user">
+              <!-- <div class="chat-user">
                 <div class="chat-user__img">
                   <img src="https://picsum.photos/id/323/120/96" alt="" />
                 </div>
@@ -103,6 +104,40 @@
                 <div class="ml-auto chat-user__right">
                   <div></div>
                   <p class="chat-user__send-date">14.30</p>
+                </div>
+              </div> -->
+              <div v-for="(chat, index) in chatData" :key="index">
+                <div class="chat-user">
+                  <div class="chat-user__img">
+                    <img :src="chat.avatar" :alt="chat.name" />
+                  </div>
+                  <div class="mx-3">
+                    <h3
+                      class="chat-user__title"
+                      :class="chat.newMessagesCount > 0 ? 'active' : ''"
+                    >
+                      {{ chat.name }}
+                      <span class="online"
+                        ><img
+                          v-if="chat.status"
+                          src="@/assets/lite/chat/online.svg"
+                          alt=""
+                      /></span>
+                    </h3>
+                    <p class="chat-user__subtitle">
+                      {{ chat.lastMessage }}
+                    </p>
+                  </div>
+                  <div class="ml-auto chat-user__right">
+                    <div>
+                      <span
+                        v-if="chat.newMessagesCount > 0"
+                        class="chat-count"
+                        >{{ chat.newMessagesCount }}</span
+                      >
+                    </div>
+                    <p class="chat-user__send-date">{{ chat.lastSeen }}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -210,9 +245,12 @@
                 <img src="@/assets/lite/chat/file.svg" alt="" />
               </button>
               <div class="text-form">
-                <input type="text" placeholder="Type your message…" />
+                <input type="text" :placeholder="$t('chat_placeholder')" />
                 <button type="button" class="emoji">
                   <img src="@/assets/lite/chat/emoji.svg" alt="" />
+                </button>
+                <button type="submit" class="send">
+                  <img src="@/assets/lite/chat/send.svg" alt="" />
                 </button>
               </div>
             </form>
@@ -224,7 +262,47 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+import Chat from "@/components/lite/desktop/Chat/Chat.vue";
+import axios from "axios";
+export default {
+  name: "Chat",
+  comments: {
+    Chat
+  },
+  data() {
+    return {
+      chatData: [],
+      colorLoading: "var(--main-color)",
+      isActive: false
+    };
+  },
+  methods: {
+    async getPost2() {
+      this.$vs.loading({
+        container: "",
+        scale: 0.8,
+        color: this.colorLoading
+      });
+      const response = await axios.get("chat").finally(() =>
+        setTimeout(() => {
+          this.$vs.loading.close(".con-vs-loading");
+        }, 10)
+      );
+      this.chatData = response.data;
+      console.log(this.chatData);
+    },
+    chat_active() {
+      this.isActive = !this.isActive;
+    }
+  },
+  computed: {
+    ...mapGetters(["currentUser"])
+  },
+  mounted() {
+    this.getPost2();
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -551,7 +629,8 @@ export default {};
       background-color: #fff;
       padding: 24px;
       .file,
-      .emoji {
+      .emoji,
+      .send {
         background-color: transparent;
         width: 40px;
         display: flex;
@@ -588,6 +667,14 @@ export default {};
         }
 
         .emoji {
+          position: absolute;
+          right: 30px;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 12;
+        }
+
+        .send {
           position: absolute;
           right: 0px;
           top: 50%;
