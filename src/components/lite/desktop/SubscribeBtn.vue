@@ -1,7 +1,9 @@
 <template>
-  <button class="d-block mt-1 subscribe_btn" :class="{ active: subscribed }">
-    {{ text }}
-  </button>
+  <div>
+    <button class="d-block mt-1 subscribe_btn" :class="{ active: subscribed }">
+      {{ text }}
+    </button>
+  </div>
 </template>
 
 <script>
@@ -17,7 +19,7 @@ export default {
   },
   data() {
     return {
-      text: "Подписаться",
+      text: this.$i18n.t("buttons.subscribe"),
       subscribed: false,
     };
   },
@@ -25,10 +27,10 @@ export default {
     changeSub() {
       if (this.isSubscribed === true) {
         this.subscribed = true;
-        this.text = "Отписаться";
+        this.text = this.$i18n.t("buttons.unsubscribe");
       } else {
         this.subscribed = false;
-        this.text = "Подписаться";
+        this.text = this.$i18n.t("buttons.subscribe");
       }
     },
   },

@@ -133,8 +133,6 @@ export default {
 
       if (response.status === 200) {
         this.step++;
-      } else {
-        console.log(response.status);
       }
     },
 

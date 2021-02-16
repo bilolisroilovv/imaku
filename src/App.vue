@@ -269,6 +269,7 @@ body.modal-open {
 .vue-file-agent.file-input-wrapper {
   text-align: left!important;
 }
+
 .vue-file-agent .file-preview .file-ext,
 .vue-file-agent .file-preview .file-size {
   display: none!important;
@@ -856,6 +857,9 @@ body.modal-open {
 .comments_select .vs-select--input {
   background: #f0f0f7!important;
   padding: 9px 12px 9px 12px !important;
+}
+.pointer-none {
+  pointer-events: none!important;
 }
 footer {
 }
