@@ -162,7 +162,7 @@
                     v-else-if="currentUser.id === shop.author_id"
                     class="send_message_btn mainbtn d-block w-100 text-center"
                   >
-                    Подать объявление
+                    {{ $t("shop.post_create") }}
                   </router-link>
                   <router-link
                     v-else
@@ -249,13 +249,15 @@ export default {
   data() {
     return {
       expanded: false,
-      text: "Показать номер",
+      text: this.$i18n.t("buttons.show_number"),
       isSubscribed: Boolean,
       shopType: "shop"
     };
   },
   props: {
     shop: []
+  },
+  watch: {
   },
   methods: {
     async toggleSub() {
@@ -275,7 +277,7 @@ export default {
       if (this.expanded) {
         this.text = response.data;
       } else {
-        this.text = "Показать номер";
+        this.text = this.$i18n.t("buttons.show_number");
       }
     },
     removePost() {

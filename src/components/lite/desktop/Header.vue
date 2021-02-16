@@ -175,19 +175,21 @@
           <!-- d-flex -->
           <div>
             <div class="d-flex align-items-center" v-if="!currentUser">
-              <router-link
-                :to="{ name: 'ShopCreatePage' }"
+              <a
+                @click.prevent
+                v-b-modal.signModal
                 class="create_store_btn d-flex align-items-center mr-2"
               >
                 {{ $t("create_shop") }}
-              </router-link>
+              </a>
               <!-- mainbtn -->
-              <router-link
-                :to="{ name: 'PostCreatePage' }"
+              <a
+                @click.prevent
+                v-b-modal.signModal
                 class="mainbtn create_ad_btn d-flex align-items-center mr-2"
               >
                 {{ $t("create_post") }}
-              </router-link>
+              </a>
               <!-- mainbtn -->
               <a
                 href="#"

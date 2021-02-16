@@ -10,8 +10,8 @@
         <div class="row">
           <div class="col-md-8">
             <div class="product_reviews_section">
-              <div class="d-flex justify-content-between">
-                <div class="d-flex align-items-center product_review_filter">
+              <div class="d-flex justify-content-end">
+                <!-- <div class="d-flex align-items-center product_review_filter">
                   <span class="mr-3">Сортировать по:</span>
 
                   <div class="product_review_sort">
@@ -27,14 +27,14 @@
                         :text="item.text"
                       />
                     </vs-select>
-                  </div><!-- product_review_sort -->
+                  </div>
 
                   <label class="control control--checkbox">
                     <input type="checkbox" checked="checked" />
                     <div class="control__indicator"></div>
                     С фото (9)
                   </label>
-                </div>
+                </div> -->
                 <!-- product_review_filter -->
 
                 <button class="write_review_btn mainbtn" v-b-modal.postCommentModal>
@@ -337,7 +337,7 @@
           <div class="col-md-4">
             <div class="product_review_stats d-flex justify-content-between">
               <div class="d-flex flex-column align-items-center">
-                <h4>{{ rating.toFixed(1) }}</h4>
+                <h4>{{ rating }}</h4>
                 <h6 class="py-2">{{reviewCount}} отзывов</h6>
                 <star-rating
                   border-color="#fc8301"
@@ -379,32 +379,32 @@
               <div class="progressbar_part">
                 <div class="progress_star">
                   <span>5 звезд</span>
-                  <b-progress :value="stars.five.toFixed(1)" :max="100" variant="warning" class="progress myprogress"></b-progress>
-                  <span>{{ stars.five.toFixed(1) }}%</span>
+                  <b-progress :value="stars.five" :max="100" variant="warning" class="progress myprogress"></b-progress>
+                  <span>{{ stars.five }}%</span>
                 </div>
                 <!-- progress_star -->
                 <div class="progress_star">
                   <span>4 звезд</span>
-                  <b-progress :value="stars.four.toFixed(1)" :max="100" variant="warning" class="progress myprogress"></b-progress>
-                  <span>{{ stars.four.toFixed(1) }}%</span>
+                  <b-progress :value="stars.four" :max="100" variant="warning" class="progress myprogress"></b-progress>
+                  <span>{{ stars.four }}%</span>
                 </div>
                 <!-- progress_star -->
                 <div class="progress_star">
                   <span>3 звезд</span>
-                  <b-progress :value="stars.three.toFixed(1)" :max="100" variant="warning" class="progress myprogress"></b-progress>
-                  <span>{{ stars.three.toFixed(1) }}%</span>
+                  <b-progress :value="stars.three" :max="100" variant="warning" class="progress myprogress"></b-progress>
+                  <span>{{ stars.three }}%</span>
                 </div>
                 <!-- progress_star -->
                 <div class="progress_star">
                   <span>2 звезд</span>
-                  <b-progress :value="stars.two.toFixed(1)" :max="100" variant="warning" class="progress myprogress"></b-progress>
-                  <span>{{ stars.two.toFixed(1) }}%</span>
+                  <b-progress :value="stars.two" :max="100" variant="warning" class="progress myprogress"></b-progress>
+                  <span>{{ stars.two }}%</span>
                 </div>
                 <!-- progress_star -->
                 <div class="progress_star">
                   <span>1 звезд</span>
-                   <b-progress :value="stars.one.toFixed(1)" :max="100" variant="warning" class="progress myprogress"></b-progress>
-                  <span>{{ stars.one.toFixed(1) }}%</span>
+                   <b-progress :value="stars.one" :max="100" variant="warning" class="progress myprogress"></b-progress>
+                  <span>{{ stars.one }}%</span>
                 </div>
                 <!-- progress_star -->
               </div>
@@ -448,7 +448,10 @@ export default {
     };
   },
   props: {
-    reviews: {},
+    reviews: {
+      type: Array,
+      default: null
+    },
     reviewCount: {
       type: Number,
       default: null

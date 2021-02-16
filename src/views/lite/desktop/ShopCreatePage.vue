@@ -8,7 +8,7 @@
             <div>
               <div class="d-flex align-items-center myinput_group pb-4">
                 <label for=""
-                  >{{ $t("post_create.product_name") }} <span>*</span></label
+                  >{{ $t("shop_create.name") }} <span>*</span></label
                 >
                 <input type="text" placeholder="" v-model="name" />
               </div>

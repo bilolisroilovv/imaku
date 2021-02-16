@@ -97,12 +97,19 @@
     "created_at": "Ro'yxatga olingan sana",
     "subscribe_to": "Obuna bo'lish",
     "update": "E'lon",
+    "adress": "Adress",
+    "post_create": "E'lon berish",
     "subscriber": "Obunachilar",
     "subscriptions": "Obuna bo'lgan",
     "socials": "Ijtimoiy tarmoqlar",
     "shop_phone": "Nomerni ko'rish",
     "send_message": "Xabar yozish",
     "description": "Tavsif"
+  },
+  "buttons": {
+    "show_number": "Raqamni ko'rsatish",
+    "subscribe": "Obuna bo'lish",
+    "unsubscribe": "Obunani bekor qilish"
   },
   "post_create": {
     "title": "E'loningizni IMAKU-ga chiqarish",
@@ -125,6 +132,7 @@
   },
   "shop_create": {
     "title": "IMAKU-da do'kon yarating",
+    "name": "Do'koningiz nomi",
     "banner": "Banner",
     "logo": "Logo",
     "photo_banner": "Do'koningiz uchun banner fotosurati",

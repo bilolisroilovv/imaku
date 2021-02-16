@@ -67,14 +67,27 @@
                 <div
                   class="product_favourite mycard_favorite_stroke2 flex-center d-flex"
                   v-b-tooltip.hover
+                  v-if="!currentUser"
+                  :title="$t('post_page.add_to_favorites')"
+                  @click.prevent
+                  v-b-modal.signModal
+                >
+                  <ToggleFavorite
+                  class="d-flex pointer-none align-items-center" />
+                </div><!-- product_favourite -->
+
+                <div
+                  class="product_favourite mycard_favorite_stroke2 flex-center d-flex"
+                  v-if="currentUser"
+                  v-b-tooltip.hover
                   :title="$t('post_page.add_to_favorites')"
                   @click.prevent="ToggleFavoriteRequest"
                 >
                   <ToggleFavorite
                   :isFavorite="this.isFavorite"
                   class="d-flex align-items-center" />
-                </div>
-                <!-- product_favourite -->
+                </div><!-- product_favourite -->
+                
               </div>
               <!-- d-flex -->
 
@@ -123,6 +136,71 @@
                 class="mycard_btns myproduct_btns d-flex align-items-center pb-1 pt-3"
               >
                 <button
+                  v-if="!currentUser"
+                  class="like_btn card_like_btn d-flex align-items-center mr-3"
+                  @click.prevent
+                  v-b-modal.signModal
+                  :class="{ active: isLiked }"
+                  title="Мне нравится"
+                >
+                  <div class="like_btn_icon d-flex align-items-center">
+                    <svg
+                      width="11"
+                      height="10"
+                      viewBox="0 0 11 10"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1.95088 3.86499H0.639545C0.458503 3.86499 0.311707 4.01176 0.311707 4.19283V9.43807C0.311707 9.61911 0.458481 9.76591 0.639545 9.76591H1.95086C2.1319 9.76591 2.27869 9.61913 2.27869 9.43807V4.19281C2.27869 4.01177 2.13194 3.86499 1.95088 3.86499Z"
+                        fill="#7D95AE"
+                      />
+                      <path
+                        d="M10.1399 4.73397C10.0821 4.22542 9.60704 3.86497 9.09521 3.86497H6.53936C6.75657 3.47603 6.87315 2.37597 6.86798 1.9266C6.85941 1.18276 6.24341 0.58667 5.49955 0.58667H5.22903C5.04784 0.58667 4.90119 0.733292 4.90119 0.914509C4.90119 1.67259 4.60601 3.04092 4.04929 3.59766C3.67458 3.97237 3.35424 4.10815 2.9342 4.31807V9.23714C3.5773 9.45148 4.39382 9.76591 5.63836 9.76591H7.78286C8.48946 9.76591 9.03979 9.11147 8.76598 8.42003C9.18314 8.30638 9.49078 7.9238 9.49078 7.4711C9.49078 7.34335 9.46613 7.22107 9.42163 7.10869C10.1246 6.91716 10.3834 6.04914 9.89546 5.50412C10.0747 5.30386 10.1736 5.02994 10.1399 4.73397Z"
+                        fill="#7D95AE"
+                      />
+                    </svg>
+                  </div>
+                  <!-- like_btn_icon -->
+                  <div class="like_btn_count">+{{ likesCount }}</div>
+                  <!-- like_btn_count -->
+                </button>
+                <!-- like_btn -->
+                <button
+                  v-if="!currentUser"
+                  @click.prevent
+                  v-b-modal.signModal
+                  class="dislike_btn card_like_btn d-flex align-items-center mr-3"
+                  :class="{ active: isDisliked }"
+                  title="Мне не нравится"
+                >
+                  <div class="dislike_btn_icon d-flex align-items-center">
+                    <svg
+                      width="11"
+                      height="11"
+                      viewBox="0 0 11 11"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1.85912 6.67188H0.468556C0.276576 6.67188 0.120911 6.51623 0.120911 6.32423V0.762087C0.120911 0.570107 0.276553 0.414442 0.468556 0.414442H1.85909C2.05107 0.414442 2.20674 0.570084 2.20674 0.762087V6.32425C2.20674 6.51623 2.05112 6.67188 1.85912 6.67188Z"
+                        fill="#7D95AE"
+                      />
+                      <path
+                        d="M10.5432 5.75057C10.4818 6.28985 9.97809 6.67207 9.43534 6.67207H6.72507C6.9554 7.08451 7.07903 8.25103 7.07355 8.72755C7.06446 9.51634 6.41124 10.1484 5.62243 10.1484H5.33557C5.14343 10.1484 4.98793 9.99296 4.98793 9.80079C4.98793 8.9969 4.67491 7.54591 4.08456 6.95553C3.6872 6.55818 3.34752 6.4142 2.9021 6.19159V0.975336C3.58404 0.748036 4.4499 0.414617 5.76963 0.414617H8.04369C8.79299 0.414617 9.37657 1.10859 9.08621 1.84181C9.52858 1.96232 9.8548 2.36802 9.8548 2.84807C9.8548 2.98354 9.82867 3.11321 9.78148 3.23237C10.5269 3.43548 10.8013 4.35594 10.2839 4.93389C10.474 5.14625 10.5788 5.43672 10.5432 5.75057Z"
+                        fill="#7D95AE"
+                      />
+                    </svg>
+                  </div>
+                  <!-- dislike_btn_icon -->
+                  <div class="dislike_btn_count">-{{ disLikesCount }}</div>
+                  <!-- dislike_btn_count -->
+                </button>
+                <!-- dislike_btn -->
+
+
+                <button
+                  v-if="currentUser"
                   class="like_btn card_like_btn d-flex align-items-center mr-3"
                   @click.prevent="handleLike"
                   :class="{ active: isLiked }"
@@ -152,6 +230,7 @@
                 </button>
                 <!-- like_btn -->
                 <button
+                  v-if="currentUser"
                   class="dislike_btn card_like_btn d-flex align-items-center mr-3"
                   @click.prevent="handleDislike"
                   :class="{ active: isDisliked }"
@@ -236,7 +315,11 @@
                     >({{ postData.author.postsCount }}
                     {{ $t("post_page.posts") }})</span
                   >
-                  <div @click.prevent="toggleSub">
+                  <div v-if="!currentUser" @click.prevent v-b-modal.signModal>
+                    <SubscribeBtn :isSubscribed="this.isSubscribed" data-show="true"/>
+                  </div>
+
+                  <div v-if="currentUser" @click.prevent="toggleSub">
                     <SubscribeBtn :isSubscribed="this.isSubscribed" data-show="true"/>
                   </div>
                   

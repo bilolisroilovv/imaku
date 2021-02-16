@@ -97,12 +97,19 @@
     "created_at": "Дата регистрации",
     "subscribe_to": "Подписаться",
     "update": "Объявлении",
+    "adress": "Адрес",
+    "post_create": "Подать объявление",
     "subscriber": "Подписчики",
     "subscriptions": "Подписки",
     "socials": "Соцсети",
     "shop_phone": "Показать номера",
     "send_message": "Написать сообщение",
     "description": "Описание"
+  },
+  "buttons": {
+    "show_number": "Показать номер",
+    "subscribe": "Подписаться",
+    "unsubscribe": "Отписаться"
   },
   "post_create": {
     "title": "Подать объявление на IMAKU",
@@ -125,6 +132,7 @@
   },
   "shop_create": {
     "title": "Создать магазин на IMAKU",
+    "name": "Название магазина",
     "banner": "Баннер",
     "logo": "Лого",
     "photo_banner": "Фото баннера для вашего магазина",
