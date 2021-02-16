@@ -1,16 +1,16 @@
 <template>
-  <b-modal id="followersModal" centered>
+  <b-modal id="followingModal" centered>
     <div class="loading_div">
       <div class="mymodal-header justify-content-center">
         <button
           type="button"
-          @click="$bvModal.hide('followersModal')"
+          @click="$bvModal.hide('followingModal')"
           class="close"
         >
           <img src="@/assets/lite/close.png" class="img-width" alt="" />
         </button>
         <h5 class="modal-title pb-3" id="exampleModalLabel">
-          Подписчики
+          Подписки
         </h5>
       </div>
       <!-- mymodal-header -->
@@ -18,7 +18,7 @@
       <div class="mymodal_body">
         <router-link
           class="follower d-flex"
-          v-for="follower in followers"
+          v-for="follower in following"
           :key="follower.id"
           :to="{
             name: 'SellerPage',
@@ -62,9 +62,9 @@
 
 <script>
 export default {
-  name: "FollowersModal",
+  name: "FollowingModal",
   props: {
-    followers: {
+    following: {
       type: Array
     }
   },
@@ -74,7 +74,7 @@ export default {
   },
   watch: {
     followers(val) {
-      console.log(this.followers, val);
+      console.log(this.following, val);
     }
   }
 };

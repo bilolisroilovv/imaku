@@ -209,6 +209,9 @@ body.modal-open {
   #followersModal .modal-dialog {
     max-width: 380px;
   }
+  #followingModal .modal-dialog {
+    max-width: 380px;
+  }
   #postCommentModal .modal-dialog {
     max-width: 440px;
   }
@@ -230,6 +233,15 @@ body.modal-open {
   display: none;
 }
 #followersModal .modal-body {
+}
+
+#followingModal .modal-header {
+  display: none;
+}
+#followingModal .modal-footer {
+  display: none;
+}
+#followingModal .modal-body {
 }
 
 #postCommentModal .modal-header {

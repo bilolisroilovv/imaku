@@ -145,7 +145,11 @@
                     <h6>{{ $t("profile.post_followers") }}</h6>
                   </button>
                   <!-- seller_info_box -->
-                  <button class="seller_info_box">
+                  <button
+                    class="seller_info_box"
+                    @click.prevent
+                    v-b-modal.followingModal
+                  >
                     <span>{{ profileData.followingCount }}</span>
                     <h6>{{ $t("profile.post_subscriptions") }}</h6>
                   </button>
@@ -268,6 +272,7 @@
     <Footer />
 
     <FollowersModal :followers="profileData.followers"/>
+    <FollowingModal :following="profileData.following"/>
   </div>
 </template>
 
@@ -275,6 +280,7 @@
 import Header from "@/components/lite/desktop/Header";
 import Footer from "@/components/lite/desktop/Footer";
 import FollowersModal from "@/components/lite/desktop/Modals/FollowersModal";
+import FollowingModal from "@/components/lite/desktop/Modals/FollowingModal";
 import { mapGetters } from "vuex";
 import axios from "axios";
 
@@ -283,7 +289,8 @@ export default {
   components: {
     Header,
     Footer,
-    FollowersModal
+    FollowersModal,
+    FollowingModal
   },
   data() {
     return {
