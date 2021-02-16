@@ -53,7 +53,7 @@
 
       <section class="section pt-3">
         <div class="container">
-          <div class="row">
+          <div class="row position-relative">
             <div class="w-29 pr-0">
               <div class="bg-white product_sidebar seller_sidebar">
                 <!-- mycard_btns -->
