@@ -146,5 +146,6 @@
     "save": "Saqlash"
   },
   "seller_social": "Sotuvchining ijtimoiy tarmoqlari",
-  "view_more": "Ko'proq ko'rish"
+  "view_more": "Ko'proq ko'rish",
+  "chat_placeholder": "Xabaringizni kiriting…"
 }

@@ -146,5 +146,6 @@
     "save": "Сохранить"
   },
   "seller_social": "Соцсети продавца",
-  "view_more": "Ko'proq ko'rish"
+  "view_more": "Ko'proq ko'rish",
+  "chat_placeholder": "Введите свое сообщение…"
 }

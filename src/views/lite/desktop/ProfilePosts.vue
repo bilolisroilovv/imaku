@@ -61,7 +61,6 @@ export default {
   },
   data() {
     return {
-      avatarImage: "'https://picsum.photos/500?random=1'",
       profileData: [],
       colorLoading: "var(--main-color)"
     };
