@@ -426,7 +426,7 @@
       <!-- container -->
     </section>
     <!-- product_review_section -->
-    <PostCommentModal :postId="postId" />
+    <PostCommentModal @CommentPost="CommentPost" :postId="postId" />
   </div>
 </template>
 
@@ -478,6 +478,9 @@ export default {
     ...mapGetters(["currentUser"])
   },
   methods: {
+    CommentPost() {
+      this.$router.push({ name: 'PostPage', params: {id: this.postId} })
+    },
     async sortBy() {
       this.catData.posts = null;
       this.$vs.loading({

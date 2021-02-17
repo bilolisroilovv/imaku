@@ -90,6 +90,7 @@ export default {
         title: "Успех",
         text: "Комментарий успешно размещен"
       });
+      this.$emit('CommentPost', this.postId)
     }
   },
 }

@@ -75,9 +75,9 @@
           </div>
           <!-- d-flex -->
           <div class="d-flex justify-content-between align-items-center">
-            <a href="#" class="navbar_top_link bg">
+            <!-- <a href="#" class="navbar_top_link bg">
               {{ $t("mobile-app") }}
-            </a>
+            </a> -->
             <!-- navbar_top_link -->
             <vs-dropdown class="header_lang_link">
               <a class="navbar_top_link" href="#">
@@ -103,23 +103,23 @@
               </vs-dropdown-menu>
             </vs-dropdown>
             <router-link
-              :to="`${$i18n.locale}/product`"
+              :to="{ name: 'SupportPage' }"
               class="navbar_top_link"
             >
               {{ $t("contact-support") }}
             </router-link>
             <!-- navbar_top_link -->
-            <a href="#" class="navbar_top_link">
+            <router-link :to="{ name: 'Chat' }" class="navbar_top_link">
               {{ $t("chat") }}
-            </a>
+            </router-link>
             <!-- navbar_top_link -->
-            <a href="#" class="navbar_top_link">
+            <router-link :to="{ name: 'ProfilePage' }" class="navbar_top_link">
               {{ $t("favourites") }}
-            </a>
+            </router-link>
             <!-- navbar_top_link -->
-            <a href="#" class="navbar_top_link pr-0">
+            <router-link :to="{ name: 'FaqPage' }" class="navbar_top_link pr-0">
               {{ $t("faq") }}
-            </a>
+            </router-link>
             <!-- navbar_top_link -->
           </div>
           <!-- d-flex -->
@@ -264,14 +264,14 @@
               </router-link>
               <!-- mainbtn -->
               <vs-dropdown class="header_profile_link ml-3">
-                <a
+                <router-link
+                  :to="{ name: 'ProfilePosts' }"
                   class="header_profile_img mybg_center"
                   :style="{
                     'background-image': 'url(' + currentUser.avatar + ')'
                   }"
-                  href="#"
                 >
-                </a>
+                </router-link>
                 <vs-dropdown-menu class="header_profile_links">
                   <router-link :to="{ name: 'ProfilePosts' }">
                     <vs-dropdown-item class="navbar_top_link">
@@ -394,6 +394,7 @@ export default {
   border-radius: 50%;
   border: 2px solid rgb(177, 177, 177);
   display: block;
+  pointer-events: inherit!important;
 }
 .create_store_btn {
   background: rgba(255, 201, 150, 0.377);

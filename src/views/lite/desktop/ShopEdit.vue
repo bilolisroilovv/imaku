@@ -211,7 +211,7 @@ export default {
         title: "Успех",
         text: "Объявлено успешно размещено"
       });
-      this.$router.push("/");
+      this.$router.push({ name: 'ProfileShops' })
     }
   },
   computed: {
