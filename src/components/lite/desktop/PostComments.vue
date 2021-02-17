@@ -37,7 +37,14 @@
                 </div> -->
                 <!-- product_review_filter -->
 
-                <button class="write_review_btn mainbtn" v-b-modal.postCommentModal>
+                <button
+                  class="write_review_btn mainbtn"
+                  v-if="!currentUser"
+                  @click.prevent
+                  v-b-modal.signModal>
+                  Написать комментарий
+                </button>
+                <button v-if="currentUser" class="write_review_btn mainbtn" v-b-modal.postCommentModal>
                   Написать комментарий
                 </button>
               </div>
@@ -425,6 +432,7 @@
 
 <script>
 import PostCommentModal from "@/components/lite/desktop/Modals/PostCommentModal"
+import { mapGetters } from "vuex";
 import axios from 'axios'
 import "lightgallery.js"
 import "lightgallery.js/dist/css/lightgallery.css"
@@ -465,6 +473,9 @@ export default {
       type: Number,
       default: null
     }
+  },
+  computed: {
+    ...mapGetters(["currentUser"])
   },
   methods: {
     async sortBy() {

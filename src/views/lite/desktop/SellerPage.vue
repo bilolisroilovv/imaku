@@ -238,7 +238,7 @@
               />
             </div>
             <!-- grid-container -->
-            <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
+            <!-- <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
               <svg
                 width="12"
                 height="12"
@@ -270,7 +270,7 @@
                 <g></g>
               </svg>
               {{ $t("view_more") }}
-            </button>
+            </button> -->
           </div>
           <!-- col-md-8 -->
         </div>

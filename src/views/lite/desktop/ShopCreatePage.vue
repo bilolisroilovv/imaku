@@ -22,17 +22,55 @@
               </div>
               <!-- d-flex -->
               <div class="d-flex myinput_group pb-4">
+                <label for="">{{ $t("shop_create.logo") }}</label>
+                <div class="w-100">
+                  <div class="photos_block">
+                    <!-- <vs-upload :text="'Добавить'" id="files" ref="files" @change="handleFilesUpload($event)" :show-upload-button="false" @on-success="successUpload">
+                    </vs-upload> -->
+                    <!-- <input
+                      type="file"
+                      id="files2"
+                      ref="files2"
+                      @change="handleFilesUpload2($event)"
+                    /> -->
+                     <input type="file" ref="files" @change="onLogoChange($event)" />
+                    <!-- <VueFileAgent
+                      ref="files"
+                      @change="handleFilesUpload($event)"
+                      :theme="'default'"
+                      :multiple="true"
+                      :deletable="true"
+                      :meta="true"
+                      :maxSize="'10MB'"
+                      :maxFiles="14"
+                      :helpText="'Choose images or zip files'"
+                      :errorText="{
+                        type: 'Invalid file type. Only images or zip Allowed',
+                        size: 'Files should not exceed 10MB in size',
+                      }"
+                    ></VueFileAgent> -->
+                  </div>
+                  <!-- photos_block -->
+                  <p class="photos_p pt-2">Лого для вашего магазина</p>
+                  <div v-if="logoUrl" id="logoPreview" class="d-flex justify-content-center">
+                    <img class="" :src="logoUrl" />
+                  </div>
+                </div>
+              </div>
+              <!-- d-flex -->
+              <div class="d-flex myinput_group pb-4">
                 <label for="">{{ $t("shop_create.banner") }}</label>
                 <div class="w-100">
                   <div class="photos_block">
                     <!-- <vs-upload :text="'Добавить'" id="files" ref="files" @change="handleFilesUpload($event)" :show-upload-button="false" @on-success="successUpload">
                     </vs-upload> -->
-                    <input
+                    <!-- <input
                       type="file"
                       id="files"
                       ref="files"
                       @change="handleFilesUpload($event)"
-                    />
+                    /> -->
+                    <input type="file" ref="files" @change="onBannerChange($event)" />
                     <!-- <VueFileAgent
                       ref="files"
                       @change="handleFilesUpload($event)"
@@ -53,42 +91,14 @@
                   <p class="photos_p pt-2">
                     {{ $t("shop_create.photo_banner") }}
                   </p>
-                </div>
-              </div>
-              <!-- d-flex -->
-              <div class="d-flex myinput_group pb-4">
-                <label for="">{{ $t("shop_create.logo") }}</label>
-                <div class="w-100">
-                  <div class="photos_block">
-                    <!-- <vs-upload :text="'Добавить'" id="files" ref="files" @change="handleFilesUpload($event)" :show-upload-button="false" @on-success="successUpload">
-                    </vs-upload> -->
-                    <input
-                      type="file"
-                      id="files2"
-                      ref="files2"
-                      @change="handleFilesUpload2($event)"
-                    />
-                    <!-- <VueFileAgent
-                      ref="files"
-                      @change="handleFilesUpload($event)"
-                      :theme="'default'"
-                      :multiple="true"
-                      :deletable="true"
-                      :meta="true"
-                      :maxSize="'10MB'"
-                      :maxFiles="14"
-                      :helpText="'Choose images or zip files'"
-                      :errorText="{
-                        type: 'Invalid file type. Only images or zip Allowed',
-                        size: 'Files should not exceed 10MB in size',
-                      }"
-                    ></VueFileAgent> -->
+
+                  <div v-if="bannerUrl" id="bannerPreview" class="d-flex justify-content-center">
+                    <img class="" :src="bannerUrl" />
                   </div>
-                  <!-- photos_block -->
-                  <p class="photos_p pt-2">Лого для вашего магазина</p>
                 </div>
               </div>
               <!-- d-flex -->
+
               <div class="d-flex myinput_group pb-4">
                 <label for=""
                   >{{ $t("post_create.address") }} <span>*</span></label
@@ -154,6 +164,10 @@ export default {
   name: "ShopCreatePage",
   data() {
     return {
+      logoUrl: null,
+      logoFile: null,
+      bannerUrl: null,
+      bannerFile: null,
       name: "",
       description: "",
       location: "",
@@ -164,6 +178,18 @@ export default {
     };
   },
   methods: {
+    onLogoChange(event) {
+      const file = event.target.files[0];
+      this.logoUrl = URL.createObjectURL(file);
+      this.logoFile = file;
+      console.log(this.logoFile);
+    },
+    onBannerChange(event) {
+      const file = event.target.files[0];
+      this.bannerUrl = URL.createObjectURL(file);
+      this.bannerFile = file;
+      console.log(this.logoFile);
+    },
     successUpload() {
       this.$vs.notify({
         color: "success",
@@ -194,7 +220,14 @@ export default {
       form.append("location", this.location);
       form.append("phone", this.phone);
 
-      for (let i = 0; i < this.files.length; i++) {
+      if (this.logoFile) {
+        form.append("avatar", this.logoFile);
+      }
+      if (this.bannerFile) {
+        form.append("banner", this.bannerFile);
+      }
+
+      /* for (let i = 0; i < this.files.length; i++) {
         const file = this.files[i];
         console.log(file);
         form.append("banner", file);
@@ -204,7 +237,7 @@ export default {
         const file = this.files2[i];
         console.log(file);
         form.append("avatar", file);
-      }
+      } */
 
       await axios
         .post("shops/store", form, {
@@ -220,7 +253,8 @@ export default {
         title: "Успех",
         text: "Объявлено успешно размещена"
       });
-      this.$router.push("/");
+      /* this.$router.push("/"); */
+      this.$router.push({ name: 'ProfileShops' })
     }
   },
   computed: {
@@ -235,6 +269,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#logoPreview {
+  width: 170px;
+  height: 170px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-bottom: 30px;
+  border: 3px solid #b8b8b8;
+  img {
+    object-fit: cover;
+    width: 100%;
+    object-position: center;
+  }
+}
+#bannerPreview {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 30px;
+  border: 3px solid #b8b8b8;
+  overflow: hidden;
+  img {
+    object-fit: cover;
+    width: 100%;
+    object-position: center;
+  }
+}
 .search_icon {
   position: absolute;
   top: 50%;

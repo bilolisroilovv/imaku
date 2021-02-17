@@ -11,8 +11,8 @@
         </h5>
       </div>
       <!-- mymodal-header -->
-      <form @submit.prevent="handleSubmit" action="" class="sign_modal_form">
-        <div v-show="step === 1" class="step1">
+      <form v-show="step === 1" @submit.prevent="nextStep" action="" class="sign_modal_form">
+        <div  class="step1">
           <input
             id="modal_phone"
             v-model="phone"
@@ -25,14 +25,32 @@
             {{ $t("modal.title") }}
           </span>
           <div>
-            <button class="mt-3 mainbtn w-100" @click.prevent="nextStep">
+            <button class="mt-3 mainbtn w-100" type="submit">
               {{ $t("modal.next") }}
             </button>
           </div>
         </div>
         <!-- step1 -->
+        <!-- step2 -->
 
-        <div v-show="step === 2" class="step2">
+        <!-- <div class="mt-3 sign_modal_terms_link">
+          <label class="control control--checkbox">
+            <input type="checkbox" checked="checked" required />
+            <div class="control__indicator"></div>
+            Я согласен с
+            <a href="#" class="complain_review_btn">правилами и условиями</a>
+          </label>
+          <label class="control control--checkbox mt-1">
+            <input type="checkbox" checked="checked" required />
+            <div class="control__indicator"></div>
+            Я хочу получать новости и акции
+          </label>
+        </div> -->
+      </form>
+
+
+       <form v-show="step === 2" @submit.prevent="handleSubmit" action="" class="sign_modal_form">
+        <div class="step2">
           <input
             id="code_phone"
             type="text"

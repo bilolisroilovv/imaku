@@ -861,6 +861,12 @@ body.modal-open {
 .pointer-none {
   pointer-events: none!important;
 }
+.b-rating .b-rating-value {
+  min-width: 1.3rem!important;
+}
+.b-rating .b-rating-star, .b-rating .b-rating-value {
+  padding: 0 0.1em!important;
+}
 footer {
 }
 </style>
