@@ -39,6 +39,18 @@ const routes = [
         component: () => import("../views/lite/desktop/SellerPage.vue")
       },
       {
+        path: "support",
+        name: "SupportPage",
+        meta: { layout: "second" },
+        component: () => import("../views/lite/desktop/SupportPage.vue")
+      },
+      {
+        path: "faq",
+        name: "FaqPage",
+        meta: { layout: "second" },
+        component: () => import("../views/lite/desktop/FaqPage.vue")
+      },
+      {
         path: "profile",
         name: "ProfilePage",
         meta: { layout: "profile" },

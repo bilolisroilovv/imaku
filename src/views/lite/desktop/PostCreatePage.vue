@@ -143,7 +143,7 @@
                     <VueFileAgent
                       ref="files"
                       :theme="'default'"
-                      :multiple="true"
+                      :multiple="fal"
                       :deletable="true"
                       :meta="true"
                       :maxSize="'10MB'"
@@ -395,7 +395,13 @@ export default {
         title: "Успех",
         text: "Объявлено успешно размещено"
       });
-      this.$router.push("/");
+      if (this.id) {
+        this.$router.push({ name: 'ShopPage', params: {id: this.id} })
+      } else {
+        this.$router.push({ name: 'ProfilePosts' })
+      }
+      /* this.$router.push({ name: 'ProfilePosts' }) */
+      
     }
   },
   computed: {

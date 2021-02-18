@@ -37,7 +37,14 @@
                 </div> -->
                 <!-- product_review_filter -->
 
-                <button class="write_review_btn mainbtn" v-b-modal.postCommentModal>
+                <button
+                  class="write_review_btn mainbtn"
+                  v-if="!currentUser"
+                  @click.prevent
+                  v-b-modal.signModal>
+                  Написать комментарий
+                </button>
+                <button v-if="currentUser" class="write_review_btn mainbtn" v-b-modal.postCommentModal>
                   Написать комментарий
                 </button>
               </div>
@@ -419,12 +426,13 @@
       <!-- container -->
     </section>
     <!-- product_review_section -->
-    <PostCommentModal :postId="postId" />
+    <PostCommentModal @CommentPost="CommentPost" :postId="postId" />
   </div>
 </template>
 
 <script>
 import PostCommentModal from "@/components/lite/desktop/Modals/PostCommentModal"
+import { mapGetters } from "vuex";
 import axios from 'axios'
 import "lightgallery.js"
 import "lightgallery.js/dist/css/lightgallery.css"
@@ -466,7 +474,13 @@ export default {
       default: null
     }
   },
+  computed: {
+    ...mapGetters(["currentUser"])
+  },
   methods: {
+    CommentPost() {
+      this.$router.push({ name: 'PostPage', params: {id: this.postId} })
+    },
     async sortBy() {
       this.catData.posts = null;
       this.$vs.loading({

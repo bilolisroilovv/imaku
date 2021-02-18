@@ -26,7 +26,25 @@
         </div>
         <!-- mycard_img -->
       </router-link>
+
       <div
+        v-if="!currentUser"
+        @click.prevent
+        v-b-modal.signModal
+        class="product_favourite flex-center d-flex"
+      >
+        <ToggleFavorite
+          v-if="!currentUser"
+          @click.prevent
+          v-b-modal.signModal
+          :title="$t('card_base.toggle_favorite')"
+          class="position-bottom-right mycard_favorite2 flex-center d-flex"
+        />
+      </div>
+
+
+      <div
+        v-if="currentUser"
         class="product_favourite flex-center d-flex"
         @click.prevent="ToggleFavoriteRequest"
       >
@@ -36,8 +54,7 @@
           class="position-bottom-right mycard_favorite2 flex-center d-flex"
         />
       </div>
-      <!-- product_favourite -->
-      <!-- mycard_favorite -->
+
     </div>
     <!-- position-relative -->
 
@@ -54,7 +71,7 @@
     <h4 class="mycard_price text_ellipsis1">{{ this.post.price }}</h4>
     <!-- mycard_price -->
     <div class="d-flex align-items-center">
-      <star-rating
+      <!-- <star-rating
         border-color="#fc8301"
         :border-width="1"
         :star-points="[
@@ -82,11 +99,12 @@
         :star-size="11"
         inactive-color="transparent"
         active-color="#fc8301"
-        :rating="4.5"
+        :rating="post.rating"
         text-class="custom-text"
         :read-only="true"
         :increment="0.5"
-      ></star-rating>
+      ></star-rating> -->
+      <b-form-rating class="p-0" :color="mainColor" readonly show-value :value="post.rating" id="rating-inline" inline no-border size="sm"></b-form-rating>
     </div>
     <!-- d-flex -->
     <div class="mycard_btns d-flex align-items-center pt-2 pb-1">
@@ -166,6 +184,7 @@
       <!-- d-flex -->
     </div>
     <!-- mycard_btns -->
+
     <hr class="mt-2 mb-2" />
     <div class="d-flex align-items-center mycard_store">
       <router-link
@@ -197,6 +216,7 @@
 
 <script>
 import ToggleFavorite from "@/components/lite/desktop/ToggleFavorite";
+import { mapGetters } from "vuex";
 import axios from "axios";
 
 export default {
@@ -206,7 +226,8 @@ export default {
   },
   data() {
     return {
-      isFavorite: this.post.isFavourite
+      isFavorite: this.post.isFavourite,
+      mainColor: "var(--main-color)"
     };
   },
   props: {
@@ -220,6 +241,9 @@ export default {
         default: ""
       }
     }
+  },
+  computed: {
+    ...mapGetters(["currentUser"])
   },
   methods: {
     async ToggleFavoriteRequest() {
@@ -237,6 +261,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#rating-inline {
+  max-width: 150px;
+  padding: 0;
+  box-shadow: none!important;
+}
+
 .card_img_div {
   display: block;
   width: 100%;
