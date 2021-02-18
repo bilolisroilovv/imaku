@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="chat-user"
-    @click="chat_active"
-    :class="{ 'chat-user-active': isActive }"
-  >
+  <div class="chat-user" @click="chat_active">
     <div class="chat-user__img">
       <img :src="chat.avatar" :alt="chat.name" />
     </div>
