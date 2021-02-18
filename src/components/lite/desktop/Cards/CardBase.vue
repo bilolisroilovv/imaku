@@ -131,7 +131,7 @@
           </svg>
         </div>
         <!-- like_btn_icon -->
-        <div class="like_btn_count">+{{ this.post.likes }}</div>
+        <div class="like_btn_count">{{ this.post.likes }}</div>
         <!-- like_btn_count -->
       </button>
       <!-- like_btn -->
@@ -158,7 +158,7 @@
           </svg>
         </div>
         <!-- dislike_btn_icon -->
-        <div class="dislike_btn_count">-{{ this.post.dislikes }}</div>
+        <div class="dislike_btn_count">{{ this.post.dislikes }}</div>
         <!-- dislike_btn_count -->
       </button>
       <!-- dislike_btn -->
@@ -190,7 +190,10 @@
       <router-link
         :to="{
           name: this.post.author.type,
-          params: { id: this.post.author.id }
+          params: {
+            id: this.post.author.id,
+            name: this.post.author.username
+          }
         }"
         class="mycard_store_img mybg_center d-block"
         :style="{ 'background-image': 'url(' + this.post.author.avatar + ')' }"
@@ -200,7 +203,10 @@
       <router-link
         :to="{
           name: this.post.author.type,
-          params: { id: this.post.author.id }
+          params: {
+            id: this.post.author.id,
+            name: this.post.author.username
+          }
         }"
         class="mycard_store_name myhover_text text_ellipsis1"
         :title="post.author.name"
@@ -227,7 +233,8 @@ export default {
   data() {
     return {
       isFavorite: this.post.isFavourite,
-      mainColor: "var(--main-color)"
+      mainColor: "var(--main-color)",
+      authorType: null
     };
   },
   props: {

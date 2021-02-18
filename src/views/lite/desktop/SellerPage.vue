@@ -285,6 +285,7 @@
 <script>
 import Card4 from "@/components/lite/desktop/Cards/Card4";
 import SubscribeBtn from "@/components/lite/desktop/SubscribeBtn";
+import { mapGetters } from "vuex";
 import axios from "axios";
 
 export default {
@@ -301,13 +302,30 @@ export default {
       expanded: false,
       text: "Показать номер",
       isSubscribed: Boolean,
+      colorLoading: "var(--main-color)",
       sellerData: []
     };
   },
-  async mounted() {
-    const response = await axios.get("seller/" + this.id);
+  computed: {
+    ...mapGetters(["currentUser"])
+  },
+  async created () {
+    this.$vs.loading({
+      container: "",
+      scale: 0.8,
+      color: this.colorLoading
+    });
+    const response = await axios
+    .get("seller/" + this.id)
+    .finally(() => this.$vs.loading.close(".con-vs-loading"));
+
     this.sellerData = response.data;
     this.isSubscribed = response.data.isSubscribed;
+
+    if (response.data.id === this.currentUser.id) {
+      this.$router.push({ name: "ProfilePosts" })
+    }
+
   },
   methods: {
     async toggleView() {

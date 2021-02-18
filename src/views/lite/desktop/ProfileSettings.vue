@@ -135,7 +135,8 @@ export default {
         title: "Успех",
         text: "Настройки успешно изменены"
       });
-      this.$router.push("/profile-settings");
+      this.$router.push({ name: 'ProfileSettings' })
+      location.reload()
     }
   },
   mounted() {

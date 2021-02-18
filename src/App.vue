@@ -533,7 +533,7 @@ body.modal-open {
   overflow: hidden;
 }
 .mainbtn:hover {
-  background: #ec8321 !important;
+  background: #db781a !important;
   color: #fff;
 }
 .mainbtn:hover svg path {

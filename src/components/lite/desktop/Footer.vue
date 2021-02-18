@@ -32,26 +32,6 @@
         <div class="col-md-2">
           <ul class="footer_list">
             <li class="footer_list_title">
-              Категории
-            </li>
-            <li>
-              <a href="#">Электроника</a>
-            </li>
-            <li>
-              <a href="#">Авто</a>
-            </li>
-            <li>
-              <a href="#">Недвижимость</a>
-            </li>
-            <li>
-              <a href="#">Все для дома и сада</a>
-            </li>
-          </ul>
-        </div>
-        <!-- col-md-2 -->
-        <div class="col-md-2">
-          <ul class="footer_list">
-            <li class="footer_list_title">
               Партнерам
             </li>
             <li>

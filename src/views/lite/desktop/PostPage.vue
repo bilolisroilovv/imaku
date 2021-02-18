@@ -162,7 +162,7 @@
                     </svg>
                   </div>
                   <!-- like_btn_icon -->
-                  <div class="like_btn_count">+{{ likesCount }}</div>
+                  <div class="like_btn_count">{{ likesCount }}</div>
                   <!-- like_btn_count -->
                 </button>
                 <!-- like_btn -->
@@ -193,7 +193,7 @@
                     </svg>
                   </div>
                   <!-- dislike_btn_icon -->
-                  <div class="dislike_btn_count">-{{ disLikesCount }}</div>
+                  <div class="dislike_btn_count">{{ disLikesCount }}</div>
                   <!-- dislike_btn_count -->
                 </button>
                 <!-- dislike_btn -->
@@ -225,7 +225,7 @@
                     </svg>
                   </div>
                   <!-- like_btn_icon -->
-                  <div class="like_btn_count">+{{ likesCount }}</div>
+                  <div class="like_btn_count">{{ likesCount }}</div>
                   <!-- like_btn_count -->
                 </button>
                 <!-- like_btn -->
@@ -255,7 +255,7 @@
                     </svg>
                   </div>
                   <!-- dislike_btn_icon -->
-                  <div class="dislike_btn_count">-{{ disLikesCount }}</div>
+                  <div class="dislike_btn_count">{{ disLikesCount }}</div>
                   <!-- dislike_btn_count -->
                 </button>
                 <!-- dislike_btn -->
@@ -285,7 +285,7 @@
               <div class="product_seller d-flex align-items-center mt-4">
                 <router-link
                   :to="{
-                    name: 'SellerPage',
+                    name: this.authorType,
                     params: {
                       id: this.postData.author.id,
                       name: this.postData.author.name
@@ -297,13 +297,13 @@
                   }"
                 ></router-link>
                 <!-- product_cusomer_img -->
-                <div class="seller_text">
+                <div  iv class="seller_text">
                   <router-link
                     :to="{
-                      name: 'SellerPage',
+                      name: this.authorType,
                       params: {
                         id: this.postData.author.id,
-                        name: this.postData.author.name
+                        name: this.postData.author.username
                       }
                     }"
                     title="postData.author.name"
@@ -585,11 +585,8 @@ export default {
   },
   data() {
     return {
-      expanded: false,
+      authorType: null,
       isSubscribed: Boolean,
-      text: "Показать номер",
-      subExpanded: false,
-      subText: "Подписаться",
       otherSellerGoodsOption: {
         spaceBetween: 15,
         slidesPerView: 3,
@@ -643,6 +640,11 @@ export default {
         .finally(() => this.$vs.loading.close(".con-vs-loading"));
 
       this.postData = response.data;
+      if (this.postData.author.type === "shop"){
+        this.authorType = "ShopPage"
+      } else {
+        this.authorType = "SellerPage"
+      }
       this.likesCount = response.data.likes;
       this.disLikesCount = response.data.dislikes;
       this.isLiked = response.data.isLiked;
@@ -665,12 +667,10 @@ export default {
       this.isSubscribed = !this.isSubscribed
       const form = new FormData();
       form.append("type", this.postData.author.type);
-      const response = await axios.post(
+      await axios.post(
         "subscribe/" + this.postData.author.id,
         form
       );
-      
-      console.log(response.data.isSubscribed);
     },
     async handleLike() {
       this.isLiked = !this.isLiked;
@@ -706,7 +706,13 @@ export default {
       const response = await axios.get("favorite/" + this.postData.id);
       console.log(response);
       this.isFavorited = !this.isFavorited;
-    }
+    },
+    checkSeller() {
+      alert('success')
+      if (this.postData.author.id === this.currentUser.id) {
+        this.$router.push({ name: "ProfilePosts" })
+      }
+    },
   }
 };
 </script>

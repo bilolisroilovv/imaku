@@ -10,7 +10,7 @@
         <div class="row">
           <div class="col-md-8">
             <div class="product_reviews_section">
-              <div class="d-flex justify-content-end">
+              <div class="d-flex justify-content-between align-items-center">
                 <!-- <div class="d-flex align-items-center product_review_filter">
                   <span class="mr-3">Сортировать по:</span>
 
@@ -36,6 +36,11 @@
                   </label>
                 </div> -->
                 <!-- product_review_filter -->
+                <div class="">
+                  <p v-if="reviewCount === 0" class="mb-0">
+                    К этому объявлению еще не оставили комментарий, будьте первыми!
+                  </p>
+                </div>
 
                 <button
                   class="write_review_btn mainbtn"

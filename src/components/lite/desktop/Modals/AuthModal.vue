@@ -11,8 +11,13 @@
         </h5>
       </div>
       <!-- mymodal-header -->
-      <form v-show="step === 1" @submit.prevent="nextStep" action="" class="sign_modal_form">
-        <div  class="step1">
+      <form
+        v-show="step === 1"
+        @submit.prevent="nextStep"
+        action=""
+        class="sign_modal_form"
+      >
+        <div class="step1">
           <input
             id="modal_phone"
             v-model="phone"
@@ -48,8 +53,12 @@
         </div> -->
       </form>
 
-
-       <form v-show="step === 2" @submit.prevent="handleSubmit" action="" class="sign_modal_form">
+      <form
+        v-show="step === 2"
+        @submit.prevent="handleSubmit"
+        action=""
+        class="sign_modal_form"
+      >
         <div class="step2">
           <input
             id="code_phone"
@@ -59,7 +68,14 @@
             required
             v-model="code"
           />
+          <span v-if="error" class="mt-1 error_message"
+            >Введен неправильной код, попробуйте заново!</span
+          >
           <span class="mt-1">{{ $t("modal.title2") }}</span>
+          <span v-if="!showSendCode">
+            Выслать повторно код можно будет через 0:{{ currentTime }}
+          </span>
+          <a v-if="showSendCode" class="send_code" href="" @click.prevent="nextStep">Выслать код повторно</a>
           <div>
             <button class="mt-3 mainbtn w-100" type="submit">
               {{ $t("modal.next") }}
@@ -132,10 +148,36 @@ export default {
       step: 1,
       phone: "",
       code: "",
+      error: false,
+      currentTime: 59,
+      timer: null,
+      showSendCode: false,
       colorLoading: "var(--main-color)"
-    };
+    }
+  },
+  mounted() {
+  },
+  destroyed() {
+    this.stopTimer()
+  },
+  watch: {
+    currentTime(time) {
+      if (time === 0) {
+        this.stopTimer()
+        this.showSendCode = true
+      }
+    }
   },
   methods: {
+    startTimer() {
+      this.showSendCode = false
+      this.timer = setInterval(() => {
+        this.currentTime--
+      }, 1000)
+    },
+    stopTimer() {
+      clearTimeout(this.timer)
+    },
     async nextStep() {
       this.$vs.loading({
         container: "",
@@ -150,18 +192,20 @@ export default {
         .finally(() => this.$vs.loading.close(".con-vs-loading"));
 
       if (response.status === 200) {
-        this.step++;
+        this.step = 2
+        this.currentTime = 59
+        this.startTimer()
       }
     },
-
     async handleSubmit() {
+      this.error = false
       this.$vs.loading({
         container: "",
         scale: 0.6,
         color: this.colorLoading
       });
-
-      const response = await axios
+      try {
+        const response = await axios
         .post("verify", {
           phone: this.phone,
           code: this.code
@@ -170,7 +214,9 @@ export default {
       localStorage.setItem("token", response.data.token);
       this.$router.go(this.$router.currentRoute);
       this.$router.push("/");
-
+      } catch (error) {
+        this.error = true
+      }
       /* if (response.data.token) {
         localStorage.setItem('token', response.data.token)
         console.log(response.data.token)
@@ -185,5 +231,13 @@ export default {
 <style lang="scss" scoped>
 .loading_div {
   max-height: 100%;
+}
+.error_message {
+  color: red !important;
+}
+.send_code {
+  color: var(--main-color);
+  font-family: "Inter";
+  font-size: 15px;
 }
 </style>
