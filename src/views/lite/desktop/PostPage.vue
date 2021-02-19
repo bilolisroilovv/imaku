@@ -315,11 +315,11 @@
                     >({{ postData.author.postsCount }}
                     {{ $t("post_page.posts") }})</span
                   >
-                  <div v-if="!currentUser" @click.prevent v-b-modal.signModal>
+                  <div class="mt-1" v-if="!currentUser" @click.prevent v-b-modal.signModal>
                     <SubscribeBtn :isSubscribed="this.isSubscribed" data-show="true"/>
                   </div>
 
-                  <div v-if="currentUser" @click.prevent="toggleSub">
+                  <div class="mt-1" v-if="currentUser" @click.prevent="toggleSub">
                     <SubscribeBtn :isSubscribed="this.isSubscribed" data-show="true"/>
                   </div>
                   
@@ -530,7 +530,7 @@
     <!-- product_section -->
 
 
-    <PostComments :stars="postData.stars" :reviewCount="postData.reviewCount" :rating="postData.rating" :postId="postData.id" :reviews="postData.reviews"/>
+    <PostComments @postComments="getPost" :stars="postData.stars" :reviewCount="postData.reviewCount" :rating="postData.rating" :postId="postData.id" :reviews="postData.reviews"/>
 
     <section class="section pt-0">
       <div class="container">

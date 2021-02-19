@@ -275,7 +275,6 @@ export default {
   padding: 0;
   box-shadow: none!important;
 }
-
 .card_img_div {
   display: block;
   width: 100%;

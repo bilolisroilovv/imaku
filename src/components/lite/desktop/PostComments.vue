@@ -62,18 +62,34 @@
                   :key="review.key"
                 >
                   <div class="d-flex">
-                    <a
-                      href="#"
+                    <router-link
+                      :to="{
+                        name: 'SellerPage',
+                        params: {
+                          id: review.author.id,
+                          name: review.author.username
+                        }
+                      }"
                       class="review_avatar"
                       :style="{
                         'background-image': 'url(' + review.author.avatar + ')'
                       }"
                     >
-                    </a>
+                    </router-link>
                     <!-- review_avatar -->
                     <div class="review_content w-100">
                       <div class="d-flex mb-1">
-                        <a href="#" class="review_name">{{review.author.username}}</a>
+                        <router-link
+                        :to="{
+                          name: 'SellerPage',
+                          params: {
+                            id: review.author.id,
+                            name: review.author.username
+                          }
+                        }"
+                        class="review_name">
+                          {{review.author.username}}
+                        </router-link>
                         <span class="review_time">{{review.createdAt}}</span>
                       </div>
                       <!-- d-flex -->
@@ -81,40 +97,7 @@
                         class="d-flex align-items-center justify-content-between"
                       >
                         <div class="d-flex align-items-center">
-                          <star-rating
-                            border-color="#fc8301"
-                            :border-width="2"
-                            :star-points="[
-                              23,
-                              2,
-                              14,
-                              17,
-                              0,
-                              19,
-                              10,
-                              34,
-                              7,
-                              50,
-                              23,
-                              43,
-                              38,
-                              50,
-                              36,
-                              34,
-                              46,
-                              19,
-                              31,
-                              17
-                            ]"
-                            :star-size="12"
-                            inactive-color="transparent"
-                            active-color="#fc8301"
-                            :show-rating="false"
-                            :rating="review.rating"
-                            text-class="custom-text"
-                            :read-only="true"
-                            :increment="0.5"
-                          ></star-rating>
+                          <b-form-rating class="p-0" :color="colorLoading" readonly show-value :value="review.rating" id="rating-inline" inline no-border size="md"></b-form-rating>
                           <h3 class="review_title">
                             {{ review.title }}
                           </h3>
@@ -431,7 +414,7 @@
       <!-- container -->
     </section>
     <!-- product_review_section -->
-    <PostCommentModal :postId="postId" />
+    <PostCommentModal @postComment="getComments" :postId="postId" />
   </div>
 </template>
 
@@ -483,6 +466,9 @@ export default {
     ...mapGetters(["currentUser"])
   },
   methods: {
+    getComments() {
+      this.$emit('postComments', this.reviews)
+    },
     async sortBy() {
       this.catData.posts = null;
       this.$vs.loading({
@@ -513,6 +499,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#rating-inline {
+  max-width: 150px;
+  height: 25px;
+  padding: 0;
+  box-shadow: none!important;
+}
 .comments_select {
   width: 200px!important;
 }

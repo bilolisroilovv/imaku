@@ -55,39 +55,7 @@
     <h4 class="mycard_price text_ellipsis1">{{ post.price }}</h4>
     <!-- mycard_price -->
     <div class="d-flex align-items-center">
-      <star-rating
-        border-color="#fc8301"
-        :border-width="1"
-        :star-points="[
-          23,
-          2,
-          14,
-          17,
-          0,
-          19,
-          10,
-          34,
-          7,
-          50,
-          23,
-          43,
-          38,
-          50,
-          36,
-          34,
-          46,
-          19,
-          31,
-          17
-        ]"
-        :star-size="11"
-        inactive-color="transparent"
-        active-color="#fc8301"
-        :rating="4.5"
-        text-class="custom-text"
-        :read-only="true"
-        :increment="0.5"
-      ></star-rating>
+      <b-form-rating class="p-0" :color="mainColor" readonly show-value :value="post.rating" id="rating-inline" inline no-border size="sm"></b-form-rating>
     </div>
     <!-- d-flex -->
     <div class="mycard_btns d-flex align-items-center pt-2 pb-1">
@@ -114,7 +82,7 @@
           </svg>
         </div>
         <!-- like_btn_icon -->
-        <div class="like_btn_count">+900</div>
+        <div class="like_btn_count">{{ post.likes }}</div>
         <!-- like_btn_count -->
       </button>
       <!-- like_btn -->
@@ -141,7 +109,7 @@
           </svg>
         </div>
         <!-- dislike_btn_icon -->
-        <div class="dislike_btn_count">-55</div>
+        <div class="dislike_btn_count">{{ post.dislikes }}</div>
         <!-- dislike_btn_count -->
       </button>
       <!-- dislike_btn -->
@@ -161,7 +129,7 @@
             fill="#7D95AE"
           />
         </svg>
-        <span>3486</span>
+        <span>{{ post.views }}</span>
       </div>
       <!-- d-flex -->
     </div>
@@ -180,7 +148,8 @@ export default {
   },
   data() {
     return {
-      isFavorite: this.post.isFavourite
+      isFavorite: this.post.isFavourite,
+      mainColor: "var(--main-color)"
     };
   },
   props: {
@@ -211,6 +180,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#rating-inline {
+  max-width: 150px;
+  padding: 0;
+  box-shadow: none!important;
+}
 .mycard {
   background: #ffffff;
   border-radius: 10px;

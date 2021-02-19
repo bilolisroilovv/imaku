@@ -89,7 +89,7 @@ export default {
       name: "",
       username: "",
       description: "",
-      location: "",
+      location: null,
       phone: Number,
       colorLoading: "var(--main-color)"
     };

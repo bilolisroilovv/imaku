@@ -79,7 +79,7 @@ export default {
         }
       }
 
-      await axios
+      const response = await axios
         .post("posts/store-comment/" + this.postId, form, {
           headers: {
             "Content-Type": "multipart/form-data"
@@ -91,6 +91,7 @@ export default {
         title: "Успех",
         text: "Комментарий успешно размещен"
       });
+      this.$emit('postComment', response.data)
     }
   },
 }
