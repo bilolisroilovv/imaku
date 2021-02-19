@@ -300,7 +300,7 @@ export default {
   data() {
     return {
       expanded: false,
-      text: "Показать номер",
+      text: this.$i18n.t("post_page.seller_phone"),
       isSubscribed: Boolean,
       colorLoading: "var(--main-color)",
       sellerData: []

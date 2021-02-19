@@ -479,8 +479,8 @@
 
                     <div>
                       <div class="position-relative">
-                        <p v-if="postData.author.posts.length === 0" class="noposts">
-                          К сожалению у данного пользователя нет других обяъвний (
+                        <p v-if="!postData.author.posts.length" class="noposts">
+                          К сожалению у данного пользователя нет других обяъвлений (
                         </p>
                         <!-- Swiper -->
                         <swiper
@@ -586,6 +586,7 @@ export default {
   data() {
     return {
       authorType: null,
+      text: this.$i18n.t("post_page.seller_phone"),
       isSubscribed: Boolean,
       otherSellerGoodsOption: {
         spaceBetween: 15,

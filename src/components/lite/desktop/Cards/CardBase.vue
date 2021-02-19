@@ -107,15 +107,16 @@
       <b-form-rating class="p-0" :color="mainColor" readonly show-value :value="post.rating" id="rating-inline" inline no-border size="sm"></b-form-rating>
     </div>
     <!-- d-flex -->
-    <div class="mycard_btns d-flex align-items-center pt-2 pb-1">
-      <button
+    <div class="mycard_btns d-flex justify-content-between align-items-center pt-2 pb-1">
+      <div class="d-flex align-items-center">
+        <button
         class="like_btn card_like_btn d-flex align-items-center mr-2"
         :title="$t('card_base.like')"
       >
         <div class="like_btn_icon d-flex align-items-center">
           <svg
-            width="11"
-            height="10"
+            width="13"
+            height="13"
             viewBox="0 0 11 10"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -141,8 +142,8 @@
       >
         <div class="dislike_btn_icon d-flex align-items-center">
           <svg
-            width="11"
-            height="11"
+            width="13"
+            height="13"
             viewBox="0 0 11 11"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -162,6 +163,7 @@
         <!-- dislike_btn_count -->
       </button>
       <!-- dislike_btn -->
+      </div>
       <div
         class="d-flex align-items-center mycard_views"
         :title="$t('card_base.view')"
@@ -281,7 +283,7 @@ export default {
 .mycard {
   background: #ffffff;
   border-radius: 3px;
-  padding: 12px;
+  padding: 10px;
   transition: all 0.2s;
   width: 100%;
   /* box-shadow: 2px 5px 20px #0000000f; */
@@ -408,19 +410,20 @@ export default {
 }
 .like_btn {
   border-radius: 2px;
-  background: #ecf2f9;
+  background: transparent;
   height: 19px;
+  cursor: inherit;
 }
 .like_btn_icon {
-  background: #dde9f7;
+  background: transparent;
   border-radius: 2px;
   height: 19px;
-  padding: 3px 6px 4px 7px;
+  padding: 3px 0 4px 3px;
 }
 .like_btn_count {
   font-weight: 500;
-  font-size: 10px;
-  padding: 3px 15px 3px 7px;
+  font-size: 12px;
+  padding: 3px 5px 3px 5px;
 
   color: #898eaf;
 }
@@ -438,19 +441,20 @@ export default {
 }
 .dislike_btn {
   border-radius: 2px;
-  background: #ecf2f9;
+  background: transparent;
   height: 19px;
+  cursor: inherit;
 }
 .dislike_btn_icon {
-  background: #dde9f7;
+  background: transparent;
   border-radius: 2px;
   height: 19px;
-  padding: 3px 6px 4px 7px;
+  padding: 3px 0 4px 3px;
 }
 .dislike_btn_count {
   font-weight: 500;
-  font-size: 10px;
-  padding: 3px 15px 3px 7px;
+  font-size: 12px;
+  padding: 3px 5px 3px 5px;
   color: #898eaf;
 }
 .dislike_btn.active {

@@ -159,7 +159,7 @@
                 </div>
               </button>
               <!-- categories_hammburger -->
-
+            <div @click="onClose()">
               <HeaderCategoriesDropdown
                 class="header_categories_dropdown"
                 :class="{ active: headerCategoriesDropdownVisible }"
@@ -169,6 +169,7 @@
                   handler: 'onClose'
                 }"
               />
+            </div>
             </div>
             <!-- header_categories -->
             <SearchGroup :scrollPosition="scrollPosition" />
@@ -328,8 +329,7 @@ export default {
       limitPosition: 950,
       scrolled: false,
       scrollPosition: null,
-      headerCategoriesDropdownVisible: false,
-      profileLogo: "'https://picsum.photos/50?random=2'"
+      headerCategoriesDropdownVisible: false
     }; /* return */
   },
   methods: {

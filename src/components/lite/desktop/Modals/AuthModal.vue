@@ -29,28 +29,28 @@
           <span class="mt-1">
             {{ $t("modal.title") }}
           </span>
-          <div>
-            <button class="mt-3 mainbtn w-100" type="submit">
-              {{ $t("modal.next") }}
-            </button>
-          </div>
-        </div>
-        <!-- step1 -->
-        <!-- step2 -->
 
-        <!-- <div class="mt-3 sign_modal_terms_link">
+          <div class="mt-3 sign_modal_terms_link">
           <label class="control control--checkbox">
             <input type="checkbox" checked="checked" required />
             <div class="control__indicator"></div>
             Я согласен с
             <a href="#" class="complain_review_btn">правилами и условиями</a>
           </label>
-          <label class="control control--checkbox mt-1">
+          <!-- <label class="control control--checkbox mt-1">
             <input type="checkbox" checked="checked" required />
             <div class="control__indicator"></div>
             Я хочу получать новости и акции
-          </label>
-        </div> -->
+          </label> -->
+        </div>
+          
+          <div>
+            <button class="mt-4 mainbtn w-100" type="submit">
+              {{ $t("modal.next") }}
+            </button>
+          </div>
+        </div>
+        <!-- step1 -->
       </form>
 
       <form
