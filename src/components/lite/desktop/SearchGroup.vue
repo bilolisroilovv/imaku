@@ -145,7 +145,7 @@ export default {
       /* axios.get('search?query=' + this.searchContent) */
       this.$router.push({
         name: "SearchPage",
-        params: { query: this.runtimeTranscription },
+        params: { query: this.runtimeTranscription }
       });
     },
   },
