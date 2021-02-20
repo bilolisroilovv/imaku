@@ -1,8 +1,5 @@
 <template>
   <div class="search_group">
-    <div class="speech-to-txt" @click="startSpeechToTxt">Speech to txt</div>
-    <p>{{ runtimeTranscription_ }}</p>
-
     <form
       action=""
       id="search"
@@ -19,7 +16,7 @@
           id="search-field"
           :placeholder="$t('search.title')"
           class="navbar_search_input"
-          v-model="searchContent"
+          v-model="transcription_"
           :class="{ active: searchDropdownVisible }"
         />
       </div>
@@ -32,6 +29,7 @@
           class="header_input_icon"
           data-toggle="tooltip"
           data-placement="top"
+          @click="startSpeechToTxt"
           id="voice-trigger"
           :title="$t('search.voice_search')"
         >
@@ -96,7 +94,7 @@ export default {
       searchDropdownVisible: false,
       runtimeTranscription_: "",
       transcription_: [],
-      lang_: "es-ES",
+      lang_: "ru-RU",
       searchContent: null,
       error: false,
       speaking: false,
@@ -140,7 +138,7 @@ export default {
       /* axios.get('search?query=' + this.searchContent) */
       this.$router.push({
         name: "SearchPage",
-        params: { query: this.searchContent },
+        params: { query: this.transcription_ },
       });
     },
   },
