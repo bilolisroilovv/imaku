@@ -94,6 +94,9 @@ export default {
   data() {
     return {
       searchDropdownVisible: false,
+      runtimeTranscription_: "",
+      transcription_: [],
+      lang_: "es-ES",
       searchContent: null,
       error: false,
       speaking: false,
