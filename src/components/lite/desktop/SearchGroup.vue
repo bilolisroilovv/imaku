@@ -14,7 +14,7 @@
         <input
           type="text"
           id="search-field"
-          :placeholder="$t('search.title')"
+          :placeholder="inputPlaceholder"
           class="navbar_search_input"
           v-model="runtimeTranscription"
           :class="{ active: searchDropdownVisible }"
@@ -92,6 +92,7 @@ export default {
   data() {
     return {
       searchDropdownVisible: false,
+      inputPlaceholder: "Поиск объявлений, магазинов, аккаунтов",
       runtimeTranscription: "",
       transcription: [],
       lang: "ru-RU",
@@ -125,9 +126,11 @@ export default {
         this.transcription.push(this.runtimeTranscription);
         /* this.runtimeTranscription = ""; */
         recognition.stop();
+        this.speaking =   false
         this.handleSubmit()
       });
       recognition.start();
+      this.inputPlaceholder = "Говорите..."
     },
     searchDropdowntoggle() {
       this.searchDropdownVisible = !this.searchDropdownVisible;
