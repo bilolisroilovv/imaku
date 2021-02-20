@@ -167,7 +167,18 @@ export default {
   /* background: rgb(248, 154, 154); */
 }
 .microphone_button.active {
-  background: red;
+  background: transparent;
+  animation-name: microphoneAnim;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.microphone_button.active:hover {
+  background: transparent!important;
+}
+@keyframes microphoneAnim {
+  0%   {transform: scale(1);}
+  100% {transform: scale(1.2);}
 }
 .border-radius-100 {
   border-radius: 100px;
