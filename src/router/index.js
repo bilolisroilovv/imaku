@@ -129,7 +129,7 @@ const routes = [
       {
         path: "chat",
         name: "Chat",
-        meta: { layout: "profile" },
+        meta: { layout: "second" },
         component: () => import("../views/lite/desktop/Chat.vue"),
         props: true
       },
