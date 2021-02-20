@@ -1,7 +1,7 @@
 <template>
   <div class="search_group">
     <div class="speech-to-txt" @click="startSpeechToTxt">Speech to txt</div>
-    <p>{{ transcription_ }}</p>
+    <p>{{ runtimeTranscription_ }}</p>
 
     <form
       action=""
