@@ -125,6 +125,7 @@ export default {
         this.transcription_.push(this.runtimeTranscription_);
         this.runtimeTranscription_ = "";
         recognition.stop();
+        this.handleSubmit()
       });
       recognition.start();
     },
