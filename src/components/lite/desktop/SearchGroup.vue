@@ -1,5 +1,8 @@
 <template>
   <div class="search_group">
+    <div class="speech-to-txt" @click="startSpeechToTxt">Speech to txt</div>
+    <p>{{ transcription_ }}</p>
+
     <form
       action=""
       id="search"
@@ -79,22 +82,51 @@
 <script>
 /* import SearchDropdown from "@/components/lite/desktop/SearchDropdown"; */
 /* import axios from 'axios' */
-import $ from "jquery";
+/* import $ from "jquery"; */
 export default {
   name: "SearchGroup",
   components: {
     /* SearchDropdown */
   },
   props: {
-    scrollPosition: Number
+    scrollPosition: Number,
   },
   data() {
     return {
       searchDropdownVisible: false,
-      searchContent: null
+      searchContent: null,
+      error: false,
+      speaking: false,
+      toggle: false,
     };
   },
+  mounted() {},
   methods: {
+    startSpeechToTxt() {
+      // initialisation of voicereco
+
+      window.SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new window.SpeechRecognition();
+      recognition.lang = this.lang_;
+      recognition.interimResults = true;
+
+      // event current voice reco word
+      recognition.addEventListener("result", (event) => {
+        var text = Array.from(event.results)
+          .map((result) => result[0])
+          .map((result) => result.transcript)
+          .join("");
+        this.runtimeTranscription_ = text;
+      });
+      // end of transcription
+      recognition.addEventListener("end", () => {
+        this.transcription_.push(this.runtimeTranscription_);
+        this.runtimeTranscription_ = "";
+        recognition.stop();
+      });
+      recognition.start();
+    },
     searchDropdowntoggle() {
       this.searchDropdownVisible = !this.searchDropdownVisible;
     },
@@ -105,80 +137,20 @@ export default {
       /* axios.get('search?query=' + this.searchContent) */
       this.$router.push({
         name: "SearchPage",
-        params: { query: this.searchContent }
+        params: { query: this.searchContent },
       });
-    }
+    },
   },
+  /*  beforeCreate() {
+    try {
+      let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SpeechRecognition(); // eslint-disable-line
+    } catch(error) {
+      console.error(error);
+    }
+  }, */
   computed: {},
   events: {},
-  mounted() {
-    var $voiceTrigger = $("#voice-trigger");
-    var $searchInput = $("#search-field");
-    var $result = $("#result"); // eslint-disable-line
-
-    /*  set Web Speech API for Chrome or Firefox */
-    window.SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
-
-    /* Check if browser support Web Speech API, remove the voice trigger if not supported */
-    if (window.SpeechRecognition) {
-      /* setup Speech Recognition */
-      var recognition = new SpeechRecognition(); // eslint-disable-line
-      recognition.interimResults = true;
-      recognition.lang = "ru-RU";
-      recognition.addEventListener("result", _transcriptHandler);
-
-      recognition.onerror = function(event) {
-        console.log(event.error);
-
-        /* Revert input and icon CSS if no speech is detected */
-        if (event.error == "no-speech") {
-          $voiceTrigger.removeClass("active");
-          $searchInput.attr("placeholder", "Поиск...");
-        }
-      };
-    } else {
-      $voiceTrigger.remove();
-    }
-
-    $(document).ready(function() {
-      /* Trigger listen event when our trigger is clicked */
-      $voiceTrigger.on("click touch", listenStart);
-    });
-
-    /* Our listen event */
-    function listenStart(e) {
-      e.preventDefault();
-      /* Update input and icon CSS to show that the browser is listening */
-      $searchInput.attr("placeholder", "Говорите...");
-      $voiceTrigger.addClass("active");
-      /* Start voice recognition */
-
-      recognition.start();
-    }
-
-    /* Parse voice input */
-    function _parseTranscript(e) {
-      return Array.from(e.results)
-        .map(function(result) {
-          return result[0];
-        })
-        .map(function(result) {
-          return result.transcript;
-        })
-        .join("");
-    }
-
-    /* Convert our voice input into text and submit the form */
-    function _transcriptHandler(e) {
-      var speechOutput = _parseTranscript(e);
-      $searchInput.val(speechOutput);
-      //$result.html(speechOutput);
-      if (e.results[0].isFinal) {
-        this.handleSubmit()
-      }
-    }
-  }
 };
 </script>
 
