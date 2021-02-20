@@ -99,7 +99,7 @@ const routes = [
         component: () => import("../views/lite/desktop/CategoryPage.vue")
       },
       {
-        path: "search/:query/Ulugbek-Tursunkulov-Pizdobol",
+        path: "search/:query",
         name: "SearchPage",
         props: true,
         meta: { layout: "second" },
