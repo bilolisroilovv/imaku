@@ -178,8 +178,8 @@ export default {
   background: transparent!important;
 }
 @keyframes microphoneAnim {
-  0%   {transform: scale(1);}
-  100% {transform: scale(1.2);}
+  0%   {transform: scale(0.95);}
+  100% {transform: scale(1.15);}
 }
 .border-radius-100 {
   border-radius: 100px;
