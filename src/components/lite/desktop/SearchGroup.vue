@@ -169,8 +169,8 @@ export default {
 .microphone_button.active {
   background: transparent;
   animation-name: microphoneAnim;
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
+  animation-duration: 0.7s;
+  animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
 .microphone_button.active:hover {
