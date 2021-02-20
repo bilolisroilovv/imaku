@@ -16,7 +16,7 @@
           id="search-field"
           :placeholder="$t('search.title')"
           class="navbar_search_input"
-          v-model="transcription_"
+          v-model="runtimeTranscription"
           :class="{ active: searchDropdownVisible }"
         />
       </div>
@@ -92,9 +92,9 @@ export default {
   data() {
     return {
       searchDropdownVisible: false,
-      runtimeTranscription_: "",
-      transcription_: [],
-      lang_: "ru-RU",
+      runtimeTranscription: "",
+      transcription: [],
+      lang: "ru-RU",
       searchContent: null,
       error: false,
       speaking: false,
@@ -109,7 +109,7 @@ export default {
       window.SpeechRecognition =
         window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognition = new window.SpeechRecognition();
-      recognition.lang = this.lang_;
+      recognition.lang = this.lang;
       recognition.interimResults = true;
 
       // event current voice reco word
@@ -118,12 +118,12 @@ export default {
           .map((result) => result[0])
           .map((result) => result.transcript)
           .join("");
-        this.runtimeTranscription_ = text;
+        this.runtimeTranscription = text;
       });
       // end of transcription
       recognition.addEventListener("end", () => {
-        this.transcription_.push(this.runtimeTranscription_);
-        this.runtimeTranscription_ = "";
+        this.transcription.push(this.runtimeTranscription);
+        /* this.runtimeTranscription = ""; */
         recognition.stop();
         this.handleSubmit()
       });
@@ -139,7 +139,7 @@ export default {
       /* axios.get('search?query=' + this.searchContent) */
       this.$router.push({
         name: "SearchPage",
-        params: { query: this.transcription_ },
+        params: { query: this.runtimeTranscription },
       });
     },
   },
