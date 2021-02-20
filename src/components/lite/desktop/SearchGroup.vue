@@ -172,6 +172,7 @@ export default {
   animation-duration: 0.7s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 .microphone_button.active:hover {
   background: transparent!important;
