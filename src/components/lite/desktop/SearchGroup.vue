@@ -26,7 +26,8 @@
           <img src="@/assets/lite/cancel.svg" class="img-width" alt="" />
         </button>
         <span
-          class="header_input_icon"
+          class="header_input_icon microphone_button"
+          :class="{active: speaking}"
           data-toggle="tooltip"
           data-placement="top"
           @click="startSpeechToTxt"
@@ -126,10 +127,12 @@ export default {
         this.transcription.push(this.runtimeTranscription);
         /* this.runtimeTranscription = ""; */
         recognition.stop();
-        this.speaking =   false
+        this.speaking = false
         this.handleSubmit()
       });
       recognition.start();
+      this.runtimeTranscription = ""
+      this.speaking = true
       this.inputPlaceholder = "Говорите..."
     },
     searchDropdowntoggle() {
@@ -163,7 +166,9 @@ export default {
 #voice-trigger.active {
   /* background: rgb(248, 154, 154); */
 }
-
+.microphone_button.active {
+  background: red;
+}
 .border-radius-100 {
   border-radius: 100px;
 }
