@@ -141,21 +141,25 @@
                       @change="handleFilesUpload($event)"
                     /> -->
                     <VueFileAgent
-                      ref="files"
+                      ref="vueFileAgent"
                       :theme="'default'"
-                      :multiple="fal"
+                      :accept="'image/*,video/*'"
+                      :multiple="true"
                       :deletable="true"
                       :meta="true"
-                      :maxSize="'10MB'"
-                      :maxFiles="14"
+                      :sortable="'handle'"
+                      :maxSize="'25MB'"
+                      :maxFiles="12"
                       :helpText="'Добавьте фотографии'"
                       required
                       :errorText="{
                         type: 'Invalid file type. Only images or zip Allowed',
                         size: 'Files should not exceed 10MB in size'
                       }"
-                      v-model="files"
-                      @beforedelete="postImagesDelete($event)"
+                      v-model="fileRecords"
+                      @select="filesSelected($event)"
+                      @beforedelete="onBeforeDelete($event)"
+                      @delete="fileDeleted($event)"
                     ></VueFileAgent>
                   </div>
                   <!-- photos_block -->
@@ -267,7 +271,8 @@ export default {
       isCharactersShow: false,
       priceTypeSelect: "сум",
       phone: Number,
-      files: [],
+      fileRecords: [],
+      fileRecordsForUpload: [],
       characters: [],
       characteristics: [],
       select1Normal: "",
@@ -292,14 +297,6 @@ export default {
     };
   },
   methods: {
-    addTag(newTag) {
-      const tag = {
-        name: newTag,
-        code: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
-      };
-      this.options.push(tag);
-      this.value.push(tag);
-    },
     successUpload() {
       this.$vs.notify({
         color: "success",
@@ -345,8 +342,37 @@ export default {
       this.characters = response.data;
       this.userCharacters = userKharacters;
     },
+    deleteUploadedFile: function (fileRecord) {
+      // Using the default uploader. You may use another uploader instead.
+      this.$refs.vueFileAgent.deleteUpload(fileRecord);
+    },
+    filesSelected: function (fileRecordsNewlySelected) {
+      var validFileRecords = fileRecordsNewlySelected.filter((fileRecord) => !fileRecord.error);
+      this.fileRecordsForUpload = this.fileRecordsForUpload.concat(validFileRecords);
+    },
+    onBeforeDelete: function (fileRecord) {
+      var i = this.fileRecordsForUpload.indexOf(fileRecord);
+      if (i !== -1) {
+      // queued file, not yet uploaded. Just remove from the arrays
+        this.fileRecordsForUpload.splice(i, 1);
+        var k = this.fileRecords.indexOf(fileRecord);
+        if (k !== -1) this.fileRecords.splice(k, 1);
+      } else {
+        if (confirm('Are you sure you want to delete?')) {
+          this.$refs.vueFileAgent.deleteFileRecord(fileRecord); // will trigger 'delete' event
+        }
+      }
+    },
+    fileDeleted: function (fileRecord) {
+      var i = this.fileRecordsForUpload.indexOf(fileRecord);
+      if (i !== -1) {
+        this.fileRecordsForUpload.splice(i, 1);
+      } else {
+        this.deleteUploadedFile(fileRecord);
+      }
+    },
     handleFilesUpload(event) {
-      this.files = event.target.files;
+      this.fileRecordsForUpload = event.target.fileRecordsForUpload;
     },
     async handleSubmit() {
       this.$vs.loading({
@@ -378,11 +404,9 @@ export default {
           this.userCharacters[i].option_id
         );
       }
-
-      for (var screens = 0; screens < this.files.length; screens++) {
-        form.append("gallery[" + screens + "]", this.files[screens].file);
+      for (var screens = 0; screens < this.fileRecords.length; screens++) {
+        form.append("gallery[" + screens + "]", this.fileRecords[screens].file);
       }
-
       await axios
         .post("posts/store", form, {
           headers: {

@@ -120,6 +120,7 @@
             <router-link :to="{ name: 'FaqPage' }" class="navbar_top_link pr-0">
               {{ $t("faq") }}
             </router-link>
+            <vue-speech lang="it-IT" />
             <!-- navbar_top_link -->
           </div>
           <!-- d-flex -->
@@ -158,7 +159,7 @@
                 </div>
               </button>
               <!-- categories_hammburger -->
-
+            <div @click="onClose()">
               <HeaderCategoriesDropdown
                 class="header_categories_dropdown"
                 :class="{ active: headerCategoriesDropdownVisible }"
@@ -168,6 +169,7 @@
                   handler: 'onClose'
                 }"
               />
+            </div>
             </div>
             <!-- header_categories -->
             <SearchGroup :scrollPosition="scrollPosition" />
@@ -327,8 +329,7 @@ export default {
       limitPosition: 950,
       scrolled: false,
       scrollPosition: null,
-      headerCategoriesDropdownVisible: false,
-      profileLogo: "'https://picsum.photos/50?random=2'"
+      headerCategoriesDropdownVisible: false
     }; /* return */
   },
   methods: {
@@ -407,7 +408,7 @@ export default {
   font-weight: 500;
 }
 .create_store_btn:hover {
-  background: rgba(255, 201, 150, 0.527);
+  background: rgba(255, 191, 131, 0.616);
   color: var(--main-color);
 }
 .create_ad_btn {

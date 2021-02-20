@@ -184,7 +184,7 @@ export default {
 
 <style scoped>
 #voice-trigger.active {
-  background: rgb(248, 154, 154);
+  /* background: rgb(248, 154, 154); */
 }
 
 .border-radius-100 {

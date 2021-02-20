@@ -390,14 +390,14 @@ export default {
   font-weight: 600;
 }
 .shop_block4 h3 {
-  font-size: 24px;
+  font-size: 23px;
   font-weight: 600;
 }
 .shop_block3 p {
   font-weight: 400;
   line-height: 26px;
   letter-spacing: 0.5px;
-  font-size: 16px;
+  font-size: 15px;
   color: #000;
 }
 .shop_block4 {

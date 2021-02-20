@@ -2,7 +2,10 @@
   <div class="mycard">
     <div class="position-relative">
       <router-link
-        :to="{ name: 'PostPage', params: { id: post.id, slug: post.slug } }"
+        :to="{
+          name: 'PostPage',
+          params: { id: this.post.id, slug: this.post.slug }
+        }"
       >
         <div class="mycard_img mybg_center position-relative d-block">
           <div class="mycard_img_list">
@@ -29,46 +32,17 @@
       <div class="d-flex justify-content-between">
         <div>
           <router-link
-            :to="{ name: 'PostPage', params: { id: post.id, slug: post.slug } }"
+            :to="{
+              name: 'PostPage',
+              params: { id: this.post.id, slug: this.post.slug }
+            }"
             :title="post.name"
             class="mycard_title text_ellipsis1 pt-1 myhover_text"
           >
             {{ post.name }}
           </router-link>
           <div class="d-flex align-items-center pt-1">
-            <star-rating
-              border-color="#fc8301"
-              :border-width="1"
-              :star-points="[
-                23,
-                2,
-                14,
-                17,
-                0,
-                19,
-                10,
-                34,
-                7,
-                50,
-                23,
-                43,
-                38,
-                50,
-                36,
-                34,
-                46,
-                19,
-                31,
-                17
-              ]"
-              :star-size="14"
-              inactive-color="transparent"
-              active-color="#fc8301"
-              :rating="4.5"
-              text-class="custom-text"
-              :read-only="true"
-              :increment="0.5"
-            ></star-rating>
+            <b-form-rating class="p-0" :color="colorLoading" readonly show-value :value="post.rating" id="rating-inline3" inline no-border size="md"></b-form-rating>
           </div>
         </div>
         <h4 class="mycard_price pt-2">{{ post.price }}</h4>
@@ -216,7 +190,18 @@ export default {
       colorLoading: "var(--main-color)"
     };
   },
-  props: ["post"],
+  props: {
+    post: {
+      id: {
+        type: Number,
+        default: null
+      },
+      slug: {
+        type: String,
+        default: ""
+      }
+    }
+  },
   methods: {
     async removePost() {
       this.$vs.loading({
@@ -244,6 +229,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#rating-inline3 {
+  max-width: 150px;
+  height: 25px;
+  margin-top: 2px;
+  padding: 0;
+  box-shadow: none!important;
+  position: relative;
+  bottom: 5px;
+}
 .post_edit_btn {
   border: 1px solid var(--main-color);
   color: var(--main-color);

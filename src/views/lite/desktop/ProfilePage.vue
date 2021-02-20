@@ -1,7 +1,11 @@
 <template>
   <div class="w-71 position-relative">
     <div class="grid-container grid-template-4 grid-gap-10">
-      <Card4 :post="post" v-for="(post, index) in profileData" :key="index" />
+      <Card4
+        v-for="(post, index) in profileData"
+        :key="index"
+        :post="post"
+      />
     </div>
     <!-- grid-container -->
     <!-- <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">

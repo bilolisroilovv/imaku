@@ -32,30 +32,12 @@
         <div class="col-md-2">
           <ul class="footer_list">
             <li class="footer_list_title">
-              Категории
-            </li>
-            <li>
-              <a href="#">Электроника</a>
-            </li>
-            <li>
-              <a href="#">Авто</a>
-            </li>
-            <li>
-              <a href="#">Недвижимость</a>
-            </li>
-            <li>
-              <a href="#">Все для дома и сада</a>
-            </li>
-          </ul>
-        </div>
-        <!-- col-md-2 -->
-        <div class="col-md-2">
-          <ul class="footer_list">
-            <li class="footer_list_title">
               Партнерам
             </li>
             <li>
-              <a href="#">Как сделать заказ</a>
+              <a href="#">
+                Как сделать заказ
+              </a>
             </li>
             <li>
               <a href="#">Сотрудничество</a>
@@ -89,13 +71,28 @@
               Соцсети
             </li>
             <li>
-              <a href="#">Инстаграм</a>
+              <a href="#">
+                <i class="fab fa-instagram"></i>
+                <span>
+                  Инстаграм
+                </span>
+              </a>
             </li>
             <li>
-              <a href="#">Фейсбук</a>
+              <a href="#">
+                <i class="fab fa-facebook"></i>
+                <span>
+                  Фейсбук
+                </span>
+              </a>
             </li>
             <li>
-              <a href="#">Тикток</a>
+              <a href="#">
+                <i class="fab fa-tiktok"></i>
+                <span>
+                  Тикток
+                </span> 
+              </a>
             </li>
           </ul>
         </div>
@@ -140,6 +137,10 @@ footer {
   font-family: "Inter";
   padding: 2px 0;
   transition: all 0.2s;
+}
+.footer_list li a i {
+  font-size: 18px;
+  width: 20px;
 }
 .footer_list li a:hover {
   color: var(--main-color);

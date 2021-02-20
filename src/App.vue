@@ -533,7 +533,7 @@ body.modal-open {
   overflow: hidden;
 }
 .mainbtn:hover {
-  background: #ec8321 !important;
+  background: #db781a !important;
   color: #fff;
 }
 .mainbtn:hover svg path {
@@ -862,10 +862,25 @@ body.modal-open {
   pointer-events: none!important;
 }
 .b-rating .b-rating-value {
-  min-width: 1.3rem!important;
+  min-width: 1.75rem!important;
+  position: relative;
+  top: 1px;
 }
 .b-rating .b-rating-star, .b-rating .b-rating-value {
   padding: 0 0.1em!important;
+}
+.vue-file-agent .file-preview-wrapper .file-sortable-handle {
+  width: 100%!important;
+  height: 100%!important;
+  border-radius: 0!important;
+  top: 0!important;
+  left: 0!important;
+  cursor: grab!important;
+  background: transparent!important;
+  clip-path: polygon(79% 0, 79% 22%, 100% 22%, 100% 100%, 0 100%, 0 0);
+}
+.vue-file-agent .file-preview-wrapper .file-sortable-handle svg {
+  display: none;
 }
 footer {
 }

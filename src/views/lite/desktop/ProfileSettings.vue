@@ -89,7 +89,7 @@ export default {
       name: "",
       username: "",
       description: "",
-      location: "",
+      location: null,
       phone: Number,
       colorLoading: "var(--main-color)"
     };
@@ -135,7 +135,8 @@ export default {
         title: "Успех",
         text: "Настройки успешно изменены"
       });
-      this.$router.push("/profile-settings");
+      this.$router.push({ name: 'ProfileSettings' })
+      location.reload()
     }
   },
   mounted() {

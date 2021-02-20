@@ -20,10 +20,13 @@ import "vue-select/dist/vue-select.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "./registerServiceWorker";
+import { SlickList, SlickItem } from 'vue-slicksort';
 
 import _ from "lodash";
 Object.defineProperty(Vue.prototype, "$_", { value: _ });
 
+Vue.component('vfa-sortable-list', SlickList);
+Vue.component('vfa-sortable-item', SlickItem);
 Vue.use(VueFileAgent);
 Vue.use(VueFileAgentStyles);
 Vue.component("input-mask", InputMask);
@@ -39,7 +42,7 @@ Vue.config.productionTip = false;
 router.beforeEach((to, from, next) => {
   let language = to.params.lang;
   if (!language) {
-    language = "en";
+    language = "ru";
   }
 
   i18n.locale = language;

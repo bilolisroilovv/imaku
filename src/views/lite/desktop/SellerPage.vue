@@ -54,14 +54,14 @@
                     target="_blank"
                     class="product_seller_name d-block text_ellipsis1"
                   >
-                    {{ this.sellerData.name }}
+                    {{ sellerData.name }}
                   </h3>
                   <!-- product_seller_name -->
                   <div class="product_sidebar_date">
                     <span class="mt- d-block"
                       >{{ $t("shop.created_at") }}:</span
                     >
-                    <h6 class="mt-1">{{ this.sellerData.createdAt }}</h6>
+                    <h6 class="mt-1">{{ sellerData.createdAt }}</h6>
                   </div>
                   <!-- product_sidebar_date -->
                 </div>
@@ -70,42 +70,9 @@
               <!-- product_cusomer -->
 
               <div class="d-flex align-items-center mt-3 mb-3">
-                <star-rating
-                  border-color="#fc8301"
-                  :border-width="2"
-                  :star-points="[
-                    23,
-                    2,
-                    14,
-                    17,
-                    0,
-                    19,
-                    10,
-                    34,
-                    7,
-                    50,
-                    23,
-                    43,
-                    38,
-                    50,
-                    36,
-                    34,
-                    46,
-                    19,
-                    31,
-                    17
-                  ]"
-                  :star-size="15"
-                  inactive-color="transparent"
-                  active-color="#fc8301"
-                  class="mr-3"
-                  :rating="4.5"
-                  text-class="custom-text"
-                  :read-only="true"
-                  :increment="0.5"
-                ></star-rating>
-                <div @click.prevent="toggleSub">
-                  <SubscribeBtn :isSubscribed="this.isSubscribed" data-show="true"/>
+                <b-form-rating class="p-0" :color="colorLoading" readonly show-value :value="sellerData.rating" id="rating-inline" inline no-border size="lg"></b-form-rating>
+                <div class="ml-3 d-flex align-items-center" @click.prevent="toggleSub">
+                  <SubscribeBtn class="mt-0" :isSubscribed="isSubscribed" data-show="true"/>
                 </div>
               </div>
               <!-- d-flex -->
@@ -285,6 +252,7 @@
 <script>
 import Card4 from "@/components/lite/desktop/Cards/Card4";
 import SubscribeBtn from "@/components/lite/desktop/SubscribeBtn";
+import { mapGetters } from "vuex";
 import axios from "axios";
 
 export default {
@@ -299,15 +267,32 @@ export default {
   data() {
     return {
       expanded: false,
-      text: "Показать номер",
+      text: this.$i18n.t("post_page.seller_phone"),
       isSubscribed: Boolean,
+      colorLoading: "var(--main-color)",
       sellerData: []
     };
   },
-  async mounted() {
-    const response = await axios.get("seller/" + this.id);
+  computed: {
+    ...mapGetters(["currentUser"])
+  },
+  async created () {
+    this.$vs.loading({
+      container: "",
+      scale: 0.8,
+      color: this.colorLoading
+    });
+    const response = await axios
+    .get("seller/" + this.id)
+    .finally(() => this.$vs.loading.close(".con-vs-loading"));
+
     this.sellerData = response.data;
     this.isSubscribed = response.data.isSubscribed;
+
+    if (response.data.id === this.currentUser.id) {
+      this.$router.push({ name: "ProfilePosts" })
+    }
+
   },
   methods: {
     async toggleView() {
@@ -335,6 +320,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#rating-inline {
+  max-width: 150px;
+  height: 25px;
+  padding: 0;
+  box-shadow: none!important;
+  position: relative;
+  bottom: 5px;
+}
 .noadress {
   font-family: 'Inter';
   font-size: 14px;

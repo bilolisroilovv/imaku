@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="postCommentModal" centered>
+  <b-modal id="postCommentModal" ref="modal" centered>
     <div class="loading_div">
       <div class="mymodal-header justify-content-center">
         <button
@@ -63,10 +63,11 @@ export default {
   },
   methods: {
     async handleSubmit() {
+      this.$refs["modal"].hide()
       this.$vs.loading({
         container: "",
         scale: 0.8,
-        color: this.colorLoading
+        color: this.mainColor
       });
       const form = new FormData()
       form.append('rating', this.rating)
@@ -78,7 +79,7 @@ export default {
         }
       }
 
-      await axios
+      const response = await axios
         .post("posts/store-comment/" + this.postId, form, {
           headers: {
             "Content-Type": "multipart/form-data"
@@ -90,7 +91,7 @@ export default {
         title: "Успех",
         text: "Комментарий успешно размещен"
       });
-      this.$emit('CommentPost', this.postId)
+      this.$emit('postComment', response.data)
     }
   },
 }

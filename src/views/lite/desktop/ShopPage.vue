@@ -47,7 +47,6 @@ export default {
   },
   data() {
     return {
-      avatarImage: "'https://picsum.photos/500?random=1'",
       shopData: [],
       colorLoading: "var(--main-color)"
     };

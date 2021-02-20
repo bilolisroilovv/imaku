@@ -3,7 +3,7 @@
     <div class="row position-relative">
       <div class="col-md-12">
         <Card5
-          v-for="(post, index) in profileData.posts"
+          v-for="(post, index) in profileData"
           :key="index"
           class="mb-3"
           :post="post"
@@ -68,7 +68,7 @@ export default {
   methods: {
     handleLogout() {
       localStorage.removeItem("token");
-      this.$router.push("/");
+      this.$router.push({name: 'HomePage'});
       this.$router.go(this.$router.currentRoute);
     },
     checkLogin() {
@@ -82,7 +82,7 @@ export default {
         scale: 0.8,
         color: this.colorLoading
       });
-      const response = await axios.get("/profile/posts").finally(() =>
+      const response = await axios.get("profile/posts").finally(() =>
         setTimeout(() => {
           this.$vs.loading.close(".con-vs-loading");
         }, 10)

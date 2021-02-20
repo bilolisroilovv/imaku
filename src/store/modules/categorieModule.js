@@ -1,4 +1,5 @@
 import axios from "axios";
+import i18n from "@/i18n";
 
 export default {
   state: {
@@ -16,7 +17,11 @@ export default {
   },
   actions: {
     async fetchCategories(ctx) {
-      const response = await axios.get("categories");
+      const response = await axios.get("categories", {
+        headers: {
+          "Accept-Language": `${i18n.locale}`
+        }
+      });
       ctx.commit("updateCategories", response.data);
     }
   }

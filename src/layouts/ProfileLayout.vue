@@ -93,46 +93,14 @@
                 <!-- product_cusomer -->
 
                 <div
-                  class="d-flex align-items-center justify-content-center mt-1 mb-3"
+                  class="d-flex align-items-center justify-content-center"
                 >
-                  <star-rating
-                    border-color="#fc8301"
-                    :border-width="2"
-                    :star-points="[
-                      23,
-                      2,
-                      14,
-                      17,
-                      0,
-                      19,
-                      10,
-                      34,
-                      7,
-                      50,
-                      23,
-                      43,
-                      38,
-                      50,
-                      36,
-                      34,
-                      46,
-                      19,
-                      31,
-                      17
-                    ]"
-                    :star-size="15"
-                    inactive-color="transparent"
-                    active-color="#fc8301"
-                    :rating="4.5"
-                    text-class="custom-text"
-                    :read-only="true"
-                    :increment="0.5"
-                  ></star-rating>
+                 <b-form-rating class="p-0" :color="mainColor" readonly show-value :value="profileData.rating" id="rating-inline" inline no-border size="lg"></b-form-rating>
                 </div>
                 <!-- d-flex -->
 
                 <div
-                  class="seller_info d-flex justify-content-between mb-3 mt-4"
+                  class="seller_info d-flex justify-content-between mb-3 mt-2"
                 >
                   <button class="seller_info_box">
                     <span>{{ profileData.postsCount }}</span>
@@ -297,7 +265,7 @@ export default {
   },
   data() {
     return {
-      avatarImage: "'https://picsum.photos/500?random=1'",
+      mainColor: "var(--main-color)",
       profileData: {
         followers: []
       }
@@ -330,6 +298,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#rating-inline {
+  max-width: 150px;
+  padding: 0;
+  box-shadow: none!important;
+  position: relative;
+  bottom: 5px;
+}
 .top_btn {
   position: fixed;
   bottom: 40px;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="d-block mt-1 subscribe_btn" :class="{ active: subscribed }">
+    <button class="d-block subscribe_btn" :class="{ active: subscribed }">
       {{ text }}
     </button>
   </div>
