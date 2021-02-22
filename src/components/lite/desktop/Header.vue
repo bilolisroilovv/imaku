@@ -172,7 +172,7 @@
             </div>
             </div>
             <!-- header_categories -->
-            <SearchGroup :scrollPosition="scrollPosition" />
+            <SearchGroup :lang="lang" :scrollPosition="scrollPosition" />
           </div>
           <!-- d-flex -->
           <div>
@@ -327,6 +327,7 @@ export default {
   data() {
     return {
       limitPosition: 950,
+      lang: "",
       scrolled: false,
       scrollPosition: null,
       headerCategoriesDropdownVisible: false
@@ -365,6 +366,7 @@ export default {
       this.$router.push({
         params: { lang: locale }
       });
+      this.lang = locale
     }
   },
   computed: {

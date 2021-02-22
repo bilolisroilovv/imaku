@@ -1,5 +1,6 @@
 <template>
   <div class="search_group">
+    <button @click="checkLang">CHECK</button>
     <form
       action=""
       id="search"
@@ -90,6 +91,10 @@ export default {
   },
   props: {
     scrollPosition: Number,
+    lang: {
+      type: String,
+      default: ''
+    }
   },
   data() {
     return {
@@ -97,7 +102,7 @@ export default {
       inputPlaceholder: "Поиск объявлений, магазинов, аккаунтов",
       runtimeTranscription: "",
       transcription: [],
-      lang: "",
+      language: this.$i18n.locale,
       searchContent: null,
       error: false,
       speaking: false,
@@ -105,19 +110,19 @@ export default {
     };
   },
   mounted () {
-    this.checkLang();
+    this.checkLang()
   },
-  /* watch: {
+  watch: {
     lang () {
       this.checkLang();
     }
-  }, */
+  },
   methods: {
     checkLang() {
-      if (this.$i18n.locale === "uz") {
-        this.lang = "uz-UZ"
+      if (this.lang === "uz") {
+        this.language = "uz-UZ"
       } else {
-        this.lang = "ru-RU"
+        this.language = "ru-RU"
       }
     },
     startSpeechToTxt() {
@@ -126,7 +131,7 @@ export default {
       window.SpeechRecognition =
         window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognition = new window.SpeechRecognition();
-      recognition.lang = this.lang;
+      recognition.lang = this.language;
       recognition.interimResults = true;
 
       // event current voice reco word
