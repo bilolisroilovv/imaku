@@ -1,6 +1,5 @@
 <template>
   <div class="search_group">
-    <button @click="checkLang">CHECK</button>
     <form
       action=""
       id="search"
