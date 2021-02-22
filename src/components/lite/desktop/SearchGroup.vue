@@ -96,7 +96,7 @@ export default {
       inputPlaceholder: "Поиск объявлений, магазинов, аккаунтов",
       runtimeTranscription: "",
       transcription: [],
-      lang: "ru-RU",
+      lang: "uz-UZ",
       searchContent: null,
       error: false,
       speaking: false,
