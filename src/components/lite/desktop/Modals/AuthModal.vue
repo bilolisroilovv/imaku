@@ -22,6 +22,7 @@
             id="modal_phone"
             v-model="phone"
             type="text"
+            @change="changePhone"
             v-mask="'+998 (##) ###-##-##'"
             :placeholder="$t('modal.phone')"
             required
@@ -34,8 +35,10 @@
           <label class="control control--checkbox">
             <input type="checkbox" checked="checked" required />
             <div class="control__indicator"></div>
-            Я согласен с
-            <a href="#" class="complain_review_btn">правилами и условиями</a>
+            {{ $t("modal.terms1") }}
+            <router-link :to="{ name: 'TermsOfUse' }" class="complain_review_btn">
+              {{ $t("modal.terms2") }}
+            </router-link>
           </label>
           <!-- <label class="control control--checkbox mt-1">
             <input type="checkbox" checked="checked" required />
@@ -146,8 +149,8 @@ export default {
   data() {
     return {
       step: 1,
-      phone: "",
-      code: "",
+      phone: null,
+      code: null,
       error: false,
       currentTime: 59,
       timer: null,
@@ -166,9 +169,28 @@ export default {
         this.stopTimer()
         this.showSendCode = true
       }
+    },
+    phone () {
+      this.checkPhone();
+    },
+    code () {
+      this.checkCode();
     }
   },
   methods: {
+    checkPhone()  {
+      if (this.phone.length === 19) {
+        this.nextStep()
+      }
+    },
+    checkCode()  {
+      if (this.code.length === 6) {
+        this.handleSubmit()
+      }
+    },
+    changePhone() {
+      console.log(this.phone.length);
+    },
     startTimer() {
       this.showSendCode = false
       this.timer = setInterval(() => {

@@ -14,9 +14,9 @@
         <input
           type="text"
           id="search-field"
-          :placeholder="$t('search.title')"
+          :placeholder="inputPlaceholder"
           class="navbar_search_input"
-          v-model="searchContent"
+          v-model="runtimeTranscription"
           :class="{ active: searchDropdownVisible }"
         />
       </div>
@@ -26,9 +26,11 @@
           <img src="@/assets/lite/cancel.svg" class="img-width" alt="" />
         </button>
         <span
-          class="header_input_icon"
+          class="header_input_icon microphone_button"
+          :class="{active: speaking}"
           data-toggle="tooltip"
           data-placement="top"
+          @click="startSpeechToTxt"
           id="voice-trigger"
           :title="$t('search.voice_search')"
         >
@@ -79,22 +81,79 @@
 <script>
 /* import SearchDropdown from "@/components/lite/desktop/SearchDropdown"; */
 /* import axios from 'axios' */
-import $ from "jquery";
+/* import $ from "jquery"; */
+
 export default {
   name: "SearchGroup",
   components: {
     /* SearchDropdown */
   },
   props: {
-    scrollPosition: Number
+    scrollPosition: Number,
+    lang: {
+      type: String,
+      default: ''
+    }
   },
   data() {
     return {
       searchDropdownVisible: false,
-      searchContent: null
+      inputPlaceholder: "Поиск объявлений, магазинов, аккаунтов",
+      runtimeTranscription: "",
+      transcription: [],
+      language: this.$i18n.locale,
+      searchContent: null,
+      error: false,
+      speaking: false,
+      toggle: false,
     };
   },
+  mounted () {
+    this.checkLang()
+  },
+  watch: {
+    lang () {
+      this.checkLang();
+    }
+  },
   methods: {
+    checkLang() {
+      if (this.lang === "uz") {
+        this.language = "uz-UZ"
+      } else {
+        this.language = "ru-RU"
+      }
+    },
+    startSpeechToTxt() {
+      // initialisation of voicereco
+
+      window.SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new window.SpeechRecognition();
+      recognition.lang = this.language;
+      recognition.interimResults = true;
+
+      // event current voice reco word
+      recognition.addEventListener("result", (event) => {
+        var text = Array.from(event.results)
+          .map((result) => result[0])
+          .map((result) => result.transcript)
+          .join("");
+        this.runtimeTranscription = text;
+      });
+      // end of transcription
+      recognition.addEventListener("end", () => {
+        this.transcription.push(this.runtimeTranscription);
+        /* this.runtimeTranscription = ""; */
+        recognition.stop();
+        this.speaking = false
+        this.handleSubmit()
+      });
+      recognition.start();
+      this.runtimeTranscription = ""
+      this.speaking = true
+      this.inputPlaceholder = "Говорите..."
+    },
     searchDropdowntoggle() {
       this.searchDropdownVisible = !this.searchDropdownVisible;
     },
@@ -105,80 +164,20 @@ export default {
       /* axios.get('search?query=' + this.searchContent) */
       this.$router.push({
         name: "SearchPage",
-        params: { query: this.searchContent }
+        params: { query: this.runtimeTranscription }
       });
-    }
+    },
   },
+  /*  beforeCreate() {
+    try {
+      let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SpeechRecognition(); // eslint-disable-line
+    } catch(error) {
+      console.error(error);
+    }
+  }, */
   computed: {},
   events: {},
-  mounted() {
-    var $voiceTrigger = $("#voice-trigger");
-    var $searchInput = $("#search-field");
-    var $result = $("#result"); // eslint-disable-line
-
-    /*  set Web Speech API for Chrome or Firefox */
-    window.SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
-
-    /* Check if browser support Web Speech API, remove the voice trigger if not supported */
-    if (window.SpeechRecognition) {
-      /* setup Speech Recognition */
-      var recognition = new SpeechRecognition(); // eslint-disable-line
-      recognition.interimResults = true;
-      recognition.lang = "ru-RU";
-      recognition.addEventListener("result", _transcriptHandler);
-
-      recognition.onerror = function(event) {
-        console.log(event.error);
-
-        /* Revert input and icon CSS if no speech is detected */
-        if (event.error == "no-speech") {
-          $voiceTrigger.removeClass("active");
-          $searchInput.attr("placeholder", "Поиск...");
-        }
-      };
-    } else {
-      $voiceTrigger.remove();
-    }
-
-    $(document).ready(function() {
-      /* Trigger listen event when our trigger is clicked */
-      $voiceTrigger.on("click touch", listenStart);
-    });
-
-    /* Our listen event */
-    function listenStart(e) {
-      e.preventDefault();
-      /* Update input and icon CSS to show that the browser is listening */
-      $searchInput.attr("placeholder", "Говорите...");
-      $voiceTrigger.addClass("active");
-      /* Start voice recognition */
-
-      recognition.start();
-    }
-
-    /* Parse voice input */
-    function _parseTranscript(e) {
-      return Array.from(e.results)
-        .map(function(result) {
-          return result[0];
-        })
-        .map(function(result) {
-          return result.transcript;
-        })
-        .join("");
-    }
-
-    /* Convert our voice input into text and submit the form */
-    function _transcriptHandler(e) {
-      var speechOutput = _parseTranscript(e);
-      $searchInput.val(speechOutput);
-      //$result.html(speechOutput);
-      if (e.results[0].isFinal) {
-        this.handleSubmit()
-      }
-    }
-  }
 };
 </script>
 
@@ -186,7 +185,21 @@ export default {
 #voice-trigger.active {
   /* background: rgb(248, 154, 154); */
 }
-
+.microphone_button.active {
+  background: transparent;
+  animation-name: microphoneAnim;
+  animation-duration: 0.7s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+.microphone_button.active:hover {
+  background: transparent!important;
+}
+@keyframes microphoneAnim {
+  0%   {transform: scale(0.95);}
+  100% {transform: scale(1.15);}
+}
 .border-radius-100 {
   border-radius: 100px;
 }
