@@ -87,6 +87,8 @@
   },
   "catalog": "Katalog",
   "modal": {
+    "terms1": "Men",
+    "terms2": "barcha qoidalar va foydalanish shartlari bilan roziman",
     "login": "Kirish va ro'yxatdan o'tish",
     "title": "Ushbu raqamga tasdiqlash kodi bilan SMS yuboriladi",
     "next": "Davom etish",

@@ -82,6 +82,7 @@
 /* import SearchDropdown from "@/components/lite/desktop/SearchDropdown"; */
 /* import axios from 'axios' */
 /* import $ from "jquery"; */
+
 export default {
   name: "SearchGroup",
   components: {
@@ -96,15 +97,29 @@ export default {
       inputPlaceholder: "Поиск объявлений, магазинов, аккаунтов",
       runtimeTranscription: "",
       transcription: [],
-      lang: "uz-UZ, ru-RU",
+      lang: "",
       searchContent: null,
       error: false,
       speaking: false,
       toggle: false,
     };
   },
-  mounted() {},
+  mounted () {
+    this.checkLang();
+  },
+  /* watch: {
+    lang () {
+      this.checkLang();
+    }
+  }, */
   methods: {
+    checkLang() {
+      if (this.$i18n.locale === "uz") {
+        this.lang = "uz-UZ"
+      } else {
+        this.lang = "ru-RU"
+      }
+    },
     startSpeechToTxt() {
       // initialisation of voicereco
 

@@ -35,8 +35,10 @@
           <label class="control control--checkbox">
             <input type="checkbox" checked="checked" required />
             <div class="control__indicator"></div>
-            Я согласен с
-            <a href="#" class="complain_review_btn">правилами и условиями</a>
+            {{ $t("modal.terms1") }}
+            <router-link :to="{ name: 'TermsOfUse' }" class="complain_review_btn">
+              {{ $t("modal.terms2") }}
+            </router-link>
           </label>
           <!-- <label class="control control--checkbox mt-1">
             <input type="checkbox" checked="checked" required />

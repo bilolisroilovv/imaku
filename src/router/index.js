@@ -45,6 +45,12 @@ const routes = [
         component: () => import("../views/lite/desktop/SupportPage.vue")
       },
       {
+        path: "terms-of-use",
+        name: "TermsOfUse",
+        meta: { layout: "second" },
+        component: () => import("../views/lite/desktop/ContentPages/TermsOfUse.vue")
+      },
+      {
         path: "faq",
         name: "FaqPage",
         meta: { layout: "second" },
