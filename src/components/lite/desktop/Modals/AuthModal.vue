@@ -22,6 +22,7 @@
             id="modal_phone"
             v-model="phone"
             type="text"
+            @change="changePhone"
             v-mask="'+998 (##) ###-##-##'"
             :placeholder="$t('modal.phone')"
             required
@@ -146,8 +147,8 @@ export default {
   data() {
     return {
       step: 1,
-      phone: "",
-      code: "",
+      phone: null,
+      code: null,
       error: false,
       currentTime: 59,
       timer: null,
@@ -166,9 +167,28 @@ export default {
         this.stopTimer()
         this.showSendCode = true
       }
+    },
+    phone () {
+      this.checkPhone();
+    },
+    code () {
+      this.checkCode();
     }
   },
   methods: {
+    checkPhone()  {
+      if (this.phone.length === 19) {
+        this.nextStep()
+      }
+    },
+    checkCode()  {
+      if (this.code.length === 6) {
+        this.handleSubmit()
+      }
+    },
+    changePhone() {
+      console.log(this.phone.length);
+    },
     startTimer() {
       this.showSendCode = false
       this.timer = setInterval(() => {
