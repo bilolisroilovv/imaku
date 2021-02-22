@@ -111,7 +111,7 @@ export default {
       window.SpeechRecognition =
         window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognition = new window.SpeechRecognition();
-      recognition.lang = this.lang;
+      /* recognition.lang = this.lang; */
       recognition.interimResults = true;
 
       // event current voice reco word
