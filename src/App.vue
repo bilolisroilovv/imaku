@@ -522,19 +522,20 @@ body.modal-open {
 }
 .mainbtn {
   border-radius: 3px;
-  border: none !important;
   color: var(--main-color);
-  padding: 10px 20px;
+  padding: 8px 20px;
   font-weight: 500;
   border: none;
-  background: var(--main-color) !important;
+  background: var(--main-color);
   color: #fff;
   transition: all 0.2s;
   overflow: hidden;
+  border: 2px solid transparent;
 }
 .mainbtn:hover {
-  background: #db781a !important;
-  color: #fff;
+  background: transparent!important;
+  border: 2px solid var(--main-color);
+  color: var(--main-color);
 }
 .mainbtn:hover svg path {
   fill: var(--main-color);

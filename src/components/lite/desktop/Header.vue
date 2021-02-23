@@ -400,21 +400,23 @@ export default {
 .create_store_btn {
   background: rgba(255, 201, 150, 0.377);
   color: var(--main-color);
-  padding: 10px 14px;
+  padding: 8px 14px;
   border-radius: 3px;
   font-size: 15px !important;
   font-family: "Inter", sans-serif;
   transition: all 0.2s;
+  border: 2px solid transparent;
   font-weight: 500;
 }
 .create_store_btn:hover {
-  background: rgba(255, 191, 131, 0.616);
+  background: transparent;
+  border: 2px solid rgba(255, 201, 150, 0.377);
   color: var(--main-color);
 }
 .create_ad_btn {
   font-size: 15px !important;
   font-family: "Inter", sans-serif;
-  padding: 10px 14px !important;
+  padding: 8px 14px !important;
 }
 .navbar_top_link {
   font-size: 13px;

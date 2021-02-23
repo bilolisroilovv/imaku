@@ -515,7 +515,7 @@ export default {
 }
 .write_review_btn {
   border-radius: 3px;
-  padding: 9px 15px;
+  padding: 7px 13px;
 }
 .product_review_filter span {
   font-size: 15px;

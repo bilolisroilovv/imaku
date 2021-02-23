@@ -2,7 +2,7 @@
   <div>
     <swiper class="swiper main_slider" :options="mainSliderOption">
       <swiper-slide
-        class="slide-1 myhover_bg"
+        class="myhover_bg"
         v-for="item in allIndexInfo.sliders"
         :key="item.id"
       >
@@ -45,6 +45,9 @@ export default {
     return {
       mainSliderOption: {
         effect: "fade",
+        slidesPerView: 1,
+        loop: true,
+        initialSlide: 1,
         autoplay: {
           delay: 5000,
           disableOnInteraction: false

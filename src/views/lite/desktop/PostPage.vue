@@ -871,7 +871,7 @@ export default {
   color: #777;
 }
 .back_btn {
-  color: #fff;
+  border: none;
   font-size: 14px;
   padding: 7px 20px 7px 15px;
   background: #343538 !important;
