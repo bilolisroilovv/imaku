@@ -329,14 +329,17 @@
               <!-- product_cusomer -->
 
               <div class="product_btns mt-4">
-                <a
-                  class="show_number_btn mb-2 d-block w-100 text-center"
-                  @click.prevent="toggleView"
-                >
-                  <img src="@/assets/lite/show_number_icon.png" alt="" />
-                  {{ text }}
-                </a>
-                <!-- show_number_btn -->
+                <div class="show_number_btn mb-2 d-block w-100 text-center">
+                  <a v-show="step === 1" class="w-100" @click.prevent="toggleView">
+                    <img src="@/assets/lite/show_number_icon.png" alt="" />
+                    Показать номер
+                  </a> <!-- show_number_btn -->
+                  <a :href="`tel:${phone}`" v-show="step === 2" class="w-100">
+                    <img src="@/assets/lite/show_number_icon.png" alt="" />
+                    {{ phone }}
+                  </a> <!-- show_number_btn -->
+                </div>
+
                 <a
                   href="#"
                   class="send_message_btn mainbtn d-block w-100 text-center"
@@ -586,6 +589,7 @@ export default {
   data() {
     return {
       authorType: null,
+      step: 1,
       text: this.$i18n.t("post_page.seller_phone"),
       isSubscribed: Boolean,
       otherSellerGoodsOption: {
@@ -656,13 +660,9 @@ export default {
       this.isSubscribed = response.data.author.isSubscribed;
     },
     async toggleView() {
-      this.expanded = !this.expanded;
       const response = await axios.post("post-phone/" + this.postData.id);
-      if (this.expanded) {
-        this.text = response.data;
-      } else {
-        this.text = "Показать номер";
-      }
+      this.phone = response.data;
+      this.step = 2
     },
     async toggleSub() {
       this.isSubscribed = !this.isSubscribed
@@ -762,19 +762,18 @@ export default {
 .other_seller_goods_slider:hover .other_seller_goods_slider_next {
   right: 20px;
 }
-.product_btns a {
+.product_btns div {
   background: #343538;
   border-radius: 4px;
   color: #fff;
   font-size: 17px;
   font-weight: 500;
-  padding: 11px 20px;
   width: 100%;
   transition: all 0.2s;
   font-family: "Inter", sans-serif;
 }
-.product_btns a:hover {
-  background: #2b2c2e;
+.product_btns div:hover {
+  background: #1a570a;
 }
 .show_number_btn {
   cursor: pointer !important;
@@ -997,6 +996,7 @@ export default {
 .product_btns a {
   background: #343538;
   border-radius: 4px;
+  display: block;
   color: #fff;
   font-size: 17px;
   padding: 11px 20px;
@@ -1004,7 +1004,7 @@ export default {
   transition: all 0.2s;
 }
 .product_btns a:hover {
-  background: #2b2c2e;
+  background: #1a570a;
 }
 
 .product_btns a img {

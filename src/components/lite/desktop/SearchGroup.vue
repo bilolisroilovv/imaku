@@ -98,7 +98,7 @@ export default {
   data() {
     return {
       searchDropdownVisible: false,
-      inputPlaceholder: "Поиск объявлений, магазинов, аккаунтов",
+      inputPlaceholder: this.$i18n.t("search.title"),
       runtimeTranscription: "",
       transcription: [],
       language: this.$i18n.locale,

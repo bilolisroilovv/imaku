@@ -6,7 +6,7 @@
           name: 'PostPage',
           params: { id: this.post.id, slug: this.post.slug }
         }"
-      >
+      > 
         <div class="mycard_img mybg_center position-relative d-block">
           <div class="mycard_img_list">
             <div
@@ -108,35 +108,39 @@
     </div>
     <!-- d-flex -->
     <div class="mycard_btns d-flex justify-content-between align-items-center pt-2 pb-1">
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center" v-if="!currentUser">
         <button
-        class="like_btn card_like_btn d-flex align-items-center mr-2"
-        :title="$t('card_base.like')"
-      >
-        <div class="like_btn_icon d-flex align-items-center">
-          <svg
-            width="13"
-            height="13"
-            viewBox="0 0 11 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M1.95088 3.86499H0.639545C0.458503 3.86499 0.311707 4.01176 0.311707 4.19283V9.43807C0.311707 9.61911 0.458481 9.76591 0.639545 9.76591H1.95086C2.1319 9.76591 2.27869 9.61913 2.27869 9.43807V4.19281C2.27869 4.01177 2.13194 3.86499 1.95088 3.86499Z"
-              fill="#7D95AE"
-            />
-            <path
-              d="M10.1399 4.73397C10.0821 4.22542 9.60704 3.86497 9.09521 3.86497H6.53936C6.75657 3.47603 6.87315 2.37597 6.86798 1.9266C6.85941 1.18276 6.24341 0.58667 5.49955 0.58667H5.22903C5.04784 0.58667 4.90119 0.733292 4.90119 0.914509C4.90119 1.67259 4.60601 3.04092 4.04929 3.59766C3.67458 3.97237 3.35424 4.10815 2.9342 4.31807V9.23714C3.5773 9.45148 4.39382 9.76591 5.63836 9.76591H7.78286C8.48946 9.76591 9.03979 9.11147 8.76598 8.42003C9.18314 8.30638 9.49078 7.9238 9.49078 7.4711C9.49078 7.34335 9.46613 7.22107 9.42163 7.10869C10.1246 6.91716 10.3834 6.04914 9.89546 5.50412C10.0747 5.30386 10.1736 5.02994 10.1399 4.73397Z"
-              fill="#7D95AE"
-            />
-          </svg>
-        </div>
-        <!-- like_btn_icon -->
-        <div class="like_btn_count">{{ this.post.likes }}</div>
-        <!-- like_btn_count -->
+          @click.prevent
+          v-b-modal.signModal
+          class="like_btn card_like_btn d-flex align-items-center mr-2"
+          :title="$t('card_base.like')"
+        >
+          <div class="like_btn_icon d-flex align-items-center">
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 11 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1.95088 3.86499H0.639545C0.458503 3.86499 0.311707 4.01176 0.311707 4.19283V9.43807C0.311707 9.61911 0.458481 9.76591 0.639545 9.76591H1.95086C2.1319 9.76591 2.27869 9.61913 2.27869 9.43807V4.19281C2.27869 4.01177 2.13194 3.86499 1.95088 3.86499Z"
+                fill="#7D95AE"
+              />
+              <path
+                d="M10.1399 4.73397C10.0821 4.22542 9.60704 3.86497 9.09521 3.86497H6.53936C6.75657 3.47603 6.87315 2.37597 6.86798 1.9266C6.85941 1.18276 6.24341 0.58667 5.49955 0.58667H5.22903C5.04784 0.58667 4.90119 0.733292 4.90119 0.914509C4.90119 1.67259 4.60601 3.04092 4.04929 3.59766C3.67458 3.97237 3.35424 4.10815 2.9342 4.31807V9.23714C3.5773 9.45148 4.39382 9.76591 5.63836 9.76591H7.78286C8.48946 9.76591 9.03979 9.11147 8.76598 8.42003C9.18314 8.30638 9.49078 7.9238 9.49078 7.4711C9.49078 7.34335 9.46613 7.22107 9.42163 7.10869C10.1246 6.91716 10.3834 6.04914 9.89546 5.50412C10.0747 5.30386 10.1736 5.02994 10.1399 4.73397Z"
+                fill="#7D95AE"
+              />
+            </svg>
+          </div>
+          <!-- like_btn_icon -->
+          <div class="like_btn_count">{{ this.post.likes }}</div>
+          <!-- like_btn_count -->
       </button>
       <!-- like_btn -->
       <button
+        @click.prevent
+        v-b-modal.signModal
         class="dislike_btn card_like_btn d-flex align-items-center mr-2"
         :title="$t('card_base.dont_like')"
       >
@@ -160,6 +164,67 @@
         </div>
         <!-- dislike_btn_icon -->
         <div class="dislike_btn_count">{{ this.post.dislikes }}</div>
+        <!-- dislike_btn_count -->
+      </button>
+      <!-- dislike_btn -->
+      </div>
+
+      <div class="d-flex align-items-center" v-if="currentUser">
+        <button
+          @click.prevent="handleLike"
+          :class="{ active: isLiked }"
+          class="like_btn card_like_btn d-flex align-items-center mr-2"
+          :title="$t('card_base.like')"
+        >
+          <div class="like_btn_icon d-flex align-items-center">
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 11 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1.95088 3.86499H0.639545C0.458503 3.86499 0.311707 4.01176 0.311707 4.19283V9.43807C0.311707 9.61911 0.458481 9.76591 0.639545 9.76591H1.95086C2.1319 9.76591 2.27869 9.61913 2.27869 9.43807V4.19281C2.27869 4.01177 2.13194 3.86499 1.95088 3.86499Z"
+                fill="#7D95AE"
+              />
+              <path
+                d="M10.1399 4.73397C10.0821 4.22542 9.60704 3.86497 9.09521 3.86497H6.53936C6.75657 3.47603 6.87315 2.37597 6.86798 1.9266C6.85941 1.18276 6.24341 0.58667 5.49955 0.58667H5.22903C5.04784 0.58667 4.90119 0.733292 4.90119 0.914509C4.90119 1.67259 4.60601 3.04092 4.04929 3.59766C3.67458 3.97237 3.35424 4.10815 2.9342 4.31807V9.23714C3.5773 9.45148 4.39382 9.76591 5.63836 9.76591H7.78286C8.48946 9.76591 9.03979 9.11147 8.76598 8.42003C9.18314 8.30638 9.49078 7.9238 9.49078 7.4711C9.49078 7.34335 9.46613 7.22107 9.42163 7.10869C10.1246 6.91716 10.3834 6.04914 9.89546 5.50412C10.0747 5.30386 10.1736 5.02994 10.1399 4.73397Z"
+                fill="#7D95AE"
+              />
+            </svg>
+          </div>
+          <!-- like_btn_icon -->
+        <div class="like_btn_count">{{ likesCount }}</div>
+        <!-- like_btn_count -->
+      </button>
+      <!-- like_btn -->
+      <button
+        @click.prevent="handleDislike"
+        :class="{ active: isDisliked }"
+        class="dislike_btn card_like_btn d-flex align-items-center mr-2"
+        :title="$t('card_base.dont_like')"
+      >
+        <div class="dislike_btn_icon d-flex align-items-center">
+          <svg
+            width="13"
+            height="13"
+            viewBox="0 0 11 11"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1.85912 6.67188H0.468556C0.276576 6.67188 0.120911 6.51623 0.120911 6.32423V0.762087C0.120911 0.570107 0.276553 0.414442 0.468556 0.414442H1.85909C2.05107 0.414442 2.20674 0.570084 2.20674 0.762087V6.32425C2.20674 6.51623 2.05112 6.67188 1.85912 6.67188Z"
+              fill="#7D95AE"
+            />
+            <path
+              d="M10.5432 5.75057C10.4818 6.28985 9.97809 6.67207 9.43534 6.67207H6.72507C6.9554 7.08451 7.07903 8.25103 7.07355 8.72755C7.06446 9.51634 6.41124 10.1484 5.62243 10.1484H5.33557C5.14343 10.1484 4.98793 9.99296 4.98793 9.80079C4.98793 8.9969 4.67491 7.54591 4.08456 6.95553C3.6872 6.55818 3.34752 6.4142 2.9021 6.19159V0.975336C3.58404 0.748036 4.4499 0.414617 5.76963 0.414617H8.04369C8.79299 0.414617 9.37657 1.10859 9.08621 1.84181C9.52858 1.96232 9.8548 2.36802 9.8548 2.84807C9.8548 2.98354 9.82867 3.11321 9.78148 3.23237C10.5269 3.43548 10.8013 4.35594 10.2839 4.93389C10.474 5.14625 10.5788 5.43672 10.5432 5.75057Z"
+              fill="#7D95AE"
+            />
+          </svg>
+        </div>
+        <!-- dislike_btn_icon -->
+        <div class="dislike_btn_count">{{ disLikesCount }}</div>
         <!-- dislike_btn_count -->
       </button>
       <!-- dislike_btn -->
@@ -234,6 +299,10 @@ export default {
   },
   data() {
     return {
+      likesCount: this.post.likes,
+      disLikesCount: this.post.dislikes,
+      isLiked: false,
+      isDisliked: false,
       isFavorite: this.post.isFavourite,
       mainColor: "var(--main-color)",
       authorType: null
@@ -255,6 +324,36 @@ export default {
     ...mapGetters(["currentUser"])
   },
   methods: {
+    async handleLike() {
+      this.isLiked = !this.isLiked;
+      if (this.isLiked === true) {
+        this.likesCount++;
+      } else {
+        this.likesCount--;
+      }
+      if (this.isDisliked === true) {
+        this.isDisliked = false;
+        this.disLikesCount--;
+      }
+      await axios.get("like/" + this.post.id);
+      /* this.likesCount = response.data.likes
+      this.dislikesCount = response.data.dislikes */
+    },
+    async handleDislike() {
+      this.isDisliked = !this.isDisliked;
+      if (this.isDisliked === true) {
+        this.disLikesCount++;
+      } else {
+        this.disLikesCount--;
+      }
+      if (this.isLiked === true) {
+        this.isLiked = false;
+        this.likesCount--;
+      }
+      await axios.get("dislike/" + this.post.id);
+      /* this.likesCount = response.data.likes
+      this.dislikesCount = response.data.dislikes */
+    },
     async ToggleFavoriteRequest() {
       const response = await axios.get("favourite/" + this.post.id);
       this.isFavorite = response.data.isFavourite;
@@ -409,20 +508,19 @@ export default {
 }
 .like_btn {
   border-radius: 2px;
-  background: transparent;
+  background: #ecf2f9;
   height: 19px;
-  cursor: inherit;
 }
 .like_btn_icon {
-  background: transparent;
+  background: #dde9f7;
   border-radius: 2px;
   height: 19px;
-  padding: 3px 0 4px 3px;
+  padding: 3px 6px 4px 7px;
 }
 .like_btn_count {
   font-weight: 500;
-  font-size: 12px;
-  padding: 3px 5px 3px 5px;
+  font-size: 10px;
+  padding: 3px 15px 3px 7px;
 
   color: #898eaf;
 }
@@ -440,20 +538,19 @@ export default {
 }
 .dislike_btn {
   border-radius: 2px;
-  background: transparent;
+  background: #ecf2f9;
   height: 19px;
-  cursor: inherit;
 }
 .dislike_btn_icon {
-  background: transparent;
+  background: #dde9f7;
   border-radius: 2px;
   height: 19px;
-  padding: 3px 0 4px 3px;
+  padding: 3px 6px 4px 7px;
 }
 .dislike_btn_count {
   font-weight: 500;
-  font-size: 12px;
-  padding: 3px 5px 3px 5px;
+  font-size: 10px;
+  padding: 3px 15px 3px 7px;
   color: #898eaf;
 }
 .dislike_btn.active {
