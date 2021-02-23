@@ -140,7 +140,8 @@
                   >
                     <input
                       type="checkbox"
-                      class="hamburger_input"
+                      class="hamburger_input pointer-none"
+                      disabled
                       v-model="headerCategoriesDropdownVisible"
                     />
                     <svg
@@ -157,7 +158,7 @@
                 </div>
               </button>
               <!-- categories_hammburger -->
-              <div @click="onClose()">
+              <div>
                 <HeaderCategoriesDropdown
                   class="header_categories_dropdown"
                   :scrollPosition="scrollPosition"
@@ -392,7 +393,7 @@ export default {
   width: 43px;
   height: 43px;
   border-radius: 50%;
-  border: 2px solid rgb(177, 177, 177);
+  border: 1px solid rgba(0,0,0,.15);
   display: block;
   pointer-events: inherit!important;
 }
