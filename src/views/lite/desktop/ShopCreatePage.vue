@@ -294,7 +294,7 @@ export default {
   border-radius: 50%;
   margin-bottom: 30px;
   margin-left: 15.5rem;
-  border: 3px solid #b8b8b8;
+  border: 2px solid rgba(0, 0, 0, 0.15);
   img {
     object-fit: cover;
     width: 100%;
