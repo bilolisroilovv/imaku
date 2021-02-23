@@ -290,6 +290,7 @@ export default {
 </script>
 
 <style scoped>
+
 .shop_adress {
   background: #fff;
   padding: 10px 15px;
@@ -453,5 +454,14 @@ export default {
   position: relative;
   font-family: "Inter", sans-serif;
   font-weight: 900;
+}
+.send_message_btn {
+  background:  var(--main-color)!important;
+  padding: 9px 0px!important;
+}
+.send_message_btn:hover {
+  color: var(--main-color);
+  border: 2px solid var(--main-color);
+  background: transparent!important;
 }
 </style>

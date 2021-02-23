@@ -118,6 +118,7 @@ export default {
   },
   methods: {
     checkLang() {
+      this.inputPlaceholder = this.$i18n.t("search.title")
       if (this.lang === "uz") {
         this.language = "uz-UZ"
       } else {

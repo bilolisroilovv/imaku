@@ -248,6 +248,8 @@
               </a>
             </div>
 
+
+
             <div class="d-flex align-items-center" v-if="currentUser">
               <router-link
                 :to="{ name: 'ShopCreatePage' }"
@@ -365,6 +367,7 @@ export default {
         params: { lang: locale }
       });
       this.lang = locale
+      this.$store.dispatch("fetchCategories");
     }
   },
   computed: {
