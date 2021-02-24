@@ -368,6 +368,7 @@ export default {
       });
       this.lang = locale
       this.$store.dispatch("fetchCategories");
+      this.$emit('langChange', locale)
     }
   },
   computed: {

@@ -25,10 +25,16 @@
   "create_post": "E'lon berish",
   "login": "Kirish",
   "category_page": {
+    "sort": {
+      "sort1": "Ommabop",
+      "sort2": "Yengilar",
+      "sort3": "Avval arzon",
+      "sort4": "Avval qimmat"
+    },
     "results": "natija",
     "price": "Narh",
     "from": "dan",
-    "to": "gacha",
+    "to": "ga",
     "brand": "Brend nomi",
     "status": {
       "status_title": "Holati",

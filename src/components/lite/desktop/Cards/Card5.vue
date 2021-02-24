@@ -162,7 +162,7 @@
         </div>
         <!-- d-flex -->
         <div class="mycard_edit_btns">
-          <button @click.prevent="removePost" class="post_remove_btn mainbtn">
+          <button @click="postClicked" class="post_remove_btn mainbtn">
             <i class="far fa-trash-alt mr-1"></i> {{ $t("card_base.delete") }}
           </button>
           <router-link
@@ -211,6 +211,9 @@ export default {
     }
   },
   methods: {
+    postClicked() {
+      this.$emit('clicked', this.post.id)
+    },
     async handleLike() {
       this.isLiked = !this.isLiked;
       if (this.isLiked === true) {
@@ -241,26 +244,6 @@ export default {
       /* this.likesCount = response.data.likes
       this.dislikesCount = response.data.dislikes */
     },
-    async removePost() {
-      this.$vs.loading({
-        container: "",
-        scale: 0.8,
-        color: this.colorLoading
-      });
-      const response = await axios
-        .get("posts/delete/" + this.post.id)
-        .finally(() =>
-          setTimeout(() => {
-            this.$vs.loading.close(".con-vs-loading");
-          }, 10)
-        );
-      this.$vs.notify({
-        color: "success",
-        title: "Успех",
-        text: "Объявление успешно удалено"
-      });
-      this.$emit("removePost", response);
-    },
     editPost() {}
   }
 };
@@ -280,7 +263,7 @@ export default {
   border: 1px solid var(--main-color);
   color: var(--main-color);
   border-radius: 3px;
-  padding: 7px 12px;
+  padding: 8px 12px;
   font-size: 14px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -289,7 +272,8 @@ export default {
 .post_remove_btn {
   font-family: "Inter", sans-serif;
   font-weight: 400;
-  padding: 8px 12px !important;
+  border: none;
+  padding: 7px 12px !important;
   font-size: 14px;
   background: #f44643 !important;
   color: #ffffff;

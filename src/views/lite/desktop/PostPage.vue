@@ -719,6 +719,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.send_message_btn {
+  background: var(--main-color)!important;
+  border: none;
+}
+.send_message_btn:hover {
+  background: #d5761d!important;
+}
+.send_message_btn:hover 
 .noposts {
   font-family: 'Inter';
   font-size: 15px;

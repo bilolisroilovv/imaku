@@ -206,6 +206,9 @@ body.modal-open {
   #signModal .modal-dialog {
     max-width: 380px;
   }
+  #confirmModal .modal-dialog {
+    max-width: 380px;
+  }
   #followersModal .modal-dialog {
     max-width: 380px;
   }
@@ -224,6 +227,16 @@ body.modal-open {
 }
 #signModal .modal-body {
   padding: 27px 2rem;
+}
+
+#confirmModal .modal-header {
+  display: none;
+}
+#confirmModal .modal-footer {
+  display: none;
+}
+#confirmModal .modal-body {
+  padding: 20px 20px 20px 20px;
 }
 
 #followersModal .modal-header {

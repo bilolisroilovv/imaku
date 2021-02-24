@@ -106,7 +106,7 @@
                 @change="sortBy"
               >
                 <vs-select-item
-                  v-for="(item, index) in options1"
+                  v-for="(item, index) in sortOptions"
                   :key="index"
                   :value="item.value"
                   :text="item.text"
@@ -175,7 +175,11 @@ export default {
     CardBase
   },
   props: {
-    id: {}
+    id: {},
+    lang: {
+      type: String,
+      default: ""
+    }
   },
   data() {
     return {
@@ -185,16 +189,23 @@ export default {
       select1: 0,
       value1: [0, 999999999],
       colorx: "var(--main-color)",
-      options1: [
-        { text: "Популярные", value: 0 },
-        { text: "Новинки", value: 1 },
-        { text: "Сначала дешевые", value: 2 },
-        { text: "Сначала дорогие", value: 3 }
-      ],
       colorLoading: "var(--main-color)"
     };
   },
+  computed: {
+    sortOptions() {
+      return [
+        { text: this.$i18n.t("category_page.sort.sort1"), value: 0 },
+        { text: this.$i18n.t("category_page.sort.sort2"), value: 1 },
+        { text: this.$i18n.t("category_page.sort.sort3"), value: 2 },
+        { text: this.$i18n.t("category_page.sort.sort4"), value: 3 },
+      ];
+    }
+  },
   watch: {
+    lang() {
+      this.getCategory();
+    },
     id() {
       this.getCategory();
     }
@@ -210,7 +221,11 @@ export default {
         color: this.colorLoading
       });
       const response = await axios
-        .get("categories/" + this.id)
+        .get("categories/" + this.id, {
+          headers: {
+            "Accept-Language": `${this.$i18n.locale}`
+          }
+        })
         .finally(() => this.$vs.loading.close(".con-vs-loading"));
       this.catData = response.data;
     },
