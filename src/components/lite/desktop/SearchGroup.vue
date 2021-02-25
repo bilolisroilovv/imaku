@@ -98,7 +98,6 @@ export default {
   data() {
     return {
       searchDropdownVisible: false,
-      inputPlaceholder: this.$i18n.t("search.title"),
       runtimeTranscription: "",
       transcription: [],
       language: this.$i18n.locale,
@@ -107,6 +106,11 @@ export default {
       speaking: false,
       toggle: false,
     };
+  },
+  computed: {
+    inputPlaceholder() {
+      return this.$i18n.t("search.title")
+    }
   },
   mounted () {
     this.checkLang()
@@ -118,7 +122,6 @@ export default {
   },
   methods: {
     checkLang() {
-      this.inputPlaceholder = this.$i18n.t("search.title")
       if (this.lang === "uz") {
         this.language = "uz-UZ"
       } else {
@@ -177,7 +180,6 @@ export default {
       console.error(error);
     }
   }, */
-  computed: {},
   events: {},
 };
 </script>
