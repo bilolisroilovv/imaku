@@ -46,7 +46,7 @@ router.beforeEach((to, from, next) => {
   next();
 });
 
-let handleOutsideClick;
+/* let handleOutsideClick;
 Vue.directive("closable", {
   bind(el, binding, vnode) {
     handleOutsideClick = e => {
@@ -71,7 +71,7 @@ Vue.directive("closable", {
     document.removeEventListener("click", handleOutsideClick);
     document.removeEventListener("touchstart", handleOutsideClick);
   }
-});
+}); */
 
 new Vue({
   router,

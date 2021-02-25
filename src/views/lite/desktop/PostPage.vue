@@ -590,6 +590,7 @@ export default {
     return {
       authorType: null,
       step: 1,
+      phone: null,
       text: this.$i18n.t("post_page.seller_phone"),
       isSubscribed: Boolean,
       otherSellerGoodsOption: {
@@ -707,13 +708,7 @@ export default {
       const response = await axios.get("favorite/" + this.postData.id);
       console.log(response);
       this.isFavorited = !this.isFavorited;
-    },
-    checkSeller() {
-      alert('success')
-      if (this.postData.author.id === this.currentUser.id) {
-        this.$router.push({ name: "ProfilePosts" })
-      }
-    },
+    }
   }
 };
 </script>

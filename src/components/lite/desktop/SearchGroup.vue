@@ -14,7 +14,7 @@
         <input
           type="text"
           id="search-field"
-          :placeholder="inputPlaceholder"
+          :placeholder="placeholder"
           class="navbar_search_input"
           v-model="runtimeTranscription"
           :class="{ active: searchDropdownVisible }"
@@ -89,40 +89,47 @@ export default {
     /* SearchDropdown */
   },
   props: {
-    scrollPosition: Number,
-    lang: {
-      type: String,
-      default: ''
-    }
+    scrollPosition: Number
   },
   data() {
     return {
       searchDropdownVisible: false,
       runtimeTranscription: "",
       transcription: [],
-      language: this.$i18n.locale,
+      language: "",
       searchContent: null,
       error: false,
       speaking: false,
       toggle: false,
+      placeholder: ""
     };
   },
   computed: {
     inputPlaceholder() {
       return this.$i18n.t("search.title")
+    },
+    placeholderOnSpeech() {
+      return this.$i18n.t("search.onSpeech")
+    },
+    myLang() {
+      return this.$i18n.locale
     }
   },
   mounted () {
     this.checkLang()
+    this.placeholder = this.inputPlaceholder
   },
   watch: {
-    lang () {
+    myLang () {
       this.checkLang();
+    },
+    inputPlaceholder(val) {
+      this.placeholder = val
     }
   },
   methods: {
     checkLang() {
-      if (this.lang === "uz") {
+      if (this.myLang === "uz") {
         this.language = "uz-UZ"
       } else {
         this.language = "ru-RU"
@@ -156,7 +163,7 @@ export default {
       recognition.start();
       this.runtimeTranscription = ""
       this.speaking = true
-      this.inputPlaceholder = "Говорите..."
+      this.placeholder = this.placeholderOnSpeech
     },
     searchDropdowntoggle() {
       this.searchDropdownVisible = !this.searchDropdownVisible;

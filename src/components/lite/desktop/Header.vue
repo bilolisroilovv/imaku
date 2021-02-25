@@ -120,7 +120,6 @@
             <router-link :to="{ name: 'FaqPage' }" class="navbar_top_link pr-0">
               {{ $t("faq") }}
             </router-link>
-            <vue-speech lang="it-IT" />
             <!-- navbar_top_link -->
           </div>
           <!-- d-flex -->
@@ -162,10 +161,6 @@
                 <HeaderCategoriesDropdown
                   class="header_categories_dropdown"
                   :scrollPosition="scrollPosition"
-                  v-closable="{
-                    exclude: ['button'],
-                    handler: 'onClose'
-                  }"
                 />
               </div>
             </div>
