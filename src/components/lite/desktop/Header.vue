@@ -367,6 +367,7 @@ export default {
         params: { lang: locale }
       });
       this.lang = locale
+      localStorage.lang = locale
       this.$store.dispatch("fetchCategories");
       this.$emit('langChange', locale)
     }

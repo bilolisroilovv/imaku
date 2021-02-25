@@ -5,6 +5,11 @@
   "chat": "Xabarlar",
   "favourites": "Saralangan e‘lonlar",
   "faq": "Faq",
+  "langModal": {
+    "title": "Tilni tanlang",
+    "text": "Tilni tanlash ovozli qidiruvga ta'sir qiladi. Ammo siz uni istalgan vaqtda o'zgartirishingiz mumkin.",
+    "button": "Saqlash"
+  },
   "profile": {
     "posts": "Mening e'lonlarim",
     "favorite": "Sevimlilar",

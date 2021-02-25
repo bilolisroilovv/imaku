@@ -3,6 +3,8 @@
     <component :is="layout">
       <router-view />
     </component>
+
+    <SelectLangModal />
   </div>
 </template>
 
@@ -11,28 +13,46 @@ import MainLayout from "@/layouts/MainLayout";
 import SecondLayout from "@/layouts/SecondLayout";
 import EmptyLayout from "@/layouts/EmptyLayout";
 import ProfileLayout from "@/layouts/ProfileLayout.vue";
+import SelectLangModal from "@/components/lite/desktop/Modals/SelectLangModal";
 /* import axios from 'axios' */
 /* import {mapGetters} from 'vuex' */
 
 export default {
   data() {
-    return {};
+    return {
+    };
   },
   computed: {
     layout() {
       return (this.$route.meta.layout || "second") + "-layout";
-    }
+    },
     /* ...mapGetters(['currentUser']) */
+  },
+  created() {
+    this.$store.dispatch("fetchUser");
+  },
+  mounted() {
+    if (localStorage.lang) {
+      this.$i18n.locale = localStorage.lang;
+      this.$router.push({
+        params: { lang: localStorage.lang }
+      });
+    } else {
+      this.$bvModal.show("selectLangModal");
+    }
+
+    if (localStorage.lang === "uz") {
+      this.$store.dispatch("fetchCategories");
+    } else {
+      this.$store.dispatch("fetchCategories");
+    }
   },
   components: {
     MainLayout,
     SecondLayout,
     EmptyLayout,
-    ProfileLayout
-  },
-  created() {
-    this.$store.dispatch("fetchCategories");
-    this.$store.dispatch("fetchUser");
+    ProfileLayout,
+    SelectLangModal,
   }
 };
 </script>
@@ -209,6 +229,9 @@ body.modal-open {
   #confirmModal .modal-dialog {
     max-width: 380px;
   }
+  #selectLangModal .modal-dialog {
+    max-width: 380px;
+  }
   #followersModal .modal-dialog {
     max-width: 380px;
   }
@@ -236,6 +259,16 @@ body.modal-open {
   display: none;
 }
 #confirmModal .modal-body {
+  padding: 20px 20px 20px 20px;
+}
+
+#selectLangModal .modal-header {
+  display: none;
+}
+#selectLangModal .modal-footer {
+  display: none;
+}
+#selectLangModal .modal-body {
   padding: 20px 20px 20px 20px;
 }
 
@@ -267,25 +300,25 @@ body.modal-open {
   padding: 22px 1.6rem;
 }
 .grid-block-wrapper .grid-block {
-  min-width: 124px!important;
+  min-width: 124px !important;
 }
 .vue-file-agent .file-preview-new .help-text {
-  font-size: 14px!important;
+  font-size: 14px !important;
   font-family: "Inter", sans-serif;
   margin-top: 5px;
-  line-height: 16px!important;
+  line-height: 16px !important;
 }
 .vue-file-agent.file-input-wrapper {
-  border: 2px dashed #bdc5cd!important;
+  border: 2px dashed #bdc5cd !important;
   padding: 6px;
 }
 .vue-file-agent.file-input-wrapper {
-  text-align: left!important;
+  text-align: left !important;
 }
 
 .vue-file-agent .file-preview .file-ext,
 .vue-file-agent .file-preview .file-size {
-  display: none!important;
+  display: none !important;
 }
 .sign_modal_form {
   display: flex;
@@ -546,7 +579,7 @@ body.modal-open {
   border: 2px solid transparent;
 }
 .mainbtn:hover {
-  background: transparent!important;
+  background: transparent !important;
   border: 2px solid var(--main-color);
   color: var(--main-color);
 }
@@ -869,28 +902,29 @@ body.modal-open {
   min-height: 100vh;
 }
 .comments_select .vs-select--input {
-  background: #f0f0f7!important;
+  background: #f0f0f7 !important;
   padding: 9px 12px 9px 12px !important;
 }
 .pointer-none {
-  pointer-events: none!important;
+  pointer-events: none !important;
 }
 .b-rating .b-rating-value {
-  min-width: 1.75rem!important;
+  min-width: 1.75rem !important;
   position: relative;
   top: 1px;
 }
-.b-rating .b-rating-star, .b-rating .b-rating-value {
-  padding: 0 0.1em!important;
+.b-rating .b-rating-star,
+.b-rating .b-rating-value {
+  padding: 0 0.1em !important;
 }
 .vue-file-agent .file-preview-wrapper .file-sortable-handle {
-  width: 100%!important;
-  height: 100%!important;
-  border-radius: 0!important;
-  top: 0!important;
-  left: 0!important;
-  cursor: grab!important;
-  background: transparent!important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  cursor: grab !important;
+  background: transparent !important;
   clip-path: polygon(79% 0, 79% 22%, 100% 22%, 100% 100%, 0 100%, 0 0);
 }
 .vue-file-agent .file-preview-wrapper .file-sortable-handle svg {
