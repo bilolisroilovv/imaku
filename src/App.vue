@@ -34,6 +34,12 @@ export default {
   mounted() {
     if (localStorage.lang) {
       this.$i18n.locale = localStorage.lang;
+<<<<<<< HEAD
+=======
+      this.$router.push({
+        params: { lang: localStorage.lang }
+      });
+>>>>>>> c61d63ac990cdbb597b015c1a4e4e90f7d151d57
     } else {
       this.$bvModal.show("selectLangModal");
     }

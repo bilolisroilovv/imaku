@@ -107,12 +107,15 @@ export default {
   computed: {
     inputPlaceholder() {
       return this.$i18n.t("search.title")
+<<<<<<< HEAD
     },
     placeholderOnSpeech() {
       return this.$i18n.t("search.onSpeech")
     },
     myLang() {
       return this.$i18n.locale
+=======
+>>>>>>> c61d63ac990cdbb597b015c1a4e4e90f7d151d57
     }
   },
   mounted () {
@@ -129,7 +132,11 @@ export default {
   },
   methods: {
     checkLang() {
+<<<<<<< HEAD
       if (this.myLang === "uz") {
+=======
+      if (this.lang === "uz") {
+>>>>>>> c61d63ac990cdbb597b015c1a4e4e90f7d151d57
         this.language = "uz-UZ"
       } else {
         this.language = "ru-RU"
