@@ -1,5 +1,5 @@
 <template>
-  <div class="mycard">
+  <div class="mycard" @mouseover="showAllImages = true">
     <div class="position-relative">
       <router-link
         :to="{
@@ -8,7 +8,21 @@
         }"
       > 
         <div class="mycard_img mybg_center position-relative d-block">
-          <div class="mycard_img_list">
+          <div class="mycard_img_list noreverse" v-if="!showAllImages">
+            <div
+              class="d-block w-100"
+            >
+              <div class="slide_item"></div>
+              <div
+                class="mybg_center myimg"
+                :style="{ 'background-image': 'url(' + this.lastItem + ')' }"
+              ></div>
+            </div>
+            <!-- d-block -->
+
+          </div> <!-- mycard_img_list -->
+
+          <div class="mycard_img_list" v-if="showAllImages">
             <div
               class="d-block w-100"
               v-for="(image, index) in this.post.gallery"
@@ -20,11 +34,9 @@
                 :style="{ 'background-image': 'url(' + image + ')' }"
               ></div>
             </div>
-            <!-- d-block -->
-          </div>
-          <!-- mycard_img_list -->
-        </div>
-        <!-- mycard_img -->
+
+          </div> <!-- mycard_img_list -->
+        </div> <!-- mycard_img -->
       </router-link>
 
       <div
@@ -299,10 +311,11 @@ export default {
   },
   data() {
     return {
+      showAllImages: false,
       likesCount: this.post.likes,
       disLikesCount: this.post.dislikes,
-      isLiked: false,
-      isDisliked: false,
+      isLiked: this.post.isLiked,
+      isDisliked: this.post.isDisliked,
       isFavorite: this.post.isFavourite,
       mainColor: "var(--main-color)",
       authorType: null
@@ -321,7 +334,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["currentUser"])
+    ...mapGetters(["currentUser"]),
+    lastItem() {
+    	return this.post.gallery.slice(-1)[0]
+    }
   },
   methods: {
     async handleLike() {
@@ -438,6 +454,8 @@ export default {
   display: flex;
   position: relative;
   flex-direction: row-reverse;
+}
+.mycard_img_list.noreverse {
 }
 .mycard_img_list .slide_item {
   width: 100%;

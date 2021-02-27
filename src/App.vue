@@ -34,9 +34,6 @@ export default {
   mounted() {
     if (localStorage.lang) {
       this.$i18n.locale = localStorage.lang;
-      this.$router.push({
-        params: { lang: localStorage.lang }
-      });
     } else {
       this.$bvModal.show("selectLangModal");
     }
@@ -929,6 +926,18 @@ body.modal-open {
 }
 .vue-file-agent .file-preview-wrapper .file-sortable-handle svg {
   display: none;
+}
+.vs-pagination--mb {
+  justify-content: center!important;
+}
+.vs-pagination--ul {
+  background: #fff!important;
+}
+.vs-pagination--buttons {
+  background: #fff!important;
+}
+.vs-pagination--buttons:hover {
+  background: var(--main-color)!important;
 }
 footer {
 }

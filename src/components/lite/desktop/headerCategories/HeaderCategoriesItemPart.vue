@@ -5,7 +5,7 @@
         <router-link
           :to="{
             name: 'CategoryPage',
-            params: { id: this.category.id, slug: this.category.slug }
+            params: { id: category.id, slug: category.slug }
           }"
         >
           {{ category.name }}

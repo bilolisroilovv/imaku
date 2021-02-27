@@ -71,7 +71,7 @@ const routes = [
         component: () => import("../views/lite/desktop/ShopPage.vue")
       },
       {
-        path: "post-create:id",
+        path: "post-create/:id",
         name: "PostCreatePage",
         props: true,
         meta: { layout: "second" },
@@ -98,7 +98,7 @@ const routes = [
         component: () => import("../views/lite/desktop/ShopCreatePage.vue")
       },
       {
-        path: "category/:id:slug",
+        path: "category/:id/:slug",
         name: "CategoryPage",
         props: true,
         meta: { layout: "second" },

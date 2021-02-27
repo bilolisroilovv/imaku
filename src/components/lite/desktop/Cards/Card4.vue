@@ -154,8 +154,8 @@ export default {
     return {
       likesCount: this.post.likes,
       disLikesCount: this.post.dislikes,
-      isLiked: false,
-      isDisliked: false,
+      isLiked: this.post.isLiked,
+      isDisliked: this.post.isDisliked,
       isFavorite: this.post.isFavourite,
       mainColor: "var(--main-color)"
     };

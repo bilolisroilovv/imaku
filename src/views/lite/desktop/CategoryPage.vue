@@ -122,6 +122,10 @@
               />
             </div>
 
+            <div class="mt-5 d-flex justify-content-center">
+              <vs-pagination v-show="catData.posts.length >= 60" :total="pagesCount" :color="colorx" v-model="currentPage" ></vs-pagination>
+            </div>
+
             <!--  <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
               <svg
                 width="12"
@@ -189,7 +193,10 @@ export default {
       select1: 0,
       value1: [0, 999999999],
       colorx: "var(--main-color)",
-      colorLoading: "var(--main-color)"
+      colorLoading: "var(--main-color)",
+      currentPage: 1,
+      pagesCount: null,
+      postsC: 0
     };
   },
   computed: {
@@ -203,31 +210,69 @@ export default {
     }
   },
   watch: {
+    currentPage() {
+      this.postsC = 0
+      this.getInitialPosts();
+    },
     lang() {
-      this.getCategory();
+      this.getInitialPosts();
     },
     id() {
-      this.getCategory();
+      this.getInitialPosts();
     }
   },
-  mounted() {
-    this.getCategory();
+  beforeMount() {
+    this.getInitialPosts();
   },
   methods: {
-    async getCategory() {
-      this.$vs.loading({
-        container: "",
-        scale: 0.8,
-        color: this.colorLoading
-      });
-      const response = await axios
-        .get("categories/" + this.id, {
-          headers: {
-            "Accept-Language": `${this.$i18n.locale}`
+    async getInitialPosts () {
+      window.scrollTo(0,0);
+
+      const form = new FormData();
+      form.append("params[from]", this.value1[0]);
+      form.append("params[to]", this.value1[1]);
+      form.append("params[sort]", this.select1);
+
+      const response = await axios.get("categories/" + this.id + '?page=' + this.currentPage + '&paginate=' + 0, form, {
+        headers: {
+          "Accept-Language": `${this.$i18n.locale}`
+        }
+      })
+      this.catData = response.data
+      this.pagesCount = response.data.pagesCount
+    },
+    scroll() {
+        const form = new FormData();
+        form.append("params[from]", this.value1[0]);
+        form.append("params[to]", this.value1[1]);
+        form.append("params[sort]", this.select1);
+       window.onscroll = () => {
+        let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+
+        if (bottomOfWindow) {
+          if(this.postsC < 48) {
+            this.postsC += 12
+            axios.get("categories/" + this.id + '?page=' + this.currentPage + '&paginate=' + this.postsC, form, {
+              headers: {
+                "Accept-Language": `${this.$i18n.locale}`
+              }
+            })
+            .then(response => {
+              for(var i = 0; i < response.data.posts.length; i++) {
+                this.catData.posts.push(response.data.posts[i]);
+              }
+              this.pagesCount = response.data.pagesCount
+              console.log(this.catData.posts);
+            });
           }
-        })
-        .finally(() => this.$vs.loading.close(".con-vs-loading"));
-      this.catData = response.data;
+        }
+      };
+    },
+    /* async paginationChange() {
+      const response = await axios.get('categories/' + this.catData.category.id + '?page=' + this.currentPage)
+      this.catData = response.data
+    }, */
+    async getCategory() {
     },
     async changePrice() {
       this.catData.posts = null;
@@ -283,7 +328,10 @@ export default {
         .finally(() => this.$vs.loading.close(".con-vs-loading"));
       this.catData = response.data;
     }
-  }
+  },
+  mounted() {
+    this.scroll();
+  },
 };
 </script>
 

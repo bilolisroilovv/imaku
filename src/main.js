@@ -8,31 +8,31 @@ import BootstrapVue from "bootstrap-vue";
 import StarRating from "vue-star-rating";
 import VueTheMask from "vue-the-mask";
 import vSelect from "vue-select";
-import Vuesax from "vuesax";
 import InputMask from "vue-input-mask";
 import i18n from "./i18n";
 import VueFileAgent from "vue-file-agent";
 import VueFileAgentStyles from "vue-file-agent/dist/vue-file-agent.css";
+import Vuesax from 'vuesax'
+import { SlickList, SlickItem } from 'vue-slicksort';
 import "./axios";
-import "vuesax/dist/vuesax.css";
+import 'vuesax/dist/vuesax.css'
 import "material-icons/iconfont/material-icons.css";
 import "vue-select/dist/vue-select.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "./registerServiceWorker";
-import { SlickList, SlickItem } from 'vue-slicksort';
 
-Vue.component('vfa-sortable-list', SlickList);
-Vue.component('vfa-sortable-item', SlickItem);
 Vue.use(VueFileAgent);
 Vue.use(VueFileAgentStyles);
-Vue.component("input-mask", InputMask);
-Vue.use(Vuesax);
-Vue.component("v-select", vSelect);
-Vue.component("star-rating", StarRating);
 Vue.use(VueTheMask);
 // Vue.use(VueAwesomeSwiper)
 Vue.use(BootstrapVue);
+Vue.use(Vuesax);
+Vue.component('vfa-sortable-list', SlickList);
+Vue.component('vfa-sortable-item', SlickItem);
+Vue.component("input-mask", InputMask);
+Vue.component("v-select", vSelect);
+Vue.component("star-rating", StarRating);
 
 Vue.config.productionTip = false;
 
