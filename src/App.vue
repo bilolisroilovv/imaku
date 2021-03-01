@@ -65,6 +65,7 @@ html,
 body {
   font-family: "Roboto", sans-serif !important;
   background: #f8f8fc !important;
+  scroll-behavior: smooth;
 }
 /*
   font-family: 'Inter', sans-serif;
@@ -780,6 +781,12 @@ body.modal-open {
 /* .con-vs-loading {
   position: absolute!important;
 } */
+.vs-con-loading__container {
+  background: transparent!important;
+}
+#div-with-loading .con-vs-loading {
+  background: transparent!important;
+}
 .con-img-upload {
   padding: 0 !important;
   margin: 0 !important;

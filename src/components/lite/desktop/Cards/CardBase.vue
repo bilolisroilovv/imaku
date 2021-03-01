@@ -1,5 +1,5 @@
 <template>
-  <div class="mycard" @mouseover="showAllImages = true">
+  <div class="mycard">
     <div class="position-relative">
       <router-link
         :to="{
@@ -7,7 +7,7 @@
           params: { id: this.post.id, slug: this.post.slug }
         }"
       > 
-        <div class="mycard_img mybg_center position-relative d-block">
+        <div class="mycard_img mybg_center position-relative d-block" @mouseover="showAllImages = true">
           <div class="mycard_img_list noreverse" v-if="!showAllImages">
             <div
               class="d-block w-100"
