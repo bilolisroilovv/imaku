@@ -5,6 +5,9 @@
     </component>
 
     <SelectLangModal />
+    <button v-show="visible" class="to_top_btn" @click.prevent="scrollTop">
+      <i class="fas fa-arrow-up"></i>
+    </button>
   </div>
 </template>
 
@@ -18,8 +21,17 @@ import SelectLangModal from "@/components/lite/desktop/Modals/SelectLangModal";
 /* import {mapGetters} from 'vuex' */
 
 export default {
+  name: "App",
+  components: {
+    MainLayout,
+    SecondLayout,
+    EmptyLayout,
+    ProfileLayout,
+    SelectLangModal,
+  },
   data() {
     return {
+      visible: false
     };
   },
   computed: {
@@ -28,10 +40,19 @@ export default {
     },
     /* ...mapGetters(['currentUser']) */
   },
+  methods: {
+    scrollTop: function () {
+      window.scrollTo(0, 0);
+    },
+    scrollListener: function () {
+      this.visible = window.scrollY > 1000
+    }
+  },
   created() {
     this.$store.dispatch("fetchUser");
   },
   mounted() {
+    window.addEventListener('scroll', this.scrollListener)
     if (localStorage.lang) {
       this.$i18n.locale = localStorage.lang;
     } else {
@@ -44,12 +65,8 @@ export default {
       this.$store.dispatch("fetchCategories");
     }
   },
-  components: {
-    MainLayout,
-    SecondLayout,
-    EmptyLayout,
-    ProfileLayout,
-    SelectLangModal,
+  beforeDestroy: function () {
+    window.removeEventListener('scroll', this.scrollListener)
   }
 };
 </script>
@@ -145,6 +162,27 @@ hr {
 body.modal-open {
   overflow: inherit;
   padding-right: 0 !important;
+}
+.to_top_btn {
+  width: 55px;
+  height: 55px;
+  background: #fff;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.08);
+  outline: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(70, 70, 70);
+  transition: all 0.2s;
+  font-size: 20px;
+  position: fixed;
+  right: 70px;
+  bottom: 40px;
+  z-index: 99999;
+}
+.to_top_btn:hover {
+  color: var(--main-color);
 }
 .modal {
 }

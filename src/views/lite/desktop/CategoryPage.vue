@@ -251,8 +251,8 @@ export default {
         form.append("params[to]", this.value1[1]);
         form.append("params[sort]", this.select1);
         window.onscroll = () => {
-          let offsetHeight = document.documentElement.offsetHeight-700
-          let offsetHeight2 = document.documentElement.offsetHeight-600
+          let offsetHeight = document.documentElement.offsetHeight-800
+          let offsetHeight2 = document.documentElement.offsetHeight-700
           let scrollTop = document.documentElement.scrollTop
           let innerHeight= window.innerHeight
 
@@ -294,7 +294,7 @@ export default {
       this.catData = response.data
     }, */
     async changePrice() {
-      this.catData.posts = null;
+      this.catData.posts = [];
       this.$vs.loading({
         container: "#div-with-loading",
         scale: 0.8,
@@ -311,7 +311,7 @@ export default {
       this.catData = response.data;
     },
     async changeFilter() {
-      this.catData.posts = null;
+      this.catData.posts = [];
       this.$vs.loading({
         container: "#div-with-loading",
         scale: 0.8,
@@ -331,7 +331,7 @@ export default {
       this.catData = response.data;
     },
     async sortBy() {
-      this.catData.posts = null;
+      this.catData.posts = [];
       this.$vs.loading({
         container: "#div-with-loading",
         scale: 0.8,
@@ -367,7 +367,6 @@ export default {
   justify-content: center;
   align-items: bottom;
 }
-
 .control {
   font-weight: 500;
   font-family: "Inter", sans-serif;
