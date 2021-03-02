@@ -4,15 +4,20 @@
       <h2 class="pb-4 mb-3">{{ $t("profile.settings") }}</h2>
       <div>
 
-        <div id="logoPreview" class="d-flex justify-content-center">
+        <div id="logoPreview" class="d-flex justify-content-center position-relative">
           <img v-if="logoUrl" class="" :src="logoUrl" />
+          <label for="avatar_img" class="avatar_label">
+          </label>
+          <div class="icon pointer-none">
+            <div class="camera pointer-none"></div> <!-- camera -->
+          </div> <!-- icon -->
         </div>
 
-        <div class="d-flex align-items-center myinput_group pb-4">
+        <div class="d-none align-items-center myinput_group pb-4">
           <label for=""
             >Аватар</label
           >
-          <input type="file" ref="files" @change="onLogoChange($event)" />
+          <input type="file" ref="files" id="avatar_img" @change="onLogoChange($event)" />
         </div>
 
         <div class="d-flex align-items-center myinput_group pb-4">
@@ -152,6 +157,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.avatar_label {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+  border-radius: 50%;
+}
 .gender_group span {
   letter-spacing: 0.3px;
   color: #242424;
@@ -166,18 +180,50 @@ export default {
   min-width: auto!important;
 }
 #logoPreview {
-  margin-left: 252px;
   width: 170px;
   height: 170px;
   overflow: hidden;
   border-radius: 50%;
   margin-bottom: 30px;
-  border: 3px solid #b8b8b8;
+  border: 2px solid rgba(0,0,0,.15);
   img {
     object-fit: cover;
     width: 100%;
     object-position: center;
   }
+}
+#logoPreview .icon {
+  content: '';
+  display: block;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  background: rgba(0,0,0,.5);
+  position: absolute;
+  bottom: 5px;
+  transition: all .5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+#logoPreview .icon .camera {
+  transition: all .5s;
+  width: 23px;
+  height: 23px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image: url("data:image/svg+xml,%3Csvg%20height=%2746%27%20viewBox=%270%200%2052%2046%27%20width=%2752%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath%20d=%27m0%2014.625c0-2.6923975%202.18261225-4.875%204.875-4.875h4.4914025c1.2310025%200%202.3563475-.6955%202.906865-1.7965675l2.629315-5.2585975c.8257925-1.651585%202.51381-2.694835%204.36033-2.694835h13.4740125c1.84665%200%203.5347%201.04325%204.360525%202.694835l2.62925%205.2585975c.55055%201.1010675%201.676025%201.7965675%202.9068%201.7965675h4.4915c2.6923%200%204.875%202.1826025%204.875%204.875v26c0%202.6923-2.1827%204.875-4.875%204.875h-42.25c-2.69238775%200-4.875-2.1827-4.875-4.875zm26%2024.375c7.179575%200%2013-5.820425%2013-13%200-7.179705-5.820425-13-13-13-7.179705%200-13%205.820295-13%2013%200%207.179575%205.820295%2013%2013%2013zm7.475-13c0%204.128475-3.346655%207.475-7.475%207.475s-7.475-3.346525-7.475-7.475c0-4.128345%203.346655-7.475%207.475-7.475s7.475%203.346655%207.475%207.475z%27%20fill=%27%23fff%27%20fill-rule=%27evenodd%27/%3E%3C/svg%3E");
+}
+#logoPreview:hover .icon {
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+}
+#logoPreview:hover .icon .camera {
+  width: 35px;
+  height: 35px;
 }
 .w-71 {
   width: 71%;

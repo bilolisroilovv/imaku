@@ -5,6 +5,11 @@
   "chat": "Xabarlar",
   "favourites": "Saralangan e‘lonlar",
   "faq": "Faq",
+  "langModal": {
+    "title": "Tilni tanlang",
+    "text": "Tilni tanlash ovozli qidiruvga ta'sir qiladi. Ammo siz uni istalgan vaqtda o'zgartirishingiz mumkin.",
+    "button": "Saqlash"
+  },
   "profile": {
     "posts": "Mening e'lonlarim",
     "favorite": "Sevimlilar",
@@ -25,10 +30,16 @@
   "create_post": "E'lon berish",
   "login": "Kirish",
   "category_page": {
+    "sort": {
+      "sort1": "Ommabop",
+      "sort2": "Yengilar",
+      "sort3": "Avval arzon",
+      "sort4": "Avval qimmat"
+    },
     "results": "natija",
     "price": "Narh",
     "from": "dan",
-    "to": "gacha",
+    "to": "ga",
     "brand": "Brend nomi",
     "status": {
       "status_title": "Holati",
@@ -81,6 +92,7 @@
   },
   "search": {
     "title": "Reklama, do'kon, hisob qaydnomalarini qidirish ...",
+    "onSpeech": "Gapiring...",
     "voice_search": "Ovozli qidirish",
     "photo_search": "Surat bo'yicha qidirish",
     "no_result": "Afsuski, hech narsa topilmadi"

@@ -60,6 +60,8 @@
     <!-- d-flex -->
     <div class="mycard_btns d-flex align-items-center pt-2 pb-1">
       <button
+        @click.prevent="handleLike"
+        :class="{ active: isLiked }"
         class="like_btn card_like_btn d-flex align-items-center mr-2"
         :title="$t('card_base.like')"
       >
@@ -82,11 +84,13 @@
           </svg>
         </div>
         <!-- like_btn_icon -->
-        <div class="like_btn_count">{{ post.likes }}</div>
+        <div class="like_btn_count">{{ likesCount }}</div>
         <!-- like_btn_count -->
       </button>
       <!-- like_btn -->
       <button
+        @click.prevent="handleDislike"
+        :class="{ active: isDisliked }"
         class="dislike_btn card_like_btn d-flex align-items-center mr-2"
         :title="$t('card_base.like')"
       >
@@ -109,7 +113,7 @@
           </svg>
         </div>
         <!-- dislike_btn_icon -->
-        <div class="dislike_btn_count">{{ post.dislikes }}</div>
+        <div class="dislike_btn_count">{{ disLikesCount }}</div>
         <!-- dislike_btn_count -->
       </button>
       <!-- dislike_btn -->
@@ -148,6 +152,10 @@ export default {
   },
   data() {
     return {
+      likesCount: this.post.likes,
+      disLikesCount: this.post.dislikes,
+      isLiked: this.post.isLiked,
+      isDisliked: this.post.isDisliked,
       isFavorite: this.post.isFavourite,
       mainColor: "var(--main-color)"
     };
@@ -165,6 +173,36 @@ export default {
     }
   },
   methods: {
+    async handleLike() {
+      this.isLiked = !this.isLiked;
+      if (this.isLiked === true) {
+        this.likesCount++;
+      } else {
+        this.likesCount--;
+      }
+      if (this.isDisliked === true) {
+        this.isDisliked = false;
+        this.disLikesCount--;
+      }
+      await axios.get("like/" + this.post.id);
+      /* this.likesCount = response.data.likes
+      this.dislikesCount = response.data.dislikes */
+    },
+    async handleDislike() {
+      this.isDisliked = !this.isDisliked;
+      if (this.isDisliked === true) {
+        this.disLikesCount++;
+      } else {
+        this.disLikesCount--;
+      }
+      if (this.isLiked === true) {
+        this.isLiked = false;
+        this.likesCount--;
+      }
+      await axios.get("dislike/" + this.post.id);
+      /* this.likesCount = response.data.likes
+      this.dislikesCount = response.data.dislikes */
+    },
     async ToggleFavoriteRequest() {
       const response = await axios.get("favourite/" + this.post.id);
       this.isFavorite = response.data.isFavourite;

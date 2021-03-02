@@ -508,8 +508,8 @@ export default {
   margin-left: 3px;
 }
 .myinput_group input {
-  min-width: 65%;
-  background: #f8f8fc;
+  min-width: 69%;
+  background: #efeff8;
   border-radius: 4px;
   border: none;
   padding: 10px 20px;
@@ -523,7 +523,7 @@ export default {
 }
 .myinput_group textarea {
   min-width: 68.7%;
-  background: #f8f8fc;
+  background: #efeff8;
   border-radius: 4px;
   border: none;
   padding: 20px;

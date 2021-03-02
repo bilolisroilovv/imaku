@@ -20,9 +20,9 @@
           ></path>
         </svg> </a
       ><!-- top_btn -->
-      <Header2 />
+      <Header @langChange="langChange"/>
       <div class="app_content">
-        <router-view />
+        <router-view :lang="lang"/>
       </div>
     </div>
     <!-- wrapper -->
@@ -32,15 +32,25 @@
 </template>
 
 <script>
-import Header2 from "@/components/lite/desktop/Header";
+import Header from "@/components/lite/desktop/Header";
 import Footer from "@/components/lite/desktop/Footer";
 
 export default {
   name: "SecondLayout",
   components: {
-    Header2,
+    Header,
     Footer
-  }
+  },
+  data() {
+    return {
+      lang: null
+    }
+  },
+  methods: {
+    langChange(lang) {
+      this.lang = lang
+    }
+  },
 };
 </script>
 

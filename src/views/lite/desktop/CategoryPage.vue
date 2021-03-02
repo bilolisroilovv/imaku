@@ -106,7 +106,7 @@
                 @change="sortBy"
               >
                 <vs-select-item
-                  v-for="(item, index) in options1"
+                  v-for="(item, index) in sortOptions"
                   :key="index"
                   :value="item.value"
                   :text="item.text"
@@ -121,6 +121,13 @@
                 :post="post"
               />
             </div>
+
+            <div class="mt-5 d-flex justify-content-center">
+              <vs-pagination v-show="catData.posts.length >= 60 || currentPage === pagesCount" :total="pagesCount" :color="colorx" v-model="currentPage" ></vs-pagination>
+            </div>
+
+            <div id="div-with-loading" class="vs-con-loading__container">
+            </div> <!-- loading_block -->
 
             <!--  <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
               <svg
@@ -175,7 +182,11 @@ export default {
     CardBase
   },
   props: {
-    id: {}
+    id: {},
+    lang: {
+      type: String,
+      default: ""
+    }
   },
   data() {
     return {
@@ -185,39 +196,107 @@ export default {
       select1: 0,
       value1: [0, 999999999],
       colorx: "var(--main-color)",
-      options1: [
-        { text: "Популярные", value: 0 },
-        { text: "Новинки", value: 1 },
-        { text: "Сначала дешевые", value: 2 },
-        { text: "Сначала дорогие", value: 3 }
-      ],
-      colorLoading: "var(--main-color)"
+      colorLoading: "var(--main-color)",
+      currentPage: 1,
+      pagesCount: null,
+      postsC: 0,
+      limit: true
     };
   },
+  computed: {
+    sortOptions() {
+      return [
+        { text: this.$i18n.t("category_page.sort.sort1"), value: 0 },
+        { text: this.$i18n.t("category_page.sort.sort2"), value: 1 },
+        { text: this.$i18n.t("category_page.sort.sort3"), value: 2 },
+        { text: this.$i18n.t("category_page.sort.sort4"), value: 3 },
+      ];
+    }
+  },
   watch: {
+    currentPage() {
+      this.postsC = 0
+      this.getCategory();
+    },
+    lang() {
+      this.getCategory();
+    },
     id() {
       this.getCategory();
     }
   },
-  mounted() {
+  beforeMount() {
     this.getCategory();
   },
   methods: {
-    async getCategory() {
-      this.$vs.loading({
-        container: "",
-        scale: 0.8,
-        color: this.colorLoading
-      });
-      const response = await axios
-        .get("categories/" + this.id)
-        .finally(() => this.$vs.loading.close(".con-vs-loading"));
-      this.catData = response.data;
+    async getCategory () {
+      window.scrollTo(0,0);
+
+      const form = new FormData();
+      form.append("params[from]", this.value1[0]);
+      form.append("params[to]", this.value1[1]);
+      form.append("params[sort]", this.select1);
+
+      const response = await axios.get("categories/" + this.id + '?page=' + this.currentPage + '&paginate=' + 0, form, {
+        headers: {
+          "Accept-Language": `${this.$i18n.locale}`
+        }
+      })
+      this.catData = response.data
+      this.pagesCount = response.data.pagesCount
     },
+    scroll() {
+        const form = new FormData();
+        form.append("params[from]", this.value1[0]);
+        form.append("params[to]", this.value1[1]);
+        form.append("params[sort]", this.select1);
+        window.onscroll = () => {
+          let offsetHeight = document.documentElement.offsetHeight-800
+          let offsetHeight2 = document.documentElement.offsetHeight-700
+          let scrollTop = document.documentElement.scrollTop
+          let innerHeight= window.innerHeight
+
+          let bottomOfWindow = scrollTop + innerHeight >= offsetHeight && scrollTop + innerHeight <= offsetHeight2; 
+          /* console.log('scrollTop ' + scrollTop);
+          console.log('innerHeight ' + innerHeight);
+          console.log('offsetHeight ' + offsetHeight); */
+          if (bottomOfWindow && this.limit) {
+            if(this.postsC < 48) {
+              this.$vs.loading({
+                container: "#div-with-loading",
+                scale: 0.8,
+                color: this.colorLoading
+              });
+              this.postsC += 12
+              axios.get("categories/" + this.id + '?page=' + this.currentPage + '&paginate=' + this.postsC, form, {
+                headers: {
+                  "Accept-Language": `${this.$i18n.locale}`
+                }
+              })
+              .then(response => {
+                for(var i = 0; i < response.data.posts.length; i++) {
+                  this.catData.posts.push(response.data.posts[i]);
+                }
+                this.pagesCount = response.data.pagesCount
+                console.log(this.catData.posts);
+              })
+              .finally(() => this.$vs.loading.close("#div-with-loading > .con-vs-loading"));
+            }
+            this.limit = false
+            setTimeout(() => {
+              this.limit = true
+            }, 100);
+          }
+      };
+    },
+    /* async paginationChange() {
+      const response = await axios.get('categories/' + this.catData.category.id + '?page=' + this.currentPage)
+      this.catData = response.data
+    }, */
     async changePrice() {
-      this.catData.posts = null;
+      this.catData.posts = [];
       this.$vs.loading({
-        container: "",
+        container: "#div-with-loading",
         scale: 0.8,
         color: this.colorLoading
       });
@@ -228,13 +307,13 @@ export default {
 
       const response = await axios
         .post("categories/" + this.id, form)
-        .finally(() => this.$vs.loading.close(".con-vs-loading"));
+        .finally(() => this.$vs.loading.close("#div-with-loading > .con-vs-loading"));
       this.catData = response.data;
     },
     async changeFilter() {
-      this.catData.posts = null;
+      this.catData.posts = [];
       this.$vs.loading({
-        container: "",
+        container: "#div-with-loading",
         scale: 0.8,
         color: this.colorLoading
       });
@@ -248,13 +327,13 @@ export default {
       }
       const response = await axios
         .post("categories/" + this.id, form)
-        .finally(() => this.$vs.loading.close(".con-vs-loading"));
+        .finally(() => this.$vs.loading.close("#div-with-loading > .con-vs-loading"));
       this.catData = response.data;
     },
     async sortBy() {
-      this.catData.posts = null;
+      this.catData.posts = [];
       this.$vs.loading({
-        container: "",
+        container: "#div-with-loading",
         scale: 0.8,
         color: this.colorLoading
       });
@@ -265,10 +344,13 @@ export default {
 
       const response = await axios
         .post("categories/" + this.id, form)
-        .finally(() => this.$vs.loading.close(".con-vs-loading"));
+        .finally(() => this.$vs.loading.close("#div-with-loading > .con-vs-loading"));
       this.catData = response.data;
     }
-  }
+  },
+  mounted() {
+    this.scroll();
+  },
 };
 </script>
 
@@ -276,6 +358,14 @@ export default {
 .loading_div {
   max-height: 100%;
   max-width: 100%;
+}
+#div-with-loading {
+  width: 200px;
+  height: 40px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: bottom;
 }
 .control {
   font-weight: 500;

@@ -120,7 +120,6 @@
             <router-link :to="{ name: 'FaqPage' }" class="navbar_top_link pr-0">
               {{ $t("faq") }}
             </router-link>
-            <vue-speech lang="it-IT" />
             <!-- navbar_top_link -->
           </div>
           <!-- d-flex -->
@@ -131,24 +130,23 @@
             <router-link :to="{ name: 'HomePage' }" class="logo mr-3">
               <img src="@/assets/lite/logo.png" alt="" class="img-width" />
             </router-link>
-            <div class="header_categories position-relative mt-1 mr-3">
+            <div class="header_categories position-relative mt-1 mr-3" @mouseover="headerCategoriesDropdownVisible = true" @mouseleave="headerCategoriesDropdownVisible = false">
               <button class="categories_hamburger">
                 <div class="menu cross menu--1">
                   <label
                     class="hamburger_label"
                     ref="button"
-                    @click="headerCategoriesDropdowntoggle"
                   >
                     <input
                       type="checkbox"
-                      class="hamburger_input"
+                      class="hamburger_input pointer-none"
+                      disabled
                       v-model="headerCategoriesDropdownVisible"
                     />
                     <svg
                       viewBox="0 0 100 100"
                       xmlns="http://www.w3.org/2000/svg"
                       ref="button"
-                      @click="headerCategoriesDropdowntoggle"
                     >
                       <path class="line--1" d="M0 40h62c13 0 6 28-4 18L35 35" />
                       <path class="line--2" d="M0 50h70" />
@@ -159,17 +157,12 @@
                 </div>
               </button>
               <!-- categories_hammburger -->
-            <div @click="onClose()">
-              <HeaderCategoriesDropdown
-                class="header_categories_dropdown"
-                :class="{ active: headerCategoriesDropdownVisible }"
-                :scrollPosition="scrollPosition"
-                v-closable="{
-                  exclude: ['button'],
-                  handler: 'onClose'
-                }"
-              />
-            </div>
+              <div>
+                <HeaderCategoriesDropdown
+                  class="header_categories_dropdown"
+                  :scrollPosition="scrollPosition"
+                />
+              </div>
             </div>
             <!-- header_categories -->
             <SearchGroup :lang="lang" :scrollPosition="scrollPosition" />
@@ -249,6 +242,8 @@
                 <span>{{ $t("login") }}</span>
               </a>
             </div>
+
+
 
             <div class="d-flex align-items-center" v-if="currentUser">
               <router-link
@@ -367,6 +362,9 @@ export default {
         params: { lang: locale }
       });
       this.lang = locale
+      localStorage.lang = locale
+      this.$store.dispatch("fetchCategories");
+      this.$emit('langChange', locale)
     }
   },
   computed: {
@@ -395,28 +393,30 @@ export default {
   width: 43px;
   height: 43px;
   border-radius: 50%;
-  border: 2px solid rgb(177, 177, 177);
+  border: 1px solid rgba(0,0,0,.15);
   display: block;
   pointer-events: inherit!important;
 }
 .create_store_btn {
   background: rgba(255, 201, 150, 0.377);
   color: var(--main-color);
-  padding: 10px 14px;
+  padding: 8px 14px;
   border-radius: 3px;
   font-size: 15px !important;
   font-family: "Inter", sans-serif;
   transition: all 0.2s;
+  border: 2px solid transparent;
   font-weight: 500;
 }
 .create_store_btn:hover {
-  background: rgba(255, 191, 131, 0.616);
+  background: transparent;
+  border: 2px solid rgba(255, 201, 150, 0.377);
   color: var(--main-color);
 }
 .create_ad_btn {
   font-size: 15px !important;
   font-family: "Inter", sans-serif;
-  padding: 10px 14px !important;
+  padding: 8px 14px !important;
 }
 .navbar_top_link {
   font-size: 13px;
@@ -472,13 +472,26 @@ export default {
   transform: translateY(-10px);
   opacity: 0;
   pointer-events: none;
-  overflow-x: hidden;
-  overflow-y: auto;
+  /* overflow-x: hidden;
+  overflow-y: auto; */
 }
 .header_categories_dropdown.active {
   opacity: 1;
   pointer-events: inherit;
   transform: translateY(0);
+}
+.header_categories:hover .categories_hamburger {
+  background: #ec8321!important;
+}
+.header_categories_dropdown:before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 30px;
+  background: transparent;
+  position: absolute;
+  left: 0;
+  top: -10px;
 }
 .mynavbar {
   width: 100%;
@@ -560,6 +573,11 @@ export default {
 }
 .categories_hamburger:hover {
   background: #ec8321;
+}
+.header_categories:hover .header_categories_dropdown {
+  opacity: 1;
+  pointer-events: inherit;
+  transform: translateY(0);
 }
 .hamburger_input {
   display: none;

@@ -2,8 +2,8 @@
   <div>
     <swiper class="swiper main_slider" :options="mainSliderOption">
       <swiper-slide
-        class="slide-1 myhover_bg"
-        v-for="item in allIndexInfo.sliders"
+        class="myhover_bg"
+        v-for="item in mainSliders"
         :key="item.id"
       >
         <router-link
@@ -32,7 +32,6 @@
 
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import { mapGetters } from "vuex";
 import "swiper/css/swiper.css";
 
 export default {
@@ -41,10 +40,19 @@ export default {
     Swiper,
     SwiperSlide
   },
+  props: {
+    mainSliders: {
+      type: Array,
+      default: Array
+    },
+  },
   data() {
     return {
       mainSliderOption: {
         effect: "fade",
+        slidesPerView: 1,
+        loop: true,
+        initialSlide: 1,
         autoplay: {
           delay: 5000,
           disableOnInteraction: false
@@ -61,7 +69,6 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["allIndexInfo"])
   }
 };
 </script>

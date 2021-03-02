@@ -3,6 +3,11 @@
     <component :is="layout">
       <router-view />
     </component>
+
+    <SelectLangModal />
+    <button v-show="visible" class="to_top_btn" @click.prevent="scrollTop">
+      <i class="fas fa-arrow-up"></i>
+    </button>
   </div>
 </template>
 
@@ -11,28 +16,57 @@ import MainLayout from "@/layouts/MainLayout";
 import SecondLayout from "@/layouts/SecondLayout";
 import EmptyLayout from "@/layouts/EmptyLayout";
 import ProfileLayout from "@/layouts/ProfileLayout.vue";
+import SelectLangModal from "@/components/lite/desktop/Modals/SelectLangModal";
 /* import axios from 'axios' */
 /* import {mapGetters} from 'vuex' */
 
 export default {
-  data() {
-    return {};
-  },
-  computed: {
-    layout() {
-      return (this.$route.meta.layout || "second") + "-layout";
-    }
-    /* ...mapGetters(['currentUser']) */
-  },
+  name: "App",
   components: {
     MainLayout,
     SecondLayout,
     EmptyLayout,
-    ProfileLayout
+    ProfileLayout,
+    SelectLangModal,
+  },
+  data() {
+    return {
+      visible: false
+    };
+  },
+  computed: {
+    layout() {
+      return (this.$route.meta.layout || "second") + "-layout";
+    },
+    /* ...mapGetters(['currentUser']) */
+  },
+  methods: {
+    scrollTop: function () {
+      window.scrollTo(0, 0);
+    },
+    scrollListener: function () {
+      this.visible = window.scrollY > 1000
+    }
   },
   created() {
-    this.$store.dispatch("fetchCategories");
     this.$store.dispatch("fetchUser");
+  },
+  mounted() {
+    window.addEventListener('scroll', this.scrollListener)
+    if (localStorage.lang) {
+      this.$i18n.locale = localStorage.lang;
+    } else {
+      this.$bvModal.show("selectLangModal");
+    }
+
+    if (localStorage.lang === "uz") {
+      this.$store.dispatch("fetchCategories");
+    } else {
+      this.$store.dispatch("fetchCategories");
+    }
+  },
+  beforeDestroy: function () {
+    window.removeEventListener('scroll', this.scrollListener)
   }
 };
 </script>
@@ -48,6 +82,7 @@ html,
 body {
   font-family: "Roboto", sans-serif !important;
   background: #f8f8fc !important;
+  scroll-behavior: smooth;
 }
 /*
   font-family: 'Inter', sans-serif;
@@ -128,6 +163,27 @@ body.modal-open {
   overflow: inherit;
   padding-right: 0 !important;
 }
+.to_top_btn {
+  width: 55px;
+  height: 55px;
+  background: #fff;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.08);
+  outline: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(70, 70, 70);
+  transition: all 0.2s;
+  font-size: 20px;
+  position: fixed;
+  right: 70px;
+  bottom: 40px;
+  z-index: 99999;
+}
+.to_top_btn:hover {
+  color: var(--main-color);
+}
 .modal {
 }
 .swiper-container {
@@ -206,6 +262,12 @@ body.modal-open {
   #signModal .modal-dialog {
     max-width: 380px;
   }
+  #confirmModal .modal-dialog {
+    max-width: 380px;
+  }
+  #selectLangModal .modal-dialog {
+    max-width: 380px;
+  }
   #followersModal .modal-dialog {
     max-width: 380px;
   }
@@ -224,6 +286,26 @@ body.modal-open {
 }
 #signModal .modal-body {
   padding: 27px 2rem;
+}
+
+#confirmModal .modal-header {
+  display: none;
+}
+#confirmModal .modal-footer {
+  display: none;
+}
+#confirmModal .modal-body {
+  padding: 20px 20px 20px 20px;
+}
+
+#selectLangModal .modal-header {
+  display: none;
+}
+#selectLangModal .modal-footer {
+  display: none;
+}
+#selectLangModal .modal-body {
+  padding: 20px 20px 20px 20px;
 }
 
 #followersModal .modal-header {
@@ -254,25 +336,25 @@ body.modal-open {
   padding: 22px 1.6rem;
 }
 .grid-block-wrapper .grid-block {
-  min-width: 124px!important;
+  min-width: 124px !important;
 }
 .vue-file-agent .file-preview-new .help-text {
-  font-size: 14px!important;
+  font-size: 14px !important;
   font-family: "Inter", sans-serif;
   margin-top: 5px;
-  line-height: 16px!important;
+  line-height: 16px !important;
 }
 .vue-file-agent.file-input-wrapper {
-  border: 2px dashed #bdc5cd!important;
+  border: 2px dashed #bdc5cd !important;
   padding: 6px;
 }
 .vue-file-agent.file-input-wrapper {
-  text-align: left!important;
+  text-align: left !important;
 }
 
 .vue-file-agent .file-preview .file-ext,
 .vue-file-agent .file-preview .file-size {
-  display: none!important;
+  display: none !important;
 }
 .sign_modal_form {
   display: flex;
@@ -522,19 +604,20 @@ body.modal-open {
 }
 .mainbtn {
   border-radius: 3px;
-  border: none !important;
   color: var(--main-color);
-  padding: 10px 20px;
+  padding: 8px 20px;
   font-weight: 500;
   border: none;
-  background: var(--main-color) !important;
+  background: var(--main-color);
   color: #fff;
   transition: all 0.2s;
   overflow: hidden;
+  border: 2px solid transparent;
 }
 .mainbtn:hover {
-  background: #db781a !important;
-  color: #fff;
+  background: transparent !important;
+  border: 2px solid var(--main-color);
+  color: var(--main-color);
 }
 .mainbtn:hover svg path {
   fill: var(--main-color);
@@ -736,6 +819,12 @@ body.modal-open {
 /* .con-vs-loading {
   position: absolute!important;
 } */
+.vs-con-loading__container {
+  background: transparent!important;
+}
+#div-with-loading .con-vs-loading {
+  background: transparent!important;
+}
 .con-img-upload {
   padding: 0 !important;
   margin: 0 !important;
@@ -855,32 +944,45 @@ body.modal-open {
   min-height: 100vh;
 }
 .comments_select .vs-select--input {
-  background: #f0f0f7!important;
+  background: #f0f0f7 !important;
   padding: 9px 12px 9px 12px !important;
 }
 .pointer-none {
-  pointer-events: none!important;
+  pointer-events: none !important;
 }
 .b-rating .b-rating-value {
-  min-width: 1.75rem!important;
+  min-width: 1.75rem !important;
   position: relative;
   top: 1px;
 }
-.b-rating .b-rating-star, .b-rating .b-rating-value {
-  padding: 0 0.1em!important;
+.b-rating .b-rating-star,
+.b-rating .b-rating-value {
+  padding: 0 0.1em !important;
 }
 .vue-file-agent .file-preview-wrapper .file-sortable-handle {
-  width: 100%!important;
-  height: 100%!important;
-  border-radius: 0!important;
-  top: 0!important;
-  left: 0!important;
-  cursor: grab!important;
-  background: transparent!important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  cursor: grab !important;
+  background: transparent !important;
   clip-path: polygon(79% 0, 79% 22%, 100% 22%, 100% 100%, 0 100%, 0 0);
 }
 .vue-file-agent .file-preview-wrapper .file-sortable-handle svg {
   display: none;
+}
+.vs-pagination--mb {
+  justify-content: center!important;
+}
+.vs-pagination--ul {
+  background: #fff!important;
+}
+.vs-pagination--buttons {
+  background: #fff!important;
+}
+.vs-pagination--buttons:hover {
+  background: var(--main-color)!important;
 }
 footer {
 }

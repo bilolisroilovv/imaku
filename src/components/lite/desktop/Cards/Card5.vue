@@ -62,6 +62,8 @@
       >
         <div class="d-flex align-items-center">
           <button
+            @click.prevent="handleLike"
+            :class="{ active: isLiked }"
             class="like_btn card_like_btn d-flex align-items-center mr-2"
             :title="$t('card_base.like')"
           >
@@ -84,11 +86,13 @@
               </svg>
             </div>
             <!-- like_btn_icon -->
-            <div class="like_btn_count">{{ post.likes }}</div>
+            <div class="like_btn_count">{{ likesCount }}</div>
             <!-- like_btn_count -->
           </button>
           <!-- like_btn -->
           <button
+            @click.prevent="handleDislike"
+            :class="{ active: isDisliked }"
             class="dislike_btn card_like_btn d-flex align-items-center mr-2"
             :title="$t('card_base.dont_like')"
           >
@@ -111,7 +115,7 @@
               </svg>
             </div>
             <!-- dislike_btn_icon -->
-            <div class="dislike_btn_count">{{ post.dislikes }}</div>
+            <div class="dislike_btn_count">{{ disLikesCount }}</div>
             <!-- dislike_btn_count -->
           </button>
           <!-- dislike_btn -->
@@ -158,7 +162,7 @@
         </div>
         <!-- d-flex -->
         <div class="mycard_edit_btns">
-          <button @click.prevent="removePost" class="post_remove_btn mainbtn">
+          <button @click="postClicked" class="post_remove_btn mainbtn">
             <i class="far fa-trash-alt mr-1"></i> {{ $t("card_base.delete") }}
           </button>
           <router-link
@@ -187,6 +191,10 @@ export default {
   components: {},
   data() {
     return {
+      likesCount: this.post.likes,
+      disLikesCount: this.post.dislikes,
+      isLiked: false,
+      isDisliked: false,
       colorLoading: "var(--main-color)"
     };
   },
@@ -203,25 +211,38 @@ export default {
     }
   },
   methods: {
-    async removePost() {
-      this.$vs.loading({
-        container: "",
-        scale: 0.8,
-        color: this.colorLoading
-      });
-      const response = await axios
-        .get("posts/delete/" + this.post.id)
-        .finally(() =>
-          setTimeout(() => {
-            this.$vs.loading.close(".con-vs-loading");
-          }, 10)
-        );
-      this.$vs.notify({
-        color: "success",
-        title: "Успех",
-        text: "Объявление успешно удалено"
-      });
-      this.$emit("removePost", response);
+    postClicked() {
+      this.$emit('clicked', this.post.id)
+    },
+    async handleLike() {
+      this.isLiked = !this.isLiked;
+      if (this.isLiked === true) {
+        this.likesCount++;
+      } else {
+        this.likesCount--;
+      }
+      if (this.isDisliked === true) {
+        this.isDisliked = false;
+        this.disLikesCount--;
+      }
+      await axios.get("like/" + this.post.id);
+      /* this.likesCount = response.data.likes
+      this.dislikesCount = response.data.dislikes */
+    },
+    async handleDislike() {
+      this.isDisliked = !this.isDisliked;
+      if (this.isDisliked === true) {
+        this.disLikesCount++;
+      } else {
+        this.disLikesCount--;
+      }
+      if (this.isLiked === true) {
+        this.isLiked = false;
+        this.likesCount--;
+      }
+      await axios.get("dislike/" + this.post.id);
+      /* this.likesCount = response.data.likes
+      this.dislikesCount = response.data.dislikes */
     },
     editPost() {}
   }
@@ -242,7 +263,7 @@ export default {
   border: 1px solid var(--main-color);
   color: var(--main-color);
   border-radius: 3px;
-  padding: 7px 12px;
+  padding: 8px 12px;
   font-size: 14px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -251,7 +272,8 @@ export default {
 .post_remove_btn {
   font-family: "Inter", sans-serif;
   font-weight: 400;
-  padding: 8px 12px !important;
+  border: none;
+  padding: 7px 12px !important;
   font-size: 14px;
   background: #f44643 !important;
   color: #ffffff;

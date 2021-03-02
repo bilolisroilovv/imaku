@@ -7,11 +7,12 @@
           :key="index"
           class="mb-3"
           :post="post"
-          @removePost="getPost"
+          @clicked="openConfirmModal"
         />
       </div>
       <!-- col-md-12 -->
     </div>
+    <ConfirmModal :postId="postId" @removePost="getPost"/>
     <!-- row -->
     <!-- <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto">
       <svg
@@ -51,21 +52,28 @@
 
 <script>
 import Card5 from "@/components/lite/desktop/Cards/Card5";
+import ConfirmModal from "@/components/lite/desktop/Modals/ConfirmModal"
 import { mapGetters } from "vuex";
 import axios from "axios";
 
 export default {
   name: "ProfilePosts",
   components: {
-    Card5
+    Card5,
+    ConfirmModal
   },
   data() {
     return {
       profileData: [],
+      postId: null,
       colorLoading: "var(--main-color)"
     };
   },
   methods: {
+    openConfirmModal(val) {
+      this.postId = val
+      this.$bvModal.show("confirmModal")
+    },
     handleLogout() {
       localStorage.removeItem("token");
       this.$router.push({name: 'HomePage'});
