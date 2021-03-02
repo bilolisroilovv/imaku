@@ -53,7 +53,6 @@ import HeaderCategoriesSlider from "@/components/lite/desktop/Sliders/HeaderCate
 import PostsSection from "@/components/lite/desktop/postsSection/PostsSection";
 import PostsSlider from "@/components/lite/desktop/Sliders/PostsSlider";
 import SelectionSection from "@/components/lite/desktop/SelectionSection/SelectionSection";
-import { mapGetters } from "vuex";
 import axios from "axios";
 
 export default {
@@ -84,12 +83,6 @@ export default {
       this.postsC = 0
       this.getForYouPosts();
     }
-  },
-  created() {
-    this.$store.dispatch("fetchInfo")
-  },
-  computed: {
-    ...mapGetters(["allIndexInfo"])
   },
   mounted() {
     this.getMainSlider();
