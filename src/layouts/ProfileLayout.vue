@@ -22,7 +22,10 @@
     <Header />
 
     <div>
-      <section class="product_section">
+      <section
+        class="product_section"
+        v-if="this.$route.path != '/ru/chat' && this.$route.path != '/uz/chat'"
+      >
         <div class="container">
           <div class="row">
             <div class="col-md-12">
@@ -239,8 +242,8 @@
 
     <Footer />
 
-    <FollowersModal :followers="profileData.followers"/>
-    <FollowingModal :following="profileData.following"/>
+    <FollowersModal :followers="profileData.followers" />
+    <FollowingModal :following="profileData.following" />
   </div>
 </template>
 
@@ -264,7 +267,7 @@ export default {
     return {
       mainColor: "var(--main-color)",
       profileData: {
-        followers: [],
+        followers: []
       }
     };
   },
@@ -284,10 +287,10 @@ export default {
     ...mapGetters(["currentUser"])
   },
   mounted() {
-    axios.get('profile').then(response => {
+    axios.get("profile").then(response => {
       this.profileData = response.data;
     });
-    this.checkLogin()
+    this.checkLogin();
     /* this.profileData = response.data; */
     /* console.log(this.profileData.followers) */
   }
