@@ -110,17 +110,17 @@ export default {
   },
 
   mounted() {
-    // this.CurrentUserId();
-    // this.Chats();
+    this.CurrentUserId();
+    this.Chats();
     Pusher.logToConsole = true;
 
-    // window.Echo.channel(`message-channel-${this.userId.id}`).listen(
-    //   ".send-message",
-    //   e => {
-    //     this.hanleIncoming(e.message);
-    //     console.lgo(e);
-    //   }
-    // );
+    window.Echo.channel(`message-channel-${this.userId.id}`).listen(
+      ".send-message",
+      e => {
+        this.hanleIncoming(e.message);
+        console.lgo(e);
+      }
+    );
   },
   created() {
     // this.selected();
