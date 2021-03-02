@@ -21,10 +21,10 @@
 <script>
 import ContactsList from "@/components/lite/desktop/Chat/ContactsList.vue";
 import Conversation from "@/components/lite/desktop/Chat/Conversation.vue";
+import axios from "axios";
+// import Echo from "laravel-echo";
 import Pusher from "pusher-js";
 
-import { mapGetters } from "vuex";
-import axios from "axios";
 export default {
   name: "Chat",
   components: {
@@ -36,11 +36,12 @@ export default {
       selectedContact: null,
       messages: [],
       contacts: [],
+      userId: null,
       colorLoading: "var(--main-color)"
     };
   },
   methods: {
-    async getPost2() {
+    async Chats() {
       this.$vs.loading({
         container: "",
         scale: 0.8,
@@ -53,84 +54,77 @@ export default {
       );
       this.contacts = response.data;
     },
+    async CurrentUserId() {
+      const response = await axios.get("/me");
+      this.userId = response.data;
+      // console.log(this.userId.id);
+    },
     startConversationWith(contact) {
       this.updateUnreadCount(contact, true);
       axios.get(`/chat/${contact.chatID}`).then(response => {
         this.messages = response.data;
         this.selectedContact = contact;
       });
+
+      // this.selected();
     },
     saveNewMessage(message) {
       this.messages.messages.push(message);
     },
 
     hanleIncoming(message) {
-      // if (this.selectedContact && message.user_id == this.selectedContact.id) {
-      this.saveNewMessage(message);
-      // return;
-      // }
-      this.updateUnreadCount(message.user_id, false);
-      console.log(this.message.user_id);
+      if (
+        this.selectedContact &&
+        message.user.id == this.selectedContact.chatID
+      ) {
+        this.saveNewMessage(message);
+        return;
+      }
+      this.updateUnreadCount(message.chatID, false);
     },
     updateUnreadCount(contact, reset) {
       this.contacts = this.contacts.map(single => {
         if (single.id !== contact.chatID) {
           return single;
         }
-        if (reset) single.unread = 0;
-        else single.unread += 1;
+        if (reset) single.newMessagesCount = 0;
+        else single.newMessagesCount += 1;
         return single;
       });
     }
+    // selected() {
+    //   Pusher.logToConsole = true;
+
+    //   const pusher = new Pusher("01bf1bff746b7b43db62", {
+    //     cluster: "ap2",
+    //     encrypted: true
+    //   });
+    //   const channel = pusher.subscribe(
+    //     "message-channel-" + this.selectedContact.chatID
+    //   );
+    //   channel.bind("send-message", function(data) {
+    //     // this.messages.messages.push(data.message);
+    //     this.hanleIncoming(data.message);
+    //   });
+    // }
   },
-  computed: {
-    ...mapGetters(["currentUser"])
-  },
+
   mounted() {
-    this.getPost2();
-    // Pusher.logToConsole = true;
-    // const pusher = new Pusher("01bf1bff746b7b43db62", {
-    //   cluster: "ap2",
-    //   authEndpoint: "/broadcasting/auth",
-    //   httpHost: "http://192.168.5.56:8000"
-    // });
-
-    // const channel = pusher.subscribe(
-    //   "private-message-channel-" + this.currentUser.id
-    // );
-
-    // channel.bind("send-message", function(data) {
-    //   alert(JSON.stringify(data));
-    // });
-
-    // channel.bind("send-message", e => {
-    //   this.hanleIncoming(e.message);
-    //   console.log(e.message);
-    // });
-  },
-  created() {
+    this.CurrentUserId();
+    this.Chats();
     Pusher.logToConsole = true;
-    const pusher = new Pusher("01bf1bff746b7b43db62", {
-      cluster: "ap2",
-      authEndpoint: "http://192.168.5.56:8000/broadcasting/auth"
-      // httpHost: "http://192.168.5.56:8000"
-    });
 
-    const channel = pusher.subscribe(
-      "private-message-channel-" + this.currentUser.id,
-      function(data) {
-        console.log(data);
+    window.Echo.channel(`message-channel-${this.userId.id}`).listen(
+      ".send-message",
+      e => {
+        this.hanleIncoming(e.message);
+        console.lgo(e);
       }
     );
-
-    channel.bind("send-message", function(data) {
-      alert(JSON.stringify(data));
-    });
-
-    channel.bind("send-message", e => {
-      this.hanleIncoming(e.message);
-      console.log(e.message);
-    });
+  },
+  created() {
+    // this.selected();
+    // console.log(this.currentUser);
   }
 };
 </script>

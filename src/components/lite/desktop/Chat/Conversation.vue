@@ -2,7 +2,12 @@
   <div>
     <div class="chat-content-top">
       <div class="chat-content-top__img">
-        <img :src="contact.avatar" :alt="contact.name" />
+        <img
+          :src="
+            contact ? contact.avatar : '@/assets/lite/desktop/profile_chat.svg'
+          "
+          :alt="contact ? contact.name : ''"
+        />
       </div>
       <div class="mx-3">
         <h3 class="chat-user__title">
@@ -12,14 +17,14 @@
           /></span>
         </h3>
       </div>
-      <div class="ml-auto d-flex align-items-center">
+      <!-- <div class="ml-auto d-flex align-items-center">
         <div class="search mr-3">
           <img src="@/assets/lite/chat/search.svg" alt="" />
         </div>
         <div class="favorite">
           <img src="@/assets/lite/chat/star.svg" alt="" />
         </div>
-      </div>
+      </div> -->
     </div>
     <MessagesFeed :contact="contact" :messages="messages" />
 
@@ -34,20 +39,28 @@ import MessageComposer from "./MessageComposer";
 
 export default {
   components: { MessagesFeed, MessageComposer },
+  // props: ["contact", "messages"],
   props: {
     contact: {
-      avatar: {
-        default: ""
-      }
+      type: Object,
+      default: null
     },
-    messages: {}
+    messages: {
+      post: {
+        type: Object,
+        default: null
+      },
+      messages: {
+        type: Array
+      }
+    }
   },
   methods: {
-    async sendMessage(text) {
-      // if (!this.contact) {
-      //   return;
-      // }
-      await axios
+    sendMessage(text) {
+      if (!this.contact) {
+        return;
+      }
+      axios
         .post("chat/sendMessage/" + this.contact.chatID, {
           body: text
         })
@@ -55,6 +68,10 @@ export default {
           this.$emit("new", response.data);
         });
     }
+  },
+  created() {
+    console.log(this.messages);
+    console.log(this.contact);
   }
 };
 </script>

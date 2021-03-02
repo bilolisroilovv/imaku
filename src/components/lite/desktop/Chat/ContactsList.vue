@@ -13,7 +13,7 @@
       <div class="chat-left__body">
         <div
           class="chat-user"
-          v-for="chat in contacts"
+          v-for="chat in sortedContacts"
           :key="chat.id"
           @click="selectContact(chat)"
           :class="{ 'chat-user-active': chat == selected }"
@@ -79,7 +79,7 @@ export default {
           if (contact == this.selected) {
             return Infinity;
           }
-          return contact.unread;
+          return contact.newMessagesCount;
         }
       ]).reverse();
     }

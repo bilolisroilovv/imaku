@@ -4,7 +4,6 @@
       <img src="@/assets/lite/chat/file.svg" alt="" />
     </button>
     <div class="text-form">
-      <!-- <input type="text" :placeholder="$t('chat_placeholder')" /> -->
       <input
         type="text"
         v-model="message"

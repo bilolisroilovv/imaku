@@ -1,9 +1,9 @@
 <template>
   <div ref="feed" v-if="contact" class="chat-content-body">
     <div class="chat-user__product">
-      <!-- <div class="product">
+      <!-- <div class="product" v-if="messages.post">
         <div class="product-img">
-          <img src="https://picsum.photos/id/1/120/80" alt="" />
+          <img :src="messages.post.avatar" :alt="messages.post.name" />
         </div>
         <div class="product-info">
           <h3 class="product-title">
@@ -27,7 +27,7 @@
     <div class="chat-content">
       <div
         class="chat-item"
-        v-for="message in messages.messages"
+        v-for="(message, index) in messages.messages"
         :class="
           `${
             message.user.id == contact.id
@@ -35,10 +35,10 @@
               : 'chat-item-sent'
           }`
         "
-        :key="message.id"
+        :key="index"
       >
         <div class="chat-user__img" v-if="message.user.id == contact.id">
-          <img :src="message.user.avatar" alt="" />
+          <img :src="message.user.avatar" :alt="message.user.name" />
         </div>
         <div class="chat-item__title">
           {{ message.content }}
@@ -51,16 +51,16 @@
 
 <script>
 export default {
+  // props: ["contact", "messages"],
   props: {
     contact: {
-      type: Object
+      type: Object,
+      default: null
     },
     messages: {
-      post: {
-        name: "",
-        id: "",
-        avatar: "",
-        price: ""
+      id: {
+        type: Number,
+        default: null
       }
     }
   },
@@ -81,6 +81,10 @@ export default {
     messages(messages) {
       this.scrollToBottom();
     }
+  },
+  created() {
+    // console.log(this.messages.messages);
+    // console.log(this.contact);
   }
 };
 </script>
