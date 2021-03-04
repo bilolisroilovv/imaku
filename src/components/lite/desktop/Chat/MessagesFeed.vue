@@ -27,7 +27,7 @@
     <div class="chat-content">
       <div
         class="chat-item"
-        v-for="(message, index) in messages.messages"
+        v-for="(message, index) in messages"
         :class="
           `${
             message.user.id == contact.id
@@ -58,10 +58,8 @@ export default {
       default: null
     },
     messages: {
-      id: {
-        type: Number,
-        default: null
-      }
+      type: Array,
+      required: true
     }
   },
   methods: {
@@ -92,28 +90,36 @@ export default {
 <style lang="scss" scoped>
 .chat {
   &-content-body {
+    min-height: 460px;
     max-height: 460px;
     overflow-y: auto;
+    background: #fafcfe!important;
 
     /* width */
     &::-webkit-scrollbar {
-      width: 8px;
+      width: 6px;
       height: 4px;
     }
 
     /* Track */
     &::-webkit-scrollbar-track {
-      background-color: rgba(#b5bdcc, 0.329);
+      background: rgba(#b5bdcc8e, 0.2);
+      border-radius: 100px;
     }
 
-    /* Handle */
+    &::-webkit-scrollbar-track:hover {
+      background: rgba(#b5bdcc8e, 0.3);
+    }
+
+  /* Handle */
     &::-webkit-scrollbar-thumb {
-      background: rgba(#b5bdcc, 0.9);
+      background: rgba(#b5bdcc8e, 0.7);
+      border-radius: 100px;
     }
 
     /* Handle on hover */
     &::-webkit-scrollbar-thumb:hover {
-      background: #b5bdcc;
+      background: rgba(#b5bdcc8e, 1);
     }
   }
   &-user {

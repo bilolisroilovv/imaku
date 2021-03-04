@@ -2,11 +2,12 @@
   <div class="w-100">
     <div class="chat">
       <div class="row position-relative">
-        <ContactsList :contacts="contacts" @selected="startConversationWith" />
+        <ContactsList :newMessagesCount="newMessagesCount" :contacts="contacts" @selected="startConversationWith" />
 
-        <div class="col-md-8 pl-0">
+        <div class="col-md-9 pl-0">
           <div class="chat-right">
             <Conversation
+              v-if="selectedContact"
               :contact="selectedContact"
               :messages="messages"
               @new="saveNewMessage"
@@ -34,6 +35,7 @@ export default {
   data() {
     return {
       selectedContact: null,
+      newMessagesCount: null,
       messages: [],
       contacts: [],
       userId: null,
@@ -52,16 +54,16 @@ export default {
           this.$vs.loading.close(".con-vs-loading");
         }, 10)
       );
-      this.contacts = response.data;
+      this.contacts = response.data.chats;
+      this.newMessagesCount = response.data.newMessagesCount;
     },
     async CurrentUserId() {
-      const response = await axios.get("/me");
-      this.userId = response.data;
-      // console.log(this.userId.id);
+      const response = await axios.get("me");
+      this.userId = response.data.id;
     },
     startConversationWith(contact) {
       this.updateUnreadCount(contact, true);
-      axios.get(`/chat/${contact.chatID}`).then(response => {
+      axios.get(`chat/${contact.chatID}`).then(response => {
         this.messages = response.data;
         this.selectedContact = contact;
       });
@@ -75,7 +77,7 @@ export default {
     hanleIncoming(message) {
       if (
         this.selectedContact &&
-        message.user.id == this.selectedContact.chatID
+        message.chatID == this.selectedContact.chatID
       ) {
         this.saveNewMessage(message);
         return;
@@ -109,18 +111,17 @@ export default {
     // }
   },
 
-  mounted() {
-    this.CurrentUserId();
+  async mounted() {
     this.Chats();
     Pusher.logToConsole = true;
-
-    window.Echo.channel(`message-channel-${this.userId.id}`).listen(
+    const response = await axios.get('me')
+    window.Echo.channel('message-channel-' + response.data.id).listen(
       ".send-message",
       e => {
         this.hanleIncoming(e.message);
-        console.lgo(e);
       }
     );
+
   },
   created() {
     // this.selected();
@@ -143,6 +144,7 @@ export default {
     border: 1px solid #eaedf7;
     box-shadow: 0px 2px 4px rgba(28, 41, 90, 0.0367952);
     border-radius: 10px;
+    overflow: hidden;
     height: 100%;
     position: relative;
   }

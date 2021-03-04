@@ -26,7 +26,7 @@
         </div>
       </div> -->
     </div>
-    <MessagesFeed :contact="contact" :messages="messages" />
+    <MessagesFeed :contact="contact" :messages="messages.messages" />
 
     <MessageComposer @send="sendMessage" />
   </div>
@@ -65,13 +65,14 @@ export default {
           body: text
         })
         .then(response => {
+          console.log(this.contact)
           this.$emit("new", response.data);
         });
     }
   },
   created() {
-    console.log(this.messages);
-    console.log(this.contact);
+    /* console.log(this.messages);
+    console.log(this.contact); */
   }
 };
 </script>
@@ -269,7 +270,8 @@ export default {
     }
   }
   .chat-content-top {
-    padding: 10px 24px;
+    padding: 14px 24px;
+    min-height: 63px;
     display: flex;
     justify-content: flex-start;
     align-items: center;

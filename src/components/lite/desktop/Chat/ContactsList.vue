@@ -1,10 +1,10 @@
 <template>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="chat-left">
       <div class="chat-left__header">
         <div class="title">
           {{ $t("chat") }}
-          <span class="chat-count">{{ contacts.length }}</span>
+          <span class="chat-count" v-if="newMessagesCount">{{ newMessagesCount }}</span>
         </div>
         <div class="search">
           <img src="@/assets/lite/chat/search.svg" alt="" />
@@ -13,7 +13,7 @@
       <div class="chat-left__body">
         <div
           class="chat-user"
-          v-for="chat in sortedContacts"
+          v-for="chat in contacts"
           :key="chat.id"
           @click="selectContact(chat)"
           :class="{ 'chat-user-active': chat == selected }"
@@ -59,7 +59,8 @@ export default {
       type: Array,
       // eslint-disable-next-line vue/require-valid-default-prop
       default: []
-    }
+    },
+    newMessagesCount: {}
   },
   data() {
     return {
@@ -103,6 +104,7 @@ export default {
       align-items: center;
       width: 100%;
       padding: 14px 24px;
+      min-height: 63px;
     }
 
     .title {
@@ -121,26 +123,33 @@ export default {
     }
 
     &__body {
-      max-height: 505px;
+      max-height: 535px;
+      max-height: 535px;
       overflow-y: auto;
+      margin-right: 3px;
 
       &::-webkit-scrollbar {
-        width: 8px;
+        width: 5px;
         height: 4px;
       }
       /* Track */
       &::-webkit-scrollbar-track {
-        background-color: rgba(#b5bdcc, 0.329);
+        background: rgba(#b5bdcc8e, 0.2);
+        border-radius: 100px;
       }
 
+      &::-webkit-scrollbar-track:hover {
+        background: rgba(#b5bdcc8e, 0.3);
+      }
       /* Handle */
       &::-webkit-scrollbar-thumb {
-        background: rgba(#b5bdcc, 0.9);
+        background: rgba(#b5bdcc8e, 0.7);
+        border-radius: 100px;
       }
 
       /* Handle on hover */
       &::-webkit-scrollbar-thumb:hover {
-        background: #b5bdcc;
+        background: rgba(#b5bdcc8e, 1);
       }
 
       .chat-user__img {
@@ -174,6 +183,7 @@ export default {
     padding: 18px 24px;
     cursor: pointer;
     border-left: 2px solid transparent;
+    border-bottom: 1px solid #EAEDF7;
 
     &-active {
       border-left-color: #ff9029;
