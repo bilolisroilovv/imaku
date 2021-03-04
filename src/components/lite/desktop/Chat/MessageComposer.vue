@@ -1,5 +1,5 @@
 <template>
-  <div class="form">
+  <form class="form">
     <button class="file" type="button">
       <img src="@/assets/lite/chat/file.svg" alt="" />
     </button>
@@ -7,7 +7,7 @@
       <input
         type="text"
         v-model="message"
-        @keydown.enter="send"
+        @keyup.enter="send"
         :placeholder="$t('chat_placeholder')"
       />
       <button type="button" class="emoji">
@@ -17,7 +17,7 @@
         <img src="@/assets/lite/chat/send.svg" alt="" />
       </button>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
@@ -37,6 +37,8 @@ export default {
       this.$emit("send", this.message);
       this.message = "";
     }
+  },
+  mounted () {
   }
 };
 </script>

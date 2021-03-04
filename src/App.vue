@@ -81,6 +81,7 @@ export default {
 html,
 body {
   font-family: "Roboto", sans-serif !important;
+  font-display: swap;
   background: #f8f8fc !important;
   scroll-behavior: smooth;
 }

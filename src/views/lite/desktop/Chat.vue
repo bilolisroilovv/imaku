@@ -44,16 +44,7 @@ export default {
   },
   methods: {
     async Chats() {
-      this.$vs.loading({
-        container: "",
-        scale: 0.8,
-        color: this.colorLoading
-      });
-      const response = await axios.get("chat").finally(() =>
-        setTimeout(() => {
-          this.$vs.loading.close(".con-vs-loading");
-        }, 10)
-      );
+      const response = await axios.get("chat")
       this.contacts = response.data.chats;
       this.newMessagesCount = response.data.newMessagesCount;
     },
@@ -118,6 +109,7 @@ export default {
     window.Echo.channel('message-channel-' + response.data.id).listen(
       ".send-message",
       e => {
+        this.Chats();
         this.hanleIncoming(e.message);
       }
     );

@@ -67,7 +67,7 @@ export default {
       setTimeout(() => {
         this.$refs.feed.scrollTop =
           this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
-      }, 50);
+      }, 0);
     }
   },
   watch: {
@@ -81,8 +81,7 @@ export default {
     }
   },
   created() {
-    // console.log(this.messages.messages);
-    // console.log(this.contact);
+    this.scrollToBottom();
   }
 };
 </script>
@@ -205,7 +204,6 @@ export default {
         &-info {
           width: 100%;
         }
-
         .phone {
           background: #343538;
           border-radius: 18px;
@@ -240,16 +238,16 @@ export default {
   &-item {
     display: flex;
     align-items: flex-end;
-    padding: 10px 0;
+    padding: 0;
     margin-bottom: 25px;
 
     &__title {
       font-weight: normal;
-      font-size: 14px;
+      font-size: 16px;
       line-height: 24px;
       letter-spacing: 0.5px;
       position: relative;
-      padding: 10px 15px;
+      padding: 8px 15px;
       margin-left: 20px;
 
       .chat-send_date {
