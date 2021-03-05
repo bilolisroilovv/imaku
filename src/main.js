@@ -16,7 +16,6 @@ import Vuesax from 'vuesax'
 import { SlickList, SlickItem } from 'vue-slicksort';
 import "./axios";
 import 'vuesax/dist/vuesax.css'
-import "material-icons/iconfont/material-icons.css";
 import "vue-select/dist/vue-select.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -30,6 +29,8 @@ import Echo from "laravel-echo";
 Vue.component("vfa-sortable-list", SlickList);
 Vue.component("vfa-sortable-item", SlickItem);
 
+const materialIcons = () => import("material-icons/iconfont/material-icons.css");
+Vue.use(materialIcons);
 Vue.use(VueFileAgent);
 Vue.use(VueFileAgentStyles);
 Vue.use(VueTheMask);

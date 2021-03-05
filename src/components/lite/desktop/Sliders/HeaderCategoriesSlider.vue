@@ -23,9 +23,9 @@
           </div> <!-- transparent_bg -->
           <router-link to="/category" class="categorie_text">
             {{ item.name }}
-          </router-link> </swiper-slide
-        ><!-- swiper-slide --> </swiper
-      ><!-- swiper-container -->
+          </router-link>
+          </swiper-slide> <!-- swiper-slide -->
+        </swiper> <!-- swiper-container -->
       <!-- Add Arrows -->
       <div class="categories_slider_next main_slider_btns flex-center d-flex">
         <i class="fas fa-chevron-right"></i>
@@ -112,7 +112,7 @@ export default {
   border-radius: 12px;
   background-size: 100%;
   transition: all 0.3s;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.336) 0%, transparent 50%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.466) 0%, transparent 50%);
   position: absolute;
   pointer-events: none;
 }
