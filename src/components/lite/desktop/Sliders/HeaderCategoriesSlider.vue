@@ -112,7 +112,7 @@ export default {
   border-radius: 12px;
   background-size: 100%;
   transition: all 0.3s;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.548), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.336) 0%, transparent 50%);
   position: absolute;
   pointer-events: none;
 }

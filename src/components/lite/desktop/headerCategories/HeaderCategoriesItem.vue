@@ -79,13 +79,16 @@ export default {
   transition: all 0s;
 }
 .mymenu_li_a_img {
-  width: 20px;
+  width: 21px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 10px;
+  margin-right: 12px;
   transition: all 0.2s;
+}
+.mymenu_li_a_img img {
+  max-width: 100%;
 }
 .mymenu_li:hover .mymenu_li_a i {
   color: rgb(31, 31, 31);
