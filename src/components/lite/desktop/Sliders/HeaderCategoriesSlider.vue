@@ -19,6 +19,8 @@
             :style="{ 'background-image': 'url(' + item.image + ')' }"
           >
           </router-link>
+          <div class="transparent_bg d-block h-100 w-100">
+          </div> <!-- transparent_bg -->
           <router-link to="/category" class="categorie_text">
             {{ item.name }}
           </router-link> </swiper-slide
@@ -104,6 +106,15 @@ export default {
 .categories_slider .swiper-slide {
   border-radius: 12px;
   overflow: hidden;
+}
+.transparent_bg {
+  position: relative;
+  border-radius: 12px;
+  background-size: 100%;
+  transition: all 0.3s;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.548), transparent);
+  position: absolute;
+  pointer-events: none;
 }
 .categories_slider .categorie_block {
   position: relative;
