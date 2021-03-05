@@ -42,16 +42,16 @@ export default {
   background: #ffffff;
   box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
-  padding: 20px 13px;
+  padding: 13px 10px;
   display: inline-block;
   height: 600px;
-  min-width: 250px;
+  min-width: 240px;
   position: relative;
 }
 .mymenu_li {
   transition: all 0s;
   border-radius: 4px;
-  min-width: 250px;
+  min-width: 240px;
 }
 .mymenu_li:hover {
   background: rgb(255, 234, 197);
