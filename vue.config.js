@@ -13,7 +13,6 @@ module.exports = {
         if (/\.css$/.test(entry)) return 'style';
         return 'script';
       }
-      options[0].include = 'allAssets'
       // options[0].fileWhitelist: [/\.files/, /\.to/, /\.include/]
       // options[0].fileBlacklist: [/\.files/, /\.to/, /\.exclude/]
       return options
