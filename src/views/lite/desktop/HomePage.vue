@@ -85,11 +85,11 @@ export default {
     }
   },
   mounted() {
-    this.getMainSlider();
     this.getGivesPosts();
     this.getSelectionPosts();
     this.getForYouPosts();
     this.scroll();
+    this.getMainSlider()
   },
   methods: {
     async getMainSlider() {

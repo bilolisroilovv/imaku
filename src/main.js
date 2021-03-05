@@ -30,6 +30,7 @@ Vue.component("vfa-sortable-list", SlickList);
 Vue.component("vfa-sortable-item", SlickItem);
 
 const materialIcons = () => import("material-icons/iconfont/material-icons.css");
+localStorage.setItem('materialIcons', materialIcons)
 Vue.use(materialIcons);
 Vue.use(VueFileAgent);
 Vue.use(VueFileAgentStyles);
