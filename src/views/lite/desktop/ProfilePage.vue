@@ -1,5 +1,7 @@
 <template>
   <div class="w-71 position-relative">
+    <div id="div-with-loading" class="vs-con-loading__container">
+    </div> <!-- loading_block -->
     <div class="grid-container grid-template-4 grid-gap-10">
       <Card4
         v-for="(post, index) in profileData"
@@ -62,15 +64,13 @@ export default {
   methods: {
     async getPosts() {
       this.$vs.loading({
-        container: "",
+        container: "#div-with-loading",
         scale: 0.8,
         color: this.colorLoading
       });
-      const response = await axios.get("profile/favourites").finally(() =>
-        setTimeout(() => {
-          this.$vs.loading.close(".con-vs-loading");
-        }, 10)
-      );
+      const response = await axios
+      .get("profile/favourites")
+      .finally(() => this.$vs.loading.close("#div-with-loading > .con-vs-loading"));
       this.profileData = response.data;
       // console.log(this.profileData.posts);
     }
@@ -82,6 +82,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#div-with-loading {
+  width: 200px;
+  height: 40px;
+  margin: auto;
+  display: flex;
+  margin-top: 1.2rem;
+  justify-content: center;
+  position: absolute!important;
+  left: 50%;
+  transform: translate(-50%, 0);
+  align-items: bottom;
+}
 .loading_div {
   max-height: 100%;
   max-width: 100%;

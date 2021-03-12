@@ -116,7 +116,7 @@ export default {
     rgba(255, 255, 255, 1) 5%,
     rgba(255, 255, 255, 1) 100%
   );
-  padding: 15px 35px;
+  padding: 15px 20px 20px 20px;
 }
 .submenu:before {
   content: "";

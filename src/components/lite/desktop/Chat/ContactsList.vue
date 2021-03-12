@@ -16,7 +16,7 @@
           v-for="chat in contacts"
           :key="chat.id"
           @click="selectContact(chat)"
-          :class="{ 'chat-user-active': chat == selected }"
+          :class="{ 'chat-user-active': chat == SelectedContact }"
         >
           <div class="chat-user__img">
             <img :src="chat.avatar" :alt="chat.name" />
@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   props: {
     contacts: {
@@ -70,10 +72,12 @@ export default {
   methods: {
     selectContact(contact) {
       this.selected = contact;
+      this.$store.dispatch('selectContact', contact)
       this.$emit("selected", contact);
     }
   },
   computed: {
+    ...mapGetters(["SelectedContact"]),
     sortedContacts() {
       return this.$_.sortBy(this.contacts, [
         contact => {
@@ -84,6 +88,8 @@ export default {
         }
       ]).reverse();
     }
+  },
+  mounted() {
   }
 };
 </script>
@@ -154,8 +160,8 @@ export default {
 
       .chat-user__img {
         img {
-          width: 42px;
-          height: 42px;
+          width: 48px;
+          height: 48px;
         }
       }
     }

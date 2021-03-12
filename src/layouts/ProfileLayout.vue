@@ -281,16 +281,22 @@ export default {
       if (!this.currentUser) {
         this.$router.push("/");
       }
+    },
+    getData() {
+      axios.get("profile").then(response => {
+        this.profileData = response.data;
+      });
     }
   },
   computed: {
     ...mapGetters(["currentUser"])
   },
-  mounted() {
-    axios.get("profile").then(response => {
-      this.profileData = response.data;
-    });
+  beforeMount() {
+    this.getData();
     this.checkLogin();
+  },
+  mounted() {
+    
     /* this.profileData = response.data; */
     /* console.log(this.profileData.followers) */
   }

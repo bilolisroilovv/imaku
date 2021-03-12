@@ -341,7 +341,7 @@
                 </div>
 
                 <a
-                  href="#"
+                  @click.prevent="contactTheSeller"
                   class="send_message_btn mainbtn d-block w-100 text-center"
                 >
                   <img src="@/assets/lite/send_message_icon.png" alt="" />
@@ -624,6 +624,13 @@ export default {
     ...mapGetters(["currentUser"])
   },
   methods: {
+    async contactTheSeller() {
+      const response = await axios.post('chat/store/' + this.postData.author.id, {
+        type: this.postData.author.type
+      })
+      this.$store.dispatch('selectContact', response.data.chat)
+      this.$router.push({name: "Chat"})
+    },
     async ToggleFavoriteRequest() {
       const response = await axios.get("favourite/" + this.id);
       this.isFavorite = response.data.isFavourite;
@@ -717,6 +724,7 @@ export default {
 .send_message_btn {
   background: var(--main-color)!important;
   border: none;
+  cursor: pointer;
 }
 .send_message_btn:hover {
   background: #d5761d!important;
@@ -1090,6 +1098,7 @@ export default {
   line-height: 26px;
   letter-spacing: 0.5px;
   color: #000000;
+  white-space: pre-line;
 }
 .product_params .pp {
   margin-bottom: 12px;

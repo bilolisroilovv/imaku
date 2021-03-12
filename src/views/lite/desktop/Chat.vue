@@ -24,6 +24,7 @@ import ContactsList from "@/components/lite/desktop/Chat/ContactsList.vue";
 import Conversation from "@/components/lite/desktop/Chat/Conversation.vue";
 import axios from "axios";
 // import Echo from "laravel-echo";
+import { mapGetters } from "vuex";
 import Pusher from "pusher-js";
 
 export default {
@@ -37,10 +38,14 @@ export default {
       selectedContact: null,
       newMessagesCount: null,
       messages: [],
+      chatIdd: 1,
       contacts: [],
       userId: null,
       colorLoading: "var(--main-color)"
     };
+  },
+  computed: {
+    ...mapGetters(["SelectedContact"])
   },
   methods: {
     async Chats() {
@@ -58,8 +63,6 @@ export default {
         this.messages = response.data;
         this.selectedContact = contact;
       });
-
-      // this.selected();
     },
     saveNewMessage(message) {
       this.messages.messages.push(message);
@@ -87,7 +90,7 @@ export default {
     }
     // selected() {
     //   Pusher.logToConsole = true;
-
+      
     //   const pusher = new Pusher("01bf1bff746b7b43db62", {
     //     cluster: "ap2",
     //     encrypted: true
@@ -104,6 +107,7 @@ export default {
 
   async mounted() {
     this.Chats();
+    this.startConversationWith(this.SelectedContact);
     Pusher.logToConsole = true;
     const response = await axios.get('me')
     window.Echo.channel('message-channel-' + response.data.id).listen(

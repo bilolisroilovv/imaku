@@ -4,15 +4,15 @@
       <div class="chat-content-top__img">
         <img
           :src="
-            contact ? contact.avatar : '@/assets/lite/desktop/profile_chat.svg'
+            SelectedContact ? SelectedContact.avatar : '@/assets/lite/desktop/profile_chat.svg'
           "
-          :alt="contact ? contact.name : ''"
+          :alt="SelectedContact ? SelectedContact.name : ''"
         />
       </div>
       <div class="mx-3">
         <h3 class="chat-user__title">
-          {{ contact ? contact.name : "Select a Contact" }}
-          <span class="online" v-if="contact.status"
+          {{ SelectedContact ? SelectedContact.name : "Select a Contact" }}
+          <span class="online" v-if="SelectedContact.status"
             ><img src="@/assets/lite/chat/online.svg" alt="online"
           /></span>
         </h3>
@@ -26,7 +26,7 @@
         </div>
       </div> -->
     </div>
-    <MessagesFeed :contact="contact" :messages="messages.messages" />
+    <MessagesFeed :contact="SelectedContact" :messages="messages.messages" />
 
     <MessageComposer @send="sendMessage" />
   </div>
@@ -36,6 +36,7 @@
 import axios from "axios";
 import MessagesFeed from "./MessagesFeed";
 import MessageComposer from "./MessageComposer";
+import { mapGetters } from "vuex";
 
 export default {
   components: { MessagesFeed, MessageComposer },
@@ -54,6 +55,9 @@ export default {
         type: Array
       }
     }
+  },
+  computed: {
+    ...mapGetters(["SelectedContact"])
   },
   methods: {
     sendMessage(text) {

@@ -53,7 +53,7 @@ export default {
   margin: 4px 0;
 }
 .submenu_list {
-  margin: 25px 10px;
+  margin: 10px 10px;
 }
 .submenu_list a {
   font-weight: normal;

@@ -388,7 +388,6 @@ export default {
       form.append("price_type", this.priceTypeSelect);
       form.append("description", this.description);
       form.append("phone", this.phone);
-      form.append("description", this.description);
       form.append("location", this.location);
       if (this.id) {
         form.append("shop_id", this.id);
