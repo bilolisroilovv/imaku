@@ -52,8 +52,8 @@
     >
       {{ post.name }}
     </router-link>
-    <h4 class="mycard_price text_ellipsis1">{{ post.price }}</h4>
-    <!-- mycard_price -->
+    <h4 class="mycard_price text_ellipsis1" v-if="this.post.price">{{ this.post.price }} <span v-if="this.post.priceType == 'сум' ">{{ $t("price_sum") }}</span> <span v-if="this.post.priceType == 'e.y' ">{{ $t("price_ye") }}</span></h4>
+    <h4 class="mycard_price text_ellipsis1" v-if="this.post.price == null">{{ $t("free") }}</h4>
     <div class="d-flex align-items-center">
       <b-form-rating class="p-0" :color="mainColor" readonly show-value :value="post.rating" id="rating-inline" inline no-border size="sm"></b-form-rating>
     </div>

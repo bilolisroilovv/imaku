@@ -56,7 +56,8 @@ export default {
     posts: {
       type: Array
     },
-    showBtn: {}
+    showBtn: {
+    }
   },
   watch: {
     posts() {

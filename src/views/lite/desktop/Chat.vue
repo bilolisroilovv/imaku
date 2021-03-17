@@ -67,7 +67,6 @@ export default {
     saveNewMessage(message) {
       this.messages.messages.push(message);
     },
-
     hanleIncoming(message) {
       if (
         this.selectedContact &&
@@ -104,7 +103,6 @@ export default {
     //   });
     // }
   },
-
   async mounted() {
     this.Chats();
     this.startConversationWith(this.SelectedContact);

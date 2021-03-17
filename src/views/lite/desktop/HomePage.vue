@@ -16,10 +16,10 @@
     <section class="section pt-5 pb-3">
       <div class="container">
         <h2 class="section_title pb-4">
-          {{ $t("homepage.give_it_away") }}
+          {{givesPosts.title}}
         </h2>
         <!-- section_title -->
-        <PostsSlider :posts="givesPosts" />
+        <PostsSlider :posts="givesPosts.posts" />
       </div>
       <!-- container -->
     </section>
@@ -62,11 +62,11 @@ export default {
       mainSliders: [],
       givesPosts: [],
       selectionPosts: [],
-      showBtn: false,
       postsForYouData: [],
       content: "",
       currentPage: 1,
       colorLoading: "var(--main-color)",
+      showBtn: false,
       postsC: 0,
       limit: true
     };

@@ -62,7 +62,8 @@
               <div
                 class="d-flex justify-content-between align-items-center pb-2"
               >
-                <h2 class="product_price">{{ postData.price }}</h2>
+                <h2 class="product_price" v-if="postData.price">{{ postData.price }} <span v-if="postData.priceType == 'сум' ">{{ $t("price_sum") }}</span> <span v-if="postData.priceType == 'e.y' ">{{ $t("price_ye") }}</span></h2>
+                <h2 class="product_price" v-if="postData.price == null">{{ $t("free") }}</h2>
 
                 <div
                   class="product_favourite mycard_favorite_stroke2 flex-center d-flex"
@@ -549,7 +550,8 @@
       <div class="container">
         <h2 class="section_title pb-4">{{ $t("post_page.for_you") }}</h2>
         <!-- section_title -->
-        <PostsSection :posts="postData.posts" />
+        <PostsSection @showMore="showMore" :posts="postsForYouData" :showBtn="showBtn" />
+
       </div>
       <!-- container -->
     </section>
@@ -588,6 +590,12 @@ export default {
   },
   data() {
     return {
+      colorLoading: "var(--main-color)",
+      postsForYouData: [],
+      currentPage: 1,
+      showBtn: false,
+      postsC: 0,
+      limit: true,
       authorType: null,
       step: 1,
       phone: null,
@@ -608,22 +616,83 @@ export default {
       isFavorite: Boolean,
       postData: [],
       gallery: [],
-      authorPosts: [],
-      colorLoading: "var(--main-color)"
+      authorPosts: []
     };
-  },
-  mounted() {
-    this.getPost();
   },
   watch: {
     id() {
       this.getPost();
+    },
+    currentPage() {
+      this.postsC = 0
+      this.getForYouPosts();
     }
+  },
+  created() {
+  },
+  mounted() {
+    this.getPost();
+    this.getForYouPosts();
+    this.scroll();
   },
   computed: {
     ...mapGetters(["currentUser"])
   },
   methods: {
+    showMore() {
+      this.showBtn = false
+      this.currentPage++
+    },
+    async getForYouPosts() {
+      const response = await axios.get('posts?page=' + this.currentPage + '&paginate=' + 0, {
+        headers: {
+          "Accept-Language": `${this.$i18n.locale}`
+        }
+      }).finally(() => this.$vs.loading.close("#div-with-loading > .con-vs-loading"));
+      for(var i = 0; i < response.data.posts.length; i++) {
+        this.postsForYouData.push(response.data.posts[i])
+      }
+      this.showBtn = false
+    },
+    scroll() {
+      window.onscroll = () => {
+        let offsetHeight = document.documentElement.offsetHeight-800
+        let offsetHeight2 = document.documentElement.offsetHeight-700
+        let scrollTop = document.documentElement.scrollTop
+        let innerHeight= window.innerHeight
+
+        let bottomOfWindow = scrollTop + innerHeight >= offsetHeight && scrollTop + innerHeight <= offsetHeight2; 
+        /* console.log('scrollTop ' + scrollTop);
+        console.log('innerHeight ' + innerHeight);
+        console.log('offsetHeight ' + offsetHeight); */
+        if (bottomOfWindow && this.limit) {
+          if(this.postsC < 15) {
+            this.$vs.loading({
+              container: "#div-with-loading",
+              scale: 0.8,
+              color: this.colorLoading
+            });
+            this.postsC += 15
+            axios.get('posts?page=' + this.currentPage + '&paginate=' + this.postsC, {
+              headers: {
+                "Accept-Language": `${this.$i18n.locale}`
+              }
+            })
+            .then(response => {
+              for(var i = 0; i < response.data.posts.length; i++) {
+                this.postsForYouData.push(response.data.posts[i])
+              }
+              this.showBtn = true
+            })
+            .finally(() => this.$vs.loading.close("#div-with-loading > .con-vs-loading"));
+          }
+          this.limit = false
+          setTimeout(() => {
+            this.limit = true
+          }, 100);
+        }
+      };
+    },
     async contactTheSeller() {
       const response = await axios.post('chat/store/' + this.postData.author.id, {
         type: this.postData.author.type
@@ -721,6 +790,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#div-with-loading {
+  width: 200px;
+  height: 40px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: bottom;
+}
 .send_message_btn {
   background: var(--main-color)!important;
   border: none;

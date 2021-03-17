@@ -162,5 +162,8 @@
   },
   "seller_social": "Соцсети продавца",
   "view_more": "Показать еще",
-  "chat_placeholder": "Введите свое сообщение…"
+  "chat_placeholder": "Введите свое сообщение…",
+  "free": "Бесплатно",
+  "price_sum": "сум",
+  "price_ye": "y.e"
 }

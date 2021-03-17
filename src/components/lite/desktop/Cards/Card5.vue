@@ -45,7 +45,8 @@
             <b-form-rating class="p-0" :color="colorLoading" readonly show-value :value="post.rating" id="rating-inline3" inline no-border size="md"></b-form-rating>
           </div>
         </div>
-        <h4 class="mycard_price pt-2">{{ post.price }}</h4>
+        <h4 class="mycard_price pt-2" v-if="this.post.price">{{ this.post.price }} <span v-if="this.post.priceType == 'сум' ">{{ $t("price_sum") }}</span> <span v-if="this.post.priceType == 'e.y' ">{{ $t("price_ye") }}</span></h4>
+        <h4 class="mycard_price pt-2" v-if="this.post.price == null">{{ $t("free") }}</h4>
       </div>
       <!-- d-flex -->
       <p class="card_location mb-0 pt-1">

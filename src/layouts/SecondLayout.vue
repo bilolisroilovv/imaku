@@ -43,10 +43,15 @@ export default {
   },
   data() {
     return {
-      lang: null
+      lang: null,
+      categoriesVisible: false
     }
   },
   methods: {
+    changeCategory(){
+      alert('oooo')
+      this.categoriesVisible = !this.categoriesVisible
+    },
     langChange(lang) {
       this.lang = lang
     }

@@ -80,7 +80,8 @@
     >
       {{ this.post.name }}
     </router-link>
-    <h4 class="mycard_price text_ellipsis1">{{ this.post.price }}</h4>
+    <h4 class="mycard_price text_ellipsis1" v-if="this.post.price">{{ this.post.price }} <span v-if="this.post.priceType == 'сум' ">{{ $t("price_sum") }}</span> <span v-if="this.post.priceType == 'e.y' ">{{ $t("price_ye") }}</span></h4>
+    <h4 class="mycard_price text_ellipsis1" v-if="this.post.price == null">{{ $t("free") }}</h4>
     <!-- mycard_price -->
     <div class="d-flex align-items-center">
       <!-- <star-rating

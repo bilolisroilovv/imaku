@@ -3,7 +3,7 @@
     <div id="div-with-loading" class="vs-con-loading__container">
     </div> <!-- loading_block -->
     <div class="row position-relative">
-      <div class="col-md-12">
+      <div class="col-md-12 justify-content-center">
         <Card5
           v-for="(post, index) in profileData"
           :key="index"
@@ -11,6 +11,41 @@
           :post="post"
           @clicked="openConfirmModal"
         />
+         <button class="mainbtn see_more_btn mt-4 d-block ml-auto mr-auto" v-if="showBtn" @click.prevent="showMore">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 341.333 341.333"
+            style="enable-background:new 0 0 341.333 341.333;"
+            xml:space="preserve"
+          >
+            <g>
+              <g>
+                <polygon
+                  points="311.253,140.587 192,259.627 192,0 149.333,0 149.333,259.627 30.293,140.373 0,170.667 170.667,341.333 341.333,170.667"
+                />
+              </g>
+            </g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+          </svg>
+          {{ $t("view_more") }}
+        </button>
+         <div id="div-with-loading" v-show="!showBtn" class="vs-con-loading__container mt-4">
+          </div> <!-- div-with-loading -->
       </div>
       <!-- col-md-12 -->
     </div>
