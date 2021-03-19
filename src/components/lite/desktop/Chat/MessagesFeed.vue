@@ -43,6 +43,8 @@
         <div class="chat-item__title">
           {{ message.content }}
           <div class="chat-send_date">{{ message.createdAt }}</div>
+          <div class="chat-icon" v-if="message.seen & message.user.id !== contact.id"><img src="@/assets/lite/chat/readed-icon.png" alt=""></div>
+          <div class="chat-icon" v-if="!message.seen & message.user.id !== contact.id"><img src="@/assets/lite/chat/sent-icon.png" alt=""></div>
         </div>
       </div>
     </div>
@@ -229,8 +231,10 @@ export default {
 
     .chat-user__img {
       img {
-        width: 42px;
-        height: 42px;
+        width: 35px;
+        height: 35px;
+        position: relative;
+        top: 5px;
       }
     }
   }
@@ -247,7 +251,7 @@ export default {
       line-height: 24px;
       letter-spacing: 0.5px;
       position: relative;
-      padding: 8px 15px;
+      padding: 6px 15px;
       margin-left: 20px;
 
       .chat-send_date {
@@ -260,6 +264,21 @@ export default {
         color: #97a0c3;
         opacity: 0.9;
         min-width: 65px;
+      }
+      .chat-icon {
+        position: absolute;
+        bottom: 8px;
+        right: 9px;
+        font-weight: normal;
+        font-size: 10px;
+        line-height: 16px;
+        letter-spacing: 0.5px;
+        color: #97a0c3;
+        opacity: 0.9;
+        width: 17px;
+      }
+      .chat-icon img {
+        max-width: 100%;
       }
     }
 
@@ -285,6 +304,7 @@ export default {
         &__title {
           background: #ff9029;
           border-radius: 40px 40px 0px 40px;
+          padding-right: 33px;
 
           color: #fff;
 

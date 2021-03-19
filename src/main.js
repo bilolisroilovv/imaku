@@ -86,9 +86,10 @@ window.Pusher = require("pusher-js");
 
 window.Echo = new Echo({
   broadcaster: "pusher",
-  key: "01bf1bff746b7b43db62",
+  key: "f87d775bfe240029523f",
   cluster: "ap2",
-  encrypted: true
+  encrypted: true,
+  forceTLS: false
   // authEndpoint: "http://192.168.5.56:8000/broadcasting/auth"
 });
 

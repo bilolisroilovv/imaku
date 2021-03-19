@@ -21,11 +21,16 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
       message: ""
     };
+  },
+  computed: {
+    ...mapGetters(["currentUser"])
   },
   methods: {
     send(e) {
@@ -34,7 +39,18 @@ export default {
       if (this.message == "") {
         return;
       }
-      this.$emit("send", this.message);
+      const date = new Date();
+      const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      console.log(date, dateOptions);
+
+      const response = {
+        content: this.message,
+        createdAt: "17 Mar 18:11",
+        user: {
+          id: this.currentUser.id
+        }
+      }
+      this.$emit("send", response);
       this.message = "";
     }
   },

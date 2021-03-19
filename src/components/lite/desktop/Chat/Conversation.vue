@@ -64,13 +64,13 @@ export default {
       if (!this.contact) {
         return;
       }
+      this.$emit("new", text);
       axios
         .post("chat/sendMessage/" + this.contact.chatID, {
-          body: text
+          body: text.content
         })
         .then(response => {
-          console.log(this.contact)
-          this.$emit("new", response.data);
+          console.log(response)
         });
     }
   },

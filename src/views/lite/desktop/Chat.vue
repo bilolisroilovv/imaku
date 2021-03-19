@@ -6,7 +6,11 @@
 
         <div class="col-md-9 pl-0">
           <div class="chat-right">
+            <div v-if="!selectedContact" class="h-100 d-flex justify-content-center align-items-center">
+              <img src="@/assets/lite/chat_image.png" alt="" class="chat-img">
+            </div>
             <Conversation
+              class="conversation"
               v-if="selectedContact"
               :contact="selectedContact"
               :messages="messages"
@@ -104,9 +108,9 @@ export default {
     // }
   },
   async mounted() {
+    Pusher.logToConsole = true;
     this.Chats();
     this.startConversationWith(this.SelectedContact);
-    Pusher.logToConsole = true;
     const response = await axios.get('me')
     window.Echo.channel('message-channel-' + response.data.id).listen(
       ".send-message",
@@ -125,6 +129,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.chat-img {
+  max-width: 500px;
+}
 .chat {
   height: 100%;
   .row {
