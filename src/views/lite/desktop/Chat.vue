@@ -110,20 +110,30 @@ export default {
   async mounted() {
     Pusher.logToConsole = true;
     this.Chats();
-    this.startConversationWith(this.SelectedContact);
+    if(this.SelectedContact){
+      this.startConversationWith(this.SelectedContact);
+    }
     const response = await axios.get('me')
     window.Echo.channel('message-channel-' + response.data.id).listen(
       ".send-message",
-      e => {
+      response => {
         this.Chats();
-        this.hanleIncoming(e.message);
+        this.hanleIncoming(response.message);
       }
     );
-
+    window.Echo.channel('message-channel-' + response.data.id).listen(
+      ".seen-message",
+      response => {
+        console.log(response);
+      }
+    );
   },
   created() {
     // this.selected();
     // console.log(this.currentUser);
+  },
+  beforeDestroy() {
+    axios.get('chat/leave')
   }
 };
 </script>

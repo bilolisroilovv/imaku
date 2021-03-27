@@ -39,6 +39,11 @@ import MessageComposer from "./MessageComposer";
 import { mapGetters } from "vuex";
 
 export default {
+  data() {
+    return {
+      message: null
+    }
+  },
   components: { MessagesFeed, MessageComposer },
   // props: ["contact", "messages"],
   props: {
@@ -70,7 +75,7 @@ export default {
           body: text.content
         })
         .then(response => {
-          console.log(response)
+          this.message = response.data
         });
     }
   },
