@@ -1,22 +1,35 @@
 <template>
   <div>
     <div class="chat-content-top">
-      <div class="chat-content-top__img">
-        <img
-          :src="
-            SelectedContact ? SelectedContact.avatar : '@/assets/lite/desktop/profile_chat.svg'
-          "
-          :alt="SelectedContact ? SelectedContact.name : ''"
-        />
-      </div>
-      <div class="mx-3">
-        <h3 class="chat-user__title">
-          {{ SelectedContact ? SelectedContact.name : "Select a Contact" }}
-          <span class="online" v-if="SelectedContact.status"
-            ><img src="@/assets/lite/chat/online.svg" alt="online"
-          /></span>
-        </h3>
-      </div>
+      <router-link
+        class="d-flex align-items-center"
+        :to="{
+          name: this.authorType,
+          params: {
+            id: SelectedContact.id,
+            name: SelectedContact.name,
+          },
+        }"
+      >
+        <div class="chat-content-top__img">
+          <img
+            :src="
+              SelectedContact
+                ? SelectedContact.avatar
+                : '@/assets/lite/desktop/profile_chat.svg'
+            "
+            :alt="SelectedContact ? SelectedContact.name : ''"
+          />
+        </div>
+        <div class="mx-3">
+          <h3 class="chat-user__title">
+            {{ SelectedContact ? SelectedContact.name : "Select a Contact" }}
+            <span class="online" v-if="SelectedContact.status"
+              ><img src="@/assets/lite/chat/online.svg" alt="online"
+            /></span>
+          </h3>
+        </div>
+      </router-link>
       <!-- <div class="ml-auto d-flex align-items-center">
         <div class="search mr-3">
           <img src="@/assets/lite/chat/search.svg" alt="" />
@@ -41,28 +54,29 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      message: null
-    }
+      message: null,
+      authorType: null,
+    };
   },
   components: { MessagesFeed, MessageComposer },
   // props: ["contact", "messages"],
   props: {
     contact: {
       type: Object,
-      default: null
+      default: null,
     },
     messages: {
       post: {
         type: Object,
-        default: null
+        default: null,
       },
       messages: {
-        type: Array
-      }
-    }
+        type: Array,
+      },
+    },
   },
   computed: {
-    ...mapGetters(["SelectedContact"])
+    ...mapGetters(["SelectedContact"]),
   },
   methods: {
     sendMessage(text) {
@@ -72,17 +86,24 @@ export default {
       this.$emit("new", text);
       axios
         .post("chat/sendMessage/" + this.contact.chatID, {
-          body: text.content
+          body: text.content,
         })
-        .then(response => {
-          this.message = response.data
+        .then((response) => {
+          this.message = response.data;
         });
+    },
+  },
+  mounted() {
+    if (this.SelectedContact.type === "shop") {
+      this.authorType = "ShopPage";
+    } else {
+      this.authorType = "SellerPage";
     }
   },
   created() {
     /* console.log(this.messages);
     console.log(this.contact); */
-  }
+  },
 };
 </script>
 
@@ -284,7 +305,6 @@ export default {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    cursor: pointer;
     border-left: 2px solid transparent;
     &__img {
       img {

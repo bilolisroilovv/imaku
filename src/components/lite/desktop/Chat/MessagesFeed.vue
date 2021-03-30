@@ -40,12 +40,14 @@
         <div class="chat-user__img" v-if="message.user.id == contact.id">
           <img :src="message.user.avatar" :alt="message.user.name" />
         </div>
-        <div class="chat-item__title">
-          {{ message.content }}
+        <div class="d-flex op flex-column">
+          <div class="chat-item__title">
+            {{ message.content }}
+            <div class="chat-icon" v-if="message.seen & message.user.id !== contact.id"><img src="@/assets/lite/chat/readed-icon.png" alt=""></div>
+            <div class="chat-icon" v-if="!message.seen & message.user.id !== contact.id"><img src="@/assets/lite/chat/sent-icon.png" alt=""></div>
+          </div>
           <div class="chat-send_date">{{ message.createdAt }}</div>
-          <div class="chat-icon" v-if="message.seen & message.user.id !== contact.id"><img src="@/assets/lite/chat/readed-icon.png" alt=""></div>
-          <div class="chat-icon" v-if="!message.seen & message.user.id !== contact.id"><img src="@/assets/lite/chat/sent-icon.png" alt=""></div>
-        </div>
+        </div> <!-- d-flex -->
       </div>
     </div>
   </div>
@@ -234,7 +236,7 @@ export default {
         width: 35px;
         height: 35px;
         position: relative;
-        top: 5px;
+        top: -15px;
       }
     }
   }
@@ -243,8 +245,21 @@ export default {
     display: flex;
     align-items: flex-end;
     padding: 0;
-    margin-bottom: 25px;
-
+    margin-bottom: 6px;
+    .op {
+      margin-left: 20px;
+    }
+    .chat-send_date {
+      margin-top: 3px;
+      font-weight: normal;
+      font-size: 10px;
+      line-height: 16px;
+      letter-spacing: 0.5px;
+      color: #97a0c3;
+      opacity: 0.9;
+      min-width: 65px;
+      align-self: flex-end;
+    }
     &__title {
       font-weight: normal;
       font-size: 16px;
@@ -252,19 +267,7 @@ export default {
       letter-spacing: 0.5px;
       position: relative;
       padding: 6px 15px;
-      margin-left: 20px;
 
-      .chat-send_date {
-        position: absolute;
-        bottom: -20px;
-        font-weight: normal;
-        font-size: 10px;
-        line-height: 16px;
-        letter-spacing: 0.5px;
-        color: #97a0c3;
-        opacity: 0.9;
-        min-width: 65px;
-      }
       .chat-icon {
         position: absolute;
         bottom: 8px;
@@ -284,6 +287,9 @@ export default {
 
     &-received {
       margin-bottom: 25px;
+      .chat-send_date {
+        align-self: flex-start!important;
+      }
       .chat-item {
         &__title {
           background: #eff2f7;
@@ -291,15 +297,14 @@ export default {
 
           color: #242f57;
 
-          .chat-send_date {
-            left: 0;
-          }
         }
       }
     }
 
     &-sent {
       justify-content: flex-end;
+      .chat-send_date {
+      }
       .chat-item {
         &__title {
           background: #ff9029;
@@ -308,9 +313,6 @@ export default {
 
           color: #fff;
 
-          .chat-send_date {
-            right: 0;
-          }
         }
       }
     }

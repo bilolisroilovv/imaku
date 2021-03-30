@@ -1,19 +1,28 @@
 <template>
   <div class="col-md-3">
     <div class="chat-left">
-      <div class="chat-left__header">
-        <div class="title">
+      <div class="chat-left__header position-relative">
+        <input
+          type="text"
+          placeholder="Поиск"
+          :class="{ w100: searchVisible }"
+          class="search_contacts_input"
+          v-model="search"
+          ref="search"
+        />
+        <div class="title po">
           {{ $t("chat") }}
-          <span class="chat-count" v-if="newMessagesCount">{{ newMessagesCount }}</span>
+          <span class="chat-count" v-if="newMessagesCount">{{
+            newMessagesCount
+          }}</span>
         </div>
-        <div class="search">
-          <img src="@/assets/lite/chat/search.svg" alt="" />
+        <div class="search" :class="{ active: searchVisible }" @click.prevent="searchVisible = !searchVisible">
         </div>
       </div>
       <div class="chat-left__body">
         <div
           class="chat-user"
-          v-for="chat in contacts"
+          v-for="chat in filteredContacts"
           :key="chat.id"
           @click="selectContact(chat)"
           :class="{ 'chat-user-active': chat == SelectedContact }"
@@ -23,7 +32,7 @@
           </div>
           <div class="mx-3">
             <h3
-              class="chat-user__title"
+              class="chat-user__title text_ellipsis12"
               :class="chat.newMessagesCount > 0 ? 'active' : ''"
             >
               {{ chat.name }}
@@ -60,41 +69,152 @@ export default {
     contacts: {
       type: Array,
       // eslint-disable-next-line vue/require-valid-default-prop
-      default: []
+      default: [],
     },
-    newMessagesCount: {}
+    newMessagesCount: {},
   },
   data() {
     return {
-      selected: this.contacts.length ? this.contacts[0] : null
+      searchVisible: false,
+      search: "",
+      selected: this.contacts.length ? this.contacts[0] : null,
     };
+  },
+  watch: {
+    searchVisible() {
+      if(this.searchVisible == true) {
+        this.$refs.search.focus();
+      } else {
+        this.search = ""
+      }
+    }
   },
   methods: {
     selectContact(contact) {
       this.selected = contact;
-      this.$store.dispatch('selectContact', contact)
+      this.$store.dispatch("selectContact", contact);
       this.$emit("selected", contact);
-    }
+    },
   },
   computed: {
     ...mapGetters(["SelectedContact"]),
+    filteredContacts() {
+      return this.contacts.filter(
+        (item) =>
+          item.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1
+      );
+    },
     sortedContacts() {
       return this.$_.sortBy(this.contacts, [
-        contact => {
+        (contact) => {
           if (contact == this.selected) {
             return Infinity;
           }
           return contact.newMessagesCount;
-        }
+        },
       ]).reverse();
-    }
+    },
   },
-  mounted() {
-  }
+  mounted() {},
 };
 </script>
 
 <style lang="scss" scoped>
+.search {
+  position: relative;
+  width: 37px;
+  height: 37px;
+  transition: all 1s;
+  z-index: 4;
+  // box-shadow: 0 0 25px 0 crimson;
+  &:hover {
+    cursor: pointer;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    margin: auto;
+    top: 22px;
+    right: -1px;
+    bottom: 9px;
+    left: 21px;
+    width: 6px;
+    height: 2px;
+    background: #7c88b1;
+    transform: rotate(45deg);
+    transition: all 0.2s;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    margin: auto;
+    top: -15px;
+    right: 0;
+    bottom: -12px;
+    left: 9px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid #7c88b1;
+    transition: all 0.05s;
+  }
+}
+.search.active {
+  z-index: 6;
+  &::before {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 17px;
+  }
+  &::after {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 17px;
+    height: 2px;
+    border: none;
+    background: #7c88b1;
+    border-radius: 0%;
+    transform: rotate(-45deg);
+  }
+}
+.search_contacts_input {
+  width: 0;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translate(0, -50%);
+
+  background: #f9f9fa;
+  border-radius: 3px;
+  font-weight: 500;
+  color: #6b6b6b;
+  transition: all 0.2s;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  border: none;
+}
+.search_contacts_input::placeholder {
+  color: #afb0b1;
+  font-family: "Inter", sans-serif;
+}
+.search_contacts_input:hover {
+  background: #fff;
+  border-color: rgba(250, 169, 93, 0.603) !important;
+}
+.search_contacts_input:focus {
+  background: #fff;
+  border-color: rgba(250, 169, 93, 0.603) !important;
+  /* box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.05); */
+}
+.search_contacts_input.w100 {
+  width: 283px;
+  padding: 7px 10px;
+  border: 2px solid #d6dbe0;
+}
 .chat {
   height: 100%;
   .row {
@@ -189,7 +309,8 @@ export default {
     padding: 18px 24px;
     cursor: pointer;
     border-left: 2px solid transparent;
-    border-bottom: 1px solid #EAEDF7;
+    border-bottom: 1px solid #eaedf7;
+    position: relative;
 
     &-active {
       border-left-color: #ff9029;
@@ -255,8 +376,10 @@ export default {
       justify-content: flex-end;
       flex-direction: column;
       align-items: flex-end;
-      height: 48px;
-      padding-bottom: 4px;
+
+      position: absolute;
+      right: 15px;
+      bottom: 10px;
     }
 
     &__product {
