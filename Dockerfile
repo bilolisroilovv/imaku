@@ -12,4 +12,5 @@ COPY --from=build-stage /app/dist /app
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
 # docker build . -t imaku-front ##### build or rebuild
+
 # docker images ##### check
