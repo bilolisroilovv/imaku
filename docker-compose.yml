@@ -1,0 +1,7 @@
+version: "3.7"
+
+services:
+  imaku-frontend:
+    image: imaku-front
+    ports:
+      - "80:80"
