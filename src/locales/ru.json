@@ -127,7 +127,7 @@
     "unsubscribe": "Отписаться"
   },
   "post_create": {
-    "title": "Подать объявление на IMAKU",
+    "title": "Подать объявление на 7MARKET",
     "category": "Категория",
     "subcategoory": "Подкатегории",
     "product_name": "Название товара",
@@ -146,7 +146,7 @@
     "add_hashtags_placeholder": "Hashtagni qidiring yoki qo'shing"
   },
   "shop_create": {
-    "title": "Создать магазин на IMAKU",
+    "title": "Создать магазин на 7MARKET",
     "name": "Название магазина",
     "banner": "Баннер",
     "logo": "Лого",

@@ -127,7 +127,7 @@
     "unsubscribe": "Obunani bekor qilish"
   },
   "post_create": {
-    "title": "E'loningizni IMAKU-ga chiqarish",
+    "title": "E'loningizni 7MARKET-ga chiqarish",
     "category": "Toifa",
     "subcategoory": "Ichki toifalar",
     "product_name": "Mahsulot nomi",
@@ -146,7 +146,7 @@
     "add_hashtags_placeholder": "Bu erga hashtag qo'shing"
   },
   "shop_create": {
-    "title": "IMAKU-da do'kon yarating",
+    "title": "7MARKET-da do'kon yarating",
     "name": "Do'koningiz nomi",
     "banner": "Banner",
     "logo": "Logo",
