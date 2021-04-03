@@ -2,6 +2,6 @@ version: "3.7"
 
 services:
   imaku-frontend:
-    image: jasurbekabdurakhmonov/imaku-vue:v3
+    image: sancho1108/7market-front:latest
     ports:
       - "3000:80"
