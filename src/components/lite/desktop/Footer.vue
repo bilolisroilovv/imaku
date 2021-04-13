@@ -121,7 +121,12 @@ footer {
   padding-bottom: 40px;
 }
 .logo {
+<<<<<<< HEAD
   width: 120px;
+=======
+  width: 100px;
+  margin-left: 1rem;
+>>>>>>> 99d5099731b57878882140540a3dea5046346eae
 }
 .footer_list .footer_list_title {
   font-size: 18px;
