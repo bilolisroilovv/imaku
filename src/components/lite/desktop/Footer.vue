@@ -121,7 +121,7 @@ footer {
   padding-bottom: 40px;
 }
 .logo {
-  width: 150px;
+  width: 120px;
 }
 .footer_list .footer_list_title {
   font-size: 18px;

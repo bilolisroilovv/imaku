@@ -5,6 +5,7 @@ import store from "./store";
 import BootstrapVue from "bootstrap-vue";
 // import VueAwesomeSwiper from 'vue-awesome-swiper'
 // import 'swiper/swiper-bundle.css'
+
 import StarRating from "vue-star-rating";
 import VueTheMask from "vue-the-mask";
 import vSelect from "vue-select";

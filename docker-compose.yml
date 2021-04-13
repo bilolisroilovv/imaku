@@ -1,0 +1,7 @@
+version: "3.7"
+
+services:
+  imaku-frontend:
+    image: sancho1108/7market-front:latest
+    ports:
+      - "3000:80"

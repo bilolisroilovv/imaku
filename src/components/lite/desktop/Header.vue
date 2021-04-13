@@ -125,9 +125,9 @@
           <!-- d-flex -->
         </div>
         <!-- navbar_links -->
-        <div class="d-flex myalign-items-center justify-content-between">
-          <div class="d-flex myalign-items-center">
-            <router-link :to="{ name: 'HomePage' }" class="logo mr-3">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <router-link :to="{ name: 'HomePage' }" class="logo">
               <img src="@/assets/lite/logo.png" alt="" class="img-width" />
             </router-link>
             <div class="header_categories position-relative mt-1 mr-3" @mouseover="headerCategoriesDropdownVisible = true" @mouseleave="headerCategoriesDropdownVisible = false">
@@ -510,7 +510,7 @@ export default {
   left: 0;
   width: 100%;
   opacity: 0;
-  padding: 20px 0;
+  padding: 15px 0;
   visibility: hidden;
   box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.05);
   transform: translate(0, -120px);
@@ -552,9 +552,9 @@ export default {
   transform: translateY(-100%) !important;
 }
 .logo {
-  width: 115px;
+  width: 80px;
   display: block;
-  padding-top: 3px;
+  margin-right: 25px;
 }
 .categories_hamburger {
   background: var(--main-color);
