@@ -125,8 +125,8 @@
           <!-- d-flex -->
         </div>
         <!-- navbar_links -->
-        <div class="d-flex align-items-center justify-content-between">
-          <div class="d-flex align-items-center">
+        <div class="d-flex justify-content-between" :class="{ 'align-items-center': scrollPosition > 220 }">
+          <div class="d-flex" :class="{ 'align-items-center': scrollPosition > 220 }">
             <router-link :to="{ name: 'HomePage' }" class="logo">
               <img src="@/assets/lite/logo.png" alt="" class="img-width" />
             </router-link>
@@ -464,7 +464,7 @@ export default {
   min-height: 600px;
   position: absolute;
   left: -131px;
-  top: 120%;
+  top: 75%;
   background: #ffffff;
   box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.03);
   border-radius: 8px;
@@ -546,7 +546,7 @@ export default {
   background: #f4f4fa;
 }
 .mynavbar.inview2 .header_categories_dropdown {
-  top: 120%;
+  top: 127%;
 }
 .headroom--unpinned {
   transform: translateY(-100%) !important;
@@ -555,6 +555,8 @@ export default {
   width: 80px;
   display: block;
   margin-right: 25px;
+  position: relative;
+  bottom: 3px;
 }
 .categories_hamburger {
   background: var(--main-color);
@@ -668,7 +670,7 @@ export default {
 }
 .mynavbar_inner {
   height: 10px;
-  margin-bottom: 130px;
+  margin-bottom: 140px;
   /* background: linear-gradient(to right, #ffb88c, #de6262 ); */
 }
 .mygradient {

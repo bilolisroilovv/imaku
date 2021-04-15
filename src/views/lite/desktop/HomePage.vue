@@ -15,9 +15,17 @@
     <!-------------------------------- END HeaderSlider -------------------------------->
     <section class="section pt-5 pb-3">
       <div class="container">
-        <h2 class="section_title pb-4">
-          {{givesPosts.title}}
-        </h2>
+        <div class="d-flex align-items-center pb-4">
+          <h2 class="section_title mr-3">
+            {{givesPosts.title}}
+          </h2>
+          <router-link
+          class="mt-1 see_all_link"
+          :to="{
+            name: 'CategoryPage',
+            params: { id: 153, slug: 'otdam-darom' }
+          }">Смотреть все</router-link>
+        </div> <!-- d-flex -->
         <!-- section_title -->
         <PostsSlider :posts="givesPosts.posts" />
       </div>
@@ -167,4 +175,16 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.see_all_link {
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--main-color);
+  transition: all 0.2s;
+  text-decoration: underline!important;
+}
+.see_all_link:hover {
+  
+}
+</style>

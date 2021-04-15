@@ -58,7 +58,7 @@
       /> -->
     </form>
     <!-- navbar_form -->
-    <!-- <div
+    <div
       class="px-2 pt-2 search_prompts"
       :class="{ 'd-none': scrollPosition > 220 }"
       v-if="$route.path === '/ru/' || $route.path === '/uz/' || $route.path === '/ru' || $route.path === '/uz' || $route.path === '/'"
@@ -72,7 +72,7 @@
       <a href="#" class="myhover_text">Ноутбук 8gb</a>
       <span>|</span>
       <a href="#" class="myhover_text">Дача Аренда</a>
-    </div> -->
+    </div>
     <!-- d-flex -->
   </div>
   <!-- w-100 -->
@@ -220,7 +220,7 @@ export default {
 .navbar_search_input {
   background: #ececf5;
   border-radius: 111px;
-  padding: 14px 25px 14px 53px;
+  padding: 14px 80px 14px 53px;
   border: none;
   width: 650px;
   font-size: 15px;
@@ -290,12 +290,13 @@ export default {
 }
 .search_prompts span {
   font-size: 13px;
+  color: #7b7b7b;
 }
 .search_prompts a {
   font-weight: normal;
   font-size: 13px;
   padding: 0 12px;
-  color: #555555;
+  color: #5f5f5f;
   font-family: "Inter", sans-serif;
 }
 </style>
