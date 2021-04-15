@@ -670,7 +670,7 @@ export default {
 }
 .mynavbar_inner {
   height: 10px;
-  margin-bottom: 140px;
+  margin-bottom: 145px;
   /* background: linear-gradient(to right, #ffb88c, #de6262 ); */
 }
 .mygradient {

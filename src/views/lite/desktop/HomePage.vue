@@ -2,11 +2,12 @@
   <div class="home">
     <h3>{{ content }}</h3>
     <!-------------------------------- START HeaderSlider -------------------------------->
-    <div class="container pt-3">
-      <HeaderMainSlider :mainSliders="mainSliders" />
-    </div>
+    <div class="pt-2">
+      <div class="container">
+        <HeaderMainSlider :mainSliders="mainSliders" />
+      </div>
+    </div> <!-- pt-3 -->
     <!-- container -->
-
     <div class="container">
       <HeaderCategoriesSlider />
     </div>
