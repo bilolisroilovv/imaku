@@ -1,106 +1,108 @@
 <template>
   <footer>
-    <div class="container pb-5">
-      <div class="row footer_top">
-        <div class="logo">
-          <img src="@/assets/lite/logo.png" class="img-fluid" alt="" />
+    <div class="pb-4">
+      <div class="container">
+        <div class="row footer_top">
+          <div class="logo">
+            <img src="@/assets/lite/logo.png" class="img-fluid" alt="" />
+          </div>
+          <!-- logo -->
         </div>
-        <!-- logo -->
+        <!-- row -->
+        <div class="row">
+          <div class="col-md-2">
+            <ul class="footer_list">
+              <li class="footer_list_title">
+                Покупателям
+              </li>
+              <li>
+                <a href="#">Как сделать заказ</a>
+              </li>
+              <li>
+                <a href="#">Вопросы и ответи</a>
+              </li>
+              <li>
+                <a href="#">Поддержка</a>
+              </li>
+              <li>
+                <a href="#">Условия использования</a>
+              </li>
+            </ul>
+          </div>
+          <!-- col-md-2 -->
+          <div class="col-md-2">
+            <ul class="footer_list">
+              <li class="footer_list_title">
+                Партнерам
+              </li>
+              <li>
+                <a href="#">
+                  Как сделать заказ
+                </a>
+              </li>
+              <li>
+                <a href="#">Сотрудничество</a>
+              </li>
+              <li>
+                <a href="#">Обратная связь</a>
+              </li>
+            </ul>
+          </div>
+          <!-- col-md-2 -->
+          <div class="col-md-2">
+            <ul class="footer_list">
+              <li class="footer_list_title">
+                Компания
+              </li>
+              <li>
+                <a href="#">О нас</a>
+              </li>
+              <li>
+                <a href="#">Вакансии</a>
+              </li>
+              <li>
+                <a href="#">Контакты</a>
+              </li>
+            </ul>
+          </div>
+          <!-- col-md-2 -->
+          <div class="col-md-2">
+            <ul class="footer_list">
+              <li class="footer_list_title">
+                Соцсети
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fab fa-instagram"></i>
+                  <span>
+                    Инстаграм
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fab fa-facebook"></i>
+                  <span>
+                    Фейсбук
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fab fa-tiktok"></i>
+                  <span>
+                    Тикток
+                  </span> 
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- col-md-2 -->
+        </div>
+        <!-- row -->
       </div>
-      <!-- row -->
-      <div class="row">
-        <div class="col-md-2">
-          <ul class="footer_list">
-            <li class="footer_list_title">
-              Покупателям
-            </li>
-            <li>
-              <a href="#">Как сделать заказ</a>
-            </li>
-            <li>
-              <a href="#">Вопросы и ответи</a>
-            </li>
-            <li>
-              <a href="#">Поддержка</a>
-            </li>
-            <li>
-              <a href="#">Условия использования</a>
-            </li>
-          </ul>
-        </div>
-        <!-- col-md-2 -->
-        <div class="col-md-2">
-          <ul class="footer_list">
-            <li class="footer_list_title">
-              Партнерам
-            </li>
-            <li>
-              <a href="#">
-                Как сделать заказ
-              </a>
-            </li>
-            <li>
-              <a href="#">Сотрудничество</a>
-            </li>
-            <li>
-              <a href="#">Обратная связь</a>
-            </li>
-          </ul>
-        </div>
-        <!-- col-md-2 -->
-        <div class="col-md-2">
-          <ul class="footer_list">
-            <li class="footer_list_title">
-              Компания
-            </li>
-            <li>
-              <a href="#">О нас</a>
-            </li>
-            <li>
-              <a href="#">Вакансии</a>
-            </li>
-            <li>
-              <a href="#">Контакты</a>
-            </li>
-          </ul>
-        </div>
-        <!-- col-md-2 -->
-        <div class="col-md-2">
-          <ul class="footer_list">
-            <li class="footer_list_title">
-              Соцсети
-            </li>
-            <li>
-              <a href="#">
-                <i class="fab fa-instagram"></i>
-                <span>
-                  Инстаграм
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fab fa-facebook"></i>
-                <span>
-                  Фейсбук
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fab fa-tiktok"></i>
-                <span>
-                  Тикток
-                </span> 
-              </a>
-            </li>
-          </ul>
-        </div>
-        <!-- col-md-2 -->
-      </div>
-      <!-- row -->
-    </div>
-    <!-- container -->
+      <!-- container -->
+    </div> <!-- pb-5 -->
     <div class="footer_bottom">
       <div class="container">
         <h5>{{ $t("footer.rights") }}</h5>
