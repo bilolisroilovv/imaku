@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <div class="container">
+    <div class="container pb-5">
       <div class="row footer_top">
         <div class="logo">
           <img src="@/assets/lite/logo.png" class="img-fluid" alt="" />
@@ -101,6 +101,11 @@
       <!-- row -->
     </div>
     <!-- container -->
+    <div class="footer_bottom">
+      <div class="container">
+        <h5>{{ $t("footer.rights") }}</h5>
+      </div> <!-- container -->
+    </div> <!-- footer_bottom -->
   </footer>
 </template>
 
@@ -111,9 +116,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.footer_bottom {
+  padding: 15px 0;
+  border-top: 1px solid rgb(223, 223, 223);
+  text-align: right;
+}
+.footer_bottom h5 {
+  font-family: "Inter";
+  font-size: 15px;
+  font-weight: 500;
+}
 footer {
   margin-top: 30px;
-  padding: 40px 0 55px 0;
+  padding: 40px 0 0 0;
   background: #fff;
   min-height: 345px;
 }

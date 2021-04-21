@@ -13,6 +13,8 @@
     </div>
     <!-- container -->
 
+    
+
     <!-------------------------------- END HeaderSlider -------------------------------->
     <section class="section pt-5 pb-3">
       <div class="container">
@@ -179,7 +181,7 @@ export default {
 <style scoped>
 .see_all_link {
   font-family: "Inter";
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--main-color);
   transition: all 0.2s;

@@ -165,5 +165,8 @@
   "chat_placeholder": "Xabaringizni kiriting…",
   "free": "Bepul",
   "price_sum": "so'm",
-  "price_ye": "y.e"
+  "price_ye": "y.e",
+  "footer": {
+    "rights": "Sayt va barcha huquqlar 'EASY CONTRACT MCHJ'ga tegishli"
+  }
 }

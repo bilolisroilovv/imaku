@@ -165,5 +165,8 @@
   "chat_placeholder": "Введите свое сообщение…",
   "free": "Бесплатно",
   "price_sum": "сум",
-  "price_ye": "y.e"
+  "price_ye": "y.e",
+  "footer": {
+    "rights": "Сайт и все права принадлежат 'OOO EASY CONTRACT'"
+  }
 }
