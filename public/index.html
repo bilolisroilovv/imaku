@@ -20,6 +20,13 @@
     <title>7MARKET - доска объявлений, бесплатные объявления</title>
   </head>
   <body>
+    <script type="text/javascript">
+      if (screen.width <= 1024) {
+        window.location = "http://m.7market.uz";
+      } else {
+        window.location = "http://7market.uz";
+      }
+    </script>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
