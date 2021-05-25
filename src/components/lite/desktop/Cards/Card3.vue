@@ -4,7 +4,7 @@
       <router-link
         :to="{
           name: 'PostPage',
-          params: { id: this.post.id, slug: this.post.slug }
+          params: { id: this.post.id, slug: this.post.slug },
         }"
         class="mycard_img mybg_center position-relative d-block"
         @click="updatePage"
@@ -40,7 +40,7 @@
     <router-link
       :to="{
         name: 'PostPage',
-        params: { id: this.post.id, slug: this.post.slug }
+        params: { id: this.post.id, slug: this.post.slug },
       }"
       :title="post.name"
       class="mycard_title text_ellipsis2 mb-2 pt-2"
@@ -48,8 +48,14 @@
       {{ post.name }}
     </router-link>
     <!-- mycard_title -->
-    <h4 class="mycard_price text_ellipsis1" v-if="this.post.price">{{ this.post.price }} <span v-if="this.post.priceType == 'сум' ">{{ $t("price_sum") }}</span> <span v-if="this.post.priceType == 'e.y' ">{{ $t("price_ye") }}</span></h4>
-    <h4 class="mycard_price text_ellipsis1" v-if="this.post.price == null">{{ $t("free") }}</h4>
+    <h4 class="mycard_price text_ellipsis1" v-if="this.post.price">
+      {{ this.post.price }}
+      <span v-if="this.post.priceType == 'сум'">{{ $t("price_sum") }}</span>
+      <span v-if="this.post.priceType == 'у.е.'">{{ $t("price_ye") }}</span>
+    </h4>
+    <h4 class="mycard_price text_ellipsis1" v-if="this.post.price == null">
+      {{ $t("free") }}
+    </h4>
     <!-- mycard_price -->
   </div>
   <!-- mycard3 -->
@@ -61,7 +67,7 @@ import ToggleFavorite from "@/components/lite/desktop/ToggleFavorite";
 export default {
   name: "CardBase",
   components: {
-    ToggleFavorite
+    ToggleFavorite,
   },
   data() {
     return {
@@ -69,27 +75,27 @@ export default {
       image2: "'https://picsum.photos/500?random=2'",
       image3: "'https://picsum.photos/500?random=3'",
       image4: "'https://picsum.photos/500?random=4'",
-      products: []
+      products: [],
     };
   },
   props: {
     post: {
       id: {
         type: Number,
-        default: null
+        default: null,
       },
       slug: {
         type: String,
-        default: ""
-      }
-    }
+        default: "",
+      },
+    },
   },
   methods: {
     updatePage() {
       event.preventDefault();
       location.reload();
-    }
-  }
+    },
+  },
 };
 </script>
 

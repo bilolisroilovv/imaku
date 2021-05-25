@@ -6,7 +6,7 @@
           <router-link
             :to="{
               name: 'CategoryPage',
-              params: { id: postPart.id, slug: postPart.slug }
+              params: { id: postPart.id, slug: postPart.slug },
             }"
             class="myhover_text section2_grouptitle"
             >{{ postPart.title }}</router-link
@@ -25,7 +25,7 @@
               <router-link
                 :to="{
                   name: 'PostPage',
-                  params: { id: post.id, slug: post.slug }
+                  params: { id: post.id, slug: post.slug },
                 }"
                 class="mycard_img mybg_center d-block"
                 :style="{ 'background-image': 'url(' + post.gallery + ')' }"
@@ -38,7 +38,7 @@
             <router-link
               :to="{
                 name: 'PostPage',
-                params: { id: post.id, slug: post.slug }
+                params: { id: post.id, slug: post.slug },
               }"
               title="{post.name}"
               class="mycard_title text_ellipsis2 mb-2 pt-2"
@@ -46,8 +46,14 @@
               {{ post.name }}
             </router-link>
             <!-- mycard_title -->
-            <h4 class="mycard_price text_ellipsis1" v-if="post.price">{{ post.price }} <span v-if="post.priceType == 'сум' ">{{ $t("price_sum") }}</span> <span v-if="post.priceType == 'e.y' ">{{ $t("price_ye") }}</span></h4>
-            <h4 class="mycard_price text_ellipsis1" v-if="post.price == null">{{ $t("free") }}</h4>
+            <h4 class="mycard_price text_ellipsis1" v-if="post.price">
+              {{ post.price }}
+              <span v-if="post.priceType == 'сум'">{{ $t("price_sum") }}</span>
+              <span v-if="post.priceType == 'у.е.'">{{ $t("price_ye") }}</span>
+            </h4>
+            <h4 class="mycard_price text_ellipsis1" v-if="post.price == null">
+              {{ $t("free") }}
+            </h4>
             <!-- mycard_price -->
           </div>
           <!-- mycard2 -->
@@ -65,8 +71,8 @@ export default {
   name: "SelectionSection",
   props: {
     posts: {
-      type: Array
-    }
+      type: Array,
+    },
   },
   components: {},
   data() {
@@ -82,10 +88,10 @@ export default {
       image9: "'https://picsum.photos/500?random=9'",
       image10: "'https://picsum.photos/500?random=10'",
       image11: "'https://picsum.photos/500?random=11'",
-      image12: "'https://picsum.photos/500?random=12'"
+      image12: "'https://picsum.photos/500?random=12'",
     };
   },
-  mounted() {}
+  mounted() {},
 };
 </script>
 

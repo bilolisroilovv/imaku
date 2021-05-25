@@ -4,7 +4,7 @@
       <router-link
         :to="{
           name: 'PostPage',
-          params: { id: this.post.id, slug: this.post.slug }
+          params: { id: this.post.id, slug: this.post.slug },
         }"
       >
         <div class="mycard_img mybg_center position-relative d-block">
@@ -44,7 +44,7 @@
     <router-link
       :to="{
         name: 'PostPage',
-        params: { id: this.post.id, slug: this.post.slug }
+        params: { id: this.post.id, slug: this.post.slug },
       }"
       target="_blank"
       :title="post.name"
@@ -52,10 +52,26 @@
     >
       {{ post.name }}
     </router-link>
-    <h4 class="mycard_price text_ellipsis1" v-if="this.post.price">{{ this.post.price }} <span v-if="this.post.priceType == 'сум' ">{{ $t("price_sum") }}</span> <span v-if="this.post.priceType == 'e.y' ">{{ $t("price_ye") }}</span></h4>
-    <h4 class="mycard_price text_ellipsis1" v-if="this.post.price == null">{{ $t("free") }}</h4>
+    <h4 class="mycard_price text_ellipsis1" v-if="this.post.price">
+      {{ this.post.price }}
+      <span v-if="this.post.priceType == 'сум'">{{ $t("price_sum") }}</span>
+      <span v-if="this.post.priceType == 'у.е.'">{{ $t("price_ye") }}</span>
+    </h4>
+    <h4 class="mycard_price text_ellipsis1" v-if="this.post.price == null">
+      {{ $t("free") }}
+    </h4>
     <div class="d-flex align-items-center">
-      <b-form-rating class="p-0" :color="mainColor" readonly show-value :value="post.rating" id="rating-inline" inline no-border size="sm"></b-form-rating>
+      <b-form-rating
+        class="p-0"
+        :color="mainColor"
+        readonly
+        show-value
+        :value="post.rating"
+        id="rating-inline"
+        inline
+        no-border
+        size="sm"
+      ></b-form-rating>
     </div>
     <!-- d-flex -->
     <div class="mycard_btns d-flex align-items-center pt-2 pb-1">
@@ -148,7 +164,7 @@ import axios from "axios";
 export default {
   name: "Card4",
   components: {
-    ToggleFavorite
+    ToggleFavorite,
   },
   data() {
     return {
@@ -157,20 +173,20 @@ export default {
       isLiked: this.post.isLiked,
       isDisliked: this.post.isDisliked,
       isFavorite: this.post.isFavourite,
-      mainColor: "var(--main-color)"
+      mainColor: "var(--main-color)",
     };
   },
   props: {
     post: {
       id: {
         type: Number,
-        default: null
+        default: null,
       },
       slug: {
         type: String,
-        default: ""
-      }
-    }
+        default: "",
+      },
+    },
   },
   methods: {
     async handleLike() {
@@ -210,10 +226,10 @@ export default {
       this.$vs.notify({
         color: "success",
         title: "Успех",
-        text: "Объявлено успешно добавлено/удалено из избранных"
+        text: "Объявлено успешно добавлено/удалено из избранных",
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -221,7 +237,7 @@ export default {
 #rating-inline {
   max-width: 150px;
   padding: 0;
-  box-shadow: none!important;
+  box-shadow: none !important;
 }
 .mycard {
   background: #ffffff;

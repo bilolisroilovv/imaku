@@ -4,14 +4,15 @@
       <router-link
         :to="{
           name: 'PostPage',
-          params: { id: this.post.id, slug: this.post.slug }
+          params: { id: this.post.id, slug: this.post.slug },
         }"
-      > 
-        <div class="mycard_img mybg_center position-relative d-block" @mouseover="showAllImages = true">
+      >
+        <div
+          class="mycard_img mybg_center position-relative d-block"
+          @mouseover="showAllImages = true"
+        >
           <div class="mycard_img_list noreverse" v-if="!showAllImages">
-            <div
-              class="d-block w-100"
-            >
+            <div class="d-block w-100">
               <div class="slide_item"></div>
               <div
                 class="mybg_center myimg"
@@ -19,8 +20,8 @@
               ></div>
             </div>
             <!-- d-block -->
-
-          </div> <!-- mycard_img_list -->
+          </div>
+          <!-- mycard_img_list -->
 
           <div class="mycard_img_list" v-if="showAllImages">
             <div
@@ -34,9 +35,10 @@
                 :style="{ 'background-image': 'url(' + image + ')' }"
               ></div>
             </div>
-
-          </div> <!-- mycard_img_list -->
-        </div> <!-- mycard_img -->
+          </div>
+          <!-- mycard_img_list -->
+        </div>
+        <!-- mycard_img -->
       </router-link>
 
       <div
@@ -54,7 +56,6 @@
         />
       </div>
 
-
       <div
         v-if="currentUser"
         class="product_favourite flex-center d-flex"
@@ -66,22 +67,27 @@
           class="position-bottom-right mycard_favorite2 flex-center d-flex"
         />
       </div>
-
     </div>
     <!-- position-relative -->
 
     <router-link
       :to="{
         name: 'PostPage',
-        params: { id: this.post.id, slug: this.post.slug }
+        params: { id: this.post.id, slug: this.post.slug },
       }"
       :title="post.name"
       class="mycard_title text_ellipsis2 mb-2 pt-2 mt-1 myhover_text"
     >
       {{ this.post.name }}
     </router-link>
-    <h4 class="mycard_price text_ellipsis1" v-if="this.post.price">{{ this.post.price }} <span v-if="this.post.priceType == 'сум' ">{{ $t("price_sum") }}</span> <span v-if="this.post.priceType == 'e.y' ">{{ $t("price_ye") }}</span></h4>
-    <h4 class="mycard_price text_ellipsis1" v-if="this.post.price == null">{{ $t("free") }}</h4>
+    <h4 class="mycard_price text_ellipsis1" v-if="this.post.price">
+      {{ this.post.price }}
+      <span v-if="this.post.priceType == 'сум'">{{ $t("price_sum") }}</span>
+      <span v-if="this.post.priceType == 'у.е.'">{{ $t("price_ye") }}</span>
+    </h4>
+    <h4 class="mycard_price text_ellipsis1" v-if="this.post.price == null">
+      {{ $t("free") }}
+    </h4>
     <!-- mycard_price -->
     <div class="d-flex align-items-center">
       <!-- <star-rating
@@ -117,10 +123,22 @@
         :read-only="true"
         :increment="0.5"
       ></star-rating> -->
-      <b-form-rating class="p-0" :color="mainColor" readonly show-value :value="post.rating" id="rating-inline" inline no-border size="sm"></b-form-rating>
+      <b-form-rating
+        class="p-0"
+        :color="mainColor"
+        readonly
+        show-value
+        :value="post.rating"
+        id="rating-inline"
+        inline
+        no-border
+        size="sm"
+      ></b-form-rating>
     </div>
     <!-- d-flex -->
-    <div class="mycard_btns d-flex justify-content-between align-items-center pt-2 pb-1">
+    <div
+      class="mycard_btns d-flex justify-content-between align-items-center pt-2 pb-1"
+    >
       <div class="d-flex align-items-center" v-if="!currentUser">
         <button
           @click.prevent
@@ -149,37 +167,37 @@
           <!-- like_btn_icon -->
           <div class="like_btn_count">{{ this.post.likes }}</div>
           <!-- like_btn_count -->
-      </button>
-      <!-- like_btn -->
-      <button
-        @click.prevent
-        v-b-modal.signModal
-        class="dislike_btn card_like_btn d-flex align-items-center mr-2"
-        :title="$t('card_base.dont_like')"
-      >
-        <div class="dislike_btn_icon d-flex align-items-center">
-          <svg
-            width="13"
-            height="13"
-            viewBox="0 0 11 11"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M1.85912 6.67188H0.468556C0.276576 6.67188 0.120911 6.51623 0.120911 6.32423V0.762087C0.120911 0.570107 0.276553 0.414442 0.468556 0.414442H1.85909C2.05107 0.414442 2.20674 0.570084 2.20674 0.762087V6.32425C2.20674 6.51623 2.05112 6.67188 1.85912 6.67188Z"
-              fill="#7D95AE"
-            />
-            <path
-              d="M10.5432 5.75057C10.4818 6.28985 9.97809 6.67207 9.43534 6.67207H6.72507C6.9554 7.08451 7.07903 8.25103 7.07355 8.72755C7.06446 9.51634 6.41124 10.1484 5.62243 10.1484H5.33557C5.14343 10.1484 4.98793 9.99296 4.98793 9.80079C4.98793 8.9969 4.67491 7.54591 4.08456 6.95553C3.6872 6.55818 3.34752 6.4142 2.9021 6.19159V0.975336C3.58404 0.748036 4.4499 0.414617 5.76963 0.414617H8.04369C8.79299 0.414617 9.37657 1.10859 9.08621 1.84181C9.52858 1.96232 9.8548 2.36802 9.8548 2.84807C9.8548 2.98354 9.82867 3.11321 9.78148 3.23237C10.5269 3.43548 10.8013 4.35594 10.2839 4.93389C10.474 5.14625 10.5788 5.43672 10.5432 5.75057Z"
-              fill="#7D95AE"
-            />
-          </svg>
-        </div>
-        <!-- dislike_btn_icon -->
-        <div class="dislike_btn_count">{{ this.post.dislikes }}</div>
-        <!-- dislike_btn_count -->
-      </button>
-      <!-- dislike_btn -->
+        </button>
+        <!-- like_btn -->
+        <button
+          @click.prevent
+          v-b-modal.signModal
+          class="dislike_btn card_like_btn d-flex align-items-center mr-2"
+          :title="$t('card_base.dont_like')"
+        >
+          <div class="dislike_btn_icon d-flex align-items-center">
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 11 11"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1.85912 6.67188H0.468556C0.276576 6.67188 0.120911 6.51623 0.120911 6.32423V0.762087C0.120911 0.570107 0.276553 0.414442 0.468556 0.414442H1.85909C2.05107 0.414442 2.20674 0.570084 2.20674 0.762087V6.32425C2.20674 6.51623 2.05112 6.67188 1.85912 6.67188Z"
+                fill="#7D95AE"
+              />
+              <path
+                d="M10.5432 5.75057C10.4818 6.28985 9.97809 6.67207 9.43534 6.67207H6.72507C6.9554 7.08451 7.07903 8.25103 7.07355 8.72755C7.06446 9.51634 6.41124 10.1484 5.62243 10.1484H5.33557C5.14343 10.1484 4.98793 9.99296 4.98793 9.80079C4.98793 8.9969 4.67491 7.54591 4.08456 6.95553C3.6872 6.55818 3.34752 6.4142 2.9021 6.19159V0.975336C3.58404 0.748036 4.4499 0.414617 5.76963 0.414617H8.04369C8.79299 0.414617 9.37657 1.10859 9.08621 1.84181C9.52858 1.96232 9.8548 2.36802 9.8548 2.84807C9.8548 2.98354 9.82867 3.11321 9.78148 3.23237C10.5269 3.43548 10.8013 4.35594 10.2839 4.93389C10.474 5.14625 10.5788 5.43672 10.5432 5.75057Z"
+                fill="#7D95AE"
+              />
+            </svg>
+          </div>
+          <!-- dislike_btn_icon -->
+          <div class="dislike_btn_count">{{ this.post.dislikes }}</div>
+          <!-- dislike_btn_count -->
+        </button>
+        <!-- dislike_btn -->
       </div>
 
       <div class="d-flex align-items-center" v-if="currentUser">
@@ -208,39 +226,39 @@
             </svg>
           </div>
           <!-- like_btn_icon -->
-        <div class="like_btn_count">{{ likesCount }}</div>
-        <!-- like_btn_count -->
-      </button>
-      <!-- like_btn -->
-      <button
-        @click.prevent="handleDislike"
-        :class="{ active: isDisliked }"
-        class="dislike_btn card_like_btn d-flex align-items-center mr-2"
-        :title="$t('card_base.dont_like')"
-      >
-        <div class="dislike_btn_icon d-flex align-items-center">
-          <svg
-            width="13"
-            height="13"
-            viewBox="0 0 11 11"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M1.85912 6.67188H0.468556C0.276576 6.67188 0.120911 6.51623 0.120911 6.32423V0.762087C0.120911 0.570107 0.276553 0.414442 0.468556 0.414442H1.85909C2.05107 0.414442 2.20674 0.570084 2.20674 0.762087V6.32425C2.20674 6.51623 2.05112 6.67188 1.85912 6.67188Z"
-              fill="#7D95AE"
-            />
-            <path
-              d="M10.5432 5.75057C10.4818 6.28985 9.97809 6.67207 9.43534 6.67207H6.72507C6.9554 7.08451 7.07903 8.25103 7.07355 8.72755C7.06446 9.51634 6.41124 10.1484 5.62243 10.1484H5.33557C5.14343 10.1484 4.98793 9.99296 4.98793 9.80079C4.98793 8.9969 4.67491 7.54591 4.08456 6.95553C3.6872 6.55818 3.34752 6.4142 2.9021 6.19159V0.975336C3.58404 0.748036 4.4499 0.414617 5.76963 0.414617H8.04369C8.79299 0.414617 9.37657 1.10859 9.08621 1.84181C9.52858 1.96232 9.8548 2.36802 9.8548 2.84807C9.8548 2.98354 9.82867 3.11321 9.78148 3.23237C10.5269 3.43548 10.8013 4.35594 10.2839 4.93389C10.474 5.14625 10.5788 5.43672 10.5432 5.75057Z"
-              fill="#7D95AE"
-            />
-          </svg>
-        </div>
-        <!-- dislike_btn_icon -->
-        <div class="dislike_btn_count">{{ disLikesCount }}</div>
-        <!-- dislike_btn_count -->
-      </button>
-      <!-- dislike_btn -->
+          <div class="like_btn_count">{{ likesCount }}</div>
+          <!-- like_btn_count -->
+        </button>
+        <!-- like_btn -->
+        <button
+          @click.prevent="handleDislike"
+          :class="{ active: isDisliked }"
+          class="dislike_btn card_like_btn d-flex align-items-center mr-2"
+          :title="$t('card_base.dont_like')"
+        >
+          <div class="dislike_btn_icon d-flex align-items-center">
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 11 11"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1.85912 6.67188H0.468556C0.276576 6.67188 0.120911 6.51623 0.120911 6.32423V0.762087C0.120911 0.570107 0.276553 0.414442 0.468556 0.414442H1.85909C2.05107 0.414442 2.20674 0.570084 2.20674 0.762087V6.32425C2.20674 6.51623 2.05112 6.67188 1.85912 6.67188Z"
+                fill="#7D95AE"
+              />
+              <path
+                d="M10.5432 5.75057C10.4818 6.28985 9.97809 6.67207 9.43534 6.67207H6.72507C6.9554 7.08451 7.07903 8.25103 7.07355 8.72755C7.06446 9.51634 6.41124 10.1484 5.62243 10.1484H5.33557C5.14343 10.1484 4.98793 9.99296 4.98793 9.80079C4.98793 8.9969 4.67491 7.54591 4.08456 6.95553C3.6872 6.55818 3.34752 6.4142 2.9021 6.19159V0.975336C3.58404 0.748036 4.4499 0.414617 5.76963 0.414617H8.04369C8.79299 0.414617 9.37657 1.10859 9.08621 1.84181C9.52858 1.96232 9.8548 2.36802 9.8548 2.84807C9.8548 2.98354 9.82867 3.11321 9.78148 3.23237C10.5269 3.43548 10.8013 4.35594 10.2839 4.93389C10.474 5.14625 10.5788 5.43672 10.5432 5.75057Z"
+                fill="#7D95AE"
+              />
+            </svg>
+          </div>
+          <!-- dislike_btn_icon -->
+          <div class="dislike_btn_count">{{ disLikesCount }}</div>
+          <!-- dislike_btn_count -->
+        </button>
+        <!-- dislike_btn -->
       </div>
       <div
         class="d-flex align-items-center mycard_views"
@@ -272,8 +290,8 @@
           name: this.post.author.type,
           params: {
             id: this.post.author.id,
-            name: this.post.author.username
-          }
+            name: this.post.author.username,
+          },
         }"
         class="mycard_store_img mybg_center d-block"
         :style="{ 'background-image': 'url(' + this.post.author.avatar + ')' }"
@@ -285,8 +303,8 @@
           name: this.post.author.type,
           params: {
             id: this.post.author.id,
-            name: this.post.author.username
-          }
+            name: this.post.author.username,
+          },
         }"
         class="mycard_store_name myhover_text text_ellipsis1"
         :title="post.author.name"
@@ -308,7 +326,7 @@ import axios from "axios";
 export default {
   name: "CardBase",
   components: {
-    ToggleFavorite
+    ToggleFavorite,
   },
   data() {
     return {
@@ -319,26 +337,26 @@ export default {
       isDisliked: this.post.isDisliked,
       isFavorite: this.post.isFavourite,
       mainColor: "var(--main-color)",
-      authorType: null
+      authorType: null,
     };
   },
   props: {
     post: {
       id: {
         type: Number,
-        default: null
+        default: null,
       },
       slug: {
         type: String,
-        default: ""
-      }
-    }
+        default: "",
+      },
+    },
   },
   computed: {
     ...mapGetters(["currentUser"]),
     lastItem() {
-    	return this.post.gallery.slice(-1)[0]
-    }
+      return this.post.gallery.slice(-1)[0];
+    },
   },
   methods: {
     async handleLike() {
@@ -378,10 +396,10 @@ export default {
       this.$vs.notify({
         color: "success",
         title: "Успех",
-        text: "Объявлено успешно добавлено/удалено из избранных"
+        text: "Объявлено успешно добавлено/удалено из избранных",
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -389,7 +407,7 @@ export default {
 #rating-inline {
   max-width: 150px;
   padding: 0;
-  box-shadow: none!important;
+  box-shadow: none !important;
 }
 .card_img_div {
   display: block;

@@ -4,7 +4,7 @@
       <router-link
         :to="{
           name: 'PostPage',
-          params: { id: this.post.id, slug: this.post.slug }
+          params: { id: this.post.id, slug: this.post.slug },
         }"
       >
         <div class="mycard_img mybg_center position-relative d-block">
@@ -34,7 +34,7 @@
           <router-link
             :to="{
               name: 'PostPage',
-              params: { id: this.post.id, slug: this.post.slug }
+              params: { id: this.post.id, slug: this.post.slug },
             }"
             :title="post.name"
             class="mycard_title text_ellipsis1 pt-1 myhover_text"
@@ -42,11 +42,27 @@
             {{ post.name }}
           </router-link>
           <div class="d-flex align-items-center pt-1">
-            <b-form-rating class="p-0" :color="colorLoading" readonly show-value :value="post.rating" id="rating-inline3" inline no-border size="md"></b-form-rating>
+            <b-form-rating
+              class="p-0"
+              :color="colorLoading"
+              readonly
+              show-value
+              :value="post.rating"
+              id="rating-inline3"
+              inline
+              no-border
+              size="md"
+            ></b-form-rating>
           </div>
         </div>
-        <h4 class="mycard_price pt-2" v-if="this.post.price">{{ this.post.price }} <span v-if="this.post.priceType == 'сум' ">{{ $t("price_sum") }}</span> <span v-if="this.post.priceType == 'e.y' ">{{ $t("price_ye") }}</span></h4>
-        <h4 class="mycard_price pt-2" v-if="this.post.price == null">{{ $t("free") }}</h4>
+        <h4 class="mycard_price pt-2" v-if="this.post.price">
+          {{ this.post.price }}
+          <span v-if="this.post.priceType == 'сум'">{{ $t("price_sum") }}</span>
+          <span v-if="this.post.priceType == 'у.е.'">{{ $t("price_ye") }}</span>
+        </h4>
+        <h4 class="mycard_price pt-2" v-if="this.post.price == null">
+          {{ $t("free") }}
+        </h4>
       </div>
       <!-- d-flex -->
       <p class="card_location mb-0 pt-1">
@@ -169,7 +185,7 @@
           <router-link
             :to="{
               name: 'PostEdit',
-              params: { id: post.id, slug: post.slug }
+              params: { id: post.id, slug: post.slug },
             }"
             class="post_edit_btn ml-2"
           >
@@ -196,24 +212,24 @@ export default {
       disLikesCount: this.post.dislikes,
       isLiked: false,
       isDisliked: false,
-      colorLoading: "var(--main-color)"
+      colorLoading: "var(--main-color)",
     };
   },
   props: {
     post: {
       id: {
         type: Number,
-        default: null
+        default: null,
       },
       slug: {
         type: String,
-        default: ""
-      }
-    }
+        default: "",
+      },
+    },
   },
   methods: {
     postClicked() {
-      this.$emit('clicked', this.post.id)
+      this.$emit("clicked", this.post.id);
     },
     async handleLike() {
       this.isLiked = !this.isLiked;
@@ -245,8 +261,8 @@ export default {
       /* this.likesCount = response.data.likes
       this.dislikesCount = response.data.dislikes */
     },
-    editPost() {}
-  }
+    editPost() {},
+  },
 };
 </script>
 
@@ -256,7 +272,7 @@ export default {
   height: 25px;
   margin-top: 2px;
   padding: 0;
-  box-shadow: none!important;
+  box-shadow: none !important;
   position: relative;
   bottom: 5px;
 }
