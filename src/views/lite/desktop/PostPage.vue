@@ -447,7 +447,7 @@
                 <!-- desc_text -->
 
                 <div class="row pt-4">
-                  <div class="col-md-6">
+                  <div class="col-md-6" v-if="postData.characters">
                     <h4 class="pb-4">{{ $t("post_page.characteristic") }}</h4>
 
                     <div class="product_params">
@@ -466,7 +466,7 @@
                     <!-- product_params -->
                   </div>
                   <!-- col-md-6 -->
-                  <div class="col-md-6">
+                  <div class="col-md-6" v-if="postData.author.posts.length">
                     <!-- <h4 class="pb-3">{{ $t('post_page.hash') }}</h4>
                     <div class="product_hashtags mb-4">
                       <router-link

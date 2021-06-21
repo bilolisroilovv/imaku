@@ -27,7 +27,7 @@
         </button>
         <span
           class="header_input_icon microphone_button"
-          :class="{active: speaking}"
+          :class="{ active: speaking }"
           data-toggle="tooltip"
           data-placement="top"
           @click="startSpeechToTxt"
@@ -37,16 +37,20 @@
           <img src="@/assets/lite/microphone.svg" class="img-width" alt="" />
         </span>
         <!-- header_input_icon -->
-        <a
-          href="#"
-          class="header_input_icon"
-          data-toggle="tooltip"
-          data-placement="top"
-          :title="$t('search.photo_search')"
-        >
-          <img src="@/assets/lite/camera.svg" class="img-width" alt="" />
-        </a>
         <!-- header_input_icon -->
+        <label class="file-select">
+          <!-- We can't use a normal button element here, as it would become the target of the label. -->
+          <a
+            class="header_input_icon"
+            data-toggle="tooltip"
+            data-placement="top"
+            :title="$t('search.photo_search')"
+          >
+            <img src="@/assets/lite/camera.svg" class="img-width" alt="" />
+          </a>
+          <!-- Now, the file input that we hide. -->
+          <input type="file" ref="files" @change="onImageChange($event)" />
+        </label>
       </div>
       <!-- search_input_icons -->
       <!-- <SearchDropdown
@@ -61,7 +65,13 @@
     <div
       class="px-2 pt-2 search_prompts"
       :class="{ 'd-none': scrollPosition > 220 }"
-      v-if="$route.path === '/ru/' || $route.path === '/uz/' || $route.path === '/ru' || $route.path === '/uz' || $route.path === '/'"
+      v-if="
+        $route.path === '/ru/' ||
+        $route.path === '/uz/' ||
+        $route.path === '/ru' ||
+        $route.path === '/uz' ||
+        $route.path === '/'
+      "
     >
       <a href="#" class="myhover_text">Худи</a>
       <span>|</span>
@@ -89,7 +99,7 @@ export default {
     /* SearchDropdown */
   },
   props: {
-    scrollPosition: Number
+    scrollPosition: Number,
   },
   data() {
     return {
@@ -101,38 +111,48 @@ export default {
       error: false,
       speaking: false,
       toggle: false,
-      placeholder: ""
+      placeholder: "",
+      imgFile: null,
     };
   },
   computed: {
     inputPlaceholder() {
-      return this.$i18n.t("search.title")
+      return this.$i18n.t("search.title");
     },
     placeholderOnSpeech() {
-      return this.$i18n.t("search.onSpeech")
+      return this.$i18n.t("search.onSpeech");
     },
     myLang() {
-      return this.$i18n.locale
-    }
+      return this.$i18n.locale;
+    },
   },
-  mounted () {
-    this.checkLang()
-    this.placeholder = this.inputPlaceholder
+  mounted() {
+    this.checkLang();
+    this.placeholder = this.inputPlaceholder;
   },
   watch: {
-    myLang () {
+    myLang() {
       this.checkLang();
     },
     inputPlaceholder(val) {
-      this.placeholder = val
-    }
+      this.placeholder = val;
+    },
   },
   methods: {
+    onImageChange(event) {
+      const image = event.target.files[0];
+      this.imgFile = image;
+      this.$router.push({name: 'HomePage'})
+      this.$router.push({
+        name: "SearchByImagePage",
+        params: { query: this.imgFile }
+      })
+    },
     checkLang() {
       if (this.myLang === "uz") {
-        this.language = "uz-UZ"
+        this.language = "uz-UZ";
       } else {
-        this.language = "ru-RU"
+        this.language = "ru-RU";
       }
     },
     startSpeechToTxt() {
@@ -157,13 +177,13 @@ export default {
         this.transcription.push(this.runtimeTranscription);
         /* this.runtimeTranscription = ""; */
         recognition.stop();
-        this.speaking = false
-        this.handleSubmit()
+        this.speaking = false;
+        this.handleSubmit();
       });
       recognition.start();
-      this.runtimeTranscription = ""
-      this.speaking = true
-      this.placeholder = this.placeholderOnSpeech
+      this.runtimeTranscription = "";
+      this.speaking = true;
+      this.placeholder = this.placeholderOnSpeech;
     },
     searchDropdowntoggle() {
       this.searchDropdownVisible = !this.searchDropdownVisible;
@@ -175,7 +195,7 @@ export default {
       /* axios.get('search?query=' + this.searchContent) */
       this.$router.push({
         name: "SearchPage",
-        params: { query: this.runtimeTranscription }
+        params: { query: this.runtimeTranscription },
       });
     },
   },
@@ -192,6 +212,22 @@ export default {
 </script>
 
 <style scoped>
+.file-select > .header_input_icon {
+  width: 30px;
+  height: 30px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 6px;
+  cursor: pointer;
+}
+
+/* Don't forget to hide the original file input! */
+.file-select > input[type="file"] {
+  display: none;
+}
 #voice-trigger.active {
   /* background: rgb(248, 154, 154); */
 }
@@ -204,11 +240,15 @@ export default {
   animation-direction: alternate;
 }
 .microphone_button.active:hover {
-  background: transparent!important;
+  background: transparent !important;
 }
 @keyframes microphoneAnim {
-  0%   {transform: scale(0.95);}
-  100% {transform: scale(1.15);}
+  0% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1.15);
+  }
 }
 .border-radius-100 {
   border-radius: 100px;
