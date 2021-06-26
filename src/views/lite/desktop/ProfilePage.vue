@@ -71,7 +71,7 @@ export default {
       const response = await axios
       .get("profile/favourites")
       .finally(() => this.$vs.loading.close("#div-with-loading > .con-vs-loading"));
-      this.profileData = response.data;
+      this.profileData = response.data.posts;
       // console.log(this.profileData.posts);
     }
   },

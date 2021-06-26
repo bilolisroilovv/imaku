@@ -26,6 +26,16 @@ import _ from "lodash";
 Object.defineProperty(Vue.prototype, "$_", { value: _ });
 
 import Echo from "laravel-echo";
+window.Pusher = require("pusher-js");
+
+window.Echo = new Echo({
+  broadcaster: "pusher",
+  key: "bba4fc30cffb99174341",
+  cluster: "ap2",
+  encrypted: true,
+  forceTLS: false
+  // authEndpoint: "http://192.168.5.56:8000/broadcasting/auth"
+});
 
 Vue.component("vfa-sortable-list", SlickList);
 Vue.component("vfa-sortable-item", SlickItem);
@@ -83,16 +93,7 @@ Vue.directive("closable", {
     document.removeEventListener("touchstart", handleOutsideClick);
   }
 }); */
-window.Pusher = require("pusher-js");
 
-window.Echo = new Echo({
-  broadcaster: "pusher",
-  key: "bba4fc30cffb99174341",
-  cluster: "ap2",
-  encrypted: true,
-  forceTLS: false
-  // authEndpoint: "http://192.168.5.56:8000/broadcasting/auth"
-});
 
 new Vue({
   router,
